@@ -1,0 +1,55 @@
+{% from "main::text.html" import show_passage, header_passage, default_footer, nav with context %}
+
+{% extends "main::container.html" %}
+
+{% macro tb_macro() %}
+<div id="treebank_container">
+</div>
+{% endmacro %}
+
+{% macro tabs(text, treebank) %}
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Texte</h4>
+            {{text}}
+      </div>
+      <div class="col-md-6" id="treebank" style="min-height:800px;">
+        <h4>Treebank</h4>
+        <em><small>Taper U et I pour naviguer parmi les treebanks</small></em>
+            <div class="__artsa" style="min-height:800px;">
+            {{ treebank }}
+            </div>
+      </div>
+    </div>
+{% endmacro %}
+
+{% block article %}
+{% if annotations | annotation_filter("http://data.perseus.org/rdfvocab/treebank", 1) %}
+    {{ show_passage(tabs(text_passage, tb_macro()), navigation=nav(), header=header_passage(), footer=default_footer())  }}
+{%else%}
+    {{ show_passage(text_passage, navigation=nav(), header=header_passage(), footer=default_footer())  }}
+{%endif%}
+{% endblock %}
+
+{% block additionalscript %}
+<script type="text/javascript" src="{{url_for(".r_arethusa_assets", filename="js/arethusa.widget.loader.js")}}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    var loaded = false;
+    $.get("{{ url_for(".r_arethusa_dependencies") }}", function(deps) {
+        window.i18npath = "{{url_for(".r_arethusa_assets", filename="i18n/")}}";
+        window.dagred3path = "vendor/dagre-d3.min.js";
+        loadArethusaWidget(
+            "treebank_container",
+            "{{ url_for(".r_arethusa_assets", filename="js/") }}",
+            "{{ url_for(".r_arethusa_config") }}",
+            {
+                doc : "{{ annotations | annotation_filter("http://data.perseus.org/rdfvocab/treebank", 1) | attr("sha") }}"
+            },
+            deps
+        );
+        loaded = true;
+    });
+});
+</script>
+{% endblock %}

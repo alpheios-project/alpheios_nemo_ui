@@ -1,0 +1,34 @@
+div.page, div.l {
+    font-family:"Lucida Grande",Verdana,Helvetica,Arial,sans-serif;
+    direction: rtl;
+    text-align: right;
+}
+
+div.page[lang='en'], div.l[lang='en'] {
+    direction: ltr;
+}
+
+.citetype {
+    padding-right: .25em;
+    padding-left: .25em;
+}
+.linenum,.citelabel  {
+    float:left;
+    padding-right: .5em;
+    font-style: italic;
+    font-size: small;
+    display: block;
+}
+
+.l.center {
+    text-align: center;
+}
+
+.superscript {
+    vertical-align: super;
+}
+
+.alpheios-highlighted-word {
+    background-color: yellow;
+    }
+}

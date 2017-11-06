@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:textgroup xmlns:ti="http://chs.harvard.edu/xmlns/cts"
+              xmlns="http://www.tei-c.org/ns/1.0"
+              urn="urn:cts:ancJewLit:hebBible"><!--Need to build in some metadata-->
+   <ti:groupname xml:lang="eng">Hebrew Bible</ti:groupname>
+   <ti:groupname xml:lang="heb">מקרא, תנ"ך</ti:groupname>
+</ti:textgroup>
+   
+   

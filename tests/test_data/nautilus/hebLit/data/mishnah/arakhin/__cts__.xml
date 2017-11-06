@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:work xmlns:ti="http://chs.harvard.edu/xmlns/cts"
+         xmlns="http://www.tei-c.org/ns/1.0"
+         groupUrn="urn:cts:ancJewLit:mishnah"
+         urn="urn:cts:ancJewLit:mishnah.arakhin"
+         xml:lang="heb"><!--Need to think about metadata here-->
+   <ti:title xml:lang="eng">Mishnah Tractate Arakhin</ti:title>
+   <ti:title xml:lang="heb">משנה, מסכת ערכין</ti:title>
+   <ti:edition workUrn="urn:cts:ancJewLit:mishnah.arakhin"
+               urn="urn:cts:ancJewLit:mishnah.arakhin.p179204">
+      <ti:label xml:lang="eng">Mishnah, Tractate Arakhin, Vilna 1913 edition</ti:label>
+      <ti:label xml:lang="heb">משנה, מסכת ערכין,דפוס וילנא, תרע"ג</ti:label>
+      <ti:description xml:lang="eng">Text of the Mishnah based on the Vilna 1913
+                  printing</ti:description>
+   </ti:edition>
+</ti:work>

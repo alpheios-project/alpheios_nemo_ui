@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:work xmlns:ti="http://chs.harvard.edu/xmlns/cts"
+         xmlns="http://www.tei-c.org/ns/1.0"
+         groupUrn="urn:cts:ancJewLit:hebBible"
+         urn="urn:cts:ancJewLit:hebBible.amos"
+         xml:lang="heb"><!--Need to think about metadata here-->
+   <ti:title xml:lang="eng">Amos</ti:title>
+   <ti:title xml:lang="heb">עמוס</ti:title>
+   <ti:edition workUrn="urn:cts:ancJewLit:hebBible.amos"
+               urn="urn:cts:ancJewLit:hebBible.amos.leningrad-cons">
+      <ti:label xml:lang="eng">Amos, Consonantal Text</ti:label>
+      <ti:label xml:lang="heb">עמוס ,בלי ניקוד</ti:label>
+      <ti:description xml:lang="eng">Consonantal text of the biblical book of Amos from the Leningrad Codex of the Hebrew
+                  Bible</ti:description>
+   </ti:edition>
+   <ti:edition workUrn="urn:cts:ancJewLit:hebBible.amos"
+               urn="urn:cts:ancJewLit:hebBible.amos.leningrad-pntd">
+      <ti:label xml:lang="eng">Amos, pointed</ti:label>
+      <ti:label xml:lang="heb">עמוס ,מנוקד</ti:label>
+      <ti:description xml:lang="eng">Pointed text of the biblical book of Amos from the Leningrad Codex of the Hebrew
+                  Bible</ti:description>
+   </ti:edition>
+</ti:work>

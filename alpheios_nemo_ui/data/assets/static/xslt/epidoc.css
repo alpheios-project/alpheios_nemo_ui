@@ -1,0 +1,31 @@
+.pb {
+	margin-top: 0.3em;
+	margin-left: 4em;
+	font-weight: thin;
+	font-size: 0.5em;
+}
+
+.ex,
+.supplied,
+.unclear {
+	color: rgb(80,80,80);
+}
+
+.unclear {
+	text-decoration: underline dotted;
+}
+
+.edition {
+    white-space: nowrap;
+}
+
+.lang_heb, .lang_ara, .lang_far {
+	text-align:right;
+}
+
+.note:hover .note-content {
+	display:inline;
+	font-style: italic;
+	color:grey;
+
+}

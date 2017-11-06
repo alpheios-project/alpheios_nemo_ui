@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="http://www.stoa.org/epidoc/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?><TEI xmlns="http://www.tei-c.org/ns/1.0">
+<teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Corpus Scriptorum Ecclesiasticorum Latinorum (CSEL)</title>
+        <sponsor>University of Leipzig</sponsor>
+        <funder>European Social Fund Saxony</funder>
+        <principal>Gregory Crane</principal>
+        <respStmt>
+          <persName xml:id="Jouve">Jouve</persName>
+          <resp>OCR-ed, corrected and encoded the text</resp>
+        </respStmt>
+        <respStmt>
+          <persName>Greta Franzini</persName>
+          <resp>Project Manager (University of Leipzig)</resp>
+        </respStmt>
+        <respStmt>
+          <persName>Simona Stoyanova</persName>
+          <resp>Project Assistant (University of Leipzig)</resp>
+        </respStmt>
+        <respStmt>
+          <persName>Bruce Robertson</persName>
+          <resp>Technical Advisor (Mount Allison University)</resp>
+        </respStmt>
+        <respStmt>
+          <persName>Uvius Fonticola</persName>
+          <resp>Technical Advisor (Ludwig Maximilians University Munich)</resp>
+        </respStmt>
+      </titleStmt>
+      
+      <publicationStmt>
+        <authority>University of Leipzig</authority>
+        <idno type="filename">CSEL65.xml</idno>
+        <availability>
+          <licence target="https://creativecommons.org/licenses/by-sa/4.0/">Available under a Creative Commons Attribution-ShareAlike 4.0 International License</licence>
+        </availability>
+        <date>2014</date>
+        <publisher>University of Leipzig</publisher>
+        <pubPlace>Germany</pubPlace>
+      </publicationStmt>
+      
+      <sourceDesc>
+        <listBibl xml:lang="lat">
+          <biblStruct>
+            <monogr>
+              <editor>
+                <persName>
+                  <name xml:lang="lat">Alfredus Feder</name>
+                  <addName xml:lang="de">Alfred Feder</addName>
+                </persName>
+              </editor> 
+              <author ref="http://data.perseus.org/catalog/urn:cite:perseus:cattg.1756.1">Hilarius Pictaviensis</author>  
+              <title ref="http://data.perseus.org/catalog/urn:cts:latinLit:stoa0149b.stoa009">Tractatus Mysteriorum</title>
+              <title ref="http://data.perseus.org/catalog/urn:cts:latinLit:stoa0149b.stoa002">Collectanea Antiariana Parisina (Fragmenta Historica)</title>
+              <title ref="http://data.perseus.org/catalog/urn:cts:latinLit:stoa0149b.stoa007">Oratio Synodi Sardicensis ad Constantium Imperatorem</title>
+              <title ref="http://data.perseus.org/catalog/urn:cts:latinLit:stoa0149b.stoa006">Libri tres adversum Valentem et Ursacium</title>
+              <title ref="http://data.perseus.org/catalog/urn:cts:latinLit:stoa0149b.stoa005">Liber ad Constantium Imperatorem</title>
+              <title ref="http://data.perseus.org/catalog/urn:cts:latinLit:stoa0149b.stoa004">Hymni</title>
+              <title ref="http://data.perseus.org/catalog/urn:cts:latinLit:stoa0149b.stoa003">Fragmenta minora</title>
+              <title ref="http://data.perseus.org/catalog/urn:cts:latinLit:stoa0149b.stoa008">Spuria</title>
+              <imprint>
+                <publisher>Österreichische Akademie der Wissenschaften (ÖAW)</publisher>
+                <pubPlace>Wien, Österreich</pubPlace>
+                <date>1916</date>
+              </imprint>
+              <biblScope unit="volume">65</biblScope>
+            </monogr>
+            <ref target="https://archive.org/stream/CSEL65#page/n0/mode/2up">Internet Archive</ref>
+            
+          </biblStruct>
+        </listBibl>
+      </sourceDesc>
+      
+    </fileDesc>
+    <encodingDesc>
+      <p>The following text is encoded in accordance with EpiDoc standards and with the
+        CTS/CITE Architecture. 
+</p>
+      <refsDecl n="CTS">
+        <cRefPattern n="book" matchPattern="(.+)" replacementPattern="#xpath(/tei:TEI/tei:text/tei:body/tei:div[@type='edition']/tei:div[@n='$1'])"/>
+      </refsDecl>
+    </encodingDesc>
+    
+    <profileDesc>
+      <langUsage>
+        <language ident="lat">Latin</language>
+      </langUsage>
+    </profileDesc>
+    
+</teiHeader>
+<text>
+<body>
+<div type="edition" xml:lang="lat" n="urn:cts:latinLit:stoa0149b.stoa006.opp-lat1">
+<head>
+            <title type="main"><hi rend="italic">c</hi>. LIBRI TRES ADUERSUM UALENTE ET UKSACIUM</title>
+          </head>
+          <p>ex Collectaneis Antiarianis Parisinis et Appendice (Libro I ad Constantium) <lb/>
+            per coniecturam dispositi. 
+</p>
+<pb n="190"/>
+            
+<pb n="191"/>
+            
+            <div n="1" subtype="book" type="textpart">
+          <ab>
+            <title type="sub">LIBER I</title>
+          </ab>
+          <p>(scriptus a. 356). 
+</p>
+          <p>Praefatio = Series B I (supra p. 98—102). 
+</p>
+          <p>De synodo Arelatensi et de exsilio Paulini episcopi Treuirensis <lb/>
+            (deest, cf. Studien 1 83). <lb/>
+            ∗∗∗ ∗∗ ∗∗∗ ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗
+</p>
+          <p>Epistula synodi Sardicensis Orientalium cum symbolo et nominibus <lb/>
+            episcoporum, qui subscripserunt (c. 9 est decurtatum; deest <lb/>
+            narratio de Paulo episcopo Constantinopolitano, d. Studien I 184) — <lb/>
+            Ser. A IV (supra p. 48-78). <lb/>
+            ∗∗∗∗∗∗∗∗∗ ∗∗∗∗∗ ∗∗∗∗∗∗∗∗ ∗∗∗∗∗∗
+</p>
+          <p>Uaria ex actis synodi Sardicensis Occidentalium, duae epistulae <lb/>
+            Ualentis et Ursacii, symbolum Nicaenum una cum textu narratiuo <lb/>
+            (n. 9 c. 1 est decurtatum; uidetur enim deesse symbolum Sirmiense <lb/>
+            atque initium refutationis, cf. supra p. 146. praeterea excidit ante primam <lb/>
+            epistulam synodi certe textus Hilarii, quo dispositionem textus narratiui <lb/>
+            insequentis indicabat, cf. Studien I 97) = Ser. B 11 (supra p. 103-154). 
+</p>
+          <p>Oratio synodi Sardicensis Occidentalium ad Constantium imperatorem <lb/>
+            una cum textu narratiuo = Liber, qui uulgo dicitur I <lb/>
+            ad Constantium imperatorem, 1-7 (supra p. 181-186). 
+</p>
+          <p>I)e synodo Mediolanensi: textus narratiuus (decurtatus in fine, cf. <lb/>
+            Studien I 149) = Liber, qui uulgo dicitur 1 ad Constantium, 8 <lb/>
+            (supra p. 186 sq.). <lb/>
+            ∗∗∗∗∗∗∗ ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ ∗∗∗ ∗∗∗∗∗∗ <lb/>
+            ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗
+</p></div>
+          <div n="2" subtype="book" type="textpart">  
+          <ab>
+            <title type="sub">\'LIBER II</title>
+          </ab>
+          <p>(scriptus hieme 359/360). <lb/>
+            ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗
+</p>
+          <p>De Liberio episcopo Romano: <lb/>
+            Epistula dubia Liberio ad Orientales episcopos <hi rend="italic">Studens paci</hi> una <lb/>
+            cum textu narratiuo (deest textus narratiuus epistulae praemissus, <lb/>
+            cf. Studien I 167) = Series B III (supra p. 155 sq.). 
+</p>
+<pb n="192"/>
+            
+          <p>Epistula Liberii ad Constantium imperatorem <hi rend="italic">Obsecro =</hi> <lb/>
+            Ser. A VII (supra p. 89-93). <lb/>
+            ∗∗∗∗∗∗∗∗∗ ∗∗∗∗∗∗∗∗ ∗∗∗∗∗∗∗ ∗∗∗∗ ∗∗∗
+</p>
+          <p>Epistulae Liberii <hi rend="italic">Quamuis sub, Nolo te</hi> rex parte), <hi rend="italic">Inter haec</hi> <lb/>
+            (ex parte) et epistulae dubiae <hi rend="italic">Pro deifico, Quia scio, Non doceo</hi> <lb/>
+            una cum textu narratiuo = Ser. B VII (supra p. 164—173). <lb/>
+            ∗∗∗∗∗∗∗∗∗ ∗∗∗∗∗∗∗∗∗∗∗ ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗
+</p>
+          <p>De synodi Ariminensis et Seleuciensis:
+</p>
+          <p>Epistula Constantii imperatoris ad episcopos synodi Ariminensis <lb/>
+            = Ser. A VIII (supra p. 93 sq.). <lb/>
+            ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗
+</p>
+          <p>Ex actis synodi Ariminensis: Definitio episcoporum homousianorum, <lb/>
+            textus narratiuus, damnatio haereticorum = Ser. <lb/>
+            A IX (supra p. 95—97). <lb/>
+            ∗∗∗∗∗ ∗∗∗∗∗∗∗ ∗∗ ∗∗∗ ∗∗∗ ∗ ∗∗∗∗∗∗∗ ∗ ∗ x
+</p>
+          <p>Epistula synodi Ariminensis ad Constantium imperatorem et <lb/>
+            gesta Nicaena una cum textu narratiuo (sequebatur forte symbolum <lb/>
+            Nicaena Thraciae propositum, cf. Studien I 76 sq.) = Ser. A V <lb/>
+            supra p. 78—86). <lb/>
+            ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ ∗∗∗∗∗
+</p>
+          <p>Epistula episcoporum Arianorum, qui synodo Ariminen. i inter- ■ <lb/>
+            erant, ad Constantium imperatorem = Ser. A VI (supra <lb/>
+            p. 87 sq.). <lb/>
+            ∗∗∗∗∗ ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ ∗
+</p>
+          <p>Epistula legatorum synodi Seleuciensis ad legatos synodi <lb/>
+            Ariminensis una cum textu narratiuo (ante epistulam excidit <lb/>
+            textus narratiuus, qui <hi rend="italic">\'librum Ualentis et Ualentis\'</hi> interpretabatur, cf. <lb/>
+            Studien Illlsq.) = Ser. B VIII (supra p. 174—177). <lb/>
+            x ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗<lb/>
+             ∗∗∗∗∗ ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗
+</p></div>
+          <div n="3" subtype="book" type="textpart">
+          <ab>
+            <title type="sub">LIBER III</title>
+          </ab>
+          <p>.(scriptus a. 367). <lb/>
+            x ∗∗∗∗∗∗∗∗∗∗∗∗∗∗ ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗<lb/>
+             ∗∗∗∗∗∗∗∗ ∗∗∗∗∗∗∗∗ ∗∗∗∗∗ ∗∗∗∗ ∗∗∗∗∗∗∗
+</p>
+          <p>Epistula synodi Parisiensis ad episcopos Orientales = Ser. A I <lb/>
+            (supra p. 43—46). <lb/>
+            ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗x
+</p>
+<pb n="193"/>
+            
+          <p>Epistula Eusebii episcopi Uercellensis ad Gregorium episcopum <lb/>
+            Eliberitanum = Ser. A II (supra p, 46 sq.). <lb/>
+            ∗∗ ∗ ∗∗∗ ∗∗∗ ∗∗∗∗∗∗ ∗∗∗ ∗∗ ∗∗∗∗∗∗∗∗∗∗∗∗∗
+</p>
+          <p>Epistulae duae de reconciliandis episcopis lapsis = Ser. H IV <lb/>
+            (supra p. 156—159). <lb/>
+            ∗∗∗∗∗ ∗ ∗∗ ∗ ∗∗∗∗∗ ∗ ∗ ∗∗∗∗∗∗ ∗∗ ∗ ∗∗∗∗∗∗∗
+</p>
+          <p>De Germinio episcopo Sirmiensi: <lb/>
+            Ex epistula Germinii ad episcopos Arianos: symbolum Germinii <lb/>
+            (excidit ipsa epistula, cf. Studien I 103) = Ser. A III (supra <lb/>
+            p. 47 sq.). <lb/>
+            ∗ ∗∗∗∗ ∗ w ∗ ∗ ∗∗∗∗∗∗∗∗∗∗∗ ∗∗∗∗∗∗∗∗∗∗∗∗
+</p>
+          <p>Epistula Ualentis, Ursacii, Gaii et Pauli ad Germinium = <lb/>
+            Ser. B V (supra p. 159 sq.). <lb/>
+            ∗ ∗ ∗∗ ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗  ∗∗∗∗∗
+</p>
+          <p>Epistula Germinii ad Kufianum, Palladium et ceteros = <lb/>
+            Ser. B VI (supra p. 160—164). <lb/>
+            ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗ ∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗∗
+
+<note type="footnote"> LXV. Hilarius pars 4. Fed er. </note>
+
+<note type="footnote"> 13 </note> 
+<pb n="194"/>
+             
+<pb n="195"/>
+            
+</p></div>
+        </div>
+</body>
+</text>
+</TEI>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:work xmlns:ti="http://chs.harvard.edu/xmlns/cts"
+         xmlns="http://www.tei-c.org/ns/1.0"
+         groupUrn="urn:cts:ancJewLit:babTalmud"
+         urn="urn:cts:ancJewLit:babTalmud.arakhin"
+         xml:lang="heb"><!--Need to think about metadata here-->
+   <ti:title xml:lang="eng">Babylonian Talmud, Tractate Arakhin</ti:title>
+   <ti:title xml:lang="heb">תלמוד בבלי, מסכת ערכין</ti:title>
+   <ti:edition workUrn="urn:cts:ancJewLit:babTalmud.arakhin"
+               urn="urn:cts:ancJewLit:babTalmud.arakhin.dicta">
+      <ti:label xml:lang="eng">Babylonian Talmud, Tractate Arakhin, Vilna 1875 edition</ti:label>
+      <ti:label xml:lang="heb">תלמוד בבלי, מסכת ערכין, דפוס וילנא, תרל"ג</ti:label>
+      <ti:description xml:lang="eng">Text of the Babylonian Talmud based on the Vilna 1875
+                  printing</ti:description>
+   </ti:edition>
+</ti:work>
