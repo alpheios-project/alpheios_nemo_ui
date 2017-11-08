@@ -122,7 +122,14 @@
                     <xsl:text>rtl</xsl:text>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:apply-templates/>
+            <xsl:choose>
+                <xsl:when test="child::t:l">
+                    <ol><xsl:apply-templates /></ol>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates/>
+                </xsl:otherwise>
+            </xsl:choose>
         </div>
     </xsl:template>
     <xsl:template match="tei:ab">
@@ -136,7 +143,20 @@
             <xsl:apply-templates/>
         </div>
     </xsl:template>
-    <xsl:template match="tei:l|tei:p|tei:seg">
+    <xsl:template match="t:l">
+        <xsl:element name="li">
+            <xsl:apply-templates select="@urn" />
+            <xsl:attribute name="value"><xsl:value-of select="@n"/></xsl:attribute>
+            <xsl:if test="@xml:lang">
+                <xsl:attribute name="lang">
+                    <xsl:value-of select="@xml:lang"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="tei:p|tei:seg">
         <xsl:variable name="rend" select="@rend"/>
         <div class="l  {$rend}">
             <xsl:if test="@n">
@@ -152,7 +172,7 @@
             <xsl:apply-templates/>
         </div>
     </xsl:template>
-    <xsl:template match="tei:wd">
+    <xsl:template match="tei:w">
         <xsl:variable name="wordId">
             <xsl:call-template name="ref_to_id">
                 <xsl:with-param name="list" select="@n"/>
@@ -167,8 +187,8 @@
             <xsl:with-param name="real_id" select="@id"/>
             <xsl:with-param name="id_list" select="$wordId"/>
             <xsl:with-param name="nrefs" select="$nrefList"/>
-            <xsl:with-param name="tbrefs" select="@tbrefs"/>
-            <xsl:with-param name="tbref" select="@tbref"/>
+            <xsl:with-param name="tbrefs" select="@ana"/>
+            <xsl:with-param name="tbref" select="@ana"/>
         </xsl:call-template>
     </xsl:template>
     <xsl:template match="tei:hi[@rend='superscript']">
@@ -206,7 +226,7 @@
          </xsl:if-->
         </xsl:variable>
         <xsl:element name="span">
-            <xsl:attribute name="class">alpheios-aligned-word <xsl:value-of select="$highlight"/>
+            <xsl:attribute name="class">w alpheios-aligned-word <xsl:value-of select="$highlight"/>
             </xsl:attribute>
             <xsl:attribute name="id">
                 <xsl:value-of select="$first"/>
@@ -223,6 +243,11 @@
                 <xsl:when test="@tbref">
                     <xsl:attribute name="tbref">
                         <xsl:value-of select="@tbref"/>
+                    </xsl:attribute>
+                </xsl:when>
+                <xsl:when test="@ana">
+                    <xsl:attribute name="tbref">
+                        <xsl:value-of select="@ana"/>
                     </xsl:attribute>
                 </xsl:when>
             </xsl:choose>
