@@ -91,6 +91,8 @@ def scheme_grouper(text, getreffs):
         level, groupby = 2, 1
     elif types == ["chapter", "verse"]:
         level, groupby = 2, 1
+    elif types == ["book", "page"]:
+        level, groupby = 2, 1
     elif "line" in types:
         groupby = 30
     return level_grouper(text, getreffs, level, groupby)

@@ -24,12 +24,20 @@
   text-align:right;
 }
 
+.lang_heb.center, .lang_ara.center, .lang_far.center, .lang_ar.center {
+  text-align:right;
+}
+
 span.w::before {
   content:" ";
 }
 
 .lang_ara, .lang_ar {
     font-family:"Lucida Grande",Verdana,Helvetica,Arial,sans-serif;
+}
+
+.center {
+    text-align: center;
 }
 
 .note > .note-content {

@@ -147,6 +147,7 @@
         <xsl:element name="li">
             <xsl:apply-templates select="@urn" />
             <xsl:attribute name="value"><xsl:value-of select="@n"/></xsl:attribute>
+            <xsl:attribute name="class"><xsl:value-of select="@rend"/></xsl:attribute>
             <xsl:if test="@xml:lang">
                 <xsl:attribute name="lang">
                     <xsl:value-of select="@xml:lang"/>
@@ -158,7 +159,7 @@
     
     <xsl:template match="tei:p|tei:seg">
         <xsl:variable name="rend" select="@rend"/>
-        <div class="l  {$rend}">
+        <div class="l {$rend}">
             <xsl:if test="@n">
                 <div class="linenum">
                     <xsl:value-of select="@n"/>
