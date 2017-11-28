@@ -99,7 +99,7 @@
             </xsl:choose>
         </p>
     </xsl:template>
-    <xsl:template match="tei:milestone">
+    <xsl:template match="tei:milestone[@unit != 'card']">
         <xsl:variable name="idstring">
             <xsl:if test="@n">
                 <xsl:text>m</xsl:text>
