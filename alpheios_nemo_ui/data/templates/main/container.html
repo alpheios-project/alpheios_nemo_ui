@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{url_for('.static', filename='css/theme.min.css')}}">
     {% if 'greekLit' in objectId %}
+    <meta name="alpheios-pedagogical-text" content="true"/>
     <meta name="alpheios-treebank-url" content="http://repos1.alpheios.net/exist/rest/db/xq/treebank-getmorph.xq?f={{ objectId | replace('urn:cts:greekLit:','')}}&amp;w=WORD">
     <meta name="alpheios-treebank-diagram-url" content="version=1.0;http://repos1.alpheios.net/exist/rest/db/app/treebank-editsentence.xhtml?doc={{objectId | replace('urn:cts:greekLit:','')}}&amp;app=viewer&amp;id=SENTENCE&amp;w=WORD">
     {% endif %}
