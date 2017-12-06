@@ -122,6 +122,9 @@
                     <xsl:text>rtl</xsl:text>
                 </xsl:attribute>
             </xsl:if>
+            <xsl:if test="@type='Book'">
+                <div id="alph-trans-url" url="http://alpheios.net/alpheios-texts/Perseus.text.1999.01.0135/align/book1_card1.html"></div>
+            </xsl:if>
             <xsl:choose>
                 <xsl:when test="child::t:l">
                     <ol><xsl:apply-templates /></ol>

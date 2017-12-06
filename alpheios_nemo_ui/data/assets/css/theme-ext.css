@@ -1,3 +1,15 @@
+body {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+a {
+  color: #3E8D9C;
+}
+
+a:hover {
+  color: #5BC8DC;
+}
 
 #menu-container  .logo {
     width: auto;
@@ -109,4 +121,24 @@ span[token-selector="state.tokens"] {
 
 #fullsearch {
   margin-top:15px;
+}
+
+.breadcrumb {
+  background-color: #4E6476;
+}
+
+.breadcrumb-item a {
+  color: white;
+}
+
+.breadcrumb .active {
+  color: #f6d918;
+}
+
+.btn-primary {
+  background-color: #3e8d9c;
+}
+
+.btn-primary:hover {
+  background-color: #5bc8dc;
 }
