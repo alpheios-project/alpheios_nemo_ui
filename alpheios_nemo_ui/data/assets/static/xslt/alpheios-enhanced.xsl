@@ -19,7 +19,7 @@
 --><!--
     Transforms an TEI XML to  XHTML (Alpheios Enhanced Text Display)     
 -->
-<xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:t="http://www.tei-c.org/ns/1.0"  xmlns:tei="http://www.tei-c.org/ns/1.0"  version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:t="http://www.tei-c.org/ns/1.0"  xmlns:tei="http://www.tei-c.org/ns/1.0"  version="1.0">
     <xsl:output method="html" indent="yes"/>
     <xsl:param name="doclang"/>
   
@@ -111,19 +111,19 @@
     <xsl:template match="//tei:body|//tei:div0|//tei:div1|//tei:div2|//tei:div3|//tei:div4|//tei:div5|//tei:sp|//tei:div">
         
         <div>
-            <xsl:attribute name="class">
-                <xsl:value-of select="@type"/>
-                <xsl:text> lang_</xsl:text>
-                <xsl:value-of select="@xml:lang"/>
-            </xsl:attribute>
-            <xsl:attribute name="data-lang"><xsl:value-of select="./@xml:lang"/></xsl:attribute>
+            <xsl:if test="@xml:lang">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="@type"/>
+                    <xsl:text> lang_</xsl:text>
+                    <xsl:value-of select="@xml:lang"/>
+                </xsl:attribute>
+                <xsl:attribute name="data-lang"><xsl:value-of select="./@xml:lang"/></xsl:attribute>
+                <xsl:attribute name="lang"><xsl:value-of select="./@xml:lang"/></xsl:attribute>
+            </xsl:if>
             <xsl:if test="@xml:lang = 'ar'">
                 <xsl:attribute name="dir">
                     <xsl:text>rtl</xsl:text>
                 </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="@type='Book'">
-                <div id="alph-trans-url" url="http://alpheios.net/alpheios-texts/Perseus.text.1999.01.0135/align/book1_card1.html"></div>
             </xsl:if>
             <xsl:choose>
                 <xsl:when test="child::t:l">
