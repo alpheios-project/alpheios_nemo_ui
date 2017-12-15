@@ -4,6 +4,7 @@ from flask_nemo.plugin import PluginPrototype
 from pkg_resources import resource_filename
 from flask import jsonify, url_for
 from flask_nemo.chunker import level_grouper
+import re
 
 
 class AlpheiosNemoUI(PluginPrototype):
@@ -39,6 +40,15 @@ class AlpheiosNemoUI(PluginPrototype):
 
     def render(self, **kwargs):
         kwargs["gtrack"] = self.GTrackCode
+        # this is a hack to enable inclusion of the language code in the top html
+        # element of the page for backwards compatibility with Alpheios V1 which
+        # looks for the language of pedagogical texts there
+        # it only works for cts texts with edition naming scheme which ends in <lang>\d
+        # (e.g. alpheios-text-grc1)
+        if ("objectId" in kwargs):
+            kwargs["lang"] = re.sub(r"^.*?-(\w\w\w)\d$", r"\1", kwargs["objectId"])
+        else:
+            kwargs["lang"] = 'en'
         return kwargs
 
     def r_typeahead_json(self):

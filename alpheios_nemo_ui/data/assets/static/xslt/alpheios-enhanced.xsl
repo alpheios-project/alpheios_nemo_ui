@@ -1,28 +1,28 @@
 <!--
     Copyright 2010 Cantus Foundation
     http://alpheios.net
-    
+
     This file is part of Alpheios.
-    
+
     Alpheios is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    
+
     Alpheios is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-    
+
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.    
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --><!--
-    Transforms an TEI XML to  XHTML (Alpheios Enhanced Text Display)     
+    Transforms an TEI XML to  XHTML (Alpheios Enhanced Text Display)
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:t="http://www.tei-c.org/ns/1.0"  xmlns:tei="http://www.tei-c.org/ns/1.0"  version="1.0">
     <xsl:output method="html" indent="yes"/>
     <xsl:param name="doclang"/>
-  
+
     <xsl:template name="footer">
         <xsl:param name="style" select="'plain'"/>
         <div class="stdfooter alpheiosignore" id="citation">
@@ -109,7 +109,7 @@
         <div class="milestone {@unit}" id="{$idstring}"><xsl:value-of select="@n"/></div>
     </xsl:template>
     <xsl:template match="//tei:body|//tei:div0|//tei:div1|//tei:div2|//tei:div3|//tei:div4|//tei:div5|//tei:sp|//tei:div">
-        
+
         <div>
             <xsl:if test="@xml:lang">
                 <xsl:attribute name="class">
@@ -159,7 +159,7 @@
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
-    
+
     <xsl:template match="tei:p|tei:seg">
         <xsl:variable name="rend" select="@rend"/>
         <div class="l {$rend}">
@@ -230,7 +230,7 @@
          </xsl:if-->
         </xsl:variable>
         <xsl:element name="span">
-            <xsl:attribute name="class">w alpheios-aligned-word <xsl:value-of select="$highlight"/>
+            <xsl:attribute name="class">w alpheios-word <xsl:value-of select="$highlight"/>
             </xsl:attribute>
             <xsl:attribute name="id">
                 <xsl:value-of select="$first"/>
@@ -303,7 +303,7 @@
             </xsl:if>
         </xsl:if>
     </xsl:template>
-  
+
     <!-- taken from perseus'  tei2p4.xsl -->
     <xsl:template name="source-desc">
         <xsl:variable name="sourceText">
@@ -337,5 +337,5 @@
                 <xsl:value-of select="$sourceText"/>
             </span>
         </xsl:if>
-    </xsl:template>  
+    </xsl:template>
 </xsl:stylesheet>
