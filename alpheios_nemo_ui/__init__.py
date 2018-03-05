@@ -18,11 +18,15 @@ class AlpheiosNemoUI(PluginPrototype):
         "main": resource_filename("alpheios_nemo_ui", "data/templates/main"),
         "alpheios": resource_filename("alpheios_nemo_ui", "data/templates/alpheios")
     }
-    CSS = [resource_filename("alpheios_nemo_ui", "data/assets/css/theme-ext.css")]
+    CSS = [
+     resource_filename("alpheios_nemo_ui", "data/assets/css/theme-ext.css"),
+     resource_filename("alpheios_nemo_ui", "data/assets/css/style.min.css")
+    ]
     JS = [
         resource_filename("alpheios_nemo_ui", "data/assets/js/bloodhound.min.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/autocomplete.min.js"),
-        resource_filename("alpheios_nemo_ui", "data/assets/js/menu.js")
+        resource_filename("alpheios_nemo_ui", "data/assets/js/menu.js"),
+        resource_filename("alpheios_nemo_ui", "data/assets/js/alpheios-embedded.js")
     ]
     STATICS = [
         resource_filename("alpheios_nemo_ui", "data/assets/images/logo.png")

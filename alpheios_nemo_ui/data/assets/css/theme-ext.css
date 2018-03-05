@@ -142,3 +142,9 @@ span[token-selector="state.tokens"] {
 .btn-primary:hover {
   background-color: #5bc8dc;
 }
+
+.alert-info {
+  background-color: #E49A0D;
+  color: white;
+  font-weight: bold;
+}

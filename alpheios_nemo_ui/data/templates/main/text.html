@@ -28,6 +28,12 @@
 {% endmacro %}
 
 {% macro show_passage(text, header, navigation, footer) %}
+<div class="alert alert-info alert-dismissible show" role="alert">
+Double-click on a word to access morphology and definitions.
+ <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+   <span aria-hidden="true">&times;</span>
+ </button>
+</div>
 <article class="hentry entry white">
         {{ header }}
     <nav>
@@ -43,6 +49,7 @@
     <footer>
       {{ footer }}
     </footer>
+    <div id="alpheios-main" data-trigger="dblclick" data-selector=".alpheios-word"></div>
 </article>
 {% endmacro %}
 
@@ -60,6 +67,11 @@
     var passage_route = "{{url_for('.r_passage', objectId='--text_id--', subreference='--passage_id--') }}".replace("--text_id--", text_id).replace('--passage_id--', passage_id);
 		$(this).attr("href", passage_route);
   });
+</script>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+      new Alpheios.Embedded("#alpheios-main",document,{top:"30vh", left:"45vw"},{}).activate();
+    });
 </script>
 {% endblock %}
 
