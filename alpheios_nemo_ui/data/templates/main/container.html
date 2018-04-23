@@ -18,9 +18,11 @@
     {% if 'greekLit' in objectId %}
     <meta name="alpheios-treebank-url" content="http://tools.alpheios.net/exist/rest/db/xq/treebank-getmorph.xq?f={{ objectId | replace('urn:cts:greekLit:','')}}&amp;w=WORD">
     <meta name="alpheios-treebank-diagram-url" content="version=1.0;http://tools.alpheios.net/exist/rest/db/app/treebank-editsentence.xhtml?doc={{objectId | replace('urn:cts:greekLit:','')}}&amp;app=viewer&amp;id=SENTENCE&amp;w=WORD">
+    <meta name="alpheios-v2-treebank-diagram-url" data-alpheios_tb_src="https://alpheios.net/alpheios-treebanks/{{objectId | replace('urn:cts:greekLit:','')}}?chunk=SENTENCE&amp;w=WORD">
     {% elif 'latinLit' in objectId %}
     <meta name="alpheios-treebank-url" content="http://tools.alpheios.net/exist/rest/db/xq/treebank-getmorph.xq?f={{ objectId | replace('urn:cts:latinLit:','')}}&amp;w=WORD">
     <meta name="alpheios-treebank-diagram-url" content="version=1.0;http://tools.alpheios.net/exist/rest/db/app/treebank-editsentence.xhtml?doc={{objectId | replace('urn:cts:latinLit:','')}}&amp;app=viewer&amp;id=SENTENCE&amp;w=WORD">
+    <meta name="alpheios-v2-treebank-diagram-url" data-alpheios_tb_src="https://alpheios.net/alpheios-treebanks/{{objectId | replace('urn:cts:latinLit:','')}}?chunk=SENTENCE&amp;w=WORD">
     {% endif %}
     {% for filename, directory in assets["css"].items() %}
       {% if directory %}<link rel="stylesheet" href="{{url_for('.secondary_assets', filetype='css', asset=filename)}}">

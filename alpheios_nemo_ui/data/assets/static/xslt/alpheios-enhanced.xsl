@@ -253,6 +253,7 @@
                     <xsl:attribute name="tbref">
                         <xsl:value-of select="@ana"/>
                     </xsl:attribute>
+                    <xsl:attribute name="data-alpheios_tb_ref"><xsl:value-of select="@ana"/></xsl:attribute>
                 </xsl:when>
             </xsl:choose>
             <xsl:apply-templates/>
