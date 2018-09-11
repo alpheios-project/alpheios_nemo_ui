@@ -20,7 +20,8 @@ class AlpheiosNemoUI(PluginPrototype):
     }
     CSS = [
      resource_filename("alpheios_nemo_ui", "data/assets/css/theme-ext.css"),
-     resource_filename("alpheios_nemo_ui", "data/assets/css/style.min.css")
+     resource_filename("alpheios_nemo_ui", "data/assets/css/style.min.css"),
+     resource_filename("alpheios_nemo_ui", "data/assets/css/style-embedded.min.css")
     ]
     JS = [
         resource_filename("alpheios_nemo_ui", "data/assets/js/bloodhound.min.js"),
