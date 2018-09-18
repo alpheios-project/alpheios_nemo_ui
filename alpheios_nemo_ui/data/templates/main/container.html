@@ -76,6 +76,7 @@
   {% block footer %}
           {% include "main::footer.html" %}
   {% endblock %}
+  <div id="alpheios-main" data-trigger="dblclick" data-selector=".alpheios-word" data-mobile-redirect-url="https://www-test.alpheios.net/pages/texts-mobile"></div>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -85,6 +86,11 @@
     ga('create', '{{gtrack}}', 'auto');
     ga('send', 'pageview');
 
+  </script>
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+      new Alpheios.Embedded("#alpheios-main",document,{top:"30vh", left:"45vw"},{}).activate();
+    });
   </script>
   </body>
 </html>
