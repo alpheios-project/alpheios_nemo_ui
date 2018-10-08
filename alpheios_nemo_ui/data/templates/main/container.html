@@ -22,7 +22,7 @@
     {% elif 'latinLit' in objectId %}
     <meta name="alpheios-treebank-url" content="http://tools.alpheios.net/exist/rest/db/xq/treebank-getmorph.xq?f={{ objectId | replace('urn:cts:latinLit:','')}}&amp;w=WORD">
     <meta name="alpheios-treebank-diagram-url" content="version=1.0;http://tools.alpheios.net/exist/rest/db/app/treebank-editsentence.xhtml?doc={{objectId | replace('urn:cts:latinLit:','')}}&amp;app=viewer&amp;id=SENTENCE&amp;w=WORD">
-    <meta name="alpheios-v2-treebank-diagram-url" data-alpheios_tb_src="https://alpheios.net/alpheios-treebanks/{{objectId | replace('urn:cts:latinLit:','')}}.html?chunk=SENTENCE&amp;w=WORD">
+    <meta name="alpheios-v2-treebank-diagram-url" data-alpheios_tb_src="https://alpheios.net/alpheios-treebanks/DOC.html?chunk=SENTENCE&amp;w=WORD">
     {% endif %}
     {% for filename, directory in assets["css"].items() %}
       {% if directory %}<link rel="stylesheet" href="{{url_for('.secondary_assets', filetype='css', asset=filename)}}">
@@ -76,6 +76,7 @@
   {% block footer %}
           {% include "main::footer.html" %}
   {% endblock %}
+  <div id="alpheios-main" data-trigger="dblclick" data-selector=".alpheios-word" data-mobile-redirect-url="https://www-test.alpheios.net/pages/texts-mobile"></div>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -85,6 +86,11 @@
     ga('create', '{{gtrack}}', 'auto');
     ga('send', 'pageview');
 
+  </script>
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+      new Alpheios.Embedded("#alpheios-main",document,{top:"30vh", left:"45vw"},{}).activate();
+    });
   </script>
   </body>
 </html>
