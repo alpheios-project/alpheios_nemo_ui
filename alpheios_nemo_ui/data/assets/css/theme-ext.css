@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Amiri');
 body {
   font-family: Arial, sans-serif;
   font-size: 12px;
@@ -45,7 +46,7 @@ span.w::before {
 }
 
 .lang_ara, .lang_ar {
-    font-family:"Lucida Grande",Verdana,Helvetica,Arial,sans-serif;
+    font-family: Amiri, serif;
 }
 
 .center {

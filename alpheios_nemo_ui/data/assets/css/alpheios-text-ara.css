@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Amiri');
+
 div.page, div.l {
-    font-family:"Lucida Grande",Verdana,Helvetica,Arial,sans-serif;
+    font-family: Amiri, serif;
     direction: rtl;
     text-align: right;
 }
