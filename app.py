@@ -68,6 +68,8 @@ nautilus = FlaskNautilus(
     resolver=resolver,
     flask_caching=http_cache
 )
+nautilus_api = FlaskNautilus(prefix="/api", app=app, resolver=resolver)
+
 
 # We set up Nemo
 nemo = Nemo(
@@ -79,7 +81,7 @@ nemo = Nemo(
     chunker={
         "default": scheme_grouper
     },
-    plugins=[AlpheiosNemoUI("")],
+    plugins=[AlpheiosNemoUI("UA-8210342-1")],
     transform={
         "default": resource_filename("alpheios_nemo_ui","data/assets/static/xslt/alpheios-enhanced.xsl")
     },

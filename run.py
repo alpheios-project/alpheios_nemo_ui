@@ -9,6 +9,7 @@ app = Flask("Nemo")
 app.debug = True
 nemo = Nemo(
     app=app,
+    GTrackCode="UA-8210342-1",
     base_url="",
     resolver=NautilusDummy,
     chunker={"default": scheme_grouper},

@@ -86,5 +86,16 @@
     ga('send', 'pageview');
 
   </script>
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+      new Alpheios.Embedded(
+            {
+              clientId: 'alpheios-nemo-ui',
+              triggerEvents: "dblclick",
+              enabledSelector: '.entry-content',
+              mobileRedirectUrl: 'https://www-test.alpheios.net/pages/texts-mobile',
+            }).activate();
+    });
+  </script>
   </body>
 </html>
