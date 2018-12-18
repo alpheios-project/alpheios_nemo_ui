@@ -253,7 +253,18 @@
                     <xsl:attribute name="tbref">
                         <xsl:value-of select="@ana"/>
                     </xsl:attribute>
-                    <xsl:attribute name="data-alpheios_tb_ref"><xsl:value-of select="@ana"/></xsl:attribute>
+                    <xsl:variable name="urn" select="ancestor::tei:body/@n"/>
+                    <xsl:variable name="docref">
+                        <xsl:choose>
+                            <xsl:when test="contains($urn,'latinLit')">
+                                <xsl:value-of select="substring-after($urn,'urn:cts:latinLit:')"/>
+                            </xsl:when>
+                            <xsl:when test="contains($urn,'greekLit')">
+                                <xsl:value-of select="substring-after($urn,'urn:cts:greekLit:')"/>
+                            </xsl:when>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <xsl:attribute name="data-alpheios_tb_ref"><xsl:value-of select="concat($docref,'#',@ana)"/></xsl:attribute>
                 </xsl:when>
             </xsl:choose>
             <xsl:apply-templates/>
