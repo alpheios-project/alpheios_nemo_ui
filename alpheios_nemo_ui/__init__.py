@@ -2,7 +2,7 @@
 
 from flask_nemo.plugin import PluginPrototype
 from pkg_resources import resource_filename
-from flask import jsonify, url_for
+from flask import jsonify, url_for, send_from_directory, make_response
 from flask_nemo.chunker import level_grouper
 import re
 
@@ -27,13 +27,16 @@ class AlpheiosNemoUI(PluginPrototype):
         resource_filename("alpheios_nemo_ui", "data/assets/js/bloodhound.min.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/autocomplete.min.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/menu.js"),
-        resource_filename("alpheios_nemo_ui", "data/assets/js/alpheios-embedded.js")
+        resource_filename("alpheios_nemo_ui", "data/assets/js/alpheios-embedded.js"),
+        resource_filename("alpheios_nemo_ui", "data/assets/js/app.js")
     ]
     STATICS = [
         resource_filename("alpheios_nemo_ui", "data/assets/images/logo.png")
     ]
     ROUTES = [
-        ("/typeahead/collections.json", "r_typeahead_json", ["GET"])
+        ("/typeahead/collections.json", "r_typeahead_json", ["GET"]),
+        ("/manifest.json", "r_manifest", ["GET"]),
+        ("/sw.js", "r_sw", ["GET"])
     ]
 
     CACHED = ["r_typeahead_json"]
@@ -55,6 +58,14 @@ class AlpheiosNemoUI(PluginPrototype):
         else:
             kwargs["lang"] = 'en'
         return kwargs
+
+    def r_manifest(self):
+        return send_from_directory('alpheios_nemo_ui/data/assets/static', 'manifest.json')
+
+    def r_sw(self):
+        response = make_response(send_from_directory('alpheios_nemo_ui/data/assets/static', 'sw.js'))
+        response.headers['Cache-Control'] = 'no-cache'
+        return response
 
     def r_typeahead_json(self):
         """ List of resource for typeahead
