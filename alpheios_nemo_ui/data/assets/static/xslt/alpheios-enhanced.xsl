@@ -336,8 +336,15 @@
     </xsl:template>
 
     <xsl:template match="t:quote">
-        <xsl:apply-templates/>
+        <blockquote>
+            <xsl:apply-templates/>    
+        </blockquote>
     </xsl:template>
+    
+    <xsl:template match="t:q">
+        <xsl:text>"</xsl:text><xsl:apply-templates/><xsl:text>"</xsl:text>
+    </xsl:template>
+    
 
     <xsl:template match="t:figure">
         <div>Figure here!
