@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css?family=Amiri'); 
+  body {
+    font-family: 'Source Serif Pro', serif;
+    font-size: 1rem;
+    line-height: 1.5; }
+
+    .lang_ara, .lang_ar {
+      font-family: Amiri, serif; }
+
+      a, a:hover {
+        color #185F6D; }
+
+        a:hover {
+          text-decoration: underline; }
+
+          h1 {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 1.625rem; }
+
+            h2 {
+              font-family: 'Source Serif Pro', serif;
+              font-size: 1.5rem;
+              font-weight: bold; }
+
+              h3 {
+                font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                                "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+                                "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                font-size: 1.125rem;
+                font-weight: bold; }
+
+                h4 {
+                  font-family: 'Source Serif Pro', serif;
+                  font-size: 1.125rem; }
+
+                  h5 {
+                    font-weight: 200;
+                    font-size: 1rem;
+                    font-family: 'Source Serif Pro', serif;
+                    font-style: italic; }
+
+                    .btn {
+                      border-radius: 10px;
+                      font-weight: bold; }
+
+                      .btn:hover {
+                        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); }
+
+                        .btn:active {
+                          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(0, 0, 0, 0.1); }
+
+                          .btn-lg, .btn-group-lg > .btn {
+                            padding: 10px 20px 10px 20px !important;
+                            min-width: 44px !important;
+                            min-height: 44px !important; }
+
+                            .btn-primary {
+                              background-color: transparent;
+                              color: #185F6D;
+                              border-color: #185F6D; }
+
+                              .btn-primary:hover {
+                                background-color: #185F6D;
+                                border: none;
+                                color: white; }
+
+                                .btn-burntorange {
+                                  color: white; }
+
+                                  .btn-burntorange:hover {
+                                    background-color: #F27431; }
+
+                                    .btn-mustardyellow {
+                                      color: #0E2233; }
+
+                                      .btn-mustardyellow:hover {
+                                        background-color: #FFD27D; }
+
+                                        .btn-outline-turquoise {
+                                          color: #185F6D;
+                                          background-color: transparent; }
+
+                                          .btn-outline-turquoise span.btn-arrow-turquoise {
+                                            background-image: url('../img/Arrow-turquoise.svg');
+                                            background-repeat: no-repeat;
+                                            background-position: right;
+                                            padding: 10px; }
+
+                                            .btn-outline-turquoise:hover {
+                                              border: none;
+                                              background-color: #185F6D;
+                                              color: white; }
+
+                                              .btn-outline-turquoise:hover span.btn-arrow-turquoise {
+                                                background-image: url('../img/Arrow-white.svg'); }
+
+                                                .btn-outline-turquoise:active span.btn-arrow-turquoise {
+                                                  background-image: url('../img/Arrow-white.svg'); }
+
+                                                  .btn-outline-mustardyellow {
+                                                    color: #FFC24F;
+                                                    background-color: transparent; }
+
+                                                    .btn-outline-mustardyellow span.btn-arrow-yellow {
+                                                      background-image: url('../img/Arrow-yellow.svg');
+                                                      background-repeat: no-repeat;
+                                                      background-position: right;
+                                                      padding: 10px; }
+
+                                                      .btn-outline-mustardyellow:hover {
+                                                        border: none;
+                                                        background-color: #FFC24F;
+                                                        color: white; }
+
+                                                        .btn-outline-mustardyellow:hover span.btn-arrow-yellow {
+                                                          background-image: url('../img/Arrow-midnight.svg'); }
+
+                                                          .btn-outline-mustardyellow:active span.btn-arrow-yellow {
+                                                            background-image: url('../img/Arrow-midnight.svg'); }
+
+                                                            .breadcrumb {
+                                                              background-color: #185F6D; }
+
+                                                              .breadcrumb-item a {
+                                                                color: white; }
+
+                                                                .breadcrumb .active {
+                                                                  color: #BCE5F0; }
+
+                                                                  .alert-info {
+                                                                    background-color: #FFC24F;
+                                                                    color: #0E2233;
+                                                                    font-weight: bold; }
+
+                                                                    #breadcrumb {
+                                                                      text-transform: none;
+                                                                      font-size: 1rem; }
+
+                                                                      ol.alpheios-reader-text-line > li {
+                                                                        display: list-item;
+                                                                        list-style: none; }
+
+                                                                        ol.alpheios-reader-text-line > li {
+                                                                          display: list-item; }
+
+                                                                          ol.alpheios-reader-text-line > li:nth-child(5n) {
+                                                                            list-style: decimal; }
+
+                                                                            ol.alpheios-reader-text-line > li:nth-child(1) {
+                                                                              list-style: decimal; }
+
+                                                                              ol.alpheios-reader-text-line > li:hover {
+                                                                                list-style: decimal; }
+
+                                                                                #menu-container .logo {
+                                                                                  width: auto; }
+
+                                                                                  .pb {
+                                                                                    font-weight: thin;
+                                                                                    font-size: 0.5em;
+                                                                                    display: inline;
+                                                                                    font-style: italic;
+                                                                                    color: grey; }
+
+                                                                                    .ex, .supplied, .unclear {
+                                                                                      color: #505050; }
+
+                                                                                      .unclear {
+                                                                                        text-decoration: underline dotted; }
+
+                                                                                        .lang_heb, .lang_ara, .lang_far, .lang_ar {
+                                                                                          text-align: right; }
+
+                                                                                          .lang_heb.center, .lang_ara.center, .lang_far.center, .lang_ar.center {
+                                                                                            text-align: right; }
+
+                                                                                            span.w::before {
+                                                                                              content: " "; }
+
+                                                                                              .center {
+                                                                                                text-align: center; }
+
+                                                                                                #reading-container article {
+                                                                                                  width: 90%; }
+
+                                                                                                  #treebank_container {
+                                                                                                    height: 600px; }
+
+                                                                                                    span[token-selector="state.tokens"] {
+                                                                                                      display: none; }
+
+                                                                                                      .algolia-autocomplete {
+                                                                                                        width: 100%; }
+
+                                                                                                        .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+                                                                                                          width: 100%; }
+
+                                                                                                          .algolia-autocomplete .aa-hint {
+                                                                                                            color: #999; }
+
+                                                                                                            .algolia-autocomplete .aa-dropdown-menu {
+                                                                                                              width: 100%;
+                                                                                                              background-color: #fff;
+                                                                                                              border: 1px solid #999;
+                                                                                                              border-top: none; }
+
+                                                                                                              .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+                                                                                                                cursor: pointer;
+                                                                                                                padding: 5px 4px; }
+
+                                                                                                                .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+                                                                                                                  background-color: #B2D7FF; }
+
+                                                                                                                  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+                                                                                                                    font-weight: bold;
+                                                                                                                    font-style: normal; }
+
+                                                                                                                    #fullsearch {
+                                                                                                                      margin-top: 15px; }
+
+                                                                                                                      .note > .note-content {
+                                                                                                                        display: none;
+                                                                                                                        color: #000000; }
+
+                                                                                                                        .note {
+                                                                                                                          cursor: pointer;
+                                                                                                                          color: #3E8D9C; }

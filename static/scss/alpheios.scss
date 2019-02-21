@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css?family=Amiri');
+$font-family-serif:      'Source Serif Pro', serif;
+$font-family-sans-serif: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+$midnightblue: #0E2233;
+$alpheiosblue: #BCE5F0;
+$mustardyellow: #FFC24F;
+$burntorange: #C64906;
+$turquoise: #185F6D;
+$hoverorange: #F27431;
+$hoveryellow: #FFD27D;
+
+$input-btn-font-family: $font-family-sans-serif;
+$btn-font-family: $font-family-sans-serif;
+
+$link-hover-color: $turquoise;
+$font-size-base: 1rem;
+$line-height-base: 1.5;
+
+body {
+  font-family: $font-family-serif;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+}
+
+.lang_ara, .lang_ar {
+    font-family: Amiri, serif;
+}
+
+a, a:hover {
+  color $turquoise;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-family: $font-family-serif;
+  font-size: $font-size-base * 1.625;
+}
+h2 {
+  font-family: $font-family-serif;
+  font-size: $font-size-base * 1.5;
+  font-weight: bold;
+}
+
+h3 {
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-base * 1.125;
+  font-weight: bold;
+}
+
+h4 {
+  font-family: $font-family-serif;
+  font-size: $font-size-base * 1.125;
+}
+
+h5 {
+  font-weight: 200;
+  font-size: $font-size-base;
+  font-family: $font-family-serif;
+  font-style: italic;
+}
+
+.btn {
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.btn:hover {
+  box-shadow: 0px 4px 4px rgba(0,0, 0, 0.25);
+}
+
+.btn:active {
+  box-shadow: 0px 4px 4px rgba(0,0, 0, 0.25), inset 0px 4px 4px rgba(0,0,0,0.1);
+}
+
+.btn-lg, .btn-group-lg > .btn {
+  padding: 10px 20px 10px 20px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+}
+
+.btn-primary {
+  background-color: transparent;
+  color: $turquoise;
+  border-color: $turquoise;
+}
+
+.btn-primary:hover {
+  background-color: $turquoise;
+  border: none;
+  color: white;
+}
+
+
+.btn-burntorange {
+  color: white;
+}
+
+.btn-burntorange:hover {
+  background-color: $hoverorange;
+}
+
+.btn-mustardyellow {
+  color: $midnightblue;
+}
+.btn-mustardyellow:hover {
+  background-color: $hoveryellow;
+}
+
+.btn-outline-turquoise {
+  color: $turquoise;
+  background-color: transparent;
+}
+
+.btn-outline-turquoise span.btn-arrow-turquoise {
+  background-image:url('../img/Arrow-turquoise.svg');
+  background-repeat: no-repeat;
+  background-position: right;
+  padding: 10px;
+}
+
+.btn-outline-turquoise:hover {
+  border: none;
+  background-color: $turquoise;
+  color: white;
+}
+
+.btn-outline-turquoise:hover span.btn-arrow-turquoise {
+  background-image:url('../img/Arrow-white.svg');
+}
+
+.btn-outline-turquoise:active span.btn-arrow-turquoise {
+  background-image:url('../img/Arrow-white.svg');
+}
+
+.btn-outline-mustardyellow {
+  color: $mustardyellow;
+  background-color: transparent;
+}
+
+.btn-outline-mustardyellow span.btn-arrow-yellow {
+  background-image:url('../img/Arrow-yellow.svg');
+  background-repeat: no-repeat;
+  background-position: right;
+  padding: 10px;
+}
+
+.btn-outline-mustardyellow:hover {
+  border: none;
+  background-color: $mustardyellow;
+  color: white;
+}
+
+.btn-outline-mustardyellow:hover span.btn-arrow-yellow {
+  background-image:url('../img/Arrow-midnight.svg');
+}
+
+.btn-outline-mustardyellow:active span.btn-arrow-yellow {
+  background-image:url('../img/Arrow-midnight.svg');
+}
+
+.breadcrumb {
+  background-color: $turquoise;
+}
+
+.breadcrumb-item a {
+  color: white;
+}
+
+.breadcrumb .active {
+  color: $alpheiosblue;
+}
+
+.alert-info {
+  background-color: $mustardyellow;
+  color: $midnightblue;
+  font-weight: bold;
+}
+
+@include media-breakpoint-up(lg) {
+  h1 {
+    font-size: $font-size-base * 2.25;
+  }
+  h2 {
+    font-size: $font-size-base * 1.75;
+  }
+
+  h3 {
+    font-size: $font-size-base * 1.375;
+  }
+
+  h4 {
+    font-size: $font-size-base * 1.125;
+  }
+
+  h5 {
+    font-size: $font-size-base;
+  }
+}
+
+
+/** Starting to try to make sense of alpheios reader styles **/
+
+#breadcrumb {
+  text-transform: none;
+  font-size: $font-size-base;
+}
+
+ol.alpheios-reader-text-line > li {
+  display: list-item;
+  list-style: none;
+}
+
+ol.alpheios-reader-text-line > li {
+  display: list-item;
+}
+
+ol.alpheios-reader-text-line > li:nth-child(5n) {
+  list-style: decimal;
+}
+ol.alpheios-reader-text-line > li:nth-child(1) {
+  list-style: decimal;
+}
+ol.alpheios-reader-text-line > li:hover {
+  list-style: decimal;
+}
+
+/** TODO these are from the old theme-ext and need to be updated **/
+#menu-container  .logo {
+    width: auto;
+}
+.pb {
+  font-weight: thin;
+  font-size: 0.5em;
+  display:inline;
+  font-style: italic;
+  color:grey;
+}
+
+.ex,
+.supplied,
+.unclear {
+  color: rgb(80,80,80);
+}
+
+.unclear {
+  text-decoration: underline dotted;
+}
+
+.lang_heb, .lang_ara, .lang_far, .lang_ar {
+  text-align:right;
+}
+
+.lang_heb.center, .lang_ara.center, .lang_far.center, .lang_ar.center {
+  text-align:right;
+}
+
+span.w::before {
+  content:" ";
+}
+
+.center {
+    text-align: center;
+}
+
+
+#reading-container article {
+  width:90%;
+}
+#treebank_container {
+  height:600px;
+}
+span[token-selector="state.tokens"] {
+  display:none;
+}
+
+/* Typeahead */
+
+.algolia-autocomplete {
+  width: 100%;
+}
+.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+  width: 100%;
+}
+.algolia-autocomplete .aa-hint {
+  color: #999;
+}
+.algolia-autocomplete .aa-dropdown-menu {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #999;
+  border-top: none;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+  cursor: pointer;
+  padding: 5px 4px;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+  background-color: #B2D7FF;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+#fullsearch {
+  margin-top:15px;
+}
+
+
+/* - from here changes that need to be made or finished for MVP */
+
+.note > .note-content {
+  display: none;
+  color: #000000; /** TODO apply SASS variable **/
+}
+
+.note {
+  cursor: pointer;
+  color: #3E8D9C; /** TODO apply SASS variable **/
+}

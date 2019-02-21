@@ -13,12 +13,12 @@
 {% macro nav() %}
     {% if prev %}
     <a class="btn btn-xs btn-primary" href="{{url_for('.r_passage', objectId=objectId, subreference=prev) }}">
-        <span class="glyphicon glyphicon-chevron-left"></span>
+      <i class="fas fa-angle-left"></i>
     </a>
     {% endif %}
     {% if next %}
     <a class="btn btn-xs btn-primary" href="{{url_for('.r_passage', objectId=objectId, subreference=next) }}">
-        <span class="glyphicon glyphicon-chevron-right"></span>
+        <i class="fas fa-angle-right"></i>
     </a>
     {% endif %}
 {% endmacro %}

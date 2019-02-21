@@ -60,7 +60,7 @@
             </xsl:if>
             <xsl:choose>
                 <xsl:when test="child::t:l">
-                    <ol>
+                    <ol class="alpheios-reader-text-line">
                         <xsl:apply-templates/>
                     </ol>
                 </xsl:when>
@@ -500,10 +500,18 @@
     </xsl:template>
 
     <xsl:template match="t:note">
-        <a>
+        <span>
             <xsl:attribute name="class">note</xsl:attribute>
-            <xsl:text>[*]</xsl:text>
-        </a>
+            <xsl:element name="span">
+                <xsl:attribute name="data-toggle">popover</xsl:attribute>
+                <xsl:attribute name="data-trigger">hover focus</xsl:attribute>
+                <xsl:text>[*]</xsl:text>
+            </xsl:element>
+            <xsl:element name="span">
+                <xsl:attribute name="class">note-content</xsl:attribute>
+                <xsl:apply-templates/>
+            </xsl:element>
+        </span>
     </xsl:template>
 
     <xsl:template match="t:ab/t:ref[@cRef]">
@@ -538,7 +546,7 @@
                     <xsl:value-of select="."/>
                 </strong>
             </xsl:when>
-            <xsl:when test="@rend = 'italic'">
+            <xsl:when test="@rend = 'italic' or @rend = 'italics'">
                 <em>
                     <xsl:value-of select="."/>
                 </em>

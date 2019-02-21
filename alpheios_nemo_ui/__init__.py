@@ -19,7 +19,6 @@ class AlpheiosNemoUI(PluginPrototype):
         "alpheios": resource_filename("alpheios_nemo_ui", "data/templates/alpheios")
     }
     CSS = [
-     resource_filename("alpheios_nemo_ui", "data/assets/css/theme-ext.css"),
      resource_filename("alpheios_nemo_ui", "data/assets/css/style.min.css"),
      resource_filename("alpheios_nemo_ui", "data/assets/css/style-embedded.min.css")
     ]

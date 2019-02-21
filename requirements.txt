@@ -1,2 +1,4 @@
 flask_nemo>=1.0.0b5
 capitains_nautilus>=1.0.0b6
+Flask-Assets
+pyscss

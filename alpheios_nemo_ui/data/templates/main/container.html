@@ -10,10 +10,22 @@
       {% include "main::metadata.html" %}
     {% endblock %}
 
-    <!-- Bootstrap --><!-- Latest compiled and minified CSS -->
-    <!--<link rel="stylesheet" href="{{url_for('.static', filename='css/teibp.min.css')}}">-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="{{url_for('.static', filename='css/theme.min.css')}}">
+    {% assets "alpheios" %}
+      <link rel=stylesheet type=text/css href="{{ ASSET_URL }}">
+    {% endassets %}
+    {% for filename, directory in assets["css"].items() %}
+      {% if directory %}<link rel="stylesheet" href="{{url_for('.secondary_assets', filetype='css', asset=filename)}}">
+      {% else %}<link rel="stylesheet" href="{{ filename }}">
+      {% endif %}
+    {% endfor %}
+
     <meta name="alpheios-pedagogical-text" content="true"/>
     {% if 'greekLit' in objectId %}
     <meta name="alpheios-treebank-url" content="http://tools.alpheios.net/exist/rest/db/xq/treebank-getmorph.xq?f={{ objectId | replace('urn:cts:greekLit:','')}}&amp;w=WORD">
@@ -24,11 +36,6 @@
     <meta name="alpheios-treebank-diagram-url" content="version=1.0;http://tools.alpheios.net/exist/rest/db/app/treebank-editsentence.xhtml?doc={{objectId | replace('urn:cts:latinLit:','')}}&amp;app=viewer&amp;id=SENTENCE&amp;w=WORD">
     <meta name="alpheios-v2-treebank-diagram-url" data-alpheios_tb_src="https://alpheios.net/alpheios-treebanks/DOC.html?chunk=SENTENCE&amp;w=WORD">
     {% endif %}
-    {% for filename, directory in assets["css"].items() %}
-      {% if directory %}<link rel="stylesheet" href="{{url_for('.secondary_assets', filetype='css', asset=filename)}}">
-      {% else %}<link rel="stylesheet" href="{{ filename }}">
-      {% endif %}
-    {% endfor %}
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -59,10 +66,7 @@
       </div>
       </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 
     {% for filename, directory in assets["js"].items() %}
       {% if directory %}<script src="{{url_for('.secondary_assets', filetype='js', asset=filename)}}"></script>
@@ -91,6 +95,17 @@
     document.addEventListener("DOMContentLoaded", function(event) {
       new Alpheios.Embedded("#alpheios-main",document,{top:"30vh", left:"45vw"},{}).activate();
     });
+
+    $(document).ready(function(){
+      $("[data-toggle=popover]").each(function(i, obj) {
+        $(this).popover({
+          html: true,
+          content: function() {
+            return $(this).next('.note-content').html();
+          }
+        });
+      });
+    })
   </script>
   </body>
 </html>
