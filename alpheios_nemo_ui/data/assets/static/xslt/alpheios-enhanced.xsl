@@ -58,23 +58,14 @@
                     <xsl:text>rtl</xsl:text>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:choose>
-                <xsl:when test="child::t:l">
-                    <ol class="alpheios-reader-text-line">
-                        <xsl:apply-templates/>
-                    </ol>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates/>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:apply-templates/>
         </div>
     </xsl:template>
    
     <xsl:template match="tei:head">
-        <div class="head">
+        <h3>
             <xsl:apply-templates/>
-        </div>
+        </h3>
     </xsl:template>
     <xsl:template match="tei:speaker">
         <div class="speaker">
@@ -82,54 +73,53 @@
         </div>
     </xsl:template>
     <xsl:template match="tei:l">
-        <xsl:element name="li">
-            <xsl:apply-templates select="@urn"/>
-            <xsl:attribute name="value">
-                <xsl:value-of select="@n"/>
-            </xsl:attribute>
-            <xsl:attribute name="class">
-                <xsl:value-of select="@rend"/>
-            </xsl:attribute>
+        <xsl:variable name="rend" select="@rend"/>
+        <div class="l {$rend}">
             <xsl:if test="@xml:lang">
                 <xsl:attribute name="lang">
                     <xsl:value-of select="@xml:lang"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:apply-templates/>
-        </xsl:element>
+            <div class="l-text">
+                <xsl:apply-templates/>
+            </div>
+            <div class="l-cite">
+                <xsl:value-of select="@n"/>
+            </div>
+        </div>
     </xsl:template>
 
     <xsl:template match="tei:p">
         <xsl:variable name="rend" select="@rend"/>
-        <div class="l p {$rend}">
-            <xsl:if test="@n">
-                <div class="linenum">
-                    <xsl:value-of select="@n"/>
-                </div>
-            </xsl:if>
+        <div class="p {$rend}">
             <xsl:if test="@xml:lang">
                 <xsl:attribute name="lang">
                     <xsl:value-of select="@xml:lang"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:apply-templates/>
+            <div class="p-text">
+                <xsl:apply-templates/>
+            </div>
+            <div class="p-cite">
+                <xsl:value-of select="@n"/>
+            </div>
         </div>
     </xsl:template>
     
     <xsl:template match="tei:seg">
         <xsl:variable name="rend" select="@rend"/>
-        <div class="l seg {$rend}">
-            <xsl:if test="@n">
-                <div class="linenum">
-                    <xsl:value-of select="@n"/>
-                </div>
-            </xsl:if>
+        <div class="seg {$rend}">
             <xsl:if test="@xml:lang">
                 <xsl:attribute name="lang">
                     <xsl:value-of select="@xml:lang"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:apply-templates/>
+            <div class="seg-text">
+                <xsl:apply-templates/>
+            </div>
+            <div class="seg-cite">
+                <xsl:value-of select="@n"/>
+            </div>
         </div>
     </xsl:template>
     

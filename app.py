@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import os
+import sys
 from flask import Flask, request
 from flask_assets import Environment, Bundle
+from webassets.filter import get_filter
 from werkzeug.contrib.cache import RedisCache, FileSystemCache
 from flask_caching import Cache
 from pkg_resources import resource_filename
@@ -86,9 +88,6 @@ nemo = Nemo(
     },
 
 )
-assets = Environment(app)
-scss = Bundle('scss/alpheios.scss', filters='pyscss', output='alpheios.css')
-assets.register('alpheios', scss)
 
 http_cache.init_app(app)
 #app.debug = True

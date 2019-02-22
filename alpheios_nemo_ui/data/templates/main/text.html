@@ -12,12 +12,12 @@
 
 {% macro nav() %}
     {% if prev %}
-    <a class="btn btn-xs btn-primary" href="{{url_for('.r_passage', objectId=objectId, subreference=prev) }}">
+    <a class="btn btn-xs btn-primary prev" href="{{url_for('.r_passage', objectId=objectId, subreference=prev) }}">
       <i class="fas fa-angle-left"></i>
     </a>
     {% endif %}
     {% if next %}
-    <a class="btn btn-xs btn-primary" href="{{url_for('.r_passage', objectId=objectId, subreference=next) }}">
+    <a class="btn btn-xs btn-primary next" href="{{url_for('.r_passage', objectId=objectId, subreference=next) }}">
         <i class="fas fa-angle-right"></i>
     </a>
     {% endif %}
@@ -39,13 +39,14 @@ Double-click on a word to access morphology and definitions.
     <nav>
         {{ navigation }}
     </nav>
-    <section class="entry-content">
+    <section class="entry-content" role="main">
         {% if cache_active %}
             {% cache cache_time, cache_key %}{{ text_passage }} {% endcache %}
         {% else %}
             {{ text_passage }}
         {% endif %}
     </section>
+
     <footer>
       {{ footer }}
     </footer>
