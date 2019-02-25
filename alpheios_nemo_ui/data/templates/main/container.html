@@ -41,27 +41,11 @@
     <![endif]-->
   </head>
   <body>
-      <div class="container-fluid">
-      <div class="row">
-        <nav class="col-sm-2 menus">
-          {% include "main::logo.html" %}
-        </nav>
-        <div class="col-sm-10 right-columns">
-              {% include "main::breadcrumb.html" %}
-        </div>
-      </div>
-      <div class="row">
-        <nav class="col-sm-2 menus" id="menu-container">
-          {% include "alpheios::menu.html" %}
-        </nav>
-        <div class="col-sm-10 hfeed right-columns" id="reading-container">
-          <div class="">
-              {% block article %}
-              {% endblock %}
-          </div>
-        </div>
-      </div>
-      </div>
+    {% include "alpheios::breadcrumb.html" %}
+    <div class="d-flex" id="reading-container">
+      {% block article %}
+      {% endblock %}
+     </div>
 
 
 

@@ -2,9 +2,13 @@
 
 from flask_nemo.plugin import PluginPrototype
 from pkg_resources import resource_filename
-from flask import jsonify, url_for
+from flask import jsonify, url_for, redirect, Markup
 from flask_nemo.chunker import level_grouper
 import re
+from MyCapytain.common.constants import Mimetypes
+from MyCapytain.resources.prototypes.metadata import ResourceCollection
+from MyCapytain.resources.prototypes.cts.inventory import CtsWorkMetadata, CtsEditionMetadata
+from MyCapytain.errors import UnknownCollection
 
 
 class AlpheiosNemoUI(PluginPrototype):
@@ -32,9 +36,16 @@ class AlpheiosNemoUI(PluginPrototype):
         resource_filename("alpheios_nemo_ui", "data/assets/js/alpheios-embedded.js")
     ]
     STATICS = [
-        resource_filename("alpheios_nemo_ui", "data/assets/images/logo.png")
+        resource_filename("alpheios_nemo_ui", "data/assets/images/logo.png"),
+        resource_filename("alpheios_nemo_ui", "data/assets/images/Alpheios-Logo-White.png")
     ]
     ROUTES = [
+        ("/", "r_index", ["GET"]),
+        ("/collections", "r_collections", ["GET"]),
+        ("/collections/<objectId>", "r_collection", ["GET"]),
+        ("/text/<objectId>/references", "r_references", ["GET"]),
+        ("/text/<objectId>/passage/<subreference>", "r_passage", ["GET"]),
+        ("/text/<objectId>/passage", "r_first_passage", ["GET"]),
         ("/typeahead/collections.json", "r_typeahead_json", ["GET"])
     ]
 
@@ -44,6 +55,163 @@ class AlpheiosNemoUI(PluginPrototype):
     def __init__(self, GTrackCode=None, *args, **kwargs):
         super(AlpheiosNemoUI, self).__init__(*args, **kwargs)
         self.GTrackCode = GTrackCode
+        self.clear_routes = True
+
+    def r_index(self):
+        """ Retrieve the top collections of the inventory
+
+        :param lang: Lang in which to express main data
+        :type lang: str
+        :return: Collections information and template
+        :rtype: {str: Any}
+        """
+        collection = self.nemo.resolver.getMetadata()
+        return {
+            "template": "main::collection.html",
+            "current_label": collection.get_label(None),
+            "collections": {
+                "members": self.nemo.make_members(collection, lang=None)
+            }
+        }
+
+    def r_collections(self, lang=None):
+        """ Retrieve the top collections of the inventory
+
+        :param lang: Lang in which to express main data
+        :type lang: str
+        :return: Collections information and template
+        :rtype: {str: Any}
+        """
+        collection = self.nemo.resolver.getMetadata()
+        return {
+            "template": "main::collection.html",
+            "current_label": collection.get_label(lang),
+            "collections": {
+                "members": self.nemo.make_members(collection, lang=lang)
+            }
+        }
+
+    def r_collection(self, objectId, lang=None):
+        """ Collection content browsing route function
+
+        :param objectId: Collection identifier
+        :type objectId: str
+        :param lang: Lang in which to express main data
+        :type lang: str
+        :return: Template and collections contained in given collection
+        :rtype: {str: Any}
+        """
+        collection = self.nemo.resolver.getMetadata(objectId)
+        return {
+            "template": "main::collection.html",
+            "collections": {
+                "current": {
+                    "label": str(collection.get_label(lang)),
+                    "id": collection.id,
+                    "model": str(collection.model),
+                    "type": str(collection.type),
+                },
+                "members": self.nemo.make_members(collection, lang=lang),
+                "parents": self.nemo.make_parents(collection, lang=lang)
+            },
+        }
+
+    def r_references(self, objectId, lang=None):
+        """ Text exemplar references browsing route function
+
+        :param objectId: Collection identifier
+        :type objectId: str
+        :param lang: Lang in which to express main data
+        :type lang: str
+        :return: Template and required information about text with its references
+        """
+        collection, reffs = self.nemo.get_reffs(objectId=objectId, export_collection=True)
+        return {
+            "template": "main::references.html",
+            "objectId": objectId,
+            "citation": collection.citation,
+            "collections": {
+                "current": {
+                    "label": collection.get_label(lang),
+                    "id": collection.id,
+                    "model": str(collection.model),
+                    "type": str(collection.type),
+                },
+                "parents": self.nemo.make_parents(collection, lang=lang)
+            },
+            "reffs": reffs
+        }
+
+    def r_first_passage(self, objectId):
+        """ Provides a redirect to the first passage of given objectId
+
+        :param objectId: Collection identifier
+        :type objectId: str
+        :return: Redirection to the first passage of given text
+        """
+        collection, reffs = self.nemo.get_reffs(objectId=objectId, export_collection=True)
+        first, _ = reffs[0]
+        return redirect(
+            url_for(".r_passage_semantic", objectId=objectId, subreference=first, semantic=self.nemo.semantic(collection))
+        )
+
+    def r_passage(self, objectId, subreference, lang=None):
+        """ Retrieve the text of the passage
+
+        :param objectId: Collection identifier
+        :type objectId: str
+        :param lang: Lang in which to express main data
+        :type lang: str
+        :param subreference: Reference identifier
+        :type subreference: str
+        :return: Template, collections metadata and Markup object representing the text
+        :rtype: {str: Any}
+        """
+        collection = self.nemo.get_collection(objectId)
+        if isinstance(collection, CtsWorkMetadata):
+            editions = [t for t in collection.children.values() if isinstance(t, CtsEditionMetadata)]
+            if len(editions) == 0:
+                raise UnknownCollection("This work has no default edition")
+            return redirect(url_for(".r_passage", objectId=str(editions[0].id), subreference=subreference))
+        text = self.nemo.get_passage(objectId=objectId, subreference=subreference)
+        passage = self.nemo.transform(text, text.export(Mimetypes.PYTHON.ETREE), objectId)
+        prev, next = self.nemo.get_siblings(objectId, subreference, text)
+        return {
+            "template": "main::text.html",
+            "objectId": objectId,
+            "subreference": subreference,
+            "collections": {
+                "current": {
+                    "label": collection.get_label(lang),
+                    "id": collection.id,
+                    "model": str(collection.model),
+                    "type": str(collection.type),
+                    "author": text.get_creator(lang),
+                    "title": text.get_title(lang),
+                    "description": text.get_description(lang),
+                    "citation": collection.citation,
+                    "coins": self.nemo.make_coins(collection, text, subreference, lang=lang)
+                },
+                "parents": self.nemo.make_parents(collection, lang=lang)
+            },
+            "text_passage": Markup(passage),
+            "prev": prev,
+            "next": next
+        }
+
+    def r_assets(self, filetype, asset):
+        """ Route for specific assets.
+
+        :param filetype: Asset Type
+        :param asset: Filename of an asset
+        :return: Response
+        """
+        if filetype in self.nemo.assets and asset in self.nemo.assets[filetype] and self.nemo.assets[filetype][asset]:
+            return send_from_directory(
+                directory=self.nemo.assets[filetype][asset],
+                filename=asset
+            )
+        abort(404)
 
     def render(self, **kwargs):
         kwargs["gtrack"] = self.GTrackCode
@@ -57,6 +225,14 @@ class AlpheiosNemoUI(PluginPrototype):
         else:
             kwargs["lang"] = 'en'
         return kwargs
+
+    @property
+    def clear_routes(self):
+       pass
+
+    def clear_routes(self,value):
+      self.clear_routes = value
+
 
     def r_typeahead_json(self):
         """ List of resource for typeahead
@@ -113,3 +289,4 @@ def scheme_grouper(text, getreffs):
     elif "line" in types:
         groupby = 30
     return level_grouper(text, getreffs, level, groupby)
+

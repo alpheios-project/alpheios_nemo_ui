@@ -1,24 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Amiri');
 @import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro');
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import "bootstrap_overrides";
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
-
-$font-family-serif:      'Source Serif Pro', serif;
-$font-family-sans-serif: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
-$midnightblue: #0E2233;
-$alpheiosblue: #BCE5F0;
-$mustardyellow: #FFC24F;
-$burntorange: #C64906;
-$turquoise: #185F6D;
-$hoverorange: #F27431;
-$hoveryellow: #FFD27D;
-
-$input-btn-font-family: $font-family-sans-serif;
-$btn-font-family: $font-family-sans-serif;
-
-$font-size-base: 1rem;
-$line-height-base: 1.5;
 
 body {
   font-family: $font-family-serif;
@@ -68,105 +52,6 @@ h5 {
   font-style: italic;
 }
 
-.btn {
-  border-radius: 10px;
-  font-weight: bold;
-}
-
-.btn:hover {
-  box-shadow: 0px 4px 4px rgba(0,0, 0, 0.25);
-}
-
-.btn:active {
-  box-shadow: 0px 4px 4px rgba(0,0, 0, 0.25), inset 0px 4px 4px rgba(0,0,0,0.1);
-}
-
-.btn-lg, .btn-group-lg > .btn {
-  padding: 10px 20px 10px 20px !important;
-  min-width: 44px !important;
-  min-height: 44px !important;
-}
-
-.btn-primary {
-  background-color: transparent;
-  color: $turquoise;
-  border-color: $turquoise;
-}
-
-.btn-primary:hover {
-  background-color: $turquoise;
-  border: none;
-  color: white;
-}
-
-
-.btn-burntorange {
-  color: white;
-}
-
-.btn-burntorange:hover {
-  background-color: $hoverorange;
-}
-
-.btn-mustardyellow {
-  color: $midnightblue;
-}
-.btn-mustardyellow:hover {
-  background-color: $hoveryellow;
-}
-
-.btn-outline-turquoise {
-  color: $turquoise;
-  background-color: transparent;
-}
-
-.btn-outline-turquoise span.btn-arrow-turquoise {
-  background-image:url('../img/Arrow-turquoise.svg');
-  background-repeat: no-repeat;
-  background-position: right;
-  padding: 10px;
-}
-
-.btn-outline-turquoise:hover {
-  border: none;
-  background-color: $turquoise;
-  color: white;
-}
-
-.btn-outline-turquoise:hover span.btn-arrow-turquoise {
-  background-image:url('../img/Arrow-white.svg');
-}
-
-.btn-outline-turquoise:active span.btn-arrow-turquoise {
-  background-image:url('../img/Arrow-white.svg');
-}
-
-.btn-outline-mustardyellow {
-  color: $mustardyellow;
-  background-color: transparent;
-}
-
-.btn-outline-mustardyellow span.btn-arrow-yellow {
-  background-image:url('../img/Arrow-yellow.svg');
-  background-repeat: no-repeat;
-  background-position: right;
-  padding: 10px;
-}
-
-.btn-outline-mustardyellow:hover {
-  border: none;
-  background-color: $mustardyellow;
-  color: white;
-}
-
-.btn-outline-mustardyellow:hover span.btn-arrow-yellow {
-  background-image:url('../img/Arrow-midnight.svg');
-}
-
-.btn-outline-mustardyellow:active span.btn-arrow-yellow {
-  background-image:url('../img/Arrow-midnight.svg');
-}
-
 .breadcrumb {
   background-color: $turquoise;
 }
@@ -186,7 +71,7 @@ h5 {
 }
 
 #reading-container article {
-  max-width: 100%;
+  width: 100%;
   margin-top: 1em;
   margin-bottom: 1em;
   margin-left: 0;
@@ -194,28 +79,7 @@ h5 {
 }
 
 @include media-breakpoint-up(lg) {
-  h1 {
-    font-size: $font-size-base * 2.25;
-  }
-  h2 {
-    font-size: $font-size-base * 1.75;
-  }
-
-  h3 {
-    font-size: $font-size-base * 1.375;
-  }
-
-  h4 {
-    font-size: $font-size-base * 1.125;
-  }
-
-  h5 {
-    font-size: $font-size-base;
-  }
   #reading-container article {
-    max-width: 90%;
-    margin-top: 1em;
-    margin-bottom: 1em;
     margin-left: 1em;
     margin-right: 1em;
   }
@@ -225,8 +89,9 @@ h5 {
 /** Starting to try to make sense of alpheios reader styles **/
 
 #breadcrumb {
-  text-transform: none;
-  font-size: $font-size-base;
+  text-transform: none !important;
+  font-size: $font-size-base !important;
+  background-color: $turquoise !important;
 }
 
 .l {
@@ -334,4 +199,45 @@ span[token-selector="state.tokens"] {
 .note {
   cursor: pointer;
   color: #3E8D9C; /** TODO apply SASS variable **/
+}
+
+/** Playing with sidebar **/
+#menu-container {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#menu-container .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#menu-container .menu-container-list {
+  width: 15rem;
+}
+
+#reading-container {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #menu-container {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+
+  #menu-container {
+    margin-left: 0;
+  }
+  #reading-container {
+    min-width: 0;
+    width: 100%;
+  }
+  #wrapper.toggled #menu-container {
+    margin-left: -15em;
+  }
 }

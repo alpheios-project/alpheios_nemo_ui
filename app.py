@@ -86,7 +86,6 @@ nemo = Nemo(
     transform={
         "default": resource_filename("alpheios_nemo_ui","data/assets/static/xslt/alpheios-enhanced.xsl")
     },
-
 )
 
 http_cache.init_app(app)

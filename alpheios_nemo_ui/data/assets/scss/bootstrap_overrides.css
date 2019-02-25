@@ -1,0 +1,181 @@
+$font-family-serif:      'Source Serif Pro', serif;
+$font-family-sans-serif: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+$midnightblue: #0E2233;
+$alpheiosblue: #BCE5F0;
+$mustardyellow: #FFC24F;
+$burntorange: #C64906;
+$turquoise: #185F6D;
+$hoverorange: #F27431;
+$hoveryellow: #FFD27D;
+
+$theme-colors: (
+  "primary": $turquoise,
+  "midnightblue": $midnightblue,
+  "turquoise": $turquoise,
+  "burntorange": $burntorange,
+  "mustardyellow": $mustardyellow,
+  "alpheiosblue": $alpheiosblue
+);
+
+$font-family-base: $font-family-serif;
+$input-btn-font-family: $font-family-sans-serif;
+$btn-font-family: $font-family-sans-serif;
+
+$navbar-dark-color: white;
+$navbar-dark-hover-color: $mustardyellow;
+$navbar-dark-active-color: $alpheiosblue;
+$navbar-dark-toggler-border-color: $turquoise;
+.navbar-dark .navbar-toggler .navbar-toggler-icon {
+  background-image: url(../static/Mobile-Menu-Close.svg);
+}
+.navbar-dark .navbar-toggler.collapsed .navbar-toggler-icon {
+  background-image: url(../static/Mobile-Menu.svg);
+}
+
+.navbar {
+  font-family: $font-family-sans-serif;
+}
+
+
+$dropdown-color: white;
+$dropdown-bg: $midnightblue;
+$dropdown-link-color: white;
+$dropdown-link-hover-color: $mustardyellow;
+$dropdown-link-active-color: $mustardyellow;
+$dropdown-link-hover-bg: $midnightblue;
+
+$link-hover-color: $turquoise;
+
+$font-size-base: 1rem;
+$line-height-base: 1.5;
+
+$h1-font-size:                $font-size-base * 2.25;
+$h2-font-size:                $font-size-base * 1.75;
+$h3-font-size:                $font-size-base * 1.375;
+$h4-font-size:                $font-size-base * 1.125;
+$h5-font-size:                $font-size-base;
+$h6-font-size:                $font-size-base;
+
+$h1-mobile-font-size: $font-size-base * 1.625;
+$h2-mobile-font-size: $font-size-base * 1.5;
+$h3-mobile-font-size: $font-size-base * 1.125;
+$h4-mobile-font-size: $font-size-base * 1.1.25;
+$h5-mobile-font-size: $font-size-base;
+$h6-mobile-font-size: $font-size-base;
+
+$grid-gutter-width: 20px;
+
+
+$nav-link-padding-y:                .5rem;
+$nav-link-padding-x:                1rem;
+
+$nav-link-height: $h3-font-size * $line-height-base + $nav-link-padding-y * 2 !default;
+
+.nav-link {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav-link.active {
+  border-bottom: 2px solid;
+  border-color: $alpheiosblue;
+}
+
+h1,h2,h4 {
+  font-family: $font-family-serif;
+}
+
+h2,h3 {
+  font-weight: bold;
+}
+
+h5 {
+  font-weight: 200;
+  font-style: italic;
+}
+
+.btn-lg, .btn-group-lg > .btn {
+  padding: 10px 20px 10px 20px !important;
+  border-radius: 10px !important;
+  font-weight: bold !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+}
+
+.btn-burntorange {
+  color: white;
+}
+
+.btn:hover {
+  box-shadow: 0px 4px 4px rgba(0,0, 0, 0.25);
+}
+
+.btn:active {
+  box-shadow: 0px 4px 4px rgba(0,0, 0, 0.25), inset 0px 4px 4px rgba(0,0,0,0.1);
+}
+
+
+.btn-burntorange:hover {
+  background-color: $hoverorange;
+}
+
+.btn-mustardyellow {
+  color: $midnightblue;
+}
+.btn-mustardyellow:hover {
+  background-color: $hoveryellow;
+}
+
+.btn-outline-turquoise {
+  color: $turquoise;
+  background-color: transparent;
+}
+
+.btn-outline-turquoise span.btn-arrow-turquoise {
+  background-image:url('../static/Arrow-turquoise.svg');
+  background-repeat: no-repeat;
+  background-position: right;
+  padding: 10px;
+}
+
+.btn-outline-turquoise:hover {
+  border: none;
+  background-color: $turquoise;
+  color: white;
+}
+
+.btn-outline-turquoise:hover span.btn-arrow-turquoise {
+  background-image:url('../static/Arrow-white.svg');
+}
+
+.btn-outline-turquoise:active span.btn-arrow-turquoise {
+  background-image:url('../static/Arrow-white.svg');
+}
+
+.btn-outline-mustardyellow {
+  color: $mustardyellow;
+  background-color: transparent;
+}
+
+.btn-outline-mustardyellow span.btn-arrow-yellow {
+  background-image:url('../static/Arrow-yellow.svg');
+  background-repeat: no-repeat;
+  background-position: right;
+  padding: 10px;
+}
+
+.btn-outline-mustardyellow:hover {
+  border: none;
+  background-color: $mustardyellow;
+  color: white;
+}
+
+.btn-outline-mustardyellow:hover span.btn-arrow-yellow {
+  background-image:url('../static/Arrow-midnight.svg');
+}
+
+.btn-outline-mustardyellow:active span.btn-arrow-yellow {
+  background-image:url('../static/Arrow-midnight.svg');
+}
+
