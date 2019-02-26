@@ -2,11 +2,18 @@
 
 {% macro header_passage() %}
 <header>
-    <h1 class="entry-title">{{collections.current.title}}</h1>
-    <h2 class="author vcard"><span class="fn">{{collections.current.author}}</span></h2>
-    <h3 class="subreference">{{subreference}}</h3>
-    <p class="entry-summary"><small>{{collections.current.label}}, <i>{{collections.current.description}}</i></small></p>
-    <span class='Z3988' title='{{collections.current.coins}}'></span>
+    <h2>
+      <span class="author vcard"><span class="fn">{{collections.current.author}}</span>,</span>
+      <span class="entry-title">{{collections.current.title}}</span>
+      <p class="alpheios-text-source">
+        <span data-toggle="popover" data-trigger="click hover focus">Source</span>
+        <span class="popover-content">
+          <span class="entry-summary">{{collections.current.label}}, <i>{{collections.current.description}}</i></span><br/>
+          <span class='Z3988' title='{{collections.current.coins}}'></span><br/>
+          <span class="copyright text-small">Made available under the Creative Commons Attribution 4.0 International License.</span>
+        </span>
+      </p>
+    </h2>
 </header>
 {% endmacro %}
 
@@ -27,7 +34,7 @@
     {% include "main::passage_footer.html" %}
 {% endmacro %}
 
-{% macro show_passage(text, header, navigation, footer) %}
+{% macro show_passage(text, subreference, header, navigation, footer) %}
 <article class="hentry entry white">
   <div class="alert alert-info alert-dismissible show alpheios-hint-trigger-desktop" role="alert">
     Double-click on a word to access morphology and definitions.
@@ -40,6 +47,7 @@
         {{ navigation }}
     </nav>
     <section class="entry-content" role="main">
+      <h4 class="subreference">{{subreference}}</h4>
         {% if cache_active %}
             {% cache cache_time, cache_key %}{{ text_passage }} {% endcache %}
         {% else %}
@@ -54,7 +62,7 @@
 {% endmacro %}
 
 {% block article %}
-    {{ show_passage(text_passage, navigation=nav(), header=header_passage(), footer=default_footer()) }}
+    {{ show_passage(text_passage, subreference, navigation=nav(), header=header_passage(), footer=default_footer()) }}
 {% endblock %}
 
 {% block additionalscript %}

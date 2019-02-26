@@ -513,7 +513,7 @@
                         <xsl:text>[*]</xsl:text>
                     </xsl:element>
                     <xsl:element name="span">
-                        <xsl:attribute name="class">note-content</xsl:attribute>
+                        <xsl:attribute name="class">popover-content note-content</xsl:attribute>
                         <xsl:apply-templates/>
                     </xsl:element>
                 </span>

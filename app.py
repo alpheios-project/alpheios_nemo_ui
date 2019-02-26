@@ -60,7 +60,7 @@ def dispatchGreekLit(collection, path=None, **kwargs):
 resolver = NautilusCTSResolver(
     [os.path.join(d,o) for o in os.listdir(d) if os.path.isdir(os.path.join(d,o))],
     dispatcher=dispatcher,
-    cache=nautilus_cache
+    cache=None
 )
 
 app = Flask("Nautilus")
@@ -69,7 +69,7 @@ nautilus = FlaskNautilus(
     prefix="/api",
     name="nautilus",
     resolver=resolver,
-    flask_caching=http_cache
+    flask_caching=None,
 )
 
 # We set up Nemo

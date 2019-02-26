@@ -3,7 +3,7 @@ $(document).ready(function(){
     $(this).popover({
       html: true,
       content: function() {
-        return $(this).next('.note-content').html();
+        return $(this).next('.popover-content').html();
       }
     });
   });

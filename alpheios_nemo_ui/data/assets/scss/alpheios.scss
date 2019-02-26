@@ -101,6 +101,10 @@ h5 {
   background-color: $turquoise !important;
 }
 
+.entry-title {
+  font-style: italic;
+}
+
 .l {
   display: grid;
   grid-template-columns: 1fr max-content;
@@ -114,6 +118,24 @@ h5 {
 
 .milestone.para {
   min-height: 1em;
+}
+
+.p {
+  padding-bottom: 1em;
+}
+
+footer.page-footer {
+  background-color: $turquoise;
+  color: $alpheiosblue;
+}
+
+footer.page-footer a {
+  color: $mustardyellow;
+}
+
+footer.page-footer a:hover {
+  color: $hoveryellow;
+  text-decoration: underline;
 }
 
 /** TODO these are from the old theme-ext and need to be updated **/
@@ -200,14 +222,18 @@ span[token-selector="state.tokens"] {
 
 /* - from here changes that need to be made or finished for MVP */
 
-.note > .note-content {
+.popover-content {
   display: none;
-  color: #000000; /** TODO apply SASS variable **/
+  color: $midnightblue;
 }
 
-.note {
+* [data-toggle='popover'] {
+  color: $turquoise;
   cursor: pointer;
-  color: #3E8D9C; /** TODO apply SASS variable **/
+}
+
+.alpheios-text-source {
+  font-size: small;
 }
 
 /** Playing with sidebar **/
