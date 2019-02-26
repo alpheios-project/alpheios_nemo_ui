@@ -66,6 +66,7 @@ $h6-mobile-font-size: $font-size-base;
 
 $grid-gutter-width: 20px;
 
+$blockquote-font-size: $font-size-base;
 
 $nav-link-padding-y:                .5rem;
 $nav-link-padding-x:                1rem;
@@ -179,3 +180,11 @@ h5 {
   background-image:url('../static/Arrow-midnight.svg');
 }
 
+.blockquote {
+  margin-top: 1em;
+  margin-left: 2em;
+}
+.blockquote {
+  margin-top: 1em;
+  margin-left: 2em;
+}

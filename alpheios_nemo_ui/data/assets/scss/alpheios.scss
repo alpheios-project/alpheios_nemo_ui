@@ -77,11 +77,18 @@ h5 {
   margin-left: 0;
   margin-right: 0;
 }
+.alpheios-hint-trigger-desktop {
+  display: none;
+}
 
 @include media-breakpoint-up(lg) {
   #reading-container article {
     margin-left: 1em;
     margin-right: 1em;
+  }
+
+  .alpheios-hint-trigger-desktop {
+    display: flex;
   }
 }
 
@@ -113,10 +120,12 @@ h5 {
 #menu-container  .logo {
     width: auto;
 }
+
+/** for now hide the page break milestones **/
 .pb {
+  display: none;
   font-weight: thin;
   font-size: 0.5em;
-  display:inline;
   font-style: italic;
   color:grey;
 }

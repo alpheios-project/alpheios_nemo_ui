@@ -326,9 +326,17 @@
     </xsl:template>
 
     <xsl:template match="t:quote">
-        <blockquote>
-            <xsl:apply-templates/>    
-        </blockquote>
+        <xsl:choose>
+            <xsl:when test="@rend='blockquote'">
+                <blockquote class="blockquote">
+                    <xsl:apply-templates/>    
+                </blockquote>
+            </xsl:when>
+            <xsl:otherwise>
+                "<xsl:apply-templates/>"
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
     
     <xsl:template match="t:q">
@@ -490,18 +498,28 @@
     </xsl:template>
 
     <xsl:template match="t:note">
-        <span>
-            <xsl:attribute name="class">note</xsl:attribute>
-            <xsl:element name="span">
-                <xsl:attribute name="data-toggle">popover</xsl:attribute>
-                <xsl:attribute name="data-trigger">hover focus</xsl:attribute>
-                <xsl:text>[*]</xsl:text>
-            </xsl:element>
-            <xsl:element name="span">
-                <xsl:attribute name="class">note-content</xsl:attribute>
-                <xsl:apply-templates/>
-            </xsl:element>
-        </span>
+        <xsl:choose>
+            <xsl:when test="ancestor::tei:blockquote or ancestor::tei:quote[@rend='blockquote'] or local-name(*[1]) ='bibl'">
+                <footer class="blockquote-footer">
+                    <xsl:apply-templates/>
+                </footer>
+            </xsl:when>
+            <xsl:otherwise>
+                <span>
+                    <xsl:attribute name="class">note</xsl:attribute>
+                    <xsl:element name="sup">
+                        <xsl:attribute name="data-toggle">popover</xsl:attribute>
+                        <xsl:attribute name="data-trigger">hover focus</xsl:attribute>
+                        <xsl:text>[*]</xsl:text>
+                    </xsl:element>
+                    <xsl:element name="span">
+                        <xsl:attribute name="class">note-content</xsl:attribute>
+                        <xsl:apply-templates/>
+                    </xsl:element>
+                </span>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
 
     <xsl:template match="t:ab/t:ref[@cRef]">
