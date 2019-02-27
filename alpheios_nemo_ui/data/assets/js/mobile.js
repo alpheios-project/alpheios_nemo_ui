@@ -5,10 +5,10 @@ $(document).ready(function() {
     $("#wrapper").toggleClass("toggled");
   });
 
-  let hammertime = new Hammer(document.querySelector('.entry'))
+  //let hammertime = new Hammer(document.querySelector('.entry'))
 
-  hammertime.on('swipeleft', navNext);
-  hammertime.on('swiperight', navPrev);
+  //hammertime.on('swipeleft', navNext);
+  //hammertime.on('swiperight', navPrev);
 });
 
 function navNext(event) {

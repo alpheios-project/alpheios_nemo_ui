@@ -13,20 +13,36 @@
     </header>
     <section class="card-columns">
         <ul>
-        {% for coll in collections.members %}
-            {% if coll.model == 'http://w3id.org/dts-ontology/resource' %}
-            <li class="card">
-                [{{coll.lang}}] {{ coll.label }}<br />
-                <a class="card-link" href="{{url_for('.r_references', objectId=coll.id)}}">Browse</a>
-                <a class="card-link" href="{{url_for('.r_first_passage', objectId=coll.id)}}">Read</a>
-            </li>
-            {% else %}
-            <li class="card">
-                {{ coll.label }}<br />
-                <a class="card-link" href="{{url_for('.r_collection', objectId=coll.id)}}">Browse ({{coll.size}})</a>
-            </li>
-            {% endif %}
-        {% endfor %}
+        {% if collections.expanded_members|length > 0 %}
+          {% for coll in collections.expanded_members %}
+              <li class="card">{{ coll.work.label }}
+                <ul>
+                  {% for ed in coll.editions %}
+                    <li class="card">
+                      [{{ed.lang}}] {{ ed.label }}<br />
+                      <a class="card-link" href="{{url_for('.r_references', objectId=ed.id)}}">Browse</a>
+                      <a class="card-link" href="{{url_for('.r_first_passage', objectId=ed.id)}}">Read</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+          {% endfor %}
+        {% else %}
+          {% for coll in collections.members %}
+              {% if coll.model == 'http://w3id.org/dts-ontology/resource' %}
+              <li class="card">
+                  [{{coll.lang}}] {{ coll.label }}<br />
+                  <a class="card-link" href="{{url_for('.r_references', objectId=coll.id)}}">Browse</a>
+                  <a class="card-link" href="{{url_for('.r_first_passage', objectId=coll.id)}}">Read</a>
+              </li>
+              {% else %}
+              <li class="card">
+                  {{ coll.label }}<br />
+                  <a class="card-link" href="{{url_for('.r_collection', objectId=coll.id)}}">Browse ({{coll.size}})</a>
+              </li>
+              {% endif %}
+          {% endfor %}
+        {% endif %}
         </ul>
     </section>
 </article>

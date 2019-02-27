@@ -8,6 +8,7 @@ import re
 from MyCapytain.common.constants import Mimetypes
 from MyCapytain.resources.prototypes.metadata import ResourceCollection
 from MyCapytain.resources.prototypes.cts.inventory import CtsWorkMetadata, CtsEditionMetadata
+from MyCapytain.resources.collections.cts import XmlCtsTextgroupMetadata
 from MyCapytain.errors import UnknownCollection
 import sys
 
@@ -103,6 +104,17 @@ class AlpheiosNemoUI(PluginPrototype):
         :rtype: {str: Any}
         """
         collection = self.nemo.resolver.getMetadata(objectId)
+        members = self.nemo.make_members(collection, lang=lang)
+        expanded_members = list()
+        if isinstance(collection, XmlCtsTextgroupMetadata):
+            for m in members:
+                e_coll = self.nemo.resolver.getMetadata(m['id'])
+                e =  {
+                    "work": m,
+                    "editions": self.nemo.make_members(e_coll,lang=lang)
+                }
+                expanded_members.append(e)
+
         return {
             "template": "alpheios::collection.html",
             "collections": {
@@ -113,7 +125,8 @@ class AlpheiosNemoUI(PluginPrototype):
                     "type": str(collection.type),
                 },
                 "members": self.nemo.make_members(collection, lang=lang),
-                "parents": self.nemo.make_parents(collection, lang=lang)
+                "parents": self.nemo.make_parents(collection, lang=lang),
+                "expanded_members": expanded_members
             },
         }
 

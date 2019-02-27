@@ -7,7 +7,14 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ol class="breadcrumb">
       {% for crumb in breadcrumbs: -%}
-        {%- if crumb["link"] != None -%}<li class="breadcrumb-item"><a href="{{url_for(crumb["link"], **crumb["args"])}}">{{crumb["title"]}}</a></li>
+        {%- if crumb["link"] != None -%}
+          {% set link = crumb["link"].replace('_semantic','') %}
+          {%- if crumb['args']['objectId'] %}
+            {% set args = { 'objectId': crumb['args']['objectId'] } %}
+          {% else %}
+            {% set args = {} %}
+          {% endif %}
+          <li class="breadcrumb-item"><a href="{{url_for(link, **args)}}">{{crumb["title"]}}</a></li>
         {% else %}<li class="breadcrumb-item active">{{crumb["title"]}}</li>{% endif %}
       {%- endfor %}
     </ol>
