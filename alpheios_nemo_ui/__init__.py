@@ -9,6 +9,7 @@ from MyCapytain.common.constants import Mimetypes
 from MyCapytain.resources.prototypes.metadata import ResourceCollection
 from MyCapytain.resources.prototypes.cts.inventory import CtsWorkMetadata, CtsEditionMetadata
 from MyCapytain.errors import UnknownCollection
+import sys
 
 
 class AlpheiosNemoUI(PluginPrototype):
@@ -67,7 +68,7 @@ class AlpheiosNemoUI(PluginPrototype):
         """
         collection = self.nemo.resolver.getMetadata()
         return {
-            "template": "main::collection.html",
+            "template": "alpheios::collection.html",
             "current_label": collection.get_label(None),
             "collections": {
                 "members": self.nemo.make_members(collection, lang=None)
@@ -84,7 +85,7 @@ class AlpheiosNemoUI(PluginPrototype):
         """
         collection = self.nemo.resolver.getMetadata()
         return {
-            "template": "main::collection.html",
+            "template": "alpheios::collection.html",
             "current_label": collection.get_label(lang),
             "collections": {
                 "members": self.nemo.make_members(collection, lang=lang)
@@ -103,7 +104,7 @@ class AlpheiosNemoUI(PluginPrototype):
         """
         collection = self.nemo.resolver.getMetadata(objectId)
         return {
-            "template": "main::collection.html",
+            "template": "alpheios::collection.html",
             "collections": {
                 "current": {
                     "label": str(collection.get_label(lang)),
@@ -127,7 +128,7 @@ class AlpheiosNemoUI(PluginPrototype):
         """
         collection, reffs = self.nemo.get_reffs(objectId=objectId, export_collection=True)
         return {
-            "template": "main::references.html",
+            "template": "alpheios::references.html",
             "objectId": objectId,
             "citation": collection.citation,
             "collections": {
