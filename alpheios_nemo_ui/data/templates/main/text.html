@@ -67,6 +67,12 @@
 
 {% block additionalscript %}
 {{ super() }}
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+      new Alpheios.Embedded({'clientId':'alpheios-reader', 'enabledSelector':'.entry-content'}).activate();
+    });
+
+  </script>
 <script type="text/javascript">
   $("a.urn").each(function() {
 		var urn = $(this).attr("href").split(":"),
