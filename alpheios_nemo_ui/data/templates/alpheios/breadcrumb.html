@@ -8,7 +8,11 @@
     <ol class="breadcrumb">
       {% for crumb in breadcrumbs: -%}
         {%- if loop.index == 5 -%}
-          {% set title = 'Text' %}
+          {%- if 'references' in request.path %}
+            {% set title = 'Browse' %}
+          {% else %}
+            {% set title = 'Read' %}
+          {% endif %}
         {% else %}
           {% set title = crumb["title"] %}
         {% endif %}

@@ -25,7 +25,7 @@
           {% for coll in collections.members %}
               {% if coll.model == 'http://w3id.org/dts-ontology/resource' %}
               <li class="card">
-                  [{{coll.lang}}] {{ coll.label }}<br />
+                  {{ coll.label }}<br />
                   <a class="card-link" href="{{url_for('.r_references', objectId=coll.id)}}">Browse</a>
                   <a class="card-link" href="{{url_for('.r_first_passage', objectId=coll.id)}}">Read</a>
               </li>
