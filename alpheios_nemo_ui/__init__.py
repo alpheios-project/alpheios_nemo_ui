@@ -87,13 +87,23 @@ class AlpheiosNemoUI(PluginPrototype):
         :rtype: {str: Any}
         """
         collection = self.nemo.resolver.getMetadata()
-        return {
-            "template": "alpheios::collection.html",
-            "current_label": collection.get_label(lang),
-            "collections": {
-                "members": self.nemo.make_members(collection, lang=lang)
+        if collection:
+            return {
+                "template": "alpheios::collection.html",
+                "current_label": collection.get_label(lang),
+                "collections": {
+                    "members": self.nemo.make_members(collection, lang=lang)
+                }
             }
-        }
+        else:
+            return {
+                "template": "alpheios::collection.html",
+                "current_label": "NONE",
+                "collections": {
+                    "members": list()
+                }
+            }
+
 
     def r_collection(self, objectId, lang=None):
         """ Collection content browsing route function
