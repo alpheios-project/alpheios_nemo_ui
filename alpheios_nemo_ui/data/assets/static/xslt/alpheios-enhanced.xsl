@@ -505,30 +505,31 @@
     </xsl:template>
 
     <xsl:template match="t:note">
-        <xsl:choose>
-            <xsl:when test="ancestor::tei:blockquote or ancestor::tei:quote[@rend='blockquote'] or local-name(*[1]) ='bibl'">
-                <footer class="blockquote-footer" data-alpheios-ignore="all">
-                    <xsl:apply-templates/>
-                </footer>
-            </xsl:when>
-            <xsl:otherwise>
-                <span>
-                    <xsl:attribute name="class">note</xsl:attribute>
-                    <xsl:element name="sup">
-                        <xsl:attribute name="data-toggle">popover</xsl:attribute>
-                        <xsl:attribute name="data-trigger">hover focus</xsl:attribute>
-                        <xsl:attribute name="data-alpheios-ignore">all</xsl:attribute>
-                        <xsl:text>[*]</xsl:text>
-                    </xsl:element>
-                    <xsl:element name="span">
-                        <xsl:attribute name="class">popover-content note-content</xsl:attribute>
-                        <xsl:attribute name="data-alpheios-ignore">all</xsl:attribute>
+        <xsl:if test="*|text()">
+            <xsl:choose>
+                <xsl:when test="ancestor::tei:blockquote or ancestor::tei:quote[@rend='blockquote'] or local-name(*[1]) ='bibl'">
+                    <footer class="blockquote-footer" data-alpheios-ignore="all">
                         <xsl:apply-templates/>
-                    </xsl:element>
-                </span>
-            </xsl:otherwise>
+                    </footer>
+                </xsl:when>
+                <xsl:otherwise>
+                    <span>
+                        <xsl:attribute name="class">note</xsl:attribute>
+                        <xsl:element name="sup">
+                            <xsl:attribute name="data-toggle">popover</xsl:attribute>
+                            <xsl:attribute name="data-trigger">hover focus</xsl:attribute>
+                            <xsl:attribute name="data-alpheios-ignore">all</xsl:attribute>
+                            <xsl:text>[*]</xsl:text>
+                        </xsl:element>
+                        <xsl:element name="span">
+                            <xsl:attribute name="class">popover-content note-content</xsl:attribute>
+                            <xsl:attribute name="data-alpheios-ignore">all</xsl:attribute>
+                            <xsl:apply-templates/>
+                        </xsl:element>
+                    </span>
+                </xsl:otherwise>
         </xsl:choose>
-        
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="t:ab/t:ref[@cRef]">
