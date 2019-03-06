@@ -377,15 +377,17 @@
         </p>
     </xsl:template>
 
+    <xsl:template match="t:foreign">
+        <span lang="{@lang|@xml:lang}"><xsl:value-of select="."/></span>
+    </xsl:template>
+    
     <xsl:template match="t:foreign[1]">
         <xsl:choose>
             <xsl:when test="preceding-sibling::t:ref[1][@cRef]">
-                <strong>
-                    <xsl:value-of select="."/>
-                </strong>
+                <span class="font-weight-bold" lang="{@lang|@xml:lang}"><xsl:value-of select="."/></span>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="."/>
+                <span lang="{@lang|@xml:lang}"><xsl:value-of select="."/></span>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
