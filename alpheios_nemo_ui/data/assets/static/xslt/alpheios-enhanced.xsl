@@ -32,7 +32,7 @@
                 <xsl:value-of select="@n"/>
             </xsl:if>
         </xsl:variable>
-        <div class="milestone {@unit}" id="{$idstring}">
+        <div class="milestone {@unit}" id="{$idstring}" data-alpheios-ignore="all">
             <xsl:value-of select="@n"/>
         </div>
     </xsl:template>
@@ -366,7 +366,7 @@
     </xsl:template>
 
     <xsl:template match="t:pb">
-        <div class="pb">
+        <div class="pb" data-alpheios-ignore="all">
             <xsl:value-of select="@n"/>
         </div>
     </xsl:template>
@@ -507,7 +507,7 @@
     <xsl:template match="t:note">
         <xsl:choose>
             <xsl:when test="ancestor::tei:blockquote or ancestor::tei:quote[@rend='blockquote'] or local-name(*[1]) ='bibl'">
-                <footer class="blockquote-footer">
+                <footer class="blockquote-footer" data-alpheios-ignore="all">
                     <xsl:apply-templates/>
                 </footer>
             </xsl:when>
@@ -517,10 +517,12 @@
                     <xsl:element name="sup">
                         <xsl:attribute name="data-toggle">popover</xsl:attribute>
                         <xsl:attribute name="data-trigger">hover focus</xsl:attribute>
+                        <xsl:attribute name="data-alpheios-ignore">all</xsl:attribute>
                         <xsl:text>[*]</xsl:text>
                     </xsl:element>
                     <xsl:element name="span">
                         <xsl:attribute name="class">popover-content note-content</xsl:attribute>
+                        <xsl:attribute name="data-alpheios-ignore">all</xsl:attribute>
                         <xsl:apply-templates/>
                     </xsl:element>
                 </span>
