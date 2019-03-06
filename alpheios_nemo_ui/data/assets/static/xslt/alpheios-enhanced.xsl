@@ -83,9 +83,14 @@
             <div class="l-text">
                 <xsl:apply-templates/>
             </div>
-            <div class="l-cite">
-                <xsl:value-of select="@n"/>
-            </div>
+            <xsl:if test="@n">
+                <xsl:variable name="citeshow">
+                    <xsl:if test="number(@n) mod 5 != 0">d-none</xsl:if>
+                </xsl:variable>
+                <div class="l-cite {$citeshow}">
+                    <xsl:value-of select="@n"/>
+                </div>    
+            </xsl:if>
         </div>
     </xsl:template>
 
