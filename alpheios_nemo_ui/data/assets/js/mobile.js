@@ -37,12 +37,12 @@ function updatePrev(prev) {
   if (prev) {
     let prevLink = $('.prev');
     let oldPassage = prevLink.attr('data-prev');
-    let prevUrl = prevLink.attr('href').replace(oldPassage,prev)
+    let prevUrl = prevLink.attr('href').replace(oldPassage,prev);
     prevLink.attr('href',prevUrl);
-    prevLink.attr('data-prev',prev)
+    prevLink.attr('data-prev',prev);
     prevLink.removeClass('d-none')
   } else {
-    prevLink.addClass('d-none')
+    prevLink.addClass('d-none');
   }
 }
 
@@ -53,8 +53,8 @@ function showNext() {
     let newref = data.subreference.split(/-/);
     $('.subreference-all').text(`${oldref[0]}-${newref[1]}`)
     $('.entry-content').append(`<h3>${data.subreference}</h3>${data.text_passage}`);
-    updateNext(data.next)
-    updatePrev(data.prev)
+    updateNext(data.next);
+    updatePrev(data.prev);
     preloadNext();
   }
 }
@@ -64,16 +64,14 @@ function isOnScreen(elem) {
 	if( elem.length == 0 ) {
 		return;
 	}
-	var $window = jQuery(window)
-	var viewport_top = $window.scrollTop()
-	var viewport_height = $window.height()
-	var viewport_bottom = viewport_top + viewport_height
-	var $elem = jQuery(elem)
-	var top = $elem.offset().top
-	var height = $elem.height()
-	var bottom = top + height
+	var $window = jQuery(window);
+	var viewport_top = $window.scrollTop();
+	var viewport_height = window.innerHeight;
+	var viewport_bottom = viewport_top + viewport_height;
+	var $elem = jQuery(elem);
+	var top = $elem.offset().top;
+	var height = $elem.height();
+	var bottom = top + height;
 
-	return (top >= viewport_top && top < viewport_bottom) ||
-	(bottom > viewport_top && bottom <= viewport_bottom) ||
-	(height > viewport_height && top <= viewport_top && bottom >= viewport_bottom)
+	return (bottom <= viewport_bottom && top >= viewport_top);
 }
