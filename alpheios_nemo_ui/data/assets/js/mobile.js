@@ -29,7 +29,7 @@ function updateNext(next) {
     nextLink.attr('data-next',next)
     nextLink.removeClass('d-none')
   } else {
-    nextLink.addClass('d-none')
+    $('.next').addClass('d-none')
   }
 }
 
@@ -42,7 +42,7 @@ function updatePrev(prev) {
     prevLink.attr('data-prev',prev);
     prevLink.removeClass('d-none')
   } else {
-    prevLink.addClass('d-none');
+    $('.prev').addClass('d-none');
   }
 }
 
