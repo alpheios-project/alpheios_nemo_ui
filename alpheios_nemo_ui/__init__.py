@@ -4,6 +4,7 @@ from flask_nemo.plugin import PluginPrototype
 from pkg_resources import resource_filename
 from flask import jsonify, url_for, redirect, Markup
 from flask_nemo.chunker import level_grouper
+from copy import deepcopy as copy
 import re
 from MyCapytain.common.constants import Mimetypes
 from MyCapytain.resources.prototypes.metadata import ResourceCollection
@@ -11,6 +12,7 @@ from MyCapytain.resources.prototypes.cts.inventory import CtsWorkMetadata, CtsEd
 from MyCapytain.resources.collections.cts import XmlCtsTextgroupMetadata
 from MyCapytain.errors import UnknownCollection
 import sys
+import alpheios_nemo_ui.filters
 
 
 class AlpheiosNemoUI(PluginPrototype):
@@ -53,6 +55,10 @@ class AlpheiosNemoUI(PluginPrototype):
         ("/typeahead/collections.json", "r_typeahead_json", ["GET"])
     ]
 
+    FILTERS = [
+        "f_hierarchical_passages_full"
+    ]
+
     CACHED = ["r_typeahead_json"]
     HAS_AUGMENT_RENDER = True
 
@@ -60,6 +66,7 @@ class AlpheiosNemoUI(PluginPrototype):
         super(AlpheiosNemoUI, self).__init__(*args, **kwargs)
         self.GTrackCode = GTrackCode
         self.clear_routes = True
+        self.f_hierarchical_passages_full = filters.f_hierarchical_passages_full
 
     def r_index(self):
         """ Retrieve the top collections of the inventory
@@ -152,10 +159,17 @@ class AlpheiosNemoUI(PluginPrototype):
         :return: Template and required information about text with its references
         """
         collection, reffs = self.nemo.get_reffs(objectId=objectId, export_collection=True)
+        cite = collection.citation
+        scheme = []
+        while (cite):
+            scheme.append(cite.name)
+            cite = cite.child
+        print(str(collection.citation.name),file=sys.stdout)
         return {
             "template": "alpheios::references.html",
             "objectId": objectId,
             "citation": collection.citation,
+            "scheme": scheme,
             "collections": {
                 "current": {
                     "label": collection.get_label(lang),
@@ -315,4 +329,3 @@ def scheme_grouper(text, getreffs):
     elif "line" in types:
         groupby = 30
     return level_grouper(text, getreffs, level, groupby)
-

@@ -95,6 +95,13 @@ h5 {
 
 /** Starting to try to make sense of alpheios reader styles **/
 
+/** References **/
+
+.col.card.reff {
+  word-wrap: normal;
+  word-break: keep-all;
+}
+
 #breadcrumb {
   text-transform: none !important;
   font-size: $font-size-base !important;
