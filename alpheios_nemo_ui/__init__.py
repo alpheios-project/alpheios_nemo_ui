@@ -51,6 +51,7 @@ class AlpheiosNemoUI(PluginPrototype):
         ("/collections/<objectId>", "r_collection", ["GET"]),
         ("/text/<objectId>/references", "r_references", ["GET"]),
         ("/text/<objectId>/passage/<subreference>", "r_passage", ["GET"]),
+        ("/text/<objectId>/passage/<subreference>/json", "r_passage_json", ["GET"]),
         ("/text/<objectId>/passage", "r_first_passage", ["GET"]),
         ("/typeahead/collections.json", "r_typeahead_json", ["GET"])
     ]
@@ -164,7 +165,6 @@ class AlpheiosNemoUI(PluginPrototype):
         while (cite):
             scheme.append(cite.name)
             cite = cite.child
-        print(str(collection.citation.name),file=sys.stdout)
         return {
             "template": "alpheios::references.html",
             "objectId": objectId,
@@ -192,7 +192,7 @@ class AlpheiosNemoUI(PluginPrototype):
         collection, reffs = self.nemo.get_reffs(objectId=objectId, export_collection=True)
         first, _ = reffs[0]
         return redirect(
-            url_for(".r_passage_semantic", objectId=objectId, subreference=first, semantic=self.nemo.semantic(collection))
+            url_for(".r_passage", objectId=objectId, subreference=first)
         )
 
     def r_passage(self, objectId, subreference, lang=None):
@@ -238,6 +238,49 @@ class AlpheiosNemoUI(PluginPrototype):
             "prev": prev,
             "next": next
         }
+
+    def r_passage_json(self, objectId, subreference, lang=None):
+        """ Retrieve the text of the passage
+
+        :param objectId: Collection identifier
+        :type objectId: str
+        :param lang: Lang in which to express main data
+        :type lang: str
+        :param subreference: Reference identifier
+        :type subreference: str
+        :return: Template, collections metadata and Markup object representing the text
+        :rtype: {str: Any}
+        """
+        collection = self.nemo.get_collection(objectId)
+        if isinstance(collection, CtsWorkMetadata):
+            editions = [t for t in collection.children.values() if isinstance(t, CtsEditionMetadata)]
+            if len(editions) == 0:
+                raise UnknownCollection("This work has no default edition")
+            return redirect(url_for(".r_passage_json", objectId=str(editions[0].id), subreference=subreference))
+        text = self.nemo.get_passage(objectId=objectId, subreference=subreference)
+        passage = self.nemo.transform(text, text.export(Mimetypes.PYTHON.ETREE), objectId)
+        prev, next = self.nemo.get_siblings(objectId, subreference, text)
+        data = {
+            "objectId": objectId,
+            "subreference": subreference,
+            "collections": {
+                "current": {
+                    "label": collection.get_label(lang),
+                    "id": collection.id,
+                    "model": str(collection.model),
+                    "type": str(collection.type),
+                    "author": text.get_creator(lang),
+                    "title": text.get_title(lang),
+                    "description": text.get_description(lang),
+                    "coins": self.nemo.make_coins(collection, text, subreference, lang=lang)
+                },
+                "parents": self.nemo.make_parents(collection, lang=lang)
+            },
+            "text_passage": Markup(passage),
+            "prev": prev,
+            "next": next
+        }
+        return jsonify(data)
 
     def r_assets(self, filetype, asset):
         """ Route for specific assets.

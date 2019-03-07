@@ -59,6 +59,7 @@
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
+            <div class="passage-end"></div>
         </div>
     </xsl:template>
    

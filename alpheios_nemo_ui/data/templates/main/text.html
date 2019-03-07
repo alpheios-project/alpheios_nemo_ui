@@ -5,6 +5,7 @@
     <h2>
       <span class="author vcard"><span class="fn">{{collections.current.author}}</span>,</span>
       <span class="entry-title">{{collections.current.title}}</span>
+      <span class="subreference-all">({{subreference}})</h3>
       <p class="alpheios-text-source">
         <span data-toggle="popover" data-trigger="click hover focus">Source</span>
         <span class="popover-content">
@@ -19,12 +20,16 @@
 
 {% macro nav() %}
     {% if prev %}
-    <a class="btn btn-xs btn-primary prev" href="{{url_for('.r_passage', objectId=objectId, subreference=prev) }}">
+    <a class="btn btn-xs btn-primary prev" data-prev="{{ prev }}" href="{{url_for('.r_passage', objectId=objectId, subreference=prev) }}">
+      <i class="fas fa-angle-left"></i>
+    </a>
+    {% else %}
+    <a class="btn btn-xs btn-primary prev d-none" data-prev="NaN" href="{{url_for('.r_passage', objectId=objectId, subreference='NaN') }}">
       <i class="fas fa-angle-left"></i>
     </a>
     {% endif %}
     {% if next %}
-    <a class="btn btn-xs btn-primary next" href="{{url_for('.r_passage', objectId=objectId, subreference=next) }}">
+    <a class="btn btn-xs btn-primary next" data-next="{{ next }}" href="{{url_for('.r_passage', objectId=objectId, subreference=next) }}">
         <i class="fas fa-angle-right"></i>
     </a>
     {% endif %}
@@ -47,7 +52,7 @@
         {{ navigation }}
     </nav>
     <section class="entry-content" role="main">
-      <h4 class="subreference">{{subreference}}</h4>
+      <h3 class="subreference">{{subreference}}</h3>
         {% if cache_active %}
             {% cache cache_time, cache_key %}{{ text_passage }} {% endcache %}
         {% else %}
