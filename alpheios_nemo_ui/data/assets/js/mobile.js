@@ -13,7 +13,7 @@ function preloadNext() {
   let next = $('.next').attr('href');
   if (next) {
     console.log(`preload ${next}`)
-    let nextUrl = `${document.location.href.replace(/\/text.*$/,next)}/json`
+    let nextUrl = `${document.location.href.replace(document.location.pathname,next)}/json`
     $.getJSON(nextUrl,function(data) {
       queue.push(data)
     })
