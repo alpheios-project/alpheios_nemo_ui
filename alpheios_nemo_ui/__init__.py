@@ -68,6 +68,7 @@ class AlpheiosNemoUI(PluginPrototype):
         self.GTrackCode = GTrackCode
         self.clear_routes = True
         self.f_hierarchical_passages_full = filters.f_hierarchical_passages_full
+        self._get_lang = _get_lang
 
     def r_index(self):
         """ Retrieve the top collections of the inventory
@@ -124,6 +125,7 @@ class AlpheiosNemoUI(PluginPrototype):
         :rtype: {str: Any}
         """
         collection = self.nemo.resolver.getMetadata(objectId)
+        lang = self._get_lang(objectId,lang)
         members = self.nemo.make_members(collection, lang=lang)
         expanded_members = list()
         if isinstance(collection, XmlCtsTextgroupMetadata):
@@ -140,6 +142,7 @@ class AlpheiosNemoUI(PluginPrototype):
             "collections": {
                 "current": {
                     "label": str(collection.get_label(lang)),
+                    "label_lang": lang,
                     "id": collection.id,
                     "model": str(collection.model),
                     "type": str(collection.type),
@@ -160,6 +163,7 @@ class AlpheiosNemoUI(PluginPrototype):
         :return: Template and required information about text with its references
         """
         collection, reffs = self.nemo.get_reffs(objectId=objectId, export_collection=True)
+        lang = self._get_lang(objectId,lang)
         cite = collection.citation
         scheme = []
         while (cite):
@@ -173,6 +177,7 @@ class AlpheiosNemoUI(PluginPrototype):
             "collections": {
                 "current": {
                     "label": collection.get_label(lang),
+                    "label_lang": lang,
                     "id": collection.id,
                     "model": str(collection.model),
                     "type": str(collection.type),
@@ -208,6 +213,7 @@ class AlpheiosNemoUI(PluginPrototype):
         :rtype: {str: Any}
         """
         collection = self.nemo.get_collection(objectId)
+        lang = self._get_lang(objectId,lang)
         if isinstance(collection, CtsWorkMetadata):
             editions = [t for t in collection.children.values() if isinstance(t, CtsEditionMetadata)]
             if len(editions) == 0:
@@ -223,11 +229,13 @@ class AlpheiosNemoUI(PluginPrototype):
             "collections": {
                 "current": {
                     "label": collection.get_label(lang),
+                    "label_lang": lang,
                     "id": collection.id,
                     "model": str(collection.model),
                     "type": str(collection.type),
                     "author": text.get_creator(lang),
                     "title": text.get_title(lang),
+                    "title_lang": lang,
                     "description": text.get_description(lang),
                     "citation": collection.citation,
                     "coins": self.nemo.make_coins(collection, text, subreference, lang=lang)
@@ -252,6 +260,7 @@ class AlpheiosNemoUI(PluginPrototype):
         :rtype: {str: Any}
         """
         collection = self.nemo.get_collection(objectId)
+        lang = self._get_lang(objectId,lang)
         if isinstance(collection, CtsWorkMetadata):
             editions = [t for t in collection.children.values() if isinstance(t, CtsEditionMetadata)]
             if len(editions) == 0:
@@ -372,3 +381,16 @@ def scheme_grouper(text, getreffs):
     elif "line" in types:
         groupby = 30
     return level_grouper(text, getreffs, level, groupby)
+
+def _get_lang(objectId,lang):
+    if ('latin' in objectId):
+        lang = 'lat'
+    elif ('greek' in objectId):
+        lang = 'grc'
+    elif ('arabic' in objectId):
+        lang = 'ara'
+    elif ('persian' in objectId):
+        lang = 'far'
+    else:
+        lang = lang or 'eng'
+    return lang

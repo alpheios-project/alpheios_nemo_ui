@@ -19,6 +19,10 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
+*[lang='grc'] {
+    font-family: Georgia, "New Athena Unicode", Gentium, "Palatino Linotype", $font-family-serif;
+}
+
 .lang_ara, .lang_ar {
   font-family: Amiri, serif;
   text-align:right;

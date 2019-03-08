@@ -4,12 +4,12 @@
 <header>
     <h2>
       <span class="author vcard"><span class="fn">{{collections.current.author}}</span>,</span>
-      <span class="entry-title">{{collections.current.title}}</span>
+      <span class="entry-title" lang="{{collections.current.title_lang}}">{{collections.current.title}}</span>
       <span class="subreference-all">({{subreference}})</h3>
       <p class="alpheios-text-source d-flex justify-content-between">
         <span data-toggle="popover" data-trigger="click hover focus">Bibliographic Source</span>
         <span class="popover-content">
-          <span class="entry-summary">{{collections.current.label}}, <i>{{collections.current.description}}</i></span><br/>
+          <span class="entry-summary" lang="{{collections.current.label_lang}}">{{collections.current.label}}, <i>{{collections.current.description}}</i></span><br/>
           <span class='Z3988' title='{{collections.current.coins}}'></span><br/>
           <span class="copyright text-small">Made available under the Creative Commons Attribution 4.0 International License.</span>
         </span>

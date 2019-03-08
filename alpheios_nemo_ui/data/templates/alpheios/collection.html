@@ -5,7 +5,7 @@
     <header>
         <h1>
         {% if collections.current %}
-        {{collections.current.label}}
+        <span lang="{{collections.current.label_lang}}">{{collections.current.label}}</span>
         {% else %}
         Text Collections
         {% endif %}
@@ -15,7 +15,7 @@
         <ul>
         {% if collections.expanded_members|length > 0 %}
           {% for coll in collections.expanded_members %}
-              <li class="card">{{ coll.work.label }}<br/>
+              <li class="card"><span lang="{{collections.current.label_lang}}">{{ coll.work.label }}</span><br/>
                   {% set ed = coll.editions[0] %}
                   <a class="card-link" href="{{url_for('.r_references', objectId=ed.id)}}">Browse</a>
                   <a class="card-link" href="{{url_for('.r_first_passage', objectId=ed.id)}}">Read</a>
@@ -25,7 +25,7 @@
           {% for coll in collections.members %}
               {% if coll.model == 'http://w3id.org/dts-ontology/resource' %}
               <li class="card">
-                  {{ coll.label }}<br />
+                  <span lang="{{coll.label_lang}}">{{ coll.label }}</span><br />
                   <a class="card-link" href="{{url_for('.r_references', objectId=coll.id)}}">Browse</a>
                   <a class="card-link" href="{{url_for('.r_first_passage', objectId=coll.id)}}">Read</a>
               </li>

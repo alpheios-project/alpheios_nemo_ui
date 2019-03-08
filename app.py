@@ -97,11 +97,9 @@ allowed_editions = [
     'urn:cts:greekLit:tlg0020.tlg002.alpheios-text-grc1',
     'urn:cts:greekLit:tlg0020.tlg001.alpheios-text-grc1',
     'urn:cts:greekLit:tlg0011.tlg003.alpheios-text-grc1',
-    'urn:cts:greekLit:tlg0012.tlg001.alpheios-text-grc1',
 ]
 
 excluded_editions = [
-    'urn:cts:greekLit:tlg0012.tlg002.alpheios-text-grc1',
     'urn:cts:greekLit:tlg0011.tlg003.perseus-grc2',
 ]
 
