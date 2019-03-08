@@ -7,10 +7,22 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ol class="breadcrumb">
       {% for crumb in breadcrumbs: -%}
-        {% set link = crumb['link'] %}
+        {% if loop.index == 4 %}
+          {% if 'references' in request.path %}
+            {% set link = '.r_first_passage' %}
+          {% else %}
+            {% set link = '.r_references' %}
+          {% endif %}
+        {% else %}
+          {% set link = crumb['link'] %}
+        {% endif %}
         {%- if link -%}
           {%- if crumb['args']['objectId'] %}
-            {% set args = { 'objectId': crumb['args']['objectId'] } %}
+            {% if loop.index == 4 %}
+              {% set args = { 'objectId': objectId } %}
+            {% else %}
+              {% set args = { 'objectId': crumb['args']['objectId'] } %}
+            {% endif %}
           {% else %}
             {% set args = {} %}
           {% endif %}
