@@ -4,14 +4,27 @@
 @import "bootstrap_overrides";
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
-body {
+body, html {
   font-family: $font-family-serif;
   font-size: $font-size-base;
   line-height: $line-height-base;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: white;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
 }
 
 .lang_ara, .lang_ar {
-    font-family: Amiri, serif;
+  font-family: Amiri, serif;
+  text-align:right;
+}
+.lang_ara.center, .lang_ar.center, .lang_far.center {
+  text-align:right;
 }
 
 a {
@@ -52,6 +65,33 @@ h5 {
   font-style: italic;
 }
 
+footer.page-footer {
+  background-color: $turquoise;
+  color: $alpheiosblue;
+}
+
+footer.page-footer a {
+  color: $mustardyellow;
+}
+
+footer.page-footer a:hover {
+  color: $hoveryellow;
+  text-decoration: underline;
+}
+
+#breadcrumb {
+  text-transform: none;
+  font-size: $font-size-base;
+  background-color: $turquoise !important;
+  padding-top: 1em;
+  font-weight: 600;
+  margin: 0 auto;
+}
+
+#breadcrumb ol.breadcrumb {
+  margin-bottom:0;
+}
+
 .breadcrumb {
   background-color: $turquoise;
 }
@@ -70,42 +110,20 @@ h5 {
   font-weight: bold;
 }
 
-#reading-container article {
-  width: 100%;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  margin-left: 0;
-  margin-right: 0;
-}
 .alpheios-hint-trigger-desktop {
   display: none;
 }
 
-@include media-breakpoint-up(lg) {
-  #reading-container article {
-    margin-left: 1em;
-    margin-right: 1em;
-  }
-
-  .alpheios-hint-trigger-desktop {
-    display: flex;
-  }
+#reading-container {
+  min-height: 100%;
 }
 
-
-/** Starting to try to make sense of alpheios reader styles **/
-
-/** References **/
-
-.col.card.reff {
-  word-wrap: normal;
-  word-break: keep-all;
-}
-
-#breadcrumb {
-  text-transform: none !important;
-  font-size: $font-size-base !important;
-  background-color: $turquoise !important;
+#reading-container article {
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 .entry-title {
@@ -137,66 +155,27 @@ h5 {
   padding-bottom: 1em;
 }
 
-footer.page-footer {
-  background-color: $turquoise;
-  color: $alpheiosblue;
-}
-
-footer.page-footer a {
-  color: $mustardyellow;
-}
-
-footer.page-footer a:hover {
-  color: $hoveryellow;
-  text-decoration: underline;
-}
-
-/** TODO these are from the old theme-ext and need to be updated **/
-#menu-container  .logo {
-    width: auto;
-}
-
-/** for now hide the page break milestones **/
 .pb {
-  display: none;
+  display: none; /** for now hide the page break milestones **/
   font-weight: thin;
   font-size: 0.5em;
   font-style: italic;
-  color:grey;
+  color:$alpheiosgray;
 }
 
 .ex,
 .supplied,
 .unclear {
-  color: rgb(80,80,80);
+  color: $alpheiosgray;
 }
 
 .unclear {
   text-decoration: underline dotted;
 }
 
-.lang_heb, .lang_ara, .lang_far, .lang_ar {
-  text-align:right;
-}
-
-.lang_heb.center, .lang_ara.center, .lang_far.center, .lang_ar.center {
-  text-align:right;
-}
 
 span.w::before {
   content:" ";
-}
-
-.center {
-    text-align: center;
-}
-
-
-#treebank_container {
-  height:600px;
-}
-span[token-selector="state.tokens"] {
-  display:none;
 }
 
 /* Typeahead */
@@ -208,20 +187,27 @@ span[token-selector="state.tokens"] {
   width: 100%;
 }
 .algolia-autocomplete .aa-hint {
-  color: #999;
+  color: white;
 }
 .algolia-autocomplete .aa-dropdown-menu {
   width: 100%;
-  background-color: #fff;
-  border: 1px solid #999;
+  background-color: $midnightblue;
+  border: 1px solid $midnightblue;
+  border-radius: 10px;
   border-top: none;
 }
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
   cursor: pointer;
   padding: 5px 4px;
+  color: white;
 }
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion a {
+  color: $mustardyellow;
+}
+
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-  background-color: #B2D7FF;
+  text-decoration: underline;
+  color: $mustardyellow;
 }
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
   font-weight: bold;
@@ -232,8 +218,6 @@ span[token-selector="state.tokens"] {
   margin-top:15px;
 }
 
-
-/* - from here changes that need to be made or finished for MVP */
 
 .popover-content {
   display: none;
@@ -249,43 +233,22 @@ span[token-selector="state.tokens"] {
   font-size: small;
 }
 
-/** Playing with sidebar **/
-#menu-container {
-  min-height: 100vh;
-  margin-left: -15rem;
-  -webkit-transition: margin .25s ease-out;
-  -moz-transition: margin .25s ease-out;
-  -o-transition: margin .25s ease-out;
-  transition: margin .25s ease-out;
-}
+/**
+ * Responsive styles
+ */
 
-#menu-container .sidebar-heading {
-  padding: 0.875rem 1.25rem;
-  font-size: 1.2rem;
-}
+@include media-breakpoint-up(lg) {
 
-#menu-container .menu-container-list {
-  width: 15rem;
-}
-
-#reading-container {
-  min-width: 100vw;
-}
-
-#wrapper.toggled #menu-container {
-  margin-left: 0;
+  .alpheios-hint-trigger-desktop {
+    display: flex;
+  }
 }
 
 @media (min-width: 768px) {
 
-  #menu-container {
-    margin-left: 0;
-  }
   #reading-container {
     min-width: 0;
     width: 100%;
   }
-  #wrapper.toggled #menu-container {
-    margin-left: -15em;
-  }
+
 }

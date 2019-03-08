@@ -6,12 +6,16 @@
       <span class="author vcard"><span class="fn">{{collections.current.author}}</span>,</span>
       <span class="entry-title">{{collections.current.title}}</span>
       <span class="subreference-all">({{subreference}})</h3>
-      <p class="alpheios-text-source">
-        <span data-toggle="popover" data-trigger="click hover focus">Source</span>
+      <p class="alpheios-text-source d-flex justify-content-between">
+        <span data-toggle="popover" data-trigger="click hover focus">Bibliographic Source</span>
         <span class="popover-content">
           <span class="entry-summary">{{collections.current.label}}, <i>{{collections.current.description}}</i></span><br/>
           <span class='Z3988' title='{{collections.current.coins}}'></span><br/>
           <span class="copyright text-small">Made available under the Creative Commons Attribution 4.0 International License.</span>
+        </span>
+        <span class="text-small">XML:
+	        <a class="text-small" href="/api/cts?request=GetPassage&urn={{objectId}}&subreference={{subreference}}" target='_blank'>Passage</a>
+	        <a class="text-small" href="/api/cts?request=GetPassage&urn={{objectId}}&subreference={{subreference}}" target='_blank'>Full Text</a>
         </span>
       </p>
     </h2>

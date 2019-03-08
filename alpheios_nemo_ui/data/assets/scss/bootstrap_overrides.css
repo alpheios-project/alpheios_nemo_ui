@@ -3,11 +3,16 @@ $font-family-sans-serif: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "
 
 $midnightblue: #0E2233;
 $alpheiosblue: #BCE5F0;
+$alpheiosgray: #757575;
+$alpheioslightgray: #E6E6E6;
 $mustardyellow: #FFC24F;
 $burntorange: #C64906;
 $turquoise: #185F6D;
 $hoverorange: #F27431;
 $hoveryellow: #FFD27D;
+$hovermidnight: #1B374F;
+$hoverturquoise: #124D59;
+$pressedturquoise: #093943;
 
 $theme-colors: (
   "primary": $turquoise,
