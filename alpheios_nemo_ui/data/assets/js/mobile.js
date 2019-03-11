@@ -50,8 +50,16 @@ function showNext() {
   let data = queue.pop();
   if (data) {
     let oldref = $('.subreference').text().split(/-/);
+    let oldstart= oldref[0]
     let newref = data.subreference.split(/-/);
-    $('.subreference-all').text(`${oldref[0]}-${newref[1]}`)
+    let newend
+    // the subreference of the new passages might be a single passage
+    if (newref.length == 1) {
+        newend = newref[0]
+    } else {
+        newend = newref[1]
+    }
+    $('.subreference-all').text(`${oldstart}-${newend}`)
     $('.entry-content').append(`<h3>${data.subreference}</h3>${data.text_passage}`);
     updateNext(data.next);
     updatePrev(data.prev);
