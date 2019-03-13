@@ -6,13 +6,14 @@ from flask import jsonify, url_for, redirect, Markup
 from flask_nemo.chunker import level_grouper
 from copy import deepcopy as copy
 import re
-from MyCapytain.common.constants import Mimetypes
+from MyCapytain.common.constants import RDF_NAMESPACES, Mimetypes
 from MyCapytain.resources.prototypes.metadata import ResourceCollection
 from MyCapytain.resources.prototypes.cts.inventory import CtsWorkMetadata, CtsEditionMetadata
 from MyCapytain.resources.collections.cts import XmlCtsTextgroupMetadata
 from MyCapytain.errors import UnknownCollection
 import sys
 import alpheios_nemo_ui.filters
+from rdflib import Namespace
 
 
 class AlpheiosNemoUI(PluginPrototype):
@@ -128,6 +129,8 @@ class AlpheiosNemoUI(PluginPrototype):
         lang = self._get_lang(objectId,lang)
         members = self.nemo.make_members(collection, lang=lang)
         expanded_members = list()
+        types = {}
+        DCT = Namespace("http://purl.org/dc/terms/")
         if isinstance(collection, XmlCtsTextgroupMetadata):
             for m in members:
                 e_coll = self.nemo.resolver.getMetadata(m['id'])
@@ -135,7 +138,13 @@ class AlpheiosNemoUI(PluginPrototype):
                     "work": m,
                     "editions": self.nemo.make_members(e_coll,lang=lang)
                 }
-                expanded_members.append(e)
+                workType = e_coll.metadata.get_single(DCT.type, lang)
+                if workType is not None:
+                    if workType not in types:
+                        types[workType] = []
+                    types[workType].append(e)
+                else:
+                    expanded_members.append(e)
 
         return {
             "template": "alpheios::collection.html",
@@ -149,6 +158,7 @@ class AlpheiosNemoUI(PluginPrototype):
                 },
                 "members": self.nemo.make_members(collection, lang=lang),
                 "parents": self.nemo.make_parents(collection, lang=lang),
+                "types": types,
                 "expanded_members": expanded_members
             },
         }

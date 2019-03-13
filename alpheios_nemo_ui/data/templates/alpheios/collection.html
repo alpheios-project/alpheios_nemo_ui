@@ -13,7 +13,22 @@
     </header>
     <section class="card-columns">
         <ul>
-        {% if collections.expanded_members|length > 0 %}
+        {% if collections.types|length > 0 %}
+          {% for type in collections.types %}
+            <li class="card">
+              <h3>{{type}}</h3>
+              <ul>
+                {% for coll in collections.types[type] %}
+                  <li class="card"><span lang="{{collections.current.label_lang}}">{{ coll.work.label }}</span><br/>
+                      {% set ed = coll.editions[0] %}
+                      <a class="card-link" href="{{url_for('.r_references', objectId=ed.id)}}">Browse</a>
+                      <a class="card-link" href="{{url_for('.r_first_passage', objectId=ed.id)}}">Read</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </li>
+          {% endfor %}
+        {% elif collections.expanded_members|length > 0 %}
           {% for coll in collections.expanded_members %}
               <li class="card"><span lang="{{collections.current.label_lang}}">{{ coll.work.label }}</span><br/>
                   {% set ed = coll.editions[0] %}
