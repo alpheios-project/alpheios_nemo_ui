@@ -2,7 +2,7 @@
 
 from flask_nemo.plugin import PluginPrototype
 from pkg_resources import resource_filename
-from flask import jsonify, url_for, redirect, Markup
+from flask import jsonify, url_for, redirect, Markup, session, request
 from flask_nemo.chunker import level_grouper
 from copy import deepcopy as copy
 import re
@@ -14,6 +14,8 @@ from MyCapytain.errors import UnknownCollection
 import sys
 import alpheios_nemo_ui.filters
 from rdflib import Namespace
+from six.moves.urllib.parse import urlencode
+from functools import wraps
 
 
 class AlpheiosNemoUI(PluginPrototype):
@@ -55,7 +57,13 @@ class AlpheiosNemoUI(PluginPrototype):
         ("/text/<objectId>/passage/<subreference>", "r_passage", ["GET"]),
         ("/text/<objectId>/passage/<subreference>/json", "r_passage_json", ["GET"]),
         ("/text/<objectId>/passage", "r_first_passage", ["GET"]),
-        ("/typeahead/collections.json", "r_typeahead_json", ["GET"])
+        ("/typeahead/collections.json", "r_typeahead_json", ["GET"]),
+        ("/authorize","r_authorize",["GET"]),
+        ("/login","r_login",["GET"]),
+        ("/logout","r_logout",["GET"]),
+        ("/return","r_logout_return",["GET"]),
+        ("/userinfo","r_userinfo",["GET"]),
+        ("/proxy_wordlist","r_proxy_wordlist",["GET"])
     ]
 
     FILTERS = [
@@ -65,12 +73,13 @@ class AlpheiosNemoUI(PluginPrototype):
     CACHED = ["r_typeahead_json"]
     HAS_AUGMENT_RENDER = True
 
-    def __init__(self, GTrackCode=None, *args, **kwargs):
+    def __init__(self, GTrackCode=None, auth0=None, *args, **kwargs):
         super(AlpheiosNemoUI, self).__init__(*args, **kwargs)
         self.GTrackCode = GTrackCode
         self.clear_routes = True
         self.f_hierarchical_passages_full = filters.f_hierarchical_passages_full
         self._get_lang = _get_lang
+        self.auth0 = auth0
 
     def r_index(self):
         """ Retrieve the top collections of the inventory
@@ -360,6 +369,60 @@ class AlpheiosNemoUI(PluginPrototype):
                 "uri": url_for(".r_first_passage", objectId=str(collection.id))
             })
         return jsonify(data)
+
+    def r_authorize(self):
+        # Handles response from token endpoint
+        self.auth0.authorize_access_token()
+        resp = self.auth0.get('userinfo')
+        userinfo = resp.json()
+
+        # Store the user information in flask session.
+        session['jwt_payload'] = userinfo
+        session['profile'] = {
+            'sub': userinfo['sub']
+            'nickname': userinfo['nickname']
+        }
+        if 'loginReturn' in session and session['loginReturn'] is not None:
+            return redirect(session['loginReturn'])
+        else:
+            return redirect(url_for('.r_index'))
+
+    def r_login(self):
+        session['loginReturn'] = request.args.get('next','')
+        return self.auth0.authorize_redirect(redirect_uri=url_for(".r_authorize",_external=True), audience='https://alpheios.auth0.com/userinfo')
+
+    def r_logout(self):
+        # Clear session stored data
+        session.clear()
+        session['logoutReturn'] = request.args.get('next','')
+        params = {'returnTo': url_for('.r_logout_return', _external=True), 'client_id': 'iT75HkBHThA4QdFwFoZRofLC41vVyvAt'}
+        return redirect(self.auth0.api_base_url + '/v2/logout?' + urlencode(params))
+
+    def r_logout_return(self):
+        if 'logoutReturn' in session and session['logoutReturn'] is not None:
+            return redirect(session['logoutReturn'])
+        else:
+            return redirect(url_for('.r_index'))
+
+    def requires_auth(f):
+        @wraps(f)
+        def decorated(*args, **kwargs):
+            if 'profile' not in session:
+                # Redirect to Login page here
+                return jsonify({"error":"notauthenticated"})
+            return f(*args, **kwargs)
+
+        return decorated
+
+    @requires_auth
+    def r_userinfo(self):
+        return jsonify(session['profile'])
+
+    @requires_auth
+    def r_proxy_wordlist(self):
+        # TODO proxy request to word api
+        return jsonify({"result":"ok"})
+
 
 
 def scheme_grouper(text, getreffs):

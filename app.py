@@ -19,6 +19,7 @@ from flask_nemo.chunker import level_grouper
 from capitains_nautilus.flask_ext import FlaskNautilus
 from alpheios_nemo_ui import AlpheiosNemoUI, scheme_grouper
 from alpheios_nemo_ui.plugins.alpheios_breadcrumb import AlpheiosBreadcrumb
+from authlib.flask.client import OAuth
 
 d = "/home/balmas/workspace/cts_test"
 #
@@ -111,6 +112,20 @@ resolver = NautilusCTSResolver(
 )
 
 app = Flask("Nautilus")
+app.secret_key = 'changemedummy'
+oauth = OAuth(app)
+
+auth0 = oauth.register(
+    'auth0',
+    client_id='iT75HkBHThA4QdFwFoZRofLC41vVyvAt',
+    client_secret='8BgJVs5sgyI5w10hXTY-D4Dv-HoCy-DxnXHJYDFISwX47wwtsK5oqboNmAhWBFQ3',
+    api_base_url='https://alpheios.auth0.com',
+    access_token_url='https://alpheios.auth0.com/oauth/token',
+    authorize_url='https://alpheios.auth0.com/authorize',
+    client_kwargs={
+        'scope': 'openid profile',
+    },
+)
 nautilus = FlaskNautilus(
     app=app,
     prefix="/api",
@@ -130,7 +145,7 @@ nemo = Nemo(
         "default": scheme_grouper
     },
     original_breadcrumb = False,
-    plugins=[AlpheiosNemoUI(""),AlpheiosBreadcrumb()],
+    plugins=[AlpheiosNemoUI("",auth0),AlpheiosBreadcrumb()],
     transform={
         "default": resource_filename("alpheios_nemo_ui","data/assets/static/xslt/alpheios-enhanced.xsl")
     },
