@@ -102,3 +102,7 @@ ENV/
 
 # node
 node_modules
+
+# auth environment
+env.js
+auth.py

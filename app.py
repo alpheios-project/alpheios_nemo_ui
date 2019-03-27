@@ -113,16 +113,19 @@ resolver = NautilusCTSResolver(
 
 app = Flask("Nautilus")
 app.secret_key = 'changemedummy'
+client_id = 'clientidhere'
+client_secret = 'clientsecrethere'
 oauth = OAuth(app)
 
 auth0 = oauth.register(
     'auth0',
-    client_id='iT75HkBHThA4QdFwFoZRofLC41vVyvAt',
-    client_secret='8BgJVs5sgyI5w10hXTY-D4Dv-HoCy-DxnXHJYDFISwX47wwtsK5oqboNmAhWBFQ3',
+    client_id=client_id,
+    client_secret=client_secret,
     api_base_url='https://alpheios.auth0.com',
     access_token_url='https://alpheios.auth0.com/oauth/token',
     authorize_url='https://alpheios.auth0.com/authorize',
     client_kwargs={
+        'audience': 'alpheios.net:apis',
         'scope': 'openid profile',
     },
 )

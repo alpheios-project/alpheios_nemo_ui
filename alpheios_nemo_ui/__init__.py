@@ -40,7 +40,7 @@ class AlpheiosNemoUI(PluginPrototype):
         resource_filename("alpheios_nemo_ui", "data/assets/js/menu.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/text.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/mobile.js"),
-        resource_filename("alpheios_nemo_ui", "data/assets/js/auth0-env.js"),
+        resource_filename("alpheios_nemo_ui", "data/assets/js/env.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/alpheios-embedded.js")
     ]
     STATICS = [
@@ -63,7 +63,7 @@ class AlpheiosNemoUI(PluginPrototype):
         ("/logout","r_logout",["GET"]),
         ("/return","r_logout_return",["GET"]),
         ("/userinfo","r_userinfo",["GET"]),
-        ("/proxy_wordlist","r_proxy_wordlist",["GET"])
+        ("/usertoken","r_usertoken",["GET"])
     ]
 
     FILTERS = [
@@ -76,10 +76,10 @@ class AlpheiosNemoUI(PluginPrototype):
     def __init__(self, GTrackCode=None, auth0=None, *args, **kwargs):
         super(AlpheiosNemoUI, self).__init__(*args, **kwargs)
         self.GTrackCode = GTrackCode
+        self.auth0 = auth0
         self.clear_routes = True
         self.f_hierarchical_passages_full = filters.f_hierarchical_passages_full
         self._get_lang = _get_lang
-        self.auth0 = auth0
 
     def r_index(self):
         """ Retrieve the top collections of the inventory
@@ -372,15 +372,17 @@ class AlpheiosNemoUI(PluginPrototype):
 
     def r_authorize(self):
         # Handles response from token endpoint
-        self.auth0.authorize_access_token()
+        tokens = self.auth0.authorize_access_token()
+        # Store the access token in the flask session
+        session['access_token'] = tokens['access_token']
         resp = self.auth0.get('userinfo')
         userinfo = resp.json()
 
         # Store the user information in flask session.
         session['jwt_payload'] = userinfo
         session['profile'] = {
-            'sub': userinfo['sub']
-            'nickname': userinfo['nickname']
+            'sub': userinfo['sub'],
+            'nickname': userinfo['nickname'],
         }
         if 'loginReturn' in session and session['loginReturn'] is not None:
             return redirect(session['loginReturn'])
@@ -389,13 +391,13 @@ class AlpheiosNemoUI(PluginPrototype):
 
     def r_login(self):
         session['loginReturn'] = request.args.get('next','')
-        return self.auth0.authorize_redirect(redirect_uri=url_for(".r_authorize",_external=True), audience='https://alpheios.auth0.com/userinfo')
+        return self.auth0.authorize_redirect(redirect_uri=url_for(".r_authorize",_external=True),audience='alpheios.net:apis')
 
     def r_logout(self):
         # Clear session stored data
         session.clear()
         session['logoutReturn'] = request.args.get('next','')
-        params = {'returnTo': url_for('.r_logout_return', _external=True), 'client_id': 'iT75HkBHThA4QdFwFoZRofLC41vVyvAt'}
+        params = {'returnTo': url_for('.r_logout_return', _external=True), 'client_id': self.auth0.client_id}
         return redirect(self.auth0.api_base_url + '/v2/logout?' + urlencode(params))
 
     def r_logout_return(self):
@@ -408,8 +410,7 @@ class AlpheiosNemoUI(PluginPrototype):
         @wraps(f)
         def decorated(*args, **kwargs):
             if 'profile' not in session:
-                # Redirect to Login page here
-                return jsonify({"error":"notauthenticated"})
+                return "Unauthorized request", 401
             return f(*args, **kwargs)
 
         return decorated
@@ -419,11 +420,8 @@ class AlpheiosNemoUI(PluginPrototype):
         return jsonify(session['profile'])
 
     @requires_auth
-    def r_proxy_wordlist(self):
-        # TODO proxy request to word api
-        return jsonify({"result":"ok"})
-
-
+    def r_usertoken(self):
+        return jsonify(session['access_token'])
 
 def scheme_grouper(text, getreffs):
     level = len(text.citation)
