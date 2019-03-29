@@ -33,9 +33,9 @@
       {%- endfor %}
     </ol>
 
-    {% include "alpheios::login.html" %}
-    
+
     <div class="ml-auto d-inline w-20">
+      {% include "alpheios::login.html" %}
       <input id="fullsearch" class="form-control form-inline" type="text" placeholder="Find a text" data-noresult="No results" data-target="{{url_for('.r_typeahead_json')}}"/>
     </div>
   </div>

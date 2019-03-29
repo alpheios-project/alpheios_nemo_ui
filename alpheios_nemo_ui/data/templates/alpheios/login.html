@@ -1,6 +1,5 @@
 <div class="nemo-oauth-login-container">
     {% if 'profile' in session and session.profile != None %}
-        <div class="user">Hello, {{ session.profile.nickname }}</div>
         <div class="logout">
             <a href="{{url_for('.r_logout')}}?next={{ request.url }}">Logout</a>
         </div>
