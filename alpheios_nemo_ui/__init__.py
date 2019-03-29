@@ -73,10 +73,11 @@ class AlpheiosNemoUI(PluginPrototype):
     CACHED = ["r_typeahead_json"]
     HAS_AUGMENT_RENDER = True
 
-    def __init__(self, GTrackCode=None, auth0=None, *args, **kwargs):
+    def __init__(self, GTrackCode=None, auth0=None, external_url_base='http://localhost:5000', *args, **kwargs):
         super(AlpheiosNemoUI, self).__init__(*args, **kwargs)
         self.GTrackCode = GTrackCode
         self.auth0 = auth0
+        self.external_url_base = external_url_base
         self.clear_routes = True
         self.f_hierarchical_passages_full = filters.f_hierarchical_passages_full
         self._get_lang = _get_lang
@@ -391,13 +392,13 @@ class AlpheiosNemoUI(PluginPrototype):
 
     def r_login(self):
         session['loginReturn'] = request.args.get('next','')
-        return self.auth0.authorize_redirect(redirect_uri=url_for(".r_authorize",_external=True),audience='alpheios.net:apis')
+        return self.auth0.authorize_redirect(redirect_uri=self.external_url_base + "/authorize",audience='alpheios.net:apis')
 
     def r_logout(self):
         # Clear session stored data
         session.clear()
         session['logoutReturn'] = request.args.get('next','')
-        params = {'returnTo': url_for('.r_logout_return', _external=True), 'client_id': self.auth0.client_id}
+        params = {'returnTo': self.external_url_base + '/return', 'client_id': self.auth0.client_id}
         return redirect(self.auth0.api_base_url + '/v2/logout?' + urlencode(params))
 
     def r_logout_return(self):
