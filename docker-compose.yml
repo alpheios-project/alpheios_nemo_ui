@@ -7,5 +7,5 @@ services:
     ports: 
       - 5000:5000
     volumes: 
-      - ./data:/data
+      - ./texts:/code/texts
       - ./alpheios_nemo_ui:/code/alpheios_nemo_ui

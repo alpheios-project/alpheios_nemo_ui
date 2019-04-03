@@ -12,7 +12,7 @@ ADD ./requirements.txt requirements.txt
 ADD ./app.py app.py
 RUN pip3 install -r requirements.txt
 
-VOLUME ["/code/alpheios_nemo_ui", "/data"]
+VOLUME ["/code/alpheios_nemo_ui", "/code/texts"]
 
 # Expose right ports
 EXPOSE 5000

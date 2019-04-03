@@ -19,7 +19,7 @@ from alpheios_nemo_ui import AlpheiosNemoUI, scheme_grouper
 from alpheios_nemo_ui.plugins.alpheios_breadcrumb import AlpheiosBreadcrumb
 from authlib.flask.client import OAuth
 
-d = "/data"
+d = "./texts"
 #
 tic = TextInventoryCollection()
 latin = PrototypeTextInventory("urn:perseus:latinLit", parent=tic)
