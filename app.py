@@ -3,8 +3,6 @@
 import os
 import sys
 from flask import Flask, request
-from flask_assets import Environment, Bundle
-from webassets.filter import get_filter
 from werkzeug.contrib.cache import RedisCache, FileSystemCache
 from flask_caching import Cache
 from pkg_resources import resource_filename
@@ -21,23 +19,16 @@ from alpheios_nemo_ui import AlpheiosNemoUI, scheme_grouper
 from alpheios_nemo_ui.plugins.alpheios_breadcrumb import AlpheiosBreadcrumb
 from authlib.flask.client import OAuth
 
-d = "/home/balmas/workspace/cts_test"
+d = "/data"
 #
 tic = TextInventoryCollection()
 latin = PrototypeTextInventory("urn:perseus:latinLit", parent=tic)
 latin.set_label("Classical Latin", "eng")
-latin.set_label("Latin Classique", "fre")
 ara = PrototypeTextInventory("urn:alpheios:arabicLit", parent=tic)
 ara.set_label("Classical Arabic", "eng")
-ara.set_label("Arabe Classique", "fre")
 gc = PrototypeTextInventory("urn:perseus:greekLit", parent=tic)
 gc.set_label("Ancient Greek", "eng")
-gc.set_label("Grec Ancien", "fre")
 
-http_cache = Cache(config={'CACHE_TYPE': "redis", "CACHE_REDIS_HOST": "localhost", "CACHE_DEFAULT_TIMEOUT": 0})
-#nautilus_cache = RedisCache("localhost", port=6379, default_timeout=0)
-#http_cache = Cache(config={'CACHE_TYPE': "filesystem", "CACHE_DIR": "<%= scope.lookupvar('capitains::cache_dir') %>", "CACHE_DEFAULT_TIMEOUT": 28800})
-nautilus_cache = FileSystemCache("/tmp/ctscache", threshold=10000, default_timeout=28800)
 dispatcher = CollectionDispatcher(tic)
 
 
@@ -154,7 +145,6 @@ nemo = Nemo(
     },
 )
 
-http_cache.init_app(app)
 #app.debug = True
 
 if __name__ == "__main__":

@@ -1,0 +1,11 @@
+version: '3'
+services: 
+  nemo: 
+    build: .
+    image: 'alpheios_nemo_ui:v1'
+    container_name: alpheios_nemo_ui_container
+    ports: 
+      - 5000:5000
+    volumes: 
+      - ./data:/data
+      - ./alpheios_nemo_ui:/code/alpheios_nemo_ui
