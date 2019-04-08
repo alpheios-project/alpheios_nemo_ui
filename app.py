@@ -103,9 +103,10 @@ resolver = NautilusCTSResolver(
 )
 
 app = Flask("Nautilus")
-app.secret_key = 'changemedummy'
-client_id = 'clientidhere'
-client_secret = 'clientsecrethere'
+app.secret_key = os.environ.get('ALPHEIOS_NEMO_APPKEY','appsecret')
+client_id = os.environ.get('ALPHEIOS_NEMO_AUTH0_CLIENTID','clientidhere')
+client_secret = os.environ.get('ALPHEIOS_NEMO_AUTH0_CLIENTSECRET','clientsecrethere')
+proxy_base = os.environ.get('ALPHEIOS_NEMO_PROXYBASE','http://dev.alpheios.net:5000')
 oauth = OAuth(app)
 
 auth0 = oauth.register(
@@ -139,7 +140,7 @@ nemo = Nemo(
         "default": scheme_grouper
     },
     original_breadcrumb = False,
-    plugins=[AlpheiosNemoUI("",auth0),AlpheiosBreadcrumb()],
+    plugins=[AlpheiosNemoUI("",auth0,proxy_base),AlpheiosBreadcrumb()],
     transform={
         "default": resource_filename("alpheios_nemo_ui","data/assets/static/xslt/alpheios-enhanced.xsl")
     },
