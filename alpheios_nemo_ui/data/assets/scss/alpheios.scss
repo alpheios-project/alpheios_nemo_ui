@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css?family=Amiri');
+@import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import "bootstrap_overrides";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+body, html {
+  font-family: $font-family-serif;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: white;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+}
+
+*[lang='grc'] {
+    font-family: Georgia, "New Athena Unicode", Gentium, "Palatino Linotype", $font-family-serif;
+}
+
+.lang_ara, .lang_ar {
+  font-family: Amiri, serif;
+  text-align:right;
+}
+.lang_ara.center, .lang_ar.center, .lang_far.center {
+  text-align:right;
+}
+
+a {
+  color: $turquoise;
+}
+
+a:hover {
+  color: $turquoise;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+h1 {
+  font-family: $font-family-serif;
+  font-size: $font-size-base * 1.625;
+}
+h2 {
+  font-family: $font-family-serif;
+  font-size: $font-size-base * 1.5;
+  font-weight: bold;
+}
+
+h3 {
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-base * 1.125;
+  font-weight: bold;
+}
+
+h4 {
+  font-family: $font-family-serif;
+  font-size: $font-size-base * 1.125;
+}
+
+h5 {
+  font-weight: 200;
+  font-size: $font-size-base;
+  font-family: $font-family-serif;
+  font-style: italic;
+}
+
+footer.page-footer {
+  background-color: $turquoise;
+  color: $alpheiosblue;
+}
+
+footer.page-footer a {
+  color: $mustardyellow;
+}
+
+footer.page-footer a:hover {
+  color: $hoveryellow;
+  text-decoration: underline;
+}
+
+#breadcrumb {
+  text-transform: none;
+  font-size: $font-size-base;
+  background-color: $turquoise !important;
+  padding-top: 1em;
+  font-weight: 600;
+  margin: 0 auto;
+}
+
+#breadcrumb ol.breadcrumb {
+  margin-bottom:0;
+}
+
+.breadcrumb {
+  background-color: $turquoise;
+}
+
+.breadcrumb-item a {
+  color: white;
+}
+
+.breadcrumb .active {
+  color: $alpheiosblue;
+}
+
+.nemo-oauth-login-container a {
+  color: white;
+}
+
+.nemo-oauth-login-container a:hover {
+  color: $alpheiosblue;
+}
+
+.alert-info {
+  background-color: $mustardyellow;
+  color: $midnightblue;
+  font-weight: bold;
+}
+
+.alpheios-hint-trigger-desktop {
+  display: none;
+}
+
+#reading-container {
+  min-height: 100%;
+}
+
+#reading-container article {
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.entry-title {
+  font-style: italic;
+}
+
+.l {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  align-items: end;
+}
+
+.milestone.tale {
+  font-weight: bold;
+  padding-top: 1em;
+}
+
+.milestone.para {
+  min-height: 1em;
+}
+
+.milestone.chapter {
+  display: inline-block;
+  padding-right: 1em;
+  font-weight: bold;
+}
+
+.p {
+  padding-bottom: 1em;
+}
+
+.pb {
+  display: none; /** for now hide the page break milestones **/
+  font-weight: thin;
+  font-size: 0.5em;
+  font-style: italic;
+  color:$alpheiosgray;
+}
+
+.ex,
+.supplied,
+.unclear {
+  color: $alpheiosgray;
+}
+
+.unclear {
+  text-decoration: underline dotted;
+}
+
+
+span.w::before {
+  content:" ";
+}
+
+/* Typeahead */
+
+.algolia-autocomplete {
+  width: 100%;
+}
+.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+  width: 100%;
+}
+.algolia-autocomplete .aa-hint {
+  color: white;
+}
+.algolia-autocomplete .aa-dropdown-menu {
+  width: 100%;
+  background-color: $midnightblue;
+  border: 1px solid $midnightblue;
+  border-radius: 10px;
+  border-top: none;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+  cursor: pointer;
+  padding: 5px 4px;
+  color: white;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion a {
+  color: $mustardyellow;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+  text-decoration: underline;
+  color: $mustardyellow;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+#fullsearch {
+  margin-top:15px;
+}
+
+
+.popover-content {
+  display: none;
+  color: $midnightblue;
+}
+
+* [data-toggle='popover'] {
+  color: $turquoise;
+  cursor: pointer;
+}
+
+.alpheios-text-source {
+  font-size: small;
+}
+
+/**
+ * Responsive styles
+ */
+
+@include media-breakpoint-up(lg) {
+
+  .alpheios-hint-trigger-desktop {
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) {
+
+  #reading-container {
+    min-width: 0;
+    width: 100%;
+  }
+
+}

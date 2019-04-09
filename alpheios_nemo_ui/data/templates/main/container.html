@@ -10,10 +10,16 @@
       {% include "main::metadata.html" %}
     {% endblock %}
 
-    <!-- Bootstrap --><!-- Latest compiled and minified CSS -->
-    <!--<link rel="stylesheet" href="{{url_for('.static', filename='css/teibp.min.css')}}">-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{url_for('.static', filename='css/theme.min.css')}}">
+    {% for filename, directory in assets["css"].items() %}
+      {% if directory %}<link rel="stylesheet" href="{{url_for('.secondary_assets', filetype='css', asset=filename)}}">
+      {% else %}<link rel="stylesheet" href="{{ filename }}">
+      {% endif %}
+    {% endfor %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
     <meta name="alpheios-pedagogical-text" content="true"/>
     {% if 'greekLit' in objectId %}
     <meta name="alpheios-treebank-url" content="http://tools.alpheios.net/exist/rest/db/xq/treebank-getmorph.xq?f={{ objectId | replace('urn:cts:greekLit:','')}}&amp;w=WORD">
@@ -24,11 +30,6 @@
     <meta name="alpheios-treebank-diagram-url" content="version=1.0;http://tools.alpheios.net/exist/rest/db/app/treebank-editsentence.xhtml?doc={{objectId | replace('urn:cts:latinLit:','')}}&amp;app=viewer&amp;id=SENTENCE&amp;w=WORD">
     <meta name="alpheios-v2-treebank-diagram-url" data-alpheios_tb_src="https://alpheios.net/alpheios-treebanks/DOC.html?chunk=SENTENCE&amp;w=WORD">
     {% endif %}
-    {% for filename, directory in assets["css"].items() %}
-      {% if directory %}<link rel="stylesheet" href="{{url_for('.secondary_assets', filetype='css', asset=filename)}}">
-      {% else %}<link rel="stylesheet" href="{{ filename }}">
-      {% endif %}
-    {% endfor %}
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -37,32 +38,13 @@
     <![endif]-->
   </head>
   <body>
-      <div class="container-fluid">
-      <div class="row">
-        <nav class="col-sm-2 menus">
-          {% include "main::logo.html" %}
-        </nav>
-        <div class="col-sm-10 right-columns">
-              {% include "main::breadcrumb.html" %}
-        </div>
-      </div>
-      <div class="row">
-        <nav class="col-sm-2 menus" id="menu-container">
-          {% include "alpheios::menu.html" %}
-        </nav>
-        <div class="col-sm-10 hfeed right-columns" id="reading-container">
-          <div class="">
-              {% block article %}
-              {% endblock %}
-          </div>
-        </div>
-      </div>
-      </div>
+    {% include "alpheios::breadcrumb.html" %}
+    <div class="d-flex" id="reading-container">
+      {% block article %}
+      {% endblock %}
+     </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 
     {% for filename, directory in assets["js"].items() %}
       {% if directory %}<script src="{{url_for('.secondary_assets', filetype='js', asset=filename)}}"></script>
@@ -76,7 +58,7 @@
   {% block footer %}
           {% include "main::footer.html" %}
   {% endblock %}
-  <div id="alpheios-main" data-trigger="dblclick" data-selector=".alpheios-word" data-mobile-redirect-url="https://www-test.alpheios.net/pages/texts-mobile"></div>
+  <div id="alpheios-main" data-trigger="dblclick" data-selector=".entry-content"></div>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -86,17 +68,6 @@
     ga('create', '{{gtrack}}', 'auto');
     ga('send', 'pageview');
 
-  </script>
-  <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function(event) {
-      new Alpheios.Embedded(
-            {
-              clientId: 'alpheios-nemo-ui',
-              triggerEvents: "dblclick",
-              enabledSelector: '.entry-content',
-              mobileRedirectUrl: 'https://www-test.alpheios.net/pages/texts-mobile',
-            }).activate();
-    });
   </script>
   </body>
 </html>

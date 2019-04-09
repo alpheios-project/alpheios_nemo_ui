@@ -1,12 +1,14 @@
-<header>
-    <span class="content">Text Collections</span>
-</header>
-<ul class="menu">
-    {% for c in main_collections %}
-        <li><a href="{{url_for('.r_collection_semantic', objectId=c.id, semantic=c.label|slugify)}}">{{c.label}}</a></li>
-    {% endfor %}
-</ul>
+<div class="menu-container-list">
+  <header>
+      <span class="content">Text Collections</span>
+  </header>
+  <ul class="menu">
+      {% for c in main_collections %}
+          <li><a href="{{url_for('.r_collection_semantic', objectId=c.id, semantic=c.label|slugify)}}">{{c.label}}</a></li>
+      {% endfor %}
+  </ul>
 
-<p>
-    <input id="fullsearch" class="form-control" type="text" placeholder="Find a text" data-noresult="No results" data-target="{{url_for('.r_typeahead_json')}}"/>
-</p>
+  <p>
+      <input id="fullsearch" class="form-control" type="text" placeholder="Find a text" data-noresult="No results" data-target="{{url_for('.r_typeahead_json')}}"/>
+  </p>
+</div>

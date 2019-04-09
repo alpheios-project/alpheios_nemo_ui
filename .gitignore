@@ -99,3 +99,13 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# node
+node_modules
+
+# auth environment
+env.js
+.env
+
+# texts
+texts

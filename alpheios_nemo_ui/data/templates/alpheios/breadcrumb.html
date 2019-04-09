@@ -1,0 +1,42 @@
+<nav id="breadcrumb" class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+ <a class="navbar-brand topnav" href="{{ url_for('.r_index')}}"><img class="img-fluid" src="{{ url_for('.secondary_assets', filetype='static', asset='Alpheios-Logo-White.png')}}"
+    alt="Alpheios Logo"/></a>
+   <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="mainmenu" aria-label="Toggle navigation">
+     <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ol class="breadcrumb">
+      {% for crumb in breadcrumbs: -%}
+        {% if loop.index == 4 %}
+          {% if 'references' in request.path %}
+            {% set link = '.r_first_passage' %}
+          {% else %}
+            {% set link = '.r_references' %}
+          {% endif %}
+        {% else %}
+          {% set link = crumb['link'] %}
+        {% endif %}
+        {%- if link -%}
+          {%- if crumb['args']['objectId'] %}
+            {% if loop.index == 4 %}
+              {% set args = { 'objectId': objectId } %}
+            {% else %}
+              {% set args = { 'objectId': crumb['args']['objectId'] } %}
+            {% endif %}
+          {% else %}
+            {% set args = {} %}
+          {% endif %}
+          <li class="breadcrumb-item"><a href="{{url_for(link, **args)}}">{{crumb["title"]}}</a></li>
+        {% else %}
+          <li class="breadcrumb-item active">{{crumb["title"]}}</li>
+        {% endif %}
+      {%- endfor %}
+    </ol>
+
+
+    <div class="ml-auto d-inline w-20">
+      {% include "alpheios::login.html" %}
+      <input id="fullsearch" class="form-control form-inline" type="text" placeholder="Find a text" data-noresult="No results" data-target="{{url_for('.r_typeahead_json')}}"/>
+    </div>
+  </div>
+</nav>

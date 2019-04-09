@@ -2,9 +2,20 @@
 
 from flask_nemo.plugin import PluginPrototype
 from pkg_resources import resource_filename
-from flask import jsonify, url_for
+from flask import jsonify, url_for, redirect, Markup, session, request
 from flask_nemo.chunker import level_grouper
+from copy import deepcopy as copy
 import re
+from MyCapytain.common.constants import RDF_NAMESPACES, Mimetypes
+from MyCapytain.resources.prototypes.metadata import ResourceCollection
+from MyCapytain.resources.prototypes.cts.inventory import CtsWorkMetadata, CtsEditionMetadata
+from MyCapytain.resources.collections.cts import XmlCtsTextgroupMetadata
+from MyCapytain.errors import UnknownCollection
+import sys
+import alpheios_nemo_ui.filters
+from rdflib import Namespace
+from six.moves.urllib.parse import urlencode
+from functools import wraps
 
 
 class AlpheiosNemoUI(PluginPrototype):
@@ -19,7 +30,7 @@ class AlpheiosNemoUI(PluginPrototype):
         "alpheios": resource_filename("alpheios_nemo_ui", "data/templates/alpheios")
     }
     CSS = [
-     resource_filename("alpheios_nemo_ui", "data/assets/css/theme-ext.css"),
+     resource_filename("alpheios_nemo_ui", "data/assets/css/alpheios.min.css"),
      resource_filename("alpheios_nemo_ui", "data/assets/css/style.min.css"),
      resource_filename("alpheios_nemo_ui", "data/assets/css/style-embedded.min.css")
     ]
@@ -27,21 +38,293 @@ class AlpheiosNemoUI(PluginPrototype):
         resource_filename("alpheios_nemo_ui", "data/assets/js/bloodhound.min.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/autocomplete.min.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/menu.js"),
+        resource_filename("alpheios_nemo_ui", "data/assets/js/text.js"),
+        resource_filename("alpheios_nemo_ui", "data/assets/js/mobile.js"),
+        resource_filename("alpheios_nemo_ui", "data/assets/js/env.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/alpheios-embedded.js")
     ]
     STATICS = [
-        resource_filename("alpheios_nemo_ui", "data/assets/images/logo.png")
+        resource_filename("alpheios_nemo_ui", "data/assets/images/logo.png"),
+        resource_filename("alpheios_nemo_ui", "data/assets/images/Alpheios-Logo-White.png"),
+        resource_filename("alpheios_nemo_ui", "data/assets/images/Mobile-Menu.svg"),
+        resource_filename("alpheios_nemo_ui", "data/assets/images/Mobile-Menu-Close.svg")
     ]
     ROUTES = [
-        ("/typeahead/collections.json", "r_typeahead_json", ["GET"])
+        ("/", "r_index", ["GET"]),
+        ("/collections", "r_collections", ["GET"]),
+        ("/collections/<objectId>", "r_collection", ["GET"]),
+        ("/text/<objectId>/references", "r_references", ["GET"]),
+        ("/text/<objectId>/passage/<subreference>", "r_passage", ["GET"]),
+        ("/text/<objectId>/passage/<subreference>/json", "r_passage_json", ["GET"]),
+        ("/text/<objectId>/passage", "r_first_passage", ["GET"]),
+        ("/typeahead/collections.json", "r_typeahead_json", ["GET"]),
+        ("/authorize","r_authorize",["GET"]),
+        ("/login","r_login",["GET"]),
+        ("/logout","r_logout",["GET"]),
+        ("/return","r_logout_return",["GET"]),
+        ("/userinfo","r_userinfo",["GET"]),
+        ("/usertoken","r_usertoken",["GET"])
+    ]
+
+    FILTERS = [
+        "f_hierarchical_passages_full"
     ]
 
     CACHED = ["r_typeahead_json"]
     HAS_AUGMENT_RENDER = True
 
-    def __init__(self, GTrackCode=None, *args, **kwargs):
+    def __init__(self, GTrackCode=None, auth0=None, external_url_base='http://localhost:5000', *args, **kwargs):
         super(AlpheiosNemoUI, self).__init__(*args, **kwargs)
         self.GTrackCode = GTrackCode
+        self.auth0 = auth0
+        self.external_url_base = external_url_base
+        self.clear_routes = True
+        self.f_hierarchical_passages_full = filters.f_hierarchical_passages_full
+        self._get_lang = _get_lang
+
+    def r_index(self):
+        """ Retrieve the top collections of the inventory
+
+        :param lang: Lang in which to express main data
+        :type lang: str
+        :return: Collections information and template
+        :rtype: {str: Any}
+        """
+        collection = self.nemo.resolver.getMetadata()
+        return {
+            "template": "alpheios::collection.html",
+            "current_label": collection.get_label(None),
+            "collections": {
+                "members": self.nemo.make_members(collection, lang=None)
+            }
+        }
+
+    def r_collections(self, lang=None):
+        """ Retrieve the top collections of the inventory
+
+        :param lang: Lang in which to express main data
+        :type lang: str
+        :return: Collections information and template
+        :rtype: {str: Any}
+        """
+        collection = self.nemo.resolver.getMetadata()
+        if collection:
+            return {
+                "template": "alpheios::collection.html",
+                "current_label": collection.get_label(lang),
+                "collections": {
+                    "members": self.nemo.make_members(collection, lang=lang)
+                }
+            }
+        else:
+            return {
+                "template": "alpheios::collection.html",
+                "current_label": "NONE",
+                "collections": {
+                    "members": list()
+                }
+            }
+
+
+    def r_collection(self, objectId, lang=None):
+        """ Collection content browsing route function
+
+        :param objectId: Collection identifier
+        :type objectId: str
+        :param lang: Lang in which to express main data
+        :type lang: str
+        :return: Template and collections contained in given collection
+        :rtype: {str: Any}
+        """
+        collection = self.nemo.resolver.getMetadata(objectId)
+        lang = self._get_lang(objectId,lang)
+        members = self.nemo.make_members(collection, lang=lang)
+        expanded_members = list()
+        types = {}
+        DCT = Namespace("http://purl.org/dc/terms/")
+        if isinstance(collection, XmlCtsTextgroupMetadata):
+            for m in members:
+                e_coll = self.nemo.resolver.getMetadata(m['id'])
+                e =  {
+                    "work": m,
+                    "editions": self.nemo.make_members(e_coll,lang=lang)
+                }
+                workType = e_coll.metadata.get_single(DCT.type, lang)
+                if workType is not None:
+                    if workType not in types:
+                        types[workType] = []
+                    types[workType].append(e)
+                else:
+                    expanded_members.append(e)
+
+        return {
+            "template": "alpheios::collection.html",
+            "collections": {
+                "current": {
+                    "label": str(collection.get_label(lang)),
+                    "label_lang": lang,
+                    "id": collection.id,
+                    "model": str(collection.model),
+                    "type": str(collection.type),
+                },
+                "members": self.nemo.make_members(collection, lang=lang),
+                "parents": self.nemo.make_parents(collection, lang=lang),
+                "types": types,
+                "expanded_members": expanded_members
+            },
+        }
+
+    def r_references(self, objectId, lang=None):
+        """ Text exemplar references browsing route function
+
+        :param objectId: Collection identifier
+        :type objectId: str
+        :param lang: Lang in which to express main data
+        :type lang: str
+        :return: Template and required information about text with its references
+        """
+        collection, reffs = self.nemo.get_reffs(objectId=objectId, export_collection=True)
+        lang = self._get_lang(objectId,lang)
+        cite = collection.citation
+        scheme = []
+        while (cite):
+            scheme.append(cite.name)
+            cite = cite.child
+        return {
+            "template": "alpheios::references.html",
+            "objectId": objectId,
+            "citation": collection.citation,
+            "scheme": scheme,
+            "collections": {
+                "current": {
+                    "label": collection.get_label(lang),
+                    "label_lang": lang,
+                    "id": collection.id,
+                    "model": str(collection.model),
+                    "type": str(collection.type),
+                },
+                "parents": self.nemo.make_parents(collection, lang=lang)
+            },
+            "reffs": reffs
+        }
+
+    def r_first_passage(self, objectId):
+        """ Provides a redirect to the first passage of given objectId
+
+        :param objectId: Collection identifier
+        :type objectId: str
+        :return: Redirection to the first passage of given text
+        """
+        collection, reffs = self.nemo.get_reffs(objectId=objectId, export_collection=True)
+        first, _ = reffs[0]
+        return redirect(
+            url_for(".r_passage", objectId=objectId, subreference=first)
+        )
+
+    def r_passage(self, objectId, subreference, lang=None):
+        """ Retrieve the text of the passage
+
+        :param objectId: Collection identifier
+        :type objectId: str
+        :param lang: Lang in which to express main data
+        :type lang: str
+        :param subreference: Reference identifier
+        :type subreference: str
+        :return: Template, collections metadata and Markup object representing the text
+        :rtype: {str: Any}
+        """
+        collection = self.nemo.get_collection(objectId)
+        lang = self._get_lang(objectId,lang)
+        if isinstance(collection, CtsWorkMetadata):
+            editions = [t for t in collection.children.values() if isinstance(t, CtsEditionMetadata)]
+            if len(editions) == 0:
+                raise UnknownCollection("This work has no default edition")
+            return redirect(url_for(".r_passage", objectId=str(editions[0].id), subreference=subreference))
+        text = self.nemo.get_passage(objectId=objectId, subreference=subreference)
+        passage = self.nemo.transform(text, text.export(Mimetypes.PYTHON.ETREE), objectId)
+        prev, next = self.nemo.get_siblings(objectId, subreference, text)
+        return {
+            "template": "main::text.html",
+            "objectId": objectId,
+            "subreference": subreference,
+            "collections": {
+                "current": {
+                    "label": collection.get_label(lang),
+                    "label_lang": lang,
+                    "id": collection.id,
+                    "model": str(collection.model),
+                    "type": str(collection.type),
+                    "author": text.get_creator(lang),
+                    "title": text.get_title(lang),
+                    "title_lang": lang,
+                    "description": text.get_description(lang),
+                    "citation": collection.citation,
+                    "coins": self.nemo.make_coins(collection, text, subreference, lang=lang)
+                },
+                "parents": self.nemo.make_parents(collection, lang=lang)
+            },
+            "text_passage": Markup(passage),
+            "prev": prev,
+            "next": next
+        }
+
+    def r_passage_json(self, objectId, subreference, lang=None):
+        """ Retrieve the text of the passage
+
+        :param objectId: Collection identifier
+        :type objectId: str
+        :param lang: Lang in which to express main data
+        :type lang: str
+        :param subreference: Reference identifier
+        :type subreference: str
+        :return: Template, collections metadata and Markup object representing the text
+        :rtype: {str: Any}
+        """
+        collection = self.nemo.get_collection(objectId)
+        lang = self._get_lang(objectId,lang)
+        if isinstance(collection, CtsWorkMetadata):
+            editions = [t for t in collection.children.values() if isinstance(t, CtsEditionMetadata)]
+            if len(editions) == 0:
+                raise UnknownCollection("This work has no default edition")
+            return redirect(url_for(".r_passage_json", objectId=str(editions[0].id), subreference=subreference))
+        text = self.nemo.get_passage(objectId=objectId, subreference=subreference)
+        passage = self.nemo.transform(text, text.export(Mimetypes.PYTHON.ETREE), objectId)
+        prev, next = self.nemo.get_siblings(objectId, subreference, text)
+        data = {
+            "objectId": objectId,
+            "subreference": subreference,
+            "collections": {
+                "current": {
+                    "label": collection.get_label(lang),
+                    "id": collection.id,
+                    "model": str(collection.model),
+                    "type": str(collection.type),
+                    "author": text.get_creator(lang),
+                    "title": text.get_title(lang),
+                    "description": text.get_description(lang),
+                    "coins": self.nemo.make_coins(collection, text, subreference, lang=lang)
+                },
+                "parents": self.nemo.make_parents(collection, lang=lang)
+            },
+            "text_passage": Markup(passage),
+            "prev": prev,
+            "next": next
+        }
+        return jsonify(data)
+
+    def r_assets(self, filetype, asset):
+        """ Route for specific assets.
+
+        :param filetype: Asset Type
+        :param asset: Filename of an asset
+        :return: Response
+        """
+        if filetype in self.nemo.assets and asset in self.nemo.assets[filetype] and self.nemo.assets[filetype][asset]:
+            return send_from_directory(
+                directory=self.nemo.assets[filetype][asset],
+                filename=asset
+            )
+        abort(404)
 
     def render(self, **kwargs):
         kwargs["gtrack"] = self.GTrackCode
@@ -55,6 +338,14 @@ class AlpheiosNemoUI(PluginPrototype):
         else:
             kwargs["lang"] = 'en'
         return kwargs
+
+    @property
+    def clear_routes(self):
+       pass
+
+    def clear_routes(self,value):
+      self.clear_routes = value
+
 
     def r_typeahead_json(self):
         """ List of resource for typeahead
@@ -80,6 +371,58 @@ class AlpheiosNemoUI(PluginPrototype):
             })
         return jsonify(data)
 
+    def r_authorize(self):
+        # Handles response from token endpoint
+        tokens = self.auth0.authorize_access_token()
+        # Store the access token in the flask session
+        session['access_token'] = tokens['access_token']
+        resp = self.auth0.get('userinfo')
+        userinfo = resp.json()
+
+        # Store the user information in flask session.
+        session['jwt_payload'] = userinfo
+        session['profile'] = {
+            'sub': userinfo['sub'],
+            'nickname': userinfo['nickname'],
+        }
+        if 'loginReturn' in session and session['loginReturn'] is not None:
+            return redirect(session['loginReturn'])
+        else:
+            return redirect(url_for('.r_index'))
+
+    def r_login(self):
+        session['loginReturn'] = request.args.get('next','')
+        return self.auth0.authorize_redirect(redirect_uri=self.external_url_base + "/authorize",audience='alpheios.net:apis')
+
+    def r_logout(self):
+        # Clear session stored data
+        session.clear()
+        session['logoutReturn'] = request.args.get('next','')
+        params = {'returnTo': self.external_url_base + '/return', 'client_id': self.auth0.client_id}
+        return redirect(self.auth0.api_base_url + '/v2/logout?' + urlencode(params))
+
+    def r_logout_return(self):
+        if 'logoutReturn' in session and session['logoutReturn'] is not None:
+            return redirect(session['logoutReturn'])
+        else:
+            return redirect(url_for('.r_index'))
+
+    def requires_auth(f):
+        @wraps(f)
+        def decorated(*args, **kwargs):
+            if 'profile' not in session:
+                return "Unauthorized request", 401
+            return f(*args, **kwargs)
+
+        return decorated
+
+    @requires_auth
+    def r_userinfo(self):
+        return jsonify(session['profile'])
+
+    @requires_auth
+    def r_usertoken(self):
+        return jsonify(session['access_token'])
 
 def scheme_grouper(text, getreffs):
     level = len(text.citation)
@@ -111,3 +454,16 @@ def scheme_grouper(text, getreffs):
     elif "line" in types:
         groupby = 30
     return level_grouper(text, getreffs, level, groupby)
+
+def _get_lang(objectId,lang):
+    if ('latin' in objectId):
+        lang = 'lat'
+    elif ('greek' in objectId):
+        lang = 'grc'
+    elif ('arabic' in objectId):
+        lang = 'ara'
+    elif ('persian' in objectId):
+        lang = 'far'
+    else:
+        lang = lang or 'eng'
+    return lang
