@@ -1,7 +1,14 @@
 version: '3'
 services: 
   nemo: 
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args: 
+        appkey: ${ALPHEIOS_NEMO_APPKEY}
+        clientid: ${ALPHEIOS_NEMO_AUTH0_CLIENTID}
+        clientsecret: ${ALPHEIOS_NEMO_AUTH0_CLIENTSECRET}
+        proxybase: ${ALPHEIOS_NEMO_PROXYBASE}
     image: 'alpheios_nemo_ui:v1'
     container_name: alpheios_nemo_ui_container
     ports: 
