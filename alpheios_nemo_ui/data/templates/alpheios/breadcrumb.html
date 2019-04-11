@@ -1,10 +1,4 @@
-<nav id="breadcrumb" class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
- <a class="navbar-brand topnav" href="{{ url_for('.r_index')}}"><img class="img-fluid" src="{{ url_for('.secondary_assets', filetype='static', asset='Alpheios-Logo-White.png')}}"
-    alt="Alpheios Logo"/></a>
-   <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="mainmenu" aria-label="Toggle navigation">
-     <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<nav id="breadcrumb" class="navbar navbar-dark bg-dark border-bottom">
     <ol class="breadcrumb">
       {% for crumb in breadcrumbs: -%}
         {% if loop.index == 4 %}
@@ -32,11 +26,4 @@
         {% endif %}
       {%- endfor %}
     </ol>
-
-
-    <div class="ml-auto d-inline w-20">
-      {% include "alpheios::login.html" %}
-      <input id="fullsearch" class="form-control form-inline" type="text" placeholder="Find a text" data-noresult="No results" data-target="{{url_for('.r_typeahead_json')}}"/>
-    </div>
-  </div>
 </nav>

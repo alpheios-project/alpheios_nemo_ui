@@ -9,8 +9,7 @@ import sys
 
 class AlpheiosBreadcrumb(PluginPrototype):
     """
-        The Breadcrumb plugin is enabled by default in Nemo.
-        It can be overwritten or removed. It simply adds a breadcrumb
+        Alpheios Breadcrumb
 
     """
     HAS_AUGMENT_RENDER = True
@@ -31,18 +30,33 @@ class AlpheiosBreadcrumb(PluginPrototype):
         # but shouldn't be included in the list itself (this is currently the case for work --
         # at some point we probably should include work in the navigation)
         breadcrumbs = []
+        menu = []
         if "collections" in kwargs:
             breadcrumbs = [{
-                "title": "Text Collections",
+                "title": "Language",
+                "link": ".r_collections",
+                "args": {}
+            }]
+            menu = [{
+                "title": "Language",
                 "link": ".r_collections",
                 "args": {}
             }]
 
             if "parents" in kwargs["collections"]:
-                print(str(kwargs["collections"]["parents"]))
                 breadcrumbs += [
                     {
-                        "title": parent["label"],
+                        "title": self.get_title(parent["class"]),
+                        "link": ".r_collection",
+                        "args": {
+                            "objectId": parent["id"],
+                        },
+                    } for parent in kwargs["collections"]["parents"]
+                ][::-1]
+                menu += [
+                    {
+                        "title": self.get_title(parent["class"]),
+                        "current": parent["label"],
                         "link": ".r_collection",
                         "args": {
                             "objectId": parent["id"],
@@ -51,7 +65,6 @@ class AlpheiosBreadcrumb(PluginPrototype):
                 ][::-1]
 
             if "current" in kwargs["collections"]:
-                print(str(kwargs["collections"]["current"]))
                 if (kwargs["collections"]["current"]["model"] == 'http://w3id.org/dts-ontology/resource'):
                     if ('citation' in kwargs["collections"]["current"]):
                         title = "Read"
@@ -64,7 +77,7 @@ class AlpheiosBreadcrumb(PluginPrototype):
                     })
                 else:
                     breadcrumbs.append({
-                        "title": kwargs["collections"]["current"]["label"],
+                        "title": self.get_title(kwargs["collections"]["current"]["class"]),
                         "link": None,
                         "args": {}
                     })
@@ -73,4 +86,17 @@ class AlpheiosBreadcrumb(PluginPrototype):
         if len(breadcrumbs) > 0:
             breadcrumbs[-1]["link"] = None
 
-        return {"breadcrumbs": breadcrumbs}
+        return {"breadcrumbs": breadcrumbs, "menu": menu}
+
+    def get_title(self,classname):
+        if classname == 'XmlCtsTextgroupMetadata':
+            return 'Works'
+        elif classname == 'XmlCtsTextInventoryMetadata':
+            return 'Authors'
+        elif classname == 'CtsTextInventoryMetadata':
+            return 'Authors'
+        else:
+            return classname
+
+
+

@@ -19,11 +19,6 @@ from functools import wraps
 
 
 class AlpheiosNemoUI(PluginPrototype):
-    """
-        The Breadcrumb plugin is enabled by default in Nemo.
-        It can be overwritten or removed. It simply adds a breadcrumb
-
-    """
     HAS_AUGMENT_RENDER = False
     TEMPLATES = {
         "main": resource_filename("alpheios_nemo_ui", "data/templates/main"),
@@ -166,9 +161,10 @@ class AlpheiosNemoUI(PluginPrototype):
                     "id": collection.id,
                     "model": str(collection.model),
                     "type": str(collection.type),
+                    "class": collection.__class__.__name__
                 },
                 "members": self.nemo.make_members(collection, lang=lang),
-                "parents": self.nemo.make_parents(collection, lang=lang),
+                "parents": self.make_parents(collection, lang=lang),
                 "types": types,
                 "expanded_members": expanded_members
             },
@@ -203,7 +199,7 @@ class AlpheiosNemoUI(PluginPrototype):
                     "model": str(collection.model),
                     "type": str(collection.type),
                 },
-                "parents": self.nemo.make_parents(collection, lang=lang)
+                "parents": self.make_parents(collection, lang=lang)
             },
             "reffs": reffs
         }
@@ -261,7 +257,7 @@ class AlpheiosNemoUI(PluginPrototype):
                     "citation": collection.citation,
                     "coins": self.nemo.make_coins(collection, text, subreference, lang=lang)
                 },
-                "parents": self.nemo.make_parents(collection, lang=lang)
+                "parents": self.make_parents(collection, lang=lang)
             },
             "text_passage": Markup(passage),
             "prev": prev,
@@ -304,7 +300,7 @@ class AlpheiosNemoUI(PluginPrototype):
                     "description": text.get_description(lang),
                     "coins": self.nemo.make_coins(collection, text, subreference, lang=lang)
                 },
-                "parents": self.nemo.make_parents(collection, lang=lang)
+                "parents": self.make_parents(collection, lang=lang)
             },
             "text_passage": Markup(passage),
             "prev": prev,
@@ -424,6 +420,27 @@ class AlpheiosNemoUI(PluginPrototype):
     def r_usertoken(self):
         return jsonify(session['access_token'])
 
+    def make_parents(self, collection, lang=None):
+        """ Build parents list for given collection
+
+        :param collection: Collection to build dict view of for its members
+        :param lang: Language to express data in
+        :return: List of basic objects
+        """
+        return [
+            {
+                "id": member.id,
+                "label": str(member.get_label(lang)),
+                "model": str(member.model),
+                "type": str(member.type),
+                "size": member.size,
+                "class": member.__class__.__name__
+            }
+            for member in collection.parents
+            if member.get_label()
+        ]
+
+
 def scheme_grouper(text, getreffs):
     level = len(text.citation)
     groupby = 5
@@ -467,3 +484,4 @@ def _get_lang(objectId,lang):
     else:
         lang = lang or 'eng'
     return lang
+

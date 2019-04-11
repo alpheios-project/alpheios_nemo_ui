@@ -83,12 +83,16 @@ footer.page-footer a:hover {
   text-decoration: underline;
 }
 
+#mainnav {
+  background-color: $turquoise !important;
+  color: white !important;
+}
+
 #breadcrumb {
   text-transform: none;
   font-size: $font-size-base;
-  background-color: $turquoise !important;
-  padding-top: 1em;
-  font-weight: 600;
+  background-color: $midnightblue !important;
+  font-weight: bold;
   margin: 0 auto;
 }
 
@@ -97,7 +101,7 @@ footer.page-footer a:hover {
 }
 
 .breadcrumb {
-  background-color: $turquoise;
+  background-color: $midnightblue;
 }
 
 .breadcrumb-item a {
@@ -106,6 +110,10 @@ footer.page-footer a:hover {
 
 .breadcrumb .active {
   color: $alpheiosblue;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+  color: white;
 }
 
 .nemo-oauth-login-container a {

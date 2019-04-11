@@ -1,15 +1,19 @@
 {% extends "main::container.html" %}
+{% include "alpheios::navpassages.html" %}
 
 {% import "alpheios::macros.html" as macros %}
 
-{% block article %}
-<article class="nav container">
-    <section class="d-flex flex-wrap">
-        {% if cache_active %}
-            {% cache cache_time, cache_key %}{{ macros.hierarchical_dispatcher(objectId, reffs, citation) }} {% endcache %}
-        {% else %}
-            {{ macros.hierarchical_dispatcher(objectId, reffs, citation) }}
-        {% endif %}
-    </section>
-</article>
-{% endblock %}
+{% include "alpheios::breadcrumbpassages.html" %}
+<div class="d-flex" id="reading-container">
+  {% block article %}
+  <article class="nav container">
+      <section class="d-flex flex-wrap">
+          {% if cache_active %}
+              {% cache cache_time, cache_key %}{{ macros.hierarchical_dispatcher(objectId, reffs, citation) }} {% endcache %}
+          {% else %}
+              {{ macros.hierarchical_dispatcher(objectId, reffs, citation) }}
+          {% endif %}
+      </section>
+  </article>
+  {% endblock %}
+</div>

@@ -38,12 +38,8 @@
     <![endif]-->
   </head>
   <body>
-    {% include "alpheios::breadcrumb.html" %}
-    <div class="d-flex" id="reading-container">
-      {% block article %}
-      {% endblock %}
-     </div>
-
+    {% block article %}
+    {% endblock %}
 
 
     {% for filename, directory in assets["js"].items() %}
