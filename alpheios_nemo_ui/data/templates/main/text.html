@@ -1,4 +1,5 @@
 {% extends "main::container.html" %}
+{% include "alpheios::navreader.html" %}
 
 {% macro header_passage() %}
 <header>
@@ -45,13 +46,7 @@
 
 {% macro show_passage(text, subreference, header, navigation, footer) %}
 <article class="hentry entry white">
-  <div class="alert alert-info alert-dismissible show alpheios-hint-trigger-desktop" role="alert">
-    Double-click on a word to access morphology and definitions.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-        {{ header }}
+     {{ header }}
     <nav>
         {{ navigation }}
     </nav>

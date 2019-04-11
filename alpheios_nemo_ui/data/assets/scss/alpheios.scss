@@ -69,6 +69,40 @@ h5 {
   font-style: italic;
 }
 
+button.btn.btn-icon {
+  height:44px;
+  width: 44px;
+  color: white;
+  fill: white;
+  stroke: white;
+  border: none;
+  padding: 0;
+}
+
+button.btn.btn-icon a {
+  color: white;
+}
+
+button.btn.btn-icon a:hover {
+  color: $mustardyellow;
+}
+
+button.btn.btn-icon:hover {
+  color: $mustardyellow;
+  fill: $mustardyellow;
+  stroke: $mustardyellow;
+  background-color: $turquoise;
+}
+
+button.btn.btn-icon svg {
+  width: 44px;
+  height: 44px;
+}
+
+button.btn.btn-icon span.icon-label {
+  display:none;
+}
+
 footer.page-footer {
   background-color: $turquoise;
   color: $alpheiosblue;
@@ -261,6 +295,10 @@ span.w::before {
 
   .alpheios-hint-trigger-desktop {
     display: flex;
+  }
+
+  button.btn.btn-icon span.icon-label {
+    display:block;
   }
 }
 

@@ -1,7 +1,13 @@
 <nav id="mainnav" class="navbar navbar-dark bg-dark border-bottom">
   {% include "alpheios::navmenu.html" %}
+  {% set args = { 'objectId': objectId } %}
   <h1>Browse Passages</h1>
   <div class="ml-auto d-inline w-20">
     <input id="fullsearch" class="form-control form-inline" type="text" placeholder="Find a text" data-noresult="No results" data-target="{{url_for('.r_typeahead_json')}}"/>
   </div>
+  <button class="btn btn-icon">
+    <a href="{{url_for('.r_first_passage',**args) }}">
+      <span class="icon-label">Back to Reader</span>
+    </a>
+  </button>
 </nav>

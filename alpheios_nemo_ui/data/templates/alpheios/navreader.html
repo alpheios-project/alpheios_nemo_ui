@@ -1,0 +1,15 @@
+<nav id="mainnav" class="navbar navbar-dark bg-dark border-bottom">
+  {% include "alpheios::navmenu.html" %}
+  {% set args = { 'objectId': objectId } %}
+  <h1>Alpheios Reader</h1>
+  <div class="ml-auto d-inline w-20">
+    <button class="btn btn-icon">
+      <span class="icon-label">Help</span>
+    </button>
+    <button class="btn btn-icon">
+      <a href="{{url_for('.r_references',**args) }}">
+        <span class="icon-label">Browse</span>
+      </a>
+    </button>
+  </div>
+</nav>
