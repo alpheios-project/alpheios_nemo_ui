@@ -47,6 +47,7 @@ class AlpheiosBreadcrumb(PluginPrototype):
                 breadcrumbs += [
                     {
                         "title": self.get_title(parent["class"]),
+                        "label": parent["label"],
                         "link": ".r_collection",
                         "args": {
                             "objectId": parent["id"],
@@ -66,12 +67,8 @@ class AlpheiosBreadcrumb(PluginPrototype):
 
             if "current" in kwargs["collections"]:
                 if (kwargs["collections"]["current"]["model"] == 'http://w3id.org/dts-ontology/resource'):
-                    if ('citation' in kwargs["collections"]["current"]):
-                        title = "Read"
-                    else:
-                        title = "Browse"
                     breadcrumbs.append({
-                        "title": title,
+                        "title": kwargs["collections"]["current"]["label"],
                         "link": None,
                         "args": {}
                     })
