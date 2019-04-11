@@ -6,13 +6,21 @@
   {% block article %}
   <article>
       <header>
-          <h1>
           {% if collections.current %}
-          <span lang="{{collections.current.label_lang}}">{{collections.current.label}}</span>
+            <h3>
+            <span lang="{{collections.current.label_lang}}">{{collections.current.label}}</span>
+            </h3>
+            {% if collections.current.class == 'XmlCtsTextgroupMetadata' %}
+              <p><i>Select a work</i></p>
+            {% else %}
+              <p><i>Select an author</i></p>
+            {% endif %}
           {% else %}
-          Text Collections
+            <h3>
+            Language
+            </h3>
+            <p><i>Select a language</i></p>
           {% endif %}
-          </h1>
       </header>
       <section class="card-columns">
           <ul>
@@ -55,6 +63,9 @@
             {% endfor %}
           {% endif %}
           </ul>
+      </section>
+      <section>
+        <button class="btn btn-large btn-outline-turquoise">© Copyright Info</button>
       </section>
   </article>
   {% endblock %}

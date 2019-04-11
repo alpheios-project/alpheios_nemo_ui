@@ -1,0 +1,4 @@
+{% if 'profile' in session and session.profile != None %}
+  <a class="dropdown-item" href="#">My Account</a>
+  <a class="dropdown-item" href="{{url_for('.r_logout')}}?next={{request.url}}">Logout</a>
+{% endif %}

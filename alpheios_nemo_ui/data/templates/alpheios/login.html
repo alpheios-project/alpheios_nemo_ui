@@ -1,11 +1,7 @@
-<div class="nemo-oauth-login-container">
-    {% if 'profile' in session and session.profile != None %}
-        <div class="logout">
-            <a href="{{url_for('.r_logout')}}?next={{ request.url }}">Logout</a>
-        </div>
-    {% else %}
-        <div class="login">
-            <a href="{{url_for('.r_login')}}?next={{ request.url }}">Login</a>
-        </div>
-    {% endif %}
-</div>
+{% if 'profile' in session and session.profile != None %}
+  <p class="dropdown-item">Logged in as {{ session.profile.nickname }}</p>
+{% else %}
+  <p class="dropdown-item">You are not logged in<br/>
+   <button class="btn btn-sm btn-burntorange"><a href="{{url_for('.r_login')}}?next={{ request.url }}">Login</a></button>
+ </p>
+{% endif %}

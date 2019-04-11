@@ -43,12 +43,12 @@ $navbar-dark-toggler-border-color: $turquoise;
 }
 
 
-$dropdown-color: white;
-$dropdown-bg: $midnightblue;
-$dropdown-link-color: white;
-$dropdown-link-hover-color: $mustardyellow;
-$dropdown-link-active-color: $mustardyellow;
-$dropdown-link-hover-bg: $midnightblue;
+$dropdown-color: $midnightblue;
+$dropdown-bg: white;
+$dropdown-link-color: $midnightblue;
+$dropdown-link-hover-color: $midnightblue;
+$dropdown-link-active-color: $midnightblue;
+$dropdown-link-hover-bg: $alpheiosblue;
 
 $link-hover-color: $turquoise;
 
