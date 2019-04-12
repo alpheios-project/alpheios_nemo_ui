@@ -79,7 +79,18 @@ button.btn.btn-icon {
   padding: 0;
 }
 
-button.btn.btn-icon.btn-icon-wide {
+button.btn.btn-icon.btn-icon-md {
+  height:unset;
+  width:unset;
+}
+
+.navbar-secondary {
+  height: 48px;
+  padding-top: 0px;
+}
+
+.navbar-secondary .alpheios-toolbar {
+  height: 48px;
   width: 254px;
 }
 
@@ -101,6 +112,17 @@ button.btn.btn-icon:hover {
 button.btn.btn-icon svg {
   width: 44px;
   height: 44px;
+  fill: white;
+  stroke: white;
+  color: white;
+}
+
+button.btn.btn-icon.btn-icon-md svg {
+  width: 44px;
+  height: 20px;
+  fill: white;
+  stroke: white;
+  color: white;
 }
 
 button.btn.btn-icon span.icon-label {
@@ -120,6 +142,15 @@ footer.page-footer a:hover {
   color: $hoveryellow;
   text-decoration: underline;
 }
+
+.navbar-dark .navbar-toggler-icon {
+  background-image: url(../static/Menu-Icon.svg);
+  background-color: $turquoise;
+}
+.navbar {
+  font-family: $font-family-sans-serif;
+}
+
 
 #mainnav {
   background-color: $turquoise !important;
@@ -302,12 +333,14 @@ span.w::before {
 
 @include media-breakpoint-up(lg) {
 
-  .alpheios-hint-trigger-desktop {
-    display: flex;
+  .box-shadow-bottom {
+    -moz-box-shadow: 4px 0px 4px rgba(0, 0, 0, .25);
+    -webkit-box-shadow: 4px 0px 4px rgba(0, 0, 0, .25);
+    box-shadow: 4px 0px 4px rgba(0, 0, 0, .25);
   }
 
-  button.btn.btn-icon span.icon-label {
-    display:block;
+  .alpheios-hint-trigger-desktop {
+    display: flex;
   }
 
   #browse-container {
@@ -318,6 +351,9 @@ span.w::before {
   #reading-container {
     margin-left: 100px;
     margin-right: 100px;
+  }
+  button.btn.btn-icon span.icon-label {
+    display:inline;
   }
 }
 

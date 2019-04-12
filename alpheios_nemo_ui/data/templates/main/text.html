@@ -13,34 +13,14 @@
   </div>
 {% endmacro %}
 
-{% macro nav() %}
-    {% if prev %}
-    <a class="btn btn-xs btn-primary prev" data-prev="{{ prev }}" href="{{url_for('.r_passage', objectId=objectId, subreference=prev) }}">
-      <i class="fas fa-angle-left"></i>
-    </a>
-    {% else %}
-    <a class="btn btn-xs btn-primary prev d-none" data-prev="NaN" href="{{url_for('.r_passage', objectId=objectId, subreference='NaN') }}">
-      <i class="fas fa-angle-left"></i>
-    </a>
-    {% endif %}
-    {% if next %}
-    <a class="btn btn-xs btn-primary next" data-next="{{ next }}" href="{{url_for('.r_passage', objectId=objectId, subreference=next) }}">
-        <i class="fas fa-angle-right"></i>
-    </a>
-    {% endif %}
-{% endmacro %}
-
 {% macro default_footer() %}
     {% include "main::passage_footer.html" %}
 {% endmacro %}
 
-{% macro show_passage(text, subreference, source, navigation, footer) %}
+{% macro show_passage(text, subreference, source, footer) %}
 <article class="hentry entry white">
     {{ source }}
     {% include "alpheios::breadcrumbtext.html" %}
-    <nav>
-        {{ navigation }}
-    </nav>
     <section id="reading-container">
       <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
@@ -63,7 +43,7 @@
 {% endmacro %}
 
 {% block article %}
-    {{ show_passage(text_passage, subreference, navigation=nav(), source=source_passage(), footer=default_footer()) }}
+    {{ show_passage(text_passage, subreference, source=source_passage(), footer=default_footer()) }}
 {% endblock %}
 
 {% block additionalscript %}

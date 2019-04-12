@@ -31,16 +31,6 @@ $navbar-dark-color: white;
 $navbar-dark-hover-color: $mustardyellow;
 $navbar-dark-active-color: $alpheiosblue;
 $navbar-dark-toggler-border-color: $turquoise;
-.navbar-dark .navbar-toggler .navbar-toggler-icon {
-  background-image: url(../static/Mobile-Menu-Close.svg);
-}
-.navbar-dark .navbar-toggler.collapsed .navbar-toggler-icon {
-  background-image: url(../static/Mobile-Menu.svg);
-}
-
-.navbar {
-  font-family: $font-family-sans-serif;
-}
 
 $navbar-light-color: $burntorange;
 $navbar-light-hover-color: $hoverorange;

@@ -41,8 +41,7 @@ class AlpheiosNemoUI(PluginPrototype):
     STATICS = [
         resource_filename("alpheios_nemo_ui", "data/assets/images/logo.png"),
         resource_filename("alpheios_nemo_ui", "data/assets/images/Alpheios-Logo-White.png"),
-        resource_filename("alpheios_nemo_ui", "data/assets/images/Mobile-Menu.svg"),
-        resource_filename("alpheios_nemo_ui", "data/assets/images/Mobile-Menu-Close.svg")
+        resource_filename("alpheios_nemo_ui", "data/assets/images/Menu-Icon.svg"),
     ]
     ROUTES = [
         ("/", "r_index", ["GET"]),
