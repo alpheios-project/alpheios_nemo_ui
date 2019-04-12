@@ -1,26 +1,16 @@
 {% extends "main::container.html" %}
 {% include "alpheios::navreader.html" %}
 
-{% macro header_passage() %}
-<header>
-    <h2>
-      <span class="author vcard"><span class="fn">{{collections.current.author}}</span>,</span>
-      <span class="entry-title" lang="{{collections.current.title_lang}}">{{collections.current.title}}</span>
-      <span class="subreference-all">({{subreference}})</h3>
-      <p class="alpheios-text-source d-flex justify-content-between">
-        <span data-toggle="popover" data-trigger="click hover focus">Bibliographic Source</span>
-        <span class="popover-content">
-          <span class="entry-summary" lang="{{collections.current.label_lang}}">{{collections.current.label}}, <i>{{collections.current.description}}</i></span><br/>
-          <span class='Z3988' title='{{collections.current.coins}}'></span><br/>
-          <span class="copyright text-small">Made available under the Creative Commons Attribution 4.0 International License.</span>
-        </span>
-        <span class="text-small">XML:
-	        <a class="text-small" href="/api/cts?request=GetPassage&urn={{objectId}}&subreference={{subreference}}" target='_blank'>Passage</a>
-	        <a class="text-small" href="/api/cts?request=GetPassage&urn={{objectId}}&subreference={{subreference}}" target='_blank'>Full Text</a>
-        </span>
-      </p>
-    </h2>
-</header>
+{% macro source_passage() %}
+  <div class="alpheios-text-source d-none">
+      <div class="entry-summary" lang="{{collections.current.label_lang}}">{{collections.current.label}}, <i>{{collections.current.description}}</i></div>
+      <div class='Z3988' title='{{collections.current.coins}}'></div>
+      <div class="copyright">Made available under the Creative Commons Attribution 4.0 International License.</div>
+    <div class="xml">XML:
+  	   <a href="/api/cts?request=GetPassage&urn={{objectId}}&subreference={{subreference}}" target='_blank'>Passage</a>
+  	   <a href="/api/cts?request=GetPassage&urn={{objectId}}&subreference={{subreference}}" target='_blank'>Full Text</a>
+    </div>
+  </div>
 {% endmacro %}
 
 {% macro nav() %}
@@ -44,19 +34,26 @@
     {% include "main::passage_footer.html" %}
 {% endmacro %}
 
-{% macro show_passage(text, subreference, header, navigation, footer) %}
+{% macro show_passage(text, subreference, source, navigation, footer) %}
 <article class="hentry entry white">
-     {{ header }}
+    {{ source }}
+    {% include "alpheios::breadcrumbtext.html" %}
     <nav>
         {{ navigation }}
     </nav>
-    <section class="entry-content" role="main">
-      <h3 class="subreference">{{subreference}}</h3>
-        {% if cache_active %}
-            {% cache cache_time, cache_key %}{{ text_passage }} {% endcache %}
-        {% else %}
-            {{ text_passage }}
-        {% endif %}
+    <section id="reading-container">
+      <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+          <div class="column entry-content">
+            <h3 class="subreference">{{subreference}}</h3>
+              {% if cache_active %}
+                  {% cache cache_time, cache_key %}{{ text_passage }} {% endcache %}
+              {% else %}
+                  {{ text_passage }}
+              {% endif %}
+          </div>
+        </div>
+      </div>
     </section>
 
     <footer>
@@ -66,7 +63,7 @@
 {% endmacro %}
 
 {% block article %}
-    {{ show_passage(text_passage, subreference, navigation=nav(), header=header_passage(), footer=default_footer()) }}
+    {{ show_passage(text_passage, subreference, navigation=nav(), source=source_passage(), footer=default_footer()) }}
 {% endblock %}
 
 {% block additionalscript %}
