@@ -60,7 +60,7 @@ function showNext() {
         newend = newref[1]
     }
     $('.subreference-all').text(`${oldstart}-${newend}`)
-    $('.entry-content').append(`<h3>${data.subreference}</h3>${data.text_passage}`);
+    $('.entry-content').append(`<h2 class="subreference text-center">${data.subreference}</h2>${data.text_passage}`);
     updateNext(data.next);
     updatePrev(data.prev);
     preloadNext();

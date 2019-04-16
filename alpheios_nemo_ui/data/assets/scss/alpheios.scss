@@ -327,6 +327,18 @@ span.w::before {
   font-size: small;
 }
 
+.l-cite {
+  font-weight: bold;
+}
+
+.subreference:after {
+  content: "";
+  display: block;
+  background: url(../static/Divider-Sm.svg) no-repeat center center;
+  border: none;
+  height: 1rem;
+}
+
 /**
  * Responsive styles
  */
@@ -354,6 +366,9 @@ span.w::before {
   }
   button.btn.btn-icon span.icon-label {
     display:inline;
+  }
+  .subreference:after {
+    background: url(../static/Divider-Lg.svg) no-repeat center center;
   }
 }
 
