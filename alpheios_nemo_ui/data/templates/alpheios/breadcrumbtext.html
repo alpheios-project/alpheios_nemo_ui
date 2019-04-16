@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-light box-shadow-bottom navbar-secondary">
+<nav class="navbar navbar-light bg-white box-shadow-bottom navbar-secondary">
   <div class="navbar-nav mr-auto">
     <div class="nav-link h4">
         <span><span class="current">{{breadcrumbs[-1]["title"]}}</span><span class="spacer">-</span><span class="parent">{{breadcrumbs[-3]["label"]}}</span></span>
@@ -6,26 +6,26 @@
   </div>
   <div class="navbar mx-auto">
     {% if prev %}
-    <a class="nav-link btn btn-xs btn-burntorange prev" data-prev="{{ prev }}" href="{{url_for('.r_passage', objectId=objectId, subreference=prev) }}">
+    <a class="nav-link btn btn-xs btn-vivid prev" data-prev="{{ prev }}" href="{{url_for('.r_passage', objectId=objectId, subreference=prev) }}">
       <i class="fas fa-angle-left"></i>
     </a>
     {% else %}
-    <a class="btn btn-xs btn-burntorange prev d-none" data-prev="NaN" href="{{url_for('.r_passage', objectId=objectId, subreference='NaN') }}">
+    <a class="btn btn-xs btn-vivid prev d-none" data-prev="NaN" href="{{url_for('.r_passage', objectId=objectId, subreference='NaN') }}">
       <i class="fas fa-angle-left"></i>
     </a>
     {% endif %}
     <div class="nav-link subreference-all">{{ subreference }}</div>
     {% if next %}
-    <a class="btn btn-xs btn-burntorange next" data-next="{{ next }}" href="{{url_for('.r_passage', objectId=objectId, subreference=next) }}">
+    <a class="btn btn-xs btn-vivid next" data-next="{{ next }}" href="{{url_for('.r_passage', objectId=objectId, subreference=next) }}">
         <i class="fas fa-angle-right"></i>
     </a>
     {% else %}
-    <a class="btn btn-xs btn-burntorange next d-none" data-next="NaN" href="{{url_for('.r_passage', objectId=objectId, subreference=next) }}">
+    <a class="btn btn-xs btn-vivid next d-none" data-next="NaN" href="{{url_for('.r_passage', objectId=objectId, subreference=next) }}">
         <i class="fas fa-angle-right"></i>
     </a>
     {% endif %}
   </div>
-  <div class="navbar-nav ml-auto bg-midnightblue alpheios-toolbar h-100">
+  <div class="navbar-nav ml-auto bg-dark alpheios-toolbar h-100">
     <button class="btn btn-icon btn-icon-md">
       <a href="#" id='alpheios-toolbar-component'>
         <svg width="30" height="27" viewBox="0 0 30 27" fill="none" xmlns="http://www.w3.org/2000/svg">

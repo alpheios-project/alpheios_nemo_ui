@@ -11,7 +11,7 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: $alpheioslightgray;
+  background-color: $alpheioscolorneutrallight;
 }
 
 body {
@@ -32,11 +32,11 @@ body {
 }
 
 a {
-  color: $turquoise;
+  color: $alpheioscolormuted;
 }
 
 a:hover {
-  color: $turquoise;
+  color: $alpheioscolormuted;
   font-weight: bold;
   text-decoration: underline;
 }
@@ -72,9 +72,9 @@ h5 {
 button.btn.btn-icon {
   height:44px;
   width: 44px;
-  color: white;
-  fill: white;
-  stroke: white;
+  color: $alpheioscolorneutrallightest;
+  fill: $alpheioscolorneutrallightest;
+  stroke: $alpheioscolorneutrallightest;
   border: none;
   padding: 0;
 }
@@ -95,34 +95,34 @@ button.btn.btn-icon.btn-icon-md {
 }
 
 button.btn.btn-icon a {
-  color: white;
+  color: $alpheioscolorneutrallightest;
 }
 
 button.btn.btn-icon a:hover {
-  color: $mustardyellow;
+  color: $alpheioscolorbright;
 }
 
 button.btn.btn-icon:hover {
-  color: $mustardyellow;
-  fill: $mustardyellow;
-  stroke: $mustardyellow;
-  background-color: $turquoise;
+  color: $alpheioscolorbright;
+  fill: $alpheioscolorbright;
+  stroke: $alpheioscolorbright;
+  background-color: $alpheioscolormuted;
 }
 
 button.btn.btn-icon svg {
   width: 44px;
   height: 44px;
-  fill: white;
-  stroke: white;
-  color: white;
+  fill: $alpheioscolorneutrallightest;
+  stroke: $alpheioscolorneutrallightest;
+  color: $alpheioscolorneutrallightest;
 }
 
 button.btn.btn-icon.btn-icon-md svg {
   width: 44px;
   height: 20px;
-  fill: white;
-  stroke: white;
-  color: white;
+  fill: $alpheioscolorneutrallightest;
+  stroke: $alpheioscolorneutrallightest;
+  color: $alpheioscolorneutrallightest;
 }
 
 button.btn.btn-icon span.icon-label {
@@ -130,22 +130,22 @@ button.btn.btn-icon span.icon-label {
 }
 
 footer.page-footer {
-  background-color: $turquoise;
-  color: $alpheiosblue;
+  background-color: $alpheioscolormuted;
+  color: $alpheioscolorlight;
 }
 
 footer.page-footer a {
-  color: $mustardyellow;
+  color: $alpheioscolorlight;
 }
 
 footer.page-footer a:hover {
-  color: $hoveryellow;
+  color: $alpheioscolorbrighthover;
   text-decoration: underline;
 }
 
 .navbar-dark .navbar-toggler-icon {
   background-image: url(../static/Menu-Icon.svg);
-  background-color: $turquoise;
+  background-color: $alpheioscolormuted;
 }
 .navbar {
   font-family: $font-family-sans-serif;
@@ -153,17 +153,17 @@ footer.page-footer a:hover {
 
 
 #mainnav {
-  background-color: $turquoise !important;
-  color: white !important;
+  background-color: $alpheioscolormuted !important;
+  color: $alpheioscolorneutrallightest !important;
 }
 
 #breadcrumb {
   text-transform: none;
   font-size: $font-size-base;
-  background-color: $midnightblue !important;
+  background-color: $alpheioscolordark !important;
   font-weight: bold;
   margin: 0 auto;
-  color: white;
+  color: $alpheioscolorneutrallightest;
 }
 
 #breadcrumb ol.breadcrumb {
@@ -171,31 +171,31 @@ footer.page-footer a:hover {
 }
 
 .breadcrumb {
-  background-color: $midnightblue;
+  background-color: $alpheioscolordark;
 }
 
 .breadcrumb-item a {
-  color: white;
+  color: $alpheioscolorneutrallightest;
 }
 
 .breadcrumb .active {
-  color: $alpheiosblue;
+  color: $alpheioscolorlight;
 }
 
 .breadcrumb-item+.breadcrumb-item::before {
-  color: white;
+  color: $alpheioscolorneutrallightest;
 }
 
 #textnav {
   font-size: $font-size-base;
-  background-color: $midnightblue !important;
+  background-color: $alpheioscolordark !important;
   font-weight: bold;
   margin: 0 auto;
 }
 
 .alert-info {
-  background-color: $mustardyellow;
-  color: $midnightblue;
+  background-color: $alpheioscolorbright;
+  color: $alpheioscolordark;
   font-weight: bold;
 }
 
@@ -211,7 +211,7 @@ footer.page-footer a:hover {
 
 #reading-container {
   min-height: 100%;
-  background-color: white;
+  background-color: $alpheioscolorneutrallightest;
   margin-left: 0;
   margin-right: 0;
 }
@@ -254,13 +254,13 @@ footer.page-footer a:hover {
   font-weight: thin;
   font-size: 0.5em;
   font-style: italic;
-  color:$alpheiosgray;
+  color:$alpheioscolorneutraldark;
 }
 
 .ex,
 .supplied,
 .unclear {
-  color: $alpheiosgray;
+  color: $alpheioscolorneutraldark;
 }
 
 .unclear {
@@ -281,27 +281,27 @@ span.w::before {
   width: 100%;
 }
 .algolia-autocomplete .aa-hint {
-  color: white;
+  color: $alpheioscolorneutrallightest;
 }
 .algolia-autocomplete .aa-dropdown-menu {
   width: 100%;
-  background-color: $midnightblue;
-  border: 1px solid $midnightblue;
+  background-color: $alpheioscolordark;
+  border: 1px solid $alpheioscolordark;
   border-radius: 10px;
   border-top: none;
 }
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
   cursor: pointer;
   padding: 5px 4px;
-  color: white;
+  color: $alpheioscolorneutrallightest;
 }
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion a {
-  color: $mustardyellow;
+  color: $alpheioscolorbright;
 }
 
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
   text-decoration: underline;
-  color: $mustardyellow;
+  color: $alpheioscolorbright;
 }
 .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
   font-weight: bold;
@@ -315,11 +315,11 @@ span.w::before {
 
 .popover-content {
   display: none;
-  color: $midnightblue;
+  color: $alpheioscolordark;
 }
 
 * [data-toggle='popover'] {
-  color: $turquoise;
+  color: $alpheioscolordark;
   cursor: pointer;
 }
 
