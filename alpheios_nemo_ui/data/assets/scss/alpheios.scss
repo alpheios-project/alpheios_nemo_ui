@@ -5,7 +5,7 @@
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
 body, html {
-  font-family: $font-family-serif;
+  font-family: $font-family-base;
   font-size: $font-size-base;
   line-height: $line-height-base;
   margin: 0;
@@ -43,29 +43,31 @@ a:hover {
 
 h1 {
   font-family: $font-family-serif;
-  font-size: $font-size-base * 1.625;
+  font-size: $h1-mobile-font-size;
+  font-weight: 800;
 }
 h2 {
-  font-family: $font-family-serif;
-  font-size: $font-size-base * 1.5;
+  font-family: $font-family-sans-serif;
+  font-size: $h2-mobile-font-size;
   font-weight: bold;
 }
 
 h3 {
   font-family: $font-family-sans-serif;
-  font-size: $font-size-base * 1.125;
-  font-weight: bold;
+  font-size: $h3-mobile-font-size;
+  font-weight: normal;
 }
 
 h4 {
   font-family: $font-family-serif;
-  font-size: $font-size-base * 1.125;
+  font-size: $h4-mobile-font-size;
 }
 
 h5 {
   font-weight: 200;
-  font-size: $font-size-base;
-  font-family: $font-family-serif;
+  font-size: $h5-mobile-font-size;
+  font-weight: 600;
+  font-family: $font-family-sans-serif;
   font-style: italic;
 }
 
@@ -226,7 +228,7 @@ footer.page-footer a:hover {
 
 .l {
   display: grid;
-  grid-template-columns: 30px minmax(0px,550px);
+  grid-template-columns: minmax(max-content,30px) minmax(0px,550px);
   align-items: end;
 }
 
@@ -308,6 +310,10 @@ span.w::before {
   font-style: normal;
 }
 
+.alpheios-nemo-toolbar {
+  display: none;
+}
+
 #fullsearch {
   margin-top:15px;
 }
@@ -327,8 +333,24 @@ span.w::before {
   font-size: small;
 }
 
-.l-cite {
+.l-cite, .section {
+  font-size: $h4-mobile-font-size;
+}
+
+.speaker {
   font-weight: bold;
+  font-style: italic;
+  font-size: $font-size-base;
+}
+
+
+.head {
+  font-weight: bold;
+  font-size: $h4-mobile-font-size;
+}
+
+.subreference {
+  font-size: $h2-mobile-font-size;
 }
 
 .subreference:after {
@@ -344,6 +366,28 @@ span.w::before {
  */
 
 @include media-breakpoint-up(lg) {
+  h1 {
+    font-size: $h1-font-size;
+  }
+
+  h2 {
+    font-size: $h2-font-size;
+    font-family: $font-family-serif;
+  }
+
+  h3 {
+    font-size: $h3-font-size;
+  }
+
+  h4 {
+    font-size: $h4-font-size;
+  }
+
+  h5 {
+    font-size: $h5-font-size;
+    font-weight: bold;
+    font-stye: italic;
+  }
 
   .box-shadow-bottom {
     -moz-box-shadow: 4px 0px 4px rgba(0, 0, 0, .25);
@@ -369,6 +413,14 @@ span.w::before {
   }
   .subreference:after {
     background: url(../static/Divider-Lg.svg) no-repeat center center;
+  }
+
+  .l-cite, .section, .subreference {
+    font-size: $h3-font-size;
+  }
+
+  .alpheios-nemo-toolbar {
+    display: block;
   }
 }
 

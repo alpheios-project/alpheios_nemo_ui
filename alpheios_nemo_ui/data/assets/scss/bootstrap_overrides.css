@@ -27,7 +27,7 @@ $theme-colors: (
   "light": $alpheioscolorlight
 );
 
-$font-family-base: $font-family-serif;
+$font-family-base: $font-family-sans-serif;
 $input-btn-font-family: $font-family-sans-serif;
 $btn-font-family: $font-family-sans-serif;
 
@@ -52,7 +52,7 @@ $dropdown-link-hover-bg: $alpheioscolorlight;
 $link-hover-color: $alpheioscolormuted;
 
 $font-size-base: 1rem;
-$line-height-base: 1.5;
+$line-height-base: 1.2;
 
 $h1-font-size:                $font-size-base * 2.25;
 $h2-font-size:                $font-size-base * 1.75;
@@ -63,8 +63,8 @@ $h6-font-size:                $font-size-base;
 
 $h1-mobile-font-size: $font-size-base * 1.625;
 $h2-mobile-font-size: $font-size-base * 1.5;
-$h3-mobile-font-size: $font-size-base * 1.125;
-$h4-mobile-font-size: $font-size-base * 1.1.25;
+$h3-mobile-font-size: $font-size-base * 1.25;
+$h4-mobile-font-size: $font-size-base * 1.125;
 $h5-mobile-font-size: $font-size-base;
 $h6-mobile-font-size: $font-size-base;
 

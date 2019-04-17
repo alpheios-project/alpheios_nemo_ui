@@ -25,7 +25,7 @@
       <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
           <div class="column entry-content">
-            <h2 class="subreference text-center">{{subreference}}</h2>
+            <div class="subreference text-center d-none">{{subreference}}</div>
               {% if cache_active %}
                   {% cache cache_time, cache_key %}{{ text_passage }} {% endcache %}
               {% else %}

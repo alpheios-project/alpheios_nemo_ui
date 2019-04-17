@@ -19,8 +19,7 @@
 --><!--
     Transforms an TEI XML to  XHTML (Alpheios Enhanced Text Display)
 -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:t="http://www.tei-c.org/ns/1.0" 
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
     xmlns:tei="http://www.tei-c.org/ns/1.0" version="1.0">
     <xsl:output method="html" indent="yes"/>
     <xsl:param name="doclang"/>
@@ -63,11 +62,6 @@
         </div>
     </xsl:template>
    
-    <xsl:template match="tei:head">
-        <h3>
-            <xsl:apply-templates/>
-        </h3>
-    </xsl:template>
     <xsl:template match="tei:speaker">
         <div class="speaker">
             <xsl:apply-templates/>
@@ -152,7 +146,7 @@
     <!-- from scaife -->
     <!-- glyphs -->
     <!-- <xsl:include href="teig.xsl" /> -->
-    <xsl:template match="//t:g">
+    <xsl:template match="//tei:g">
         <xsl:choose>
             <xsl:when test="@type = 'crux' or @type = 'cross'">
                 <xsl:text>†</xsl:text>
@@ -324,14 +318,14 @@
     <!-- edition -->
 
 
-    <xsl:template match="t:phr">
+    <xsl:template match="tei:phr">
         <xsl:element name="span">
             <xsl:attribute name="class">phr</xsl:attribute>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="t:quote">
+    <xsl:template match="tei:quote">
         <xsl:choose>
             <xsl:when test="@rend='blockquote'">
                 <blockquote class="blockquote">
@@ -345,12 +339,12 @@
         
     </xsl:template>
     
-    <xsl:template match="t:q">
+    <xsl:template match="tei:q">
         <xsl:text>"</xsl:text><xsl:apply-templates/><xsl:text>"</xsl:text>
     </xsl:template>
     
 
-    <xsl:template match="t:figure">
+    <xsl:template match="tei:figure">
         <div>Figure here!
             <!--<figure>
 <xsl:element name="img">
@@ -360,31 +354,31 @@
 </figure>--></div>
     </xsl:template>
 
-    <xsl:template match="t:lg">
+    <xsl:template match="tei:lg">
         <div class="lg">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
-    <xsl:template match="t:pb">
+    <xsl:template match="tei:pb">
         <div class="pb" data-alpheios-ignore="all">
             <xsl:value-of select="@n"/>
         </div>
     </xsl:template>
 
-    <xsl:template match="t:ab">
+    <xsl:template match="tei:ab">
         <p>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
 
-    <xsl:template match="t:foreign">
+    <xsl:template match="tei:foreign">
         <span lang="{@lang|@xml:lang}"><xsl:value-of select="."/></span>
     </xsl:template>
     
-    <xsl:template match="t:foreign[1]">
+    <xsl:template match="tei:foreign[1]">
         <xsl:choose>
-            <xsl:when test="preceding-sibling::t:ref[1][@cRef]">
+            <xsl:when test="preceding-sibling::tei:ref[1][@cRef]">
                 <span class="font-weight-bold" lang="{@lang|@xml:lang}"><xsl:value-of select="."/></span>
             </xsl:when>
             <xsl:otherwise>
@@ -394,22 +388,22 @@
     </xsl:template>
 
 
-    <xsl:template match="t:name[not(t:placeName)]">
+    <xsl:template match="tei:name[not(tei:placeName)]">
         <span class="name">
             <xsl:value-of select="."/>
         </span>
     </xsl:template>
 
-    <xsl:template match="t:name[t:placeName]">
+    <xsl:template match="tei:name[tei:placeName]">
         <a>
             <xsl:attribute name="class">placeName</xsl:attribute>
-            <xsl:value-of select="t:placeName"/>
+            <xsl:value-of select="tei:placeName"/>
         </a>
     </xsl:template>
 
-    <xsl:template match="t:lb"> </xsl:template>
+    <xsl:template match="tei:lb"> </xsl:template>
 
-    <xsl:template match="t:ex">
+    <xsl:template match="tei:ex">
         <span class="ex">
             <xsl:text>(</xsl:text>
             <xsl:value-of select="."/>
@@ -417,7 +411,7 @@
         </span>
     </xsl:template>
 
-    <xsl:template match="t:abbr">
+    <xsl:template match="tei:abbr">
         <span class="abbr">
             <xsl:text/>
             <xsl:value-of select="."/>
@@ -425,10 +419,10 @@
         </span>
     </xsl:template>
 
-    <xsl:template match="t:bibl">
+    <xsl:template match="tei:bibl">
         <xsl:choose>
-            <xsl:when test="t:author"/>
-            <xsl:when test="t:title"/>
+            <xsl:when test="tei:author"/>
+            <xsl:when test="tei:title"/>
             <xsl:otherwise>
                 <xsl:element name="cite">
                     <xsl:if test="@n">
@@ -442,7 +436,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="t:gap">
+    <xsl:template match="tei:gap">
         <span class="gap">
             <xsl:choose>
                 <xsl:when test="@quantity and @unit = 'character'">
@@ -456,43 +450,43 @@
         </span>
     </xsl:template>
 
-    <xsl:template match="t:head">
+    <xsl:template match="tei:head">
         <div class="head">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
-    <xsl:template match="t:head/t:title">
+    <xsl:template match="tei:head/tei:title">
         <div class="title">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
-    <xsl:template match="t:sp">
+    <xsl:template match="tei:sp">
         <div class="speak">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
-    <xsl:template match="t:said">
+    <xsl:template match="tei:said">
         <div class="said">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
-    <xsl:template match="t:label">
+    <xsl:template match="tei:label">
         <span class="label">
             <xsl:apply-templates/>
         </span>
     </xsl:template>
 
-    <xsl:template match="t:speaker">
+    <xsl:template match="tei:speaker">
         <span class="speaker">
             <xsl:apply-templates/>
         </span>
     </xsl:template>
 
-    <xsl:template match="t:supplied">
+    <xsl:template match="tei:supplied">
         <span>
             <xsl:attribute name="class">supplied supplied_<xsl:value-of select="@cert"
                 /></xsl:attribute>
@@ -505,7 +499,7 @@
         </span>
     </xsl:template>
 
-    <xsl:template match="t:note">
+    <xsl:template match="tei:note">
         <xsl:if test="*|text()">
             <xsl:choose>
                 <xsl:when test="ancestor::tei:blockquote or ancestor::tei:quote[@rend='blockquote'] or local-name(*[1]) ='bibl'">
@@ -533,13 +527,13 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="t:ab/t:ref[@cRef]">
+    <xsl:template match="tei:ab/tei:ref[@cRef]">
         <span class="cRef">◉</span>
         <xsl:text> </xsl:text>
         <xsl:apply-templates/>
     </xsl:template>
 
-    <xsl:template match="t:ab/t:ref[@target]">
+    <xsl:template match="tei:ab/tei:ref[@target]">
         <xsl:element name="ref-lower">
             <xsl:attribute name="urn">
                 <xsl:value-of select="@target"/>
@@ -548,7 +542,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="t:choice">
+    <xsl:template match="tei:choice">
         <span class="choice">
             <xsl:attribute name="title">
                 <xsl:value-of select="reg"/>
@@ -558,7 +552,7 @@
         </span>
     </xsl:template>
 
-    <xsl:template match="t:hi">
+    <xsl:template match="tei:hi">
         <xsl:choose>
             <xsl:when test="@rend = '#bold' or @rend = 'bold'">
                 <strong>
@@ -596,7 +590,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <!--<xsl:template match="t:ab>
+    <!--<xsl:template match="tei:ab>
     <xsl:element name="text-part">
       <xsl:attribute name="class">ab<xsl:attribute>
      <xsl:apply-templates/>
@@ -606,7 +600,7 @@
 
 
 
-    <xsl:template match="t:unclear">
+    <xsl:template match="tei:unclear">
         <span class="unclear">
             <xsl:value-of select="."/>
         </span>
