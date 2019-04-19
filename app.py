@@ -60,6 +60,7 @@ allowed_textgroups = [
     'phi0893', # Horace
     'phi0474', # Cicero
     'tlg0011', # Sophocles
+    'tlg0059', # Plato
 ]
 
 allowed_works = [
@@ -73,6 +74,7 @@ allowed_works = [
     'urn:cts:greekLit:tlg0032.tlg007', # xenophon cyropaedia
     'urn:cts:greekLit:tlg0032.tlg001', # xenophon hellenica
     'urn:cts:greekLit:tlg0032.tlg002', # xenophon memorabilia
+    'urn:cts:greekLit:tlg0059.tlg002', # Plato Apology
 ]
 
 allowed_editions = [
@@ -90,6 +92,7 @@ allowed_editions = [
     'urn:cts:greekLit:tlg0020.tlg002.alpheios-text-grc1',
     'urn:cts:greekLit:tlg0020.tlg001.alpheios-text-grc1',
     'urn:cts:greekLit:tlg0011.tlg003.alpheios-text-grc1',
+    'urn:cts:greekLit:tlg0059.tlg002.alpheios-text-grc1',
 ]
 
 excluded_editions = [
