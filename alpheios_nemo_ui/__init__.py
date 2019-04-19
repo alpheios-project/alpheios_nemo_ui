@@ -240,10 +240,12 @@ class AlpheiosNemoUI(PluginPrototype):
         text = self.nemo.get_passage(objectId=objectId, subreference=subreference)
         passage = self.nemo.transform(text, text.export(Mimetypes.PYTHON.ETREE), objectId)
         prev, next = self.nemo.get_siblings(objectId, subreference, text)
+        newLevel = self.new_level(subreference,prev)
         return {
             "template": "main::text.html",
             "objectId": objectId,
             "subreference": subreference,
+            "new_level": newLevel,
             "collections": {
                 "current": {
                     "label": collection.get_label(lang),
@@ -287,9 +289,11 @@ class AlpheiosNemoUI(PluginPrototype):
         text = self.nemo.get_passage(objectId=objectId, subreference=subreference)
         passage = self.nemo.transform(text, text.export(Mimetypes.PYTHON.ETREE), objectId)
         prev, next = self.nemo.get_siblings(objectId, subreference, text)
+        newLevel = self.new_level(subreference,prev)
         data = {
             "objectId": objectId,
             "subreference": subreference,
+            "new_level": newLevel,
             "collections": {
                 "current": {
                     "label": collection.get_label(lang),
@@ -441,6 +445,22 @@ class AlpheiosNemoUI(PluginPrototype):
             if member.get_label()
         ]
 
+    def new_level(self,subreference,prev):
+        curr_first = subreference.split('-')[0]
+        curr_levels = curr_first.split('.')
+        if prev and len(curr_levels)>1:
+            prev_first = prev.split('-')[0]
+            prev_levels = prev_first.split('.')
+            if len(prev_levels) == len(curr_levels) and curr_levels[-2] != prev_levels[-2]:
+                curr_levels.pop()
+                return '.'.join(curr_levels)
+            else:
+                return None
+        elif len(curr_levels)>1:
+            curr_levels.pop()
+            return '.'.join(curr_levels)
+        else:
+            return None
 
 def scheme_grouper(text, getreffs):
     level = len(text.citation)
@@ -452,7 +472,7 @@ def scheme_grouper(text, getreffs):
     if str(text.id) == "urn:cts:latinLit:stoa0040.stoa062.opp-lat1":
         level, groupby = 1, 2
     elif types == ["book", "poem", "line"]:
-        level, groupby = 2, 1
+        level, groupby = 2, 1, 30
     elif types == ["book", "line"]:
         level, groupby = 2, 30
     elif types == ["book", "chapter"]:
