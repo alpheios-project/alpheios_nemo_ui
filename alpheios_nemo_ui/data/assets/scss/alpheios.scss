@@ -222,29 +222,31 @@ footer.page-footer a:hover {
   width: 100%;
 }
 
+.entry-content {
+  max-width: 550px
+}
+
 .entry-title {
   font-style: italic;
 }
 
 .l {
   display: grid;
-  grid-template-columns: minmax(max-content,30px) minmax(0px,550px);
+  grid-template-columns: minmax(max-content,30px) 1fr;
+  column-gap: 1em;
   align-items: end;
 }
 
 .milestone.tale {
+  font-family: $font-family-serif;
+  font-size: $h4-mobile-font-size;
   font-weight: bold;
-  padding-top: 1em;
+  text-align: center;
+  padding-top: 1.2em;
 }
 
 .milestone.para {
   min-height: 1em;
-}
-
-.milestone.chapter {
-  display: inline-block;
-  padding-right: 1em;
-  font-weight: bold;
 }
 
 .p {
@@ -341,6 +343,9 @@ span.w::before {
   font-weight: bold;
   font-style: italic;
   font-size: $font-size-base;
+  text-align: center;
+  display: block;
+  padding-top: 1.2em;
 }
 
 
@@ -349,11 +354,12 @@ span.w::before {
   font-size: $h4-mobile-font-size;
 }
 
-.subreference {
+.newlevel, .milestone.chapter {
   font-size: $h2-mobile-font-size;
+  text-align: center;
 }
 
-.subreference:after {
+.newlevel:after, .milestone.chapter:after {
   content: "";
   display: block;
   background: url(../static/Divider-Sm.svg) no-repeat center center;
@@ -411,11 +417,11 @@ span.w::before {
   button.btn.btn-icon span.icon-label {
     display:inline;
   }
-  .subreference:after {
+  .newlevel:after, .milestone.chapter:after {
     background: url(../static/Divider-Lg.svg) no-repeat center center;
   }
 
-  .l-cite, .section, .subreference {
+  .l-cite, .section, .newlevel, .milestone.chapter, milestone.tale {
     font-size: $h3-font-size;
   }
 

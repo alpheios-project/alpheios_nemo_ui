@@ -75,14 +75,7 @@
                     <xsl:value-of select="@xml:lang"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:if test="@n">
-                <xsl:variable name="citeshow">
-                    <xsl:if test="number(@n) mod 5 != 0">invisible</xsl:if>
-                </xsl:variable>
-                <div class="l-cite {$citeshow}">
-                    <xsl:value-of select="@n"/>
-                </div>    
-            </xsl:if>
+            <xsl:call-template name="cite"/>
             <div class="l-text">
                 <xsl:apply-templates/>
             </div>
@@ -100,9 +93,6 @@
             <div class="p-text">
                 <xsl:apply-templates/>
             </div>
-            <div class="p-cite">
-                <xsl:value-of select="@n"/>
-            </div>
         </div>
     </xsl:template>
     
@@ -116,9 +106,6 @@
             </xsl:if>
             <div class="seg-text">
                 <xsl:apply-templates/>
-            </div>
-            <div class="seg-cite">
-                <xsl:value-of select="@n"/>
             </div>
         </div>
     </xsl:template>
@@ -837,6 +824,17 @@
             <span class="source-desc">
                 <xsl:value-of select="$sourceText"/>
             </span>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template name="cite">
+        <xsl:if test="@n">
+         <xsl:variable name="citeshow">
+             <xsl:if test="local-name(.) = 'l' and number(@n) mod 5 != 0">invisible</xsl:if>
+         </xsl:variable>
+         <div class="{concat(local-name(.),'-cite')} {$citeshow}">
+             <xsl:value-of select="@n"/>
+         </div>    
         </xsl:if>
     </xsl:template>
 </xsl:stylesheet>

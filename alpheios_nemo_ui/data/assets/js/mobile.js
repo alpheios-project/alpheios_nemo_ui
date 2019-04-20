@@ -49,7 +49,7 @@ function updatePrev(prev) {
 function showNext() {
   let data = queue.pop();
   if (data) {
-    let oldref = $('.subreference').text().split(/-/);
+    let oldref = $('.subreference-all').text().split(/-/);
     let oldstart= oldref[0]
     let newref = data.subreference.split(/-/);
     let newend
@@ -60,7 +60,10 @@ function showNext() {
         newend = newref[1]
     }
     $('.subreference-all').text(`${oldstart}-${newend}`)
-    $('.entry-content').append(`<div class="subreference text-center">${data.subreference}</div>${data.text_passage}`);
+    if (data.new_level) {
+      $('.entry-content').append(`<div class="newlevel">${data.new_level}</div>`)
+    }
+    $('.entry-content').append(data.text_passage)
     updateNext(data.next);
     updatePrev(data.prev);
     preloadNext();
