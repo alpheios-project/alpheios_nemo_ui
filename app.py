@@ -1,3 +1,4 @@
+#!"C:/Users/irish/AppData/Local/Programs/Python/Python37-32/python.exe"
 # -*- coding: utf-8 -*-
 
 import os
