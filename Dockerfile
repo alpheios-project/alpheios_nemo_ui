@@ -6,9 +6,9 @@ RUN apk add --no-cache \
 
 # Sets up locales to avoid decode issue in python
 ENV LANG C.UTF-8
-ARG appkey=mysecret
-ARG clientid=iT75HkBHThA4QdFwFoZRofLC41vVyvAt
-ARG clientsecret=8BgJVs5sgyI5w10hXTY-D4Dv-HoCy-DxnXHJYDFISwX47wwtsK5oqboNmAhWBFQ3
+ARG appkey=dummyappkey
+ARG clientid=dummyclientid
+ARG clientsecret=dummyclientsecret
 ARG proxybase=http://dev.alpheios.net:5000
 
 WORKDIR /code/
