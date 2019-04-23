@@ -1,6 +1,4 @@
 {% extends "main::container.html" %}
-{% include "alpheios::navlogin.html" %}
-{% include "alpheios::navreader.html" %}
 
 {% macro source_passage() %}
   <div class="alpheios-text-source d-none">
@@ -46,6 +44,8 @@
 {% endmacro %}
 
 {% block article %}
+  {% include "alpheios::navlogin.html" %}
+  {% include "alpheios::navreader.html" %}
     {{ show_passage(text_passage, subreference, source=source_passage(), footer=default_footer()) }}
 {% endblock %}
 

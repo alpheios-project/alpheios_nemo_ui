@@ -1,20 +1,20 @@
 {% extends "main::container.html" %}
-{% include "alpheios::navlogin.html" %}
-{% include "alpheios::navreferences.html" %}
+{% block article %}
+  {% include "alpheios::navlogin.html" %}
+  {% include "alpheios::navreferences.html" %}
 
-{% import "alpheios::macros.html" as macros %}
+  {% import "alpheios::macros.html" as macros %}
 
-{% include "alpheios::breadcrumbreferences.html" %}
-<div class="d-flex" id="reading-container">
-  {% block article %}
-  <article class="nav container">
-      <section class="d-flex flex-wrap">
-          {% if cache_active %}
-              {% cache cache_time, cache_key %}{{ macros.hierarchical_dispatcher(objectId, reffs, citation) }} {% endcache %}
-          {% else %}
-              {{ macros.hierarchical_dispatcher(objectId, reffs, citation) }}
-          {% endif %}
-      </section>
-  </article>
-  {% endblock %}
-</div>
+  {% include "alpheios::breadcrumbreferences.html" %}
+  <div class="d-flex" id="reading-container">
+    <article class="nav container">
+        <section class="d-flex flex-wrap">
+            {% if cache_active %}
+                {% cache cache_time, cache_key %}{{ macros.hierarchical_dispatcher(objectId, reffs, citation) }} {% endcache %}
+            {% else %}
+                {{ macros.hierarchical_dispatcher(objectId, reffs, citation) }}
+            {% endif %}
+        </section>
+    </article>
+  </div>
+{% endblock %}
