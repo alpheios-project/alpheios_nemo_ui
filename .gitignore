@@ -109,3 +109,7 @@ env.js
 
 # texts
 texts
+
+#specific for win
+._docker_source
+._docker_win
