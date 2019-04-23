@@ -40,6 +40,7 @@ class AlpheiosNemoUI(PluginPrototype):
     ]
     STATICS = [
         resource_filename("alpheios_nemo_ui", "data/assets/images/logo.png"),
+        resource_filename("alpheios_nemo_ui", "data/assets/images/alpheios-logo.svg"),
         resource_filename("alpheios_nemo_ui", "data/assets/images/Alpheios-Logo-White.png"),
         resource_filename("alpheios_nemo_ui", "data/assets/images/Menu-Icon.svg"),
         resource_filename("alpheios_nemo_ui", "data/assets/images/Divider-Lg.svg"),

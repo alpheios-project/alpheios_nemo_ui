@@ -1,13 +1,14 @@
 {% extends "main::container.html" %}
+{% include "alpheios::navlogin.html" %}
 {% include "alpheios::navcollection.html" %}
 
 {% include "alpheios::breadcrumb.html" %}
 <div class="d-flex" id="reading-container">
   {% block article %}
-  <article id="browse-container">
-      <header>
+  <article id="browse-container" class="collection-browse-container">
+      <header class="collection-browse-header">
           {% if collections.current %}
-            <h3>
+            <h3  class="collection-browse-header-title">
             <span lang="{{collections.current.label_lang}}">{{collections.current.label}}</span>
             </h3>
             {% if collections.current.class == 'XmlCtsTextgroupMetadata' %}
@@ -16,14 +17,14 @@
               <p><i>Select an author</i></p>
             {% endif %}
           {% else %}
-            <h3>
+            <h3  class="collection-browse-header-title">
             Language
             </h3>
             <p><i>Select a language</i></p>
           {% endif %}
       </header>
       <section class="card-columns">
-          <ul>
+          <ul class="collection-browse-cards">
           {% if collections.types|length > 0 %}
             {% for type in collections.types %}
               <li class="card">
@@ -56,16 +57,19 @@
                     <a class="card-link" href="{{url_for('.r_first_passage', objectId=coll.id)}}">Read</a>
                 </li>
                 {% else %}
-                <li class="card">
-                    <a class="card-link" href="{{url_for('.r_collection', objectId=coll.id)}}">{{ coll.label }} ({{coll.size}})</a>
+                <li class="collection-browse-card-item">
+                    <a class="card-link collection-browse-card-item-link" href="{{url_for('.r_collection', objectId=coll.id)}}">
+                      <span>{{ coll.label }} ({{coll.size}})</span>
+                      <span class="collection-browse-card-item-icon">{% include "alpheios::icons/Right-caret.svg" %}</span>
+                    </a>
                 </li>
                 {% endif %}
             {% endfor %}
           {% endif %}
           </ul>
       </section>
-      <section>
-        <button class="btn btn-large btn-outline-muted">© Copyright Info</button>
+      <section class="collection-browse-copyright">
+        <button class="btn btn-large btn-outline-muted copyright-button">© Copyright Info</button>
       </section>
   </article>
   {% endblock %}
