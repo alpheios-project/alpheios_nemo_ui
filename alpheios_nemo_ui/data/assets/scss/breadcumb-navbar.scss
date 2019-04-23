@@ -1,0 +1,86 @@
+.breadcumb-navbar {
+    overflow: hidden;
+    display: block;
+    text-align: center;
+
+    .nav-link-current-text {
+        font-size: 14px;
+        color: $alpheioscolorvivid;
+        font-weight: normal;
+        padding: 0;
+
+        span {
+            display: inline-block;
+            vertical-align: top;
+            position: relative;
+        }
+
+        .nav-link-current-text-icon svg {
+            fill: $alpheioscolorvivid;
+            width: 15px;
+            height: 15px;
+            vertical-align: top;
+            position: relative;
+            top: 3px;
+        }
+    }
+
+    .navbar-section-ref {
+        display: flex;
+        text-align: center;
+        padding: 0.5rem 0;
+        
+        .nav-link {
+            display: inline-block;
+            vertical-align: middle;
+            padding: 0;
+            font-size: 16px;
+
+            &.subreference-all {
+                padding: 0 1rem;
+            }
+    
+        }
+
+        svg {
+            width: 15px;
+            height: 15px;
+            fill: $alpheioscolorvivid;
+        }
+    }
+
+    .alpheios-nemo-toolbar {
+        max-height: 48px;
+        min-width: 254px;
+    }
+}
+
+@include media-breakpoint-up(sm) {
+    .breadcumb-navbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .breadcumb-navbar {
+        padding: 0.5rem 1rem 0.5rem 100px;
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    .breadcumb-navbar {
+        padding: 0 0 0 100px;
+        .alpheios-nemo-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-link-current-text {
+            font-size: 18px;
+        }
+    }
+}

@@ -1,13 +1,18 @@
-<nav class="navbar navbar-light bg-white box-shadow-bottom navbar-secondary">
-  <div class="navbar-nav mr-auto">
-    <div class="nav-link h4">
-        <span><span class="current">{{breadcrumbs[-1]["title"]}}</span><span class="spacer">-</span><span class="parent">{{breadcrumbs[-3]["label"]}}</span></span>
+<nav class="navbar bg-white shadow navbar-secondary breadcumb-navbar">
+  <div class="navbar-nav">
+    <div class="nav-link nav-link-current-text">
+        <span>
+          <span class="nav-link-current-text-icon">{% include "alpheios::icons/Bibliography-Source-Icon.svg" %}</span>
+          <span class="current">{{breadcrumbs[-1]["title"]}}</span>
+          <span class="spacer">-</span>
+          <span class="parent">{{breadcrumbs[-3]["label"]}}</span>
+        </span>
     </div>
   </div>
-  <div class="navbar mx-auto">
+  <div class="navbar navbar-section-ref">
     {% if prev %}
     <a class="nav-link btn btn-xs btn-vivid prev" data-prev="{{ prev }}" href="{{url_for('.r_passage', objectId=objectId, subreference=prev) }}">
-      <i class="fas fa-angle-left"></i>
+        {% include "alpheios::icons/Left-caret.svg" %}
     </a>
     {% else %}
     <a class="btn btn-xs btn-vivid prev d-none" data-prev="NaN" href="{{url_for('.r_passage', objectId=objectId, subreference='NaN') }}">
@@ -16,16 +21,16 @@
     {% endif %}
     <div class="nav-link subreference-all">{{ subreference }}</div>
     {% if next %}
-    <a class="btn btn-xs btn-vivid next" data-next="{{ next }}" href="{{url_for('.r_passage', objectId=objectId, subreference=next) }}">
-        <i class="fas fa-angle-right"></i>
+    <a class="nav-link btn btn-xs btn-vivid next" data-next="{{ next }}" href="{{url_for('.r_passage', objectId=objectId, subreference=next) }}">
+        {% include "alpheios::icons/Right-Caret.svg" %}
     </a>
     {% else %}
-    <a class="btn btn-xs btn-vivid next d-none" data-next="NaN" href="{{url_for('.r_passage', objectId=objectId, subreference=next) }}">
+    <a class="nav-link btn btn-xs btn-vivid next d-none" data-next="NaN" href="{{url_for('.r_passage', objectId=objectId, subreference=next) }}">
         <i class="fas fa-angle-right"></i>
     </a>
     {% endif %}
   </div>
-  <div class="navbar-nav ml-auto bg-dark alpheios-nemo-toolbar h-100">
+  <div class="navbar-nav bg-dark alpheios-nemo-toolbar h-100">
     <button class="btn btn-icon btn-icon-md">
       <a href="#" id='alpheios-toolbar-component'>
         <svg width="30" height="27" viewBox="0 0 30 27" fill="none" xmlns="http://www.w3.org/2000/svg">
