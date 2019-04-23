@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Alpheios Texts</title>
-    {% block metadata %}
-      {% include "main::metadata.html" %}
-    {% endblock %}
-
     {% for filename, directory in assets["css"].items() %}
       {% if directory %}<link rel="stylesheet" href="{{url_for('.secondary_assets', filetype='css', asset=filename)}}">
       {% else %}<link rel="stylesheet" href="{{ filename }}">

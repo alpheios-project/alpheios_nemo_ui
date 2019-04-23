@@ -1,10 +1,10 @@
 {% extends "main::container.html" %}
+{% block article %}
 {% include "alpheios::navlogin.html" %}
 {% include "alpheios::navcollection.html" %}
 
 {% include "alpheios::breadcrumb.html" %}
 <div class="d-flex" id="reading-container">
-  {% block article %}
   <article id="browse-container" class="collection-browse-container">
       <header class="collection-browse-header">
           {% if collections.current %}
@@ -72,5 +72,5 @@
         <button class="btn btn-large btn-outline-muted copyright-button">© Copyright Info</button>
       </section>
   </article>
-  {% endblock %}
 </div>
+{% endblock %}
