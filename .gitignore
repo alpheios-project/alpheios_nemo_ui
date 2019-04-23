@@ -111,5 +111,5 @@ env.js
 texts
 
 #specific for win
-._docker_source
-._docker_win
+._docker_source/
+._docker_win/
