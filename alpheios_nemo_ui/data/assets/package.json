@@ -11,8 +11,10 @@
     "lint": "eslint --fix src/**/*.js"
   },
   "dependencies": {
+    "alpheios-node-build": "github:alpheios-project/node-build",
     "bootstrap": "^4.1.3",
-    "alpheios-node-build": "github:alpheios-project/node-build"
+    "webpack-pwa-manifest": "*",
+    "workbox-webpack-plugin": "*"
   },
   "devDependencies": {}
 }

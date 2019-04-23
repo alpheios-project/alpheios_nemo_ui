@@ -25,4 +25,6 @@ ENV ALPHEIOS_NEMO_APPKEY=${appkey}
 ENV ALPHEIOS_NEMO_AUTH0_CLIENTID=${clientid}
 ENV ALPHEIOS_NEMO_AUTH0_CLIENTSECRET=${clientsecret}
 ENV ALPHEIOS_NEMO_PROXYBASE=${proxybase}
+
+RUN chmod 644 app.py
 CMD ["python", "app.py"]
