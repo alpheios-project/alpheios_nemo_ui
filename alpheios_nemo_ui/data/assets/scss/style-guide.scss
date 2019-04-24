@@ -8,20 +8,77 @@
     }
 }
 
+@mixin aplheios-h4() {
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+}
+
+@mixin aplheios-body() {
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+}
+
 @mixin aplheios-h1-mobile() {
     font-size: 22px;
     font-weight: black;
     font-style: normal;
 }
 
-@mixin aplheios-button-text() {
-    font-size: 16px;
-    font-weight: bold;
-    text-decoration: none;
+@mixin alpheios-icon($width, $height) {
+    svg {
+        width: $width;
+        height: $height;   
+        display: inline-block;
+    }
 }
 
+@mixin hidelabelXS() {
+    .toolbar-button-text {
+        display: none;
+        @include media-breakpoint-up(sm) {
+            display: inline-block;
+        }
+    }
+}
 
-@mixin alpheios-menu-button-neutral() {
+@mixin alpheios-button($iconwidth, $iconheight) {
+    border: none;
+    height: auto;
+    width: auto;
+    text-decoration: none;
+    position: relative;
+
+    &:hover, 
+    &:active,
+    &:focus {
+        box-shadow: none;
+        text-decoration: none;
+        font-weight: inherit;
+    }
+
+    .toolbar-button-icon {
+        display: inline;
+        position: relative;
+        @include alpheios-icon($iconwidth, $iconheight);
+    }
+
+    .toolbar-button-text {
+        display: inline;
+        position: relative;
+        @include aplheios-body();
+    }    
+
+    @include media-breakpoint-up(sm) {
+        .toolbar-button-icon,
+        .toolbar-button-text {
+            display: inline-block;
+        }
+    }
+}
+
+@mixin alpheios-neutral() {
     color: $alpheioscolorneutrallightest;
     svg {
         fill: $alpheioscolorneutrallightest;
@@ -34,22 +91,7 @@
     }
 }
 
-@mixin alpheios-menu-button-neutral-bright() {
-    color: $alpheioscolorneutrallightest;
-    svg {
-        fill: $alpheioscolorneutrallightest;
-        stroke: $alpheioscolorneutrallightest;
-    }
-    &:hover {
-        color: $alpheioscolorbright;
-        svg {
-            fill: $alpheioscolorbright;
-            stroke: $alpheioscolorbright;
-        }
-    }
-}
-
-@mixin alpheios-menu-button-vivid() {
+@mixin alpheios-vivid() {
     color: $alpheioscolorvivid;
     svg {
         fill: $alpheioscolorvivid;
@@ -60,6 +102,21 @@
         svg {
             fill: $alpheioscolorvividhover;
             stroke: $alpheioscolorvividhover;
+        }
+    }
+}
+
+@mixin alpheios-neutral-bright() {
+    color: $alpheioscolorneutrallightest;
+    svg {
+        fill: $alpheioscolorneutrallightest;
+        stroke: $alpheioscolorneutrallightest;
+    }
+    &:hover {
+        color: $alpheioscolorbright;
+        svg {
+            fill: $alpheioscolorbright;
+            stroke: $alpheioscolorbright;
         }
     }
 }

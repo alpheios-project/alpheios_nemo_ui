@@ -1,78 +1,41 @@
-@mixin alpheios-menu-icon($width, $height) {
-    svg {
-        width: $width;
-        height: $height;   
-        display: inline-block;
-        vertical-align: middle;
-    }
-}
-
-@mixin alpheios-menu-button() {
-    border: none;
-    height: auto;
-    width: auto;
-    &:hover, 
-    &:active,
-    &:focus {
-        box-shadow: none;
-    }
-    .span-label {
-        display: none;
-        
-        vertical-align: middle;
-        padding-left: 5px;
-        @include aplheios-button-text();
-
-        @include media-breakpoint-up(sm) {
-            display: inline-block;
-        }
-    }
-}
-
 .main-navbar {
     padding-top: 15px;
     padding-bottom: 15px;
 
-    .navbar-toggler {
-        padding: 0 15px 0 0;
-        @include alpheios-menu-button();
-        @include alpheios-menu-button-neutral();
-        .navbar-toggler-menu-icon {
-            @include alpheios-menu-icon(30px, 20px);
-        }
-    }
-
-    .main-navbar-text {
-        @include aplheios-h3();
-        color: $alpheioscolorneutrallightest;
-        padding: 0;
-        margin: 0;
-    }
-
-    .btn.main-navbar-btn {
-        @include alpheios-menu-button();
-        @include alpheios-menu-button-neutral-bright();
-        padding-right: 0;
-        padding-left: 20px;
-        .main-navbar-btn-icon {
-            @include alpheios-menu-icon(22px, 22px);
-            @include media-breakpoint-up(sm) {
-                @include alpheios-menu-icon(20px, 20px);
-            }
-        }
-    }
-}
-
-@include media-breakpoint-up(sm) {
-    .main-navbar {
+    @include media-breakpoint-up(sm) {
         padding-top: 13px;
         padding-bottom: 13px;
     }
-}
-
-@include media-breakpoint-up(md) {
-    .main-navbar {
+    
+    @include media-breakpoint-up(md) {
         padding-left: 120px;
         padding-right: 100px;
     }
+}    
+.navbar-toggler {
+    padding: 0 15px 0 0;
+    @include alpheios-button(30px, 20px);
+    @include alpheios-neutral();
 }
+
+.main-navbar-text {
+    @include aplheios-h3();
+    color: $alpheioscolorneutrallightest;
+    padding: 0;
+    margin: 0;
+}
+
+.btn.main-navbar-btn {
+    @include alpheios-button(22px, 22px);
+    @include alpheios-neutral-bright();
+    @include hidelabelXS();
+    padding-right: 0;
+    padding-left: 20px;
+    
+    .toolbar-button-icon {
+        @include media-breakpoint-up(sm) {
+            @include alpheios-icon(20px, 20px);
+        }
+    }
+}
+
