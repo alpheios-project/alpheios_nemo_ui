@@ -1,20 +1,120 @@
+@mixin aplheios-h3() {
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+
+    @include media-breakpoint-up(md) {
+        font-size: 22px;
+    }
+}
+
+@mixin aplheios-button-text() {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+@mixin alpheios-menu-icon($width, $height) {
+    svg {
+        width: $width;
+        height: $height;   
+        display: inline-block;
+    }
+}
+
+@mixin alpheios-menu-button() {
+    border: none;
+    height: auto;
+    width: auto;
+    &:hover, 
+    &:active,
+    &:focus {
+        box-shadow: none;
+    }
+
+    .span-icon {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .span-label {
+        display: none;
+        
+        vertical-align: middle;
+        padding-left: 5px;
+        @include aplheios-button-text();
+
+        @include media-breakpoint-up(sm) {
+            display: inline-block;
+        }
+    }
+}
+
+@mixin alpheios-menu-button-neutral() {
+    color: $alpheioscolorneutrallightest;
+    svg {
+        fill: $alpheioscolorneutrallightest;
+    }
+    &:hover {
+        color: $alpheioscolorneutraldark;
+        svg {
+            fill: $alpheioscolorneutraldark;
+        }
+    }
+}
+
+@mixin alpheios-menu-button-neutral-bright() {
+    color: $alpheioscolorneutrallightest;
+    svg {
+        fill: $alpheioscolorneutrallightest;
+        stroke: $alpheioscolorneutrallightest;
+    }
+    &:hover {
+        color: $alpheioscolorbright;
+        svg {
+            fill: $alpheioscolorbright;
+            stroke: $alpheioscolorbright;
+        }
+    }
+}
+
+
+
 .main-navbar {
+    padding-top: 19px;
+    padding-bottom: 19px;
+
+    .navbar-toggler {
+        padding: 0 15px 0 0;
+        @include alpheios-menu-button();
+        @include alpheios-menu-button-neutral();
+        .navbar-toggler-menu-icon {
+            @include alpheios-menu-icon(30px, 20px);
+        }
+    }
+
     .main-navbar-text {
-        font-size: 1.2rem;
-        font-weight: bold;
+        @include aplheios-h3();
         color: $alpheioscolorneutrallightest;
-        padding: 0.5rem;
+        padding: 0;
         margin: 0;
+    }
+
+    .btn.main-navbar-btn {
+        @include alpheios-menu-button();
+        @include alpheios-menu-button-neutral-bright();
+        padding-right: 0;
+        padding-left: 20px;
+        .main-navbar-btn-icon {
+            @include alpheios-menu-icon(22px, 22px);
+            @include media-breakpoint-up(sm) {
+                @include alpheios-menu-icon(20px, 20px);
+            }
+        }
     }
 }
 
 @include media-breakpoint-up(md) {
     .main-navbar {
-        padding-left: 100px;
+        padding-left: 120px;
         padding-right: 100px;
-
-        .main-navbar-text {
-            font-size: 1.5rem;
-        }
     }
 }
