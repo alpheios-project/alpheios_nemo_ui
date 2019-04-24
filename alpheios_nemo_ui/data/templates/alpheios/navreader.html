@@ -4,14 +4,14 @@
     {% set args = { 'objectId': objectId } %}
     <div class="navbar-text main-navbar-text">Alpheios Reader</div>
     <div class="ml-auto d-inline w-20">
-      <button class="btn btn-icon main-navbar-btn" data-toggle="modal" data-target="#helpPopup">
-        <span class="main-navbar-btn-icon span-icon">{% include "alpheios::icons/Help-icon.svg" %}</span>
-        <span class="main-navbar-btn-label span-label">Help</span>
+      <button class="btn main-navbar-btn" data-toggle="modal" data-target="#helpPopup">
+        <span class="toolbar-button-icon">{% include "alpheios::icons/Help-icon.svg" %}</span>
+        <span class="toolbar-button-text">Help</span>
       </button>
 
-        <a href="{{url_for('.r_references',**args) }}" class="btn btn-icon main-navbar-btn">
-          <span class="main-navbar-btn-icon span-icon">{% include "alpheios::icons/Browse-Passages-Icon.svg" %}</span>
-          <span class="main-navbar-btn-label span-label">Browse</span>
+        <a href="{{url_for('.r_references',**args) }}" class="btn main-navbar-btn">
+          <span class="toolbar-button-icon">{% include "alpheios::icons/Browse-Passages-Icon.svg" %}</span>
+          <span class="toolbar-button-text">Browse</span>
         </a>
     </div>
 
