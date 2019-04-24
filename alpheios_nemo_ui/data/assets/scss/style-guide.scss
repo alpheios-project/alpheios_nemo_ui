@@ -1,0 +1,65 @@
+@mixin aplheios-h3() {
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+
+    @include media-breakpoint-up(md) {
+        font-size: 22px;
+    }
+}
+
+@mixin aplheios-h1-mobile() {
+    font-size: 22px;
+    font-weight: black;
+    font-style: normal;
+}
+
+@mixin aplheios-button-text() {
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+@mixin alpheios-menu-button-neutral() {
+    color: $alpheioscolorneutrallightest;
+    svg {
+        fill: $alpheioscolorneutrallightest;
+    }
+    &:hover {
+        color: $alpheioscolorneutraldark;
+        svg {
+            fill: $alpheioscolorneutraldark;
+        }
+    }
+}
+
+@mixin alpheios-menu-button-neutral-bright() {
+    color: $alpheioscolorneutrallightest;
+    svg {
+        fill: $alpheioscolorneutrallightest;
+        stroke: $alpheioscolorneutrallightest;
+    }
+    &:hover {
+        color: $alpheioscolorbright;
+        svg {
+            fill: $alpheioscolorbright;
+            stroke: $alpheioscolorbright;
+        }
+    }
+}
+
+@mixin alpheios-menu-button-vivid() {
+    color: $alpheioscolorvivid;
+    svg {
+        fill: $alpheioscolorvivid;
+        stroke: $alpheioscolorvivid;
+    }
+    &:hover {
+        color: $alpheioscolorvividhover;
+        svg {
+            fill: $alpheioscolorvividhover;
+            stroke: $alpheioscolorvividhover;
+        }
+    }
+}

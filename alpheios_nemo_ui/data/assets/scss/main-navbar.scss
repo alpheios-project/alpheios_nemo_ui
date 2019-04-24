@@ -1,23 +1,9 @@
-@mixin aplheios-h3() {
-    font-size: 20px;
-    font-weight: normal;
-    font-style: normal;
-
-    @include media-breakpoint-up(md) {
-        font-size: 22px;
-    }
-}
-
-@mixin aplheios-button-text() {
-    font-size: 16px;
-    font-weight: bold;
-}
-
 @mixin alpheios-menu-icon($width, $height) {
     svg {
         width: $width;
         height: $height;   
         display: inline-block;
+        vertical-align: middle;
     }
 }
 
@@ -29,11 +15,6 @@
     &:active,
     &:focus {
         box-shadow: none;
-    }
-
-    .span-icon {
-        display: inline-block;
-        vertical-align: middle;
     }
     .span-label {
         display: none;
@@ -48,39 +29,9 @@
     }
 }
 
-@mixin alpheios-menu-button-neutral() {
-    color: $alpheioscolorneutrallightest;
-    svg {
-        fill: $alpheioscolorneutrallightest;
-    }
-    &:hover {
-        color: $alpheioscolorneutraldark;
-        svg {
-            fill: $alpheioscolorneutraldark;
-        }
-    }
-}
-
-@mixin alpheios-menu-button-neutral-bright() {
-    color: $alpheioscolorneutrallightest;
-    svg {
-        fill: $alpheioscolorneutrallightest;
-        stroke: $alpheioscolorneutrallightest;
-    }
-    &:hover {
-        color: $alpheioscolorbright;
-        svg {
-            fill: $alpheioscolorbright;
-            stroke: $alpheioscolorbright;
-        }
-    }
-}
-
-
-
 .main-navbar {
-    padding-top: 19px;
-    padding-bottom: 19px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 
     .navbar-toggler {
         padding: 0 15px 0 0;
@@ -109,6 +60,13 @@
                 @include alpheios-menu-icon(20px, 20px);
             }
         }
+    }
+}
+
+@include media-breakpoint-up(sm) {
+    .main-navbar {
+        padding-top: 13px;
+        padding-bottom: 13px;
     }
 }
 
