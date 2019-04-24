@@ -22,9 +22,22 @@
 
 @mixin aplheios-h1-mobile() {
     font-size: 22px;
-    font-weight: black;
+    font-weight: bold;
     font-style: normal;
 }
+
+@mixin aplheios-large-label() {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+}
+
+@mixin aplheios-small-label() {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 @mixin alpheios-icon($width, $height) {
     svg {
@@ -55,7 +68,7 @@
     &:focus {
         box-shadow: none;
         text-decoration: none;
-        font-weight: inherit;
+        font-weight: bold;
     }
 
     .toolbar-button-icon {
@@ -99,6 +112,21 @@
     }
     &:hover {
         color: $alpheioscolorvividhover;
+        svg {
+            fill: $alpheioscolorvividhover;
+            stroke: $alpheioscolorvividhover;
+        }
+    }
+}
+
+@mixin alpheios-neutral-vivid() {
+    color: $alpheioscolorneutrallightest;
+    svg {
+        fill: $alpheioscolorvivid;
+        stroke: $alpheioscolorvivid;
+    }
+    &:hover {
+        color: $alpheioscolorbright;
         svg {
             fill: $alpheioscolorvividhover;
             stroke: $alpheioscolorvividhover;
