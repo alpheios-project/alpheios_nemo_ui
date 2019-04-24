@@ -26,7 +26,7 @@ $down-caret-size: 12px;
             vertical-align: middle;
             padding-left: $logo-width / 2;
             margin: 0;
-            @include aplheios-h1-mobile();
+            @include alpheios-h1-mobile();
         }
     }
     .navlogin-login-container {
@@ -34,7 +34,7 @@ $down-caret-size: 12px;
 
         .navlogin-login-container-link {
             @include alpheios-vivid();
-            @include aplheios-body();
+            @include alpheios-body();
         }
         
 
