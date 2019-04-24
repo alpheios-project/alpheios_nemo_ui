@@ -80,17 +80,7 @@ body, html {
     height:unset;
     width:unset;
   }
-  
-  .navbar-secondary {
-    height: 48px;
-    padding-top: 0px;
-  }
-  
-  .navbar-secondary .alpheios-nemo-toolbar {
-    height: 48px;
-    width: 254px;
-  }
-  
+   
   button.btn.btn-icon a {
     color: $alpheioscolorneutrallightest;
   }
@@ -427,4 +417,7 @@ body, html {
   
   }
 
+  .no-visibility {
+    visibility: hidden;
+  }
   

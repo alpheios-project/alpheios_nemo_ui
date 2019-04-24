@@ -1,0 +1,41 @@
+.main-navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    @include media-breakpoint-up(sm) {
+        padding-top: 13px;
+        padding-bottom: 13px;
+    }
+    
+    @include media-breakpoint-up(md) {
+        padding-left: 120px;
+        padding-right: 100px;
+    }
+}    
+.navbar-toggler {
+    padding: 0 15px 0 0;
+    @include alpheios-button(30px, 20px);
+    @include alpheios-neutral();
+}
+
+.main-navbar-text {
+    @include aplheios-h3();
+    color: $alpheioscolorneutrallightest;
+    padding: 0;
+    margin: 0;
+}
+
+.btn.main-navbar-btn {
+    @include alpheios-button(22px, 22px);
+    @include alpheios-neutral-bright();
+    @include hidelabelXS();
+    padding-right: 0;
+    padding-left: 20px;
+    
+    .toolbar-button-icon {
+        @include media-breakpoint-up(sm) {
+            @include alpheios-icon(20px, 20px);
+        }
+    }
+}
+

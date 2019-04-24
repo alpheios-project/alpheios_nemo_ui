@@ -3,7 +3,7 @@ $down-caret-size: 12px;
 
 .navlogin {
     display: none;
-    padding: 2rem 2rem 1rem 2rem;
+    padding: 26px 120px 26px 0;
     background: $navbar-dark-color;
 
     .navlogin-logo-container {
@@ -11,36 +11,44 @@ $down-caret-size: 12px;
         a {
             display: inline-block;
             vertical-align: middle;
-            padding-right: $logo-width / 2;
+            width: $logo-width * 2;
+            text-align: center;
+            border-right: 1px solid $alpheioscolormuted;
         }
 
         img {
             width: $logo-width;
+            display: inline-block;
         }
 
         h1 {
             display: inline-block;
             vertical-align: middle;
             padding-left: $logo-width / 2;
-            border-left: 1px solid $alpheioscolormuted;
-            font-size: $logo-width / 2;
             margin: 0;
+            @include aplheios-h1-mobile();
         }
     }
     .navlogin-login-container {
         position: relative;
+
+        .navlogin-login-container-link {
+            @include alpheios-vivid();
+            @include aplheios-body();
+        }
+        
+
         .navlogin-login-container-text {
-          color: $alpheioscolorvivid;
-          font-weight: bold;
           display: inline-block;
           vertical-align: middle;
+          
         }
+
         .navlogin-login-container-icon {
             display: inline-block;
             vertical-align: middle;
             padding-top: $down-caret-size / 3;
             svg {
-                fill: $alpheioscolorvivid;
                 width: $down-caret-size;
                 height: auto;
             }

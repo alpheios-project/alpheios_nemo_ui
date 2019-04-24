@@ -1,61 +1,73 @@
   
-  $help-popup-icon-size: 20px;
+  $help-popup-icon-size: 24px;
 
-  .help-popup {
-    .help-popup-content {
-        border-radius: 1rem;
-    }
-
-    .help-popup-header {
-      padding: 3rem 2rem 1rem 2rem;
-      border-bottom: 0;
-    }
-  
-    .help-popup-title {
-      font-weight: bold;
-      margin-left: 2 * $help-popup-icon-size;
-      padding-left: 0;
-    }
-
-    .help-popup-body {
-        padding: 0 2rem;
-
-        .help-popup-list-item {
-            margin-bottom: 1.5rem;
-            display: flex;
-            column-count: 2;
-            align-items: center;
-        }
-
-        .help-popup-list-item-title,
-        .help-popup-list-item-description {
-            display: block;
-            font-size: 90%;
-        }
-
-        .help-popup-list-item-title {
-            font-weight: bold;
-        }
-
-        .help-popup-list-item-icon {
-            margin-right: $help-popup-icon-size;
-
-            svg {
-                fill: $alpheioscolormuted;
-                width: $help-popup-icon-size;
-                height: $help-popup-icon-size;
-            }
-        }
-    }
-
-    .help-popup-footer {
-        border-top: 0;
-        justify-content: center;
-        padding: 1rem 2rem 3rem 2rem;
-
-        .btn {
-            min-width: 250px;
-        }
+  .help-popup-content {
+    padding: 20px 30px;
+    border-radius: 10px;
+    @include media-breakpoint-up(sm) {
+        padding: 40px;
     }
   }
+
+  .help-popup-header {
+    padding: 0 0 20px 0;
+    border-bottom: 0;
+    @include aplheios-h4();
+  }
+
+  .help-popup-title {
+    margin: 0;
+    padding: 0;
+    @include aplheios-h1-mobile();
+    text-align: center;
+    width: 100%;
+
+    @include media-breakpoint-up(sm) {
+        @include aplheios-h4();
+        text-align: left;
+    }
+  }
+  
+  .help-popup-body {
+    padding: 0;
+  }
+
+  .help-popup-list-item {
+    margin-bottom: 15px;
+    display: flex;
+    column-count: 2;
+    align-items: center;
+
+    .help-popup-list-item-icon {
+        @include alpheios-icon(24px, 24px);
+        padding-right: 15px;
+        svg {
+            fill: $alpheioscolormuted;
+        }
+    }
+
+    .help-popup-list-item-title,
+    .help-popup-list-item-description {
+        @include aplheios-large-label();
+        display: block;
+    }
+
+    .help-popup-list-item-title {
+        font-weight: bold;
+    }
+  }
+
+  .help-popup-footer {
+    border-top: 0;
+    justify-content: center;
+    padding: 20px 0 0 0;
+
+    .help-popup-footer-button {
+        @include alpheios-button(0,0);
+        @include alpheios-neutral-vivid();
+        min-width: 190px;
+    }
+  }
+
+
   
