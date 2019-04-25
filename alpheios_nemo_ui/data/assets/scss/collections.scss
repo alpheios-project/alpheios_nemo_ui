@@ -45,8 +45,7 @@
     }
 
     .copyright-button {
-        background-color: transparent;
-        border: 1px solid $alpheioscolormuted;
+        @include alpheios-neutral-dark();
         border-radius: 0.5rem;
     }
 }

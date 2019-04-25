@@ -69,8 +69,12 @@
           </ul>
       </section>
       <section class="collection-browse-copyright">
-        <button class="btn btn-large btn-outline-muted copyright-button">© Copyright Info</button>
+        <button class="btn btn-large btn-outline-muted copyright-button" data-toggle="modal" data-target="#copyrightPopup">© Copyright Info</button>
       </section>
   </article>
 </div>
+{% endblock %}
+
+{% block pagePopups %}
+{% include "alpheios::copyrightpopup.html" %}
 {% endblock %}

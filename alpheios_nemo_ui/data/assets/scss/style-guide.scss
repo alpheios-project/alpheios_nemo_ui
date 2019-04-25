@@ -161,3 +161,72 @@
         }
     }
 }
+
+@mixin alpheios-neutral-dark() {
+    color: $alpheioscolordark;
+    border: 1px solid $alpheioscolordark;
+    background: $alpheioscolorneutrallightest;
+    svg {
+        fill: $alpheioscolordark;
+        stroke: $alpheioscolordark;
+    }
+    &:hover {
+        color: $alpheioscolorneutrallightest;
+        background: $alpheioscolordark;
+        svg {
+            fill: $alpheioscolorneutrallightest;
+            stroke: $alpheioscolorneutrallightest;
+        }
+    }
+}
+
+@mixin alpheios-modal-popup() {
+    .modal-dialog {
+        margin: 0;
+        top: 64px;
+
+        @include media-breakpoint-up(sm) {
+            margin: 1.75rem auto;
+            top: 0;
+        }
+    }
+
+    .modal-content {
+        padding: 20px;
+        border-radius: 0;
+
+        @include media-breakpoint-up(sm) {
+            padding: 40px;
+        }
+    }
+
+    .modal-header {
+        padding: 0 0 40px 0;
+        border-bottom: 0;
+
+        .toolbar-button-icon {
+            cursor: pointer;
+        }
+    }
+
+    .modal-title {
+        margin: 0;
+        padding: 0;
+        @include alpheios-h1-mobile();
+
+        @include media-breakpoint-up(sm) {
+            @include alpheios-h3();
+        }
+    }
+
+    .modal-body {
+        padding: 0;
+        @include alpheios-body();
+    }
+
+    .modal-footer {
+        border-top: 0;
+        padding: 70px 0 0 0;
+        display: block; 
+    }
+}

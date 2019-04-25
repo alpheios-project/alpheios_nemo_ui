@@ -1,6 +1,6 @@
-<nav id="mainnav" class="navbar navbar-dark bg-dark">
+<nav id="mainnav" class="navbar navbar-dark bg-dark main-navbar">
   {% include "alpheios::navmenu.html" %}
-  <div class="navbar-text h3">Collections</div>
+  <div class="navbar-text main-navbar-text">Collections</div>
   <div class="ml-auto d-inline w-20">
     <input id="fullsearch" class="form-control form-inline" type="text" placeholder="Find a text" data-noresult="No results" data-target="{{url_for('.r_typeahead_json')}}"/>
   </div>
