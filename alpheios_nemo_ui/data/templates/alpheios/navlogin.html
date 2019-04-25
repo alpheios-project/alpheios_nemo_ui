@@ -7,8 +7,8 @@
     <div class="navlogin-login-container">
         {% if 'profile' in session and session.profile != None %}
         <a class="navlogin-login-container-link" href="#" role="button" id="dropdownLoginMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="navlogin-login-container-text">Logged in as {{ session.profile.nickname }}</span>
-            <span class="navlogin-login-container-icon">{% include "alpheios::icons/Down-caret.svg" %}</span>
+            <span class="toolbar-button-text">Logged in as {{ session.profile.nickname }}</span>
+            <span class="toolbar-button-icon">{% include "alpheios::icons/Down-caret.svg" %}</span>
         </a>
         {% else %}
             <a class="btn btn-default alpheios-button-primary" href="{{url_for('.r_login')}}?next={{ request.url }}">Login</a>

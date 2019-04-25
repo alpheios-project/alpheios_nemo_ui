@@ -1,5 +1,4 @@
 $logo-width: 50px;
-$down-caret-size: 12px;
 
 .navlogin {
     display: none;
@@ -33,27 +32,12 @@ $down-caret-size: 12px;
         position: relative;
 
         .navlogin-login-container-link {
+            @include alpheios-button(12px, auto);
             @include alpheios-vivid();
-            @include aplheios-body();
-        }
-        
 
-        .navlogin-login-container-text {
-          display: inline-block;
-          vertical-align: middle;
-          
-        }
-
-        .navlogin-login-container-icon {
-            display: inline-block;
-            vertical-align: middle;
-            padding-top: $down-caret-size / 3;
-            svg {
-                width: $down-caret-size;
-                height: auto;
+            .toolbar-button-icon svg {
+                vertical-align: baseline;
             }
-
-            cursor: pointer;
         }
     }
 
