@@ -12,18 +12,17 @@
   .help-popup-header {
     padding: 0 0 20px 0;
     border-bottom: 0;
-    @include aplheios-h4();
   }
 
   .help-popup-title {
     margin: 0;
     padding: 0;
-    @include aplheios-h1-mobile();
+    @include alpheios-h1-mobile();
     text-align: center;
     width: 100%;
 
     @include media-breakpoint-up(sm) {
-        @include aplheios-h4();
+        @include alpheios-h4();
         text-align: left;
     }
   }
@@ -48,7 +47,7 @@
 
     .help-popup-list-item-title,
     .help-popup-list-item-description {
-        @include aplheios-large-label();
+        @include alpheios-large-label();
         display: block;
     }
 

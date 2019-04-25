@@ -1,4 +1,4 @@
-@mixin aplheios-h3() {
+@mixin alpheios-h3() {
     font-size: 20px;
     font-weight: normal;
     font-style: normal;
@@ -8,35 +8,48 @@
     }
 }
 
-@mixin aplheios-h4() {
+@mixin alpheios-h4() {
     font-size: 18px;
     font-weight: normal;
     font-style: normal;
 }
 
-@mixin aplheios-body() {
+@mixin alpheios-body() {
     font-size: 16px;
     font-weight: normal;
     font-style: normal;
 }
 
-@mixin aplheios-h1-mobile() {
+@mixin alpheios-h1-mobile() {
     font-size: 22px;
     font-weight: bold;
     font-style: normal;
 }
 
-@mixin aplheios-large-label() {
+@mixin alpheios-large-label() {
     font-size: 14px;
     font-weight: normal;
     font-style: normal;
 }
 
-@mixin aplheios-small-label() {
+@mixin alpheios-small-label() {
     font-size: 14px;
     font-weight: normal;
     font-style: normal;
 }
+
+@mixin alpheios-link-vivid() {
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    color: $alpheioscolorvivid;
+
+    &:hover {
+        text-decoration: underline;
+        color: $alpheioscolorvividhover;
+    }
+}
+
 
 
 @mixin alpheios-icon($width, $height) {
@@ -80,7 +93,7 @@
     .toolbar-button-text {
         display: inline;
         position: relative;
-        @include aplheios-body();
+        @include alpheios-body();
     }    
 
     @include media-breakpoint-up(sm) {
