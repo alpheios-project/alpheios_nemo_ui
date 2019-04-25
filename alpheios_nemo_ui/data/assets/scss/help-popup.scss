@@ -1,34 +1,24 @@
-  
-  $help-popup-icon-size: 24px;
+$help-icon-size: 24px;
+
+.help-popup {
+  @include alpheios-modal-popup();
 
   .help-popup-content {
     padding: 20px 30px;
     border-radius: 10px;
+
     @include media-breakpoint-up(sm) {
-        padding: 40px;
+      padding: 40px;
     }
   }
 
   .help-popup-header {
-    padding: 0 0 20px 0;
-    border-bottom: 0;
+    padding-bottom: 20px;
   }
 
   .help-popup-title {
-    margin: 0;
-    padding: 0;
-    @include alpheios-h1-mobile();
-    text-align: center;
     width: 100%;
-
-    @include media-breakpoint-up(sm) {
-        @include alpheios-h4();
-        text-align: left;
-    }
-  }
-  
-  .help-popup-body {
-    padding: 0;
+    padding-left: $help-icon-size * 1.5;
   }
 
   .help-popup-list-item {
@@ -38,11 +28,11 @@
     align-items: center;
 
     .help-popup-list-item-icon {
-        @include alpheios-icon(24px, 24px);
-        padding-right: 15px;
-        svg {
-            fill: $alpheioscolormuted;
-        }
+      @include alpheios-icon($help-icon-size, $help-icon-size);
+      padding-right: $help-icon-size/2;
+      svg {
+          fill: $alpheioscolormuted;
+      }
     }
 
     .help-popup-list-item-title,
@@ -55,11 +45,9 @@
         font-weight: bold;
     }
   }
-
   .help-popup-footer {
-    border-top: 0;
-    justify-content: center;
     padding: 20px 0 0 0;
+    text-align: center;
 
     .help-popup-footer-button {
         @include alpheios-button(0,0);
@@ -67,6 +55,5 @@
         min-width: 190px;
     }
   }
-
-
+}
   
