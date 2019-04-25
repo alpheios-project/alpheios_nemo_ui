@@ -2,19 +2,29 @@
   <button class="navbar-toggler btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <span class="navbar-toggler-menu-icon toolbar-button-icon">{% include "alpheios::icons/Menu-Icon.svg" %}</span>
   </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    {% include "alpheios::login.html" %}
-    {% for crumb in menu: -%}
-      {% if loop.index < 4 %}
-        {% set args = { 'objectId': crumb['args']['objectId'] } %}
-        {% if crumb.current %}
-          <a class="dropdown-item" href="{{url_for(crumb.link, **args)}}">{{crumb.title}}<span class="current"> ({{crumb.current}})</span></a>
-        {% else %}
-          <a class="dropdown-item" href="{{url_for(crumb.link, **args)}}">{{crumb.title}}</a>
+  <div class="dropdown-menu main-dropdown" aria-labelledby="dropdownMenuButton">
+    <div class="main-dropdown-header">
+      <a href="#" class="toolbar-button-icon" data-dismiss="modal">{% include "alpheios::icons/X-Close-Icon.svg" %}</a>
+      <h3 class="main-dropdown-title">Main Menu</h3>
+    </div>
+
+    <div class="main-dropdown-content">
+      {% for crumb in menu: -%}
+        {% if loop.index < 4 %}
+          {% set args = { 'objectId': crumb['args']['objectId'] } %}          
+            <a class="dropdown-item main-dropdown-item" href="{{url_for(crumb.link, **args)}}">
+                <span class="main-dropdown-item-icon">{% include "alpheios::icons/Collections-Folder-Icon.svg" %}</span>
+                <span class="main-dropdown-item-text">{{crumb.title}}</span>
+                {% if crumb.current %} <span class="current"> ({{crumb.current}})</span>{% endif %}
+            </a>
         {% endif %}
-      {% endif %}
-    {% endfor %}
-    <a class="dropdown-item" href="https://alpheios.net">Go to Alpheios.net</a>
-    {% include "alpheios::logout.html" %}
+      {% endfor %}
+    </div>
+    <div class="main-dropdown-content">
+      <a class="dropdown-item main-dropdown-item" href="https://alpheios.net">
+        <span class="main-dropdown-item-icon">{% include "alpheios::icons/External-Link-Icon.svg" %}</span>
+        <span class="main-dropdown-item-text">Go to Alpheios.net</span>
+      </a>
+    </div>
   </div>
 </div>
