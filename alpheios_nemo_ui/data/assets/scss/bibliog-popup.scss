@@ -1,0 +1,70 @@
+
+.bibliog-popup-dialog {
+    margin: 0;
+    top: 64px;
+
+    @include media-breakpoint-up(sm) {
+        margin: 1.75rem auto;
+        top: 0;
+    }
+}
+
+.bibliog-popup-content {
+    padding: 20px;
+    border-radius: 0;
+
+    @include media-breakpoint-up(sm) {
+        padding: 40px;
+    }
+}
+
+.bibliog-popup-header {
+    padding: 0 0 40px 0;
+    border-bottom: 0;
+
+    .toolbar-button-icon {
+        @include alpheios-icon(30px, 30px);
+        @include alpheios-vivid();
+    }
+}
+
+.bibliog-popup-title {
+    margin: 0;
+    padding: 0;
+    @include alpheios-h1-mobile();
+
+    @include media-breakpoint-up(sm) {
+        @include alpheios-h3();
+    }
+}
+.bibliog-popup-body {
+    padding: 0;
+    @include alpheios-body();
+
+    .copyright {
+        padding-top: 20px;
+    }
+}
+
+.bibliog-popup-footer {
+    border-top: 0;
+    padding: 70px 0 0 0;
+    display: block; 
+
+    .bibliog-popup-footer-title {
+        @include alpheios-h4();
+    }
+    
+    .bibliog-popup-footer-link {
+        @include alpheios-link-vivid();
+        font-weight: bold;
+        margin: 0;
+    }   
+
+    .bibliog-popup-footer-link-divider {
+        width: 0;
+        padding: 0;    
+        margin: 0 10px 0 8px;
+        border-right: 2px solid $alpheioscolordark;
+    }
+}

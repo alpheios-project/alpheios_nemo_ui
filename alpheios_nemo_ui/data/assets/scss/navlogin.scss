@@ -25,7 +25,7 @@ $logo-width: 50px;
             vertical-align: middle;
             padding-left: $logo-width / 2;
             margin: 0;
-            @include aplheios-h1-mobile();
+            @include alpheios-h1-mobile();
         }
     }
     .navlogin-login-container {
