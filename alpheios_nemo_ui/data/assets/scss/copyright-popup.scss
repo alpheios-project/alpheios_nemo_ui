@@ -1,0 +1,9 @@
+.copyright-popup {
+    @include alpheios-modal-popup();
+    .copyright-popup-header {
+        .toolbar-button-icon {
+            @include alpheios-icon(30px, 30px);
+            @include alpheios-vivid();
+        }
+    }
+}
