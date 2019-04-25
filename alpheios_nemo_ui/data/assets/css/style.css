@@ -1008,12 +1008,12 @@ p.alpheios-lemma__translations-value {
   font-weight: normal;
   padding-right: 0.25em;
 }
-.alpheios-morph__linkedattr {
+.alpheios-content .alpheios-morph__linkedattr {
   color: var(--alpheios-color-vivid);
   cursor: pointer;
   font-weight: 700;
 }
-.alpheios-morph__linkedattr:hover, .alpheios-morph__linkedattr:active {
+.alpheios-content .alpheios-morph__linkedattr:hover, .alpheios-content .alpheios-morph__linkedattr:active {
   text-decoration: underline;
 }
 .alpheios-morph__pofs span:last-child:after {
@@ -1177,7 +1177,7 @@ select.alpheios-setting__control,
   align-items: stretch;
   flex: 0 0 auto;
   background: var(--alpheios-color-neutral-lightest);
-  padding: 0 calc(var(--alpheios-base-ui-size) * 1);
+  padding: calc(var(--alpheios-base-ui-size) * 1) calc(var(--alpheios-base-ui-size) * 1) 0;
 }
 .alpheios-notification-area__notification {
   display: flex;
@@ -1366,13 +1366,13 @@ select.alpheios-setting__control,
   border-style: solid;
   border-color: transparent transparent var(--alpheios-border-color) transparent;
 }
-.alpheios-panel-right .alph_tooltip-bottom-right {
+.alpheios-panel--right .alph_tooltip-bottom-right {
   top: 135%;
   right: auto;
   margin-left: 0;
   left: 0;
 }
-.alpheios-panel-right .alph_tooltip-bottom-right::after {
+.alpheios-panel--right .alph_tooltip-bottom-right::after {
   margin-left: 0;
   right: auto;
   left: 15%;
@@ -1462,6 +1462,9 @@ select.alpheios-setting__control,
   overflow: auto;
   border: 1px solid var(--alpheios-border-color);
   border-radius: calc(var(--alpheios-base-ui-size) * 0.625);
+}
+.alpheios-popup .alpheios-notification-area {
+  padding-top: 0;
 }
 .alpheios-popup__header {
   display: flex;
@@ -2309,39 +2312,10 @@ h3.alpheios-inflections__credits-title {
 }
 .alpheios-user-auth__notifications {
   display: none;
-  position: relative;
-  padding: calc(var(--alpheios-base-text-size) * 0.625) calc(var(--alpheios-base-text-size) * 1.25);
   margin-top: calc(var(--alpheios-base-text-size) * 0.625);
-  color: var(--alpheios-color-neutral-lightest);
-  background: var(--alpheios-color-muted);
-  border-radius: calc(var(--alpheios-base-ui-size) * 0.625);
-  flex: 0 0 calc(var(--alpheios-base-ui-size) * 3.75);
-  box-sizing: border-box;
-  overflow: hidden;
-  min-height: calc(var(--alpheios-base-ui-size) * 2.25);
-}
-.alpheios-user-auth__notifications-close-btn {
-  position: absolute;
-  right: calc(var(--alpheios-base-ui-size) * 0.625);
-  top: calc(var(--alpheios-base-ui-size) * 0.625);
-  display: block;
-  width: calc(var(--alpheios-base-ui-size) * 1.25);
-  height: auto;
-  margin: 0;
-  cursor: pointer;
-  fill: var(--alpheios-color-neutral-lightest);
-  stroke: var(--alpheios-color-neutral-lightest);
-}
-.alpheios-user-auth__notifications-close-btn:hover, .alpheios-user-auth__notifications-close-btn:focus {
-  fill: var(--alpheios-icon-color-hover);
-  stroke: var(--alpheios-icon-color-hover);
-}
-.alpheios-user-auth__notifications-close-btn:active {
-  fill: var(--alpheios-icon-color-active);
-  stroke: var(--alpheios-icon-color-active);
 }
 [data-notification-visible=true] .alpheios-user-auth__notifications {
-  display: block;
+  display: flex;
 }
 /*
  Calculates a size of text elements relative to the base size.
@@ -2577,6 +2551,9 @@ h3.alpheios-inflections__credits-title {
 .alpheios-visibility__hidden {
   visibility: hidden;
 }
+.alpheios-worditem__lemmasList-lemmaitem {
+  cursor: pointer;
+}
 /*
  Calculates a size of text elements relative to the base size.
  Such elements can be scaled proportionally by changing the `--alpheios-base-text-size` custom prop.
@@ -2593,8 +2570,20 @@ h3.alpheios-inflections__credits-title {
   font-weight: bold;
   padding-bottom: 10px;
 }
+.alpheios-wordlist-filters .alpheios-wordlist-header-select-filterBy-block,
+.alpheios-wordlist-filters .alpheios-wordlist-header-input-filterBy-block {
+  width: 48%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.alpheios-wordlist-filters .alpheios-wordlist-header-input-filterBy-block {
+  margin-left: 2%;
+}
 .alpheios-wordlist-filters .alpheios-wordlist-header-select-filterBy {
-  width: 50%;
+  width: 90%;
+}
+.alpheios-wordlist-filters .alpheios-wordlist-header-input-filterBy {
+  width: 80%;
 }
 .alpheios-wordlist-filters .alpheios-wordlist-header-clear-icon {
   width: 20px;
@@ -2795,7 +2784,7 @@ h3.alpheios-inflections__credits-title {
   box-sizing: border-box;
   display: flex;
   flex-flow: wrap;
-  align-items: flex-start;
+  align-items: stretch;
   position: relative;
   background: var(--alpheios-color-neutral-lightest);
   padding-top: calc(var(--alpheios-base-ui-size) * 1.25);
@@ -2812,9 +2801,8 @@ h3.alpheios-inflections__credits-title {
   display: flex;
   flex-direction: column;
   padding: 20px;
-}
-.alpheios-panel__tab-panel--fw {
-  width: 100%;
+  flex: 1 1 auto;
+  box-sizing: border-box;
 }
 .alpheios-panel__tab-panel--no-padding {
   padding: 0;
@@ -2845,10 +2833,6 @@ h3.alpheios-inflections__credits-title {
   box-sizing: border-box;
   align-items: stretch;
 }
-.alpheios-panel__tab__options {
-  width: 100%;
-  max-width: calc(var(--alpheios-base-ui-size) * 37.5);
-}
 .alpheios-panel__options-item {
   margin-bottom: calc(var(--alpheios-base-text-size) * 0.625);
   display: flex;
@@ -2874,7 +2858,20 @@ h3.alpheios-inflections__credits-title {
   width: 100%;
   left: 0;
   bottom: 0;
-  border-top: 1px solid var(--alpheios-border-color);
+}
+.alpheios-panel--compact.alpheios-panel--left {
+  height: 100vh;
+  width: 50vw;
+  top: 0;
+  bottom: auto;
+}
+.alpheios-panel--compact.alpheios-panel--right {
+  height: 100vh;
+  width: 50vw;
+  right: 0;
+  left: auto;
+  top: 0;
+  bottom: auto;
 }
 .alpheios-panel--compact .alpheios-panel__content {
   overflow: auto;
@@ -2904,42 +2901,39 @@ h3.alpheios-inflections__credits-title {
 .alpheios-panel__close-btn {
   width: calc(var(--alpheios-base-ui-size) * 5);
 }
-.alpheios-panel-left.alpheios-panel {
+.alpheios-panel--left.alpheios-panel {
   left: 0;
 }
-.alpheios-panel-left .alpheios-panel__header {
+.alpheios-panel--left .alpheios-panel__header {
   direction: ltr;
   border-top-right-radius: calc(var(--alpheios-base-ui-size) * 0.625);
   padding-left: calc(var(--alpheios-base-ui-size) * 0.875);
 }
-.alpheios-panel-left .alpheios-panel__content,
-.alpheios-panel-left .alpheios-notification-area {
+.alpheios-panel--left .alpheios-panel__content,
+.alpheios-panel--left .alpheios-notification-area {
   border-right: 1px solid var(--alpheios-border-color);
 }
-.alpheios-panel-left .alpheios-panel__close-btn {
+.alpheios-panel--left .alpheios-panel__close-btn {
   border-top-right-radius: calc(var(--alpheios-base-ui-size) * 0.625);
 }
-.alpheios-panel-left .alpheios-panel__close-btn svg {
+.alpheios-panel--left .alpheios-panel__close-btn svg {
   left: calc(var(--alpheios-base-ui-size) * 1.25);
 }
-.alpheios-panel-right.alpheios-panel {
+.alpheios-panel--right.alpheios-panel {
   right: 0;
 }
-.alpheios-panel-right .alpheios-panel__header {
+.alpheios-panel--right .alpheios-panel__header {
   border-top-left-radius: calc(var(--alpheios-base-ui-size) * 0.625);
 }
-.alpheios-panel-right .alpheios-panel__header-logo {
+.alpheios-panel--right .alpheios-panel__header-logo {
   margin-left: calc(var(--alpheios-base-ui-size) * 1);
 }
-.alpheios-panel-right .alpheios-panel__content,
-.alpheios-panel-right .alpheios-notification-area {
+.alpheios-panel--right .alpheios-panel__content,
+.alpheios-panel--right .alpheios-notification-area {
   border-left: 1px solid var(--alpheios-border-color);
 }
-.alpheios-panel-right .alpheios-panel__close-btn svg {
+.alpheios-panel--right .alpheios-panel__close-btn svg {
   left: calc(var(--alpheios-base-ui-size) * 1.75);
-}
-.alpheios-panel__tab__word-usage {
-  width: 100%;
 }
 /*
  Calculates a size of text elements relative to the base size.
@@ -3013,8 +3007,6 @@ h3.alpheios-inflections__credits-title {
  */
 .alpheios-toolbar.alpheios-toolbar--large {
   background: transparent;
-  top: 10px;
-  right: 15px;
 }
 .alpheios-toolbar .alpheios-navbuttons__btn {
   width: calc(var(--alpheios-base-ui-size) * 2.75);
@@ -3083,13 +3075,15 @@ h3.alpheios-inflections__credits-title {
   left: calc(var(--alpheios-base-ui-size) * -20);
   top: 0;
   border: calc(var(--alpheios-base-ui-size) * 0.0625) solid var(--alpheios-border-color);
-  border-top-left-radius: calc(var(--alpheios-base-ui-size) * 0.625);
-  border-bottom-left-radius: calc(var(--alpheios-base-ui-size) * 0.625);
-  border-right: none;
+  border-radius: calc(var(--alpheios-base-ui-size) * 0.625) 0 0 calc(var(--alpheios-base-ui-size) * 0.625);
   box-sizing: border-box;
-  padding: calc(var(--alpheios-base-ui-size) * 0.625);
-  padding-right: calc(var(--alpheios-base-ui-size) * 1.25);
+  padding: calc(var(--alpheios-base-ui-size) * 0.625) calc(var(--alpheios-base-ui-size) * 1.25) calc(var(--alpheios-base-ui-size) * 0.625) calc(var(--alpheios-base-ui-size) * 0.625);
   z-index: -1;
+}
+.alpheios-toolbar--left .alpheios-toolbar__lookup {
+  left: 34px;
+  border-radius: 0 calc(var(--alpheios-base-ui-size) * 0.625) calc(var(--alpheios-base-ui-size) * 0.625) 0;
+  padding: calc(var(--alpheios-base-ui-size) * 0.625) calc(var(--alpheios-base-ui-size) * 0.625) calc(var(--alpheios-base-ui-size) * 0.625) calc(var(--alpheios-base-ui-size) * 1.25);
 }
 .alpheios-toolbar__lookup .alpheios-lookup__form {
   justify-content: flex-end;
