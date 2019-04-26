@@ -47,6 +47,9 @@ $(document).ready(function($) {
     $('#dropdownMenuButtonClose').click(function(event){
       $('.modal-backdrop').remove();
     });
+    $('.dropdown-menu').click(function(event){
+      $('.modal-backdrop').remove();
+    });
     $( "body" ).on( "click", ".modal-backdrop", function() {
       $(this).remove();
     });

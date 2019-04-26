@@ -3,7 +3,11 @@
   {% if session.profile.mail != NaN %}
     <p class="logged-in-email">{{ session.profile.mail }}</p>
   {% endif %}  
+  <a class="navlogin-login-container-link" href="#" role="button" id="dropdownLoginMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="toolbar-button-icon">{% include "alpheios::icons/Down-caret.svg" %}</span>
+  </a>
 {% else %}
   <p class="">You are not logged in.</p>
   <p><a class="btn btn-default alpheios-button-primary" href="{{url_for('.r_login')}}?next={{ request.url }}">Log in</a></p>
 {% endif %}
+

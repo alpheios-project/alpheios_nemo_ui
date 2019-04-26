@@ -18,34 +18,29 @@
         {% include "alpheios::login.html" %}
     </div>
 
-    <div class="main-dropdown-content">
+    <div class="m-dropdown-content">
       <p class="main-dropdown-content-title">Collections</p>
       {% for crumb in menu: -%}
         {% if loop.index < 4 %}
           {% set args = { 'objectId': crumb['args']['objectId'] } %}          
-            <a class="dropdown-item main-dropdown-item" href="{{url_for(crumb.link, **args)}}">
-                <span class="main-dropdown-item-icon" >{% include "alpheios::icons/Collections-Folder-Icon.svg" %}</span>
-                <span class="main-dropdown-item-text">{{crumb.title}}</span>
+            <a class="dropdown-item m-dropdown-item" href="{{url_for(crumb.link, **args)}}">
+                <span class="m-dropdown-item-icon" >{% include "alpheios::icons/Collections-Folder-Icon.svg" %}</span>
+                <span class="m-dropdown-item-text">{{crumb.title}}</span>
                 {% if crumb.current %}
-                   <span class="main-dropdown-item-text-current">({{ crumb.current }})</span>
+                   <span class="m-dropdown-item-text-current">({{ crumb.current }})</span>
                 {% endif %}
             </a>
         {% endif %}
       {% endfor %}
     </div>
-    <div class="main-dropdown-content">
-      <a class="dropdown-item main-dropdown-item" href="https://alpheios.net">
-        <span class="main-dropdown-item-icon">{% include "alpheios::icons/External-Link-Icon.svg" %}</span>
-        <span class="main-dropdown-item-text">Go to Alpheios.net</span>
+    <div class="m-dropdown-content">
+      <a class="dropdown-item m-dropdown-item" href="https://alpheios.net">
+        <span class="m-dropdown-item-icon">{% include "alpheios::icons/External-Link-Icon.svg" %}</span>
+        <span class="m-dropdown-item-text">Go to Alpheios.net</span>
       </a>
     </div>
-    <div class="main-dropdown-content d-md-block d-lg-none">
-      {% if 'profile' in session and session.profile != None %}
-        <a class="dropdown-item main-dropdown-item" href="{{url_for('.r_logout')}}?next={{request.url}}">
-          <span class="main-dropdown-item-icon">{% include "alpheios::icons/Logout-Lock-Icon.svg" %}</span>
-          <span class="main-dropdown-item-text">Log Out</span>
-        </a>
-      {% endif %}
+    <div class="d-md-block d-lg-none">
+        {% include "alpheios::logout.html" %}
     </div>
     
     </div>

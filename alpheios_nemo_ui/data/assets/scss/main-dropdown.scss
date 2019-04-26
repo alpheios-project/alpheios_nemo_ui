@@ -115,40 +115,43 @@ $menu-lg-padding: 115px;
             }
         }
     }
+}
 
-    .main-dropdown-content {
-        border-bottom: 1px solid $alpheioscolorneutrallight;
+.m-dropdown-content {
+    border-bottom: 1px solid $alpheioscolorneutrallight;
+}
+
+.main-dropdown-content-title {
+    @include alpheios-large-label();
+    padding: 5px 5px 0 5px;
+    margin: 0;
+    color: $alpheioscolorneutraldark;
+}
+.m-dropdown-item {
+    padding: 15px 5px;
+    min-width: 250px;
+
+    @include alpheios_body();
+    @include alpheios-link-dark-vivid();
+
+    &:hover {
+        font-weight: normal;
+    }
+    .m-dropdown-item-icon {
+        @include alpheios-icon(15px, 15px);
+        svg {
+            vertical-align: baseline;
+        }
     }
 
-    .main-dropdown-content-title {
-        @include alpheios-large-label();
-        padding: 5px 5px 0 5px;
-        margin: 0;
+    .m-dropdown-item-text {
+        padding-left: 15px;
+    }
+    &:hover {
+        background: transparent;
+        text-decoration: none;
+    }
+    .m-dropdown-item-text-current {
         color: $alpheioscolorneutraldark;
-    }
-    .main-dropdown-item {
-        padding: 15px 5px;
-        min-width: 250px;
-
-        @include alpheios_body();
-        @include alpheios-link-dark-vivid();
-
-        .main-dropdown-item-icon {
-            @include alpheios-icon(15px, 15px);
-            svg {
-                vertical-align: baseline;
-            }
-        }
-
-        .main-dropdown-item-text {
-            padding-left: 15px;
-        }
-        &:hover {
-            background: transparent;
-            text-decoration: none;
-        }
-        .main-dropdown-item-text-current {
-            color: $alpheioscolorneutraldark;
-        }
     }
 }
