@@ -34,4 +34,17 @@ $(document).ready(function($) {
        event.preventDefault();
        window.location = suggestion.uri;
     });
+
+    $('#dropdownMenuButton').click(function(event){
+      if (!Boolean($('#dropdownMenuButton').prop('aria-expanded'))) {
+        if ($('.modal-backdrop').length === 0) {
+          $('body').append($('<div class="modal-backdrop fade show"></div>'));
+        } else {
+          $('.modal-backdrop').addClass('show');
+        }
+      }
+    });
+    $('#dropdownMenuButtonClose').click(function(event){
+      $('.modal-backdrop').remove();
+    });
 });
