@@ -31,19 +31,41 @@ $logo-width: 50px;
     .navlogin-login-container {
         position: relative;
 
+        .logged-in-email {
+            display: none;
+        }
+        .logged-in-text {
+            display: inline-block;
+            vertical-align: baseline;
+            color: $alpheioscolorvivid;
+        }
         .navlogin-login-container-link {
             @include alpheios-button(12px, auto);
-            @include alpheios-vivid();
+            @include alpheios-neutral-vivid();
+            
+            display: inline-block;
 
             .toolbar-button-icon svg {
                 vertical-align: baseline;
             }
+        }
+
+        .m-dropdown-item:hover {
+            font-weight: normal;
         }
     }
 
     .navlogin-dropdown-menu {
         left: auto;
         right: 0;
+        padding: 10px;
+
+        .m-dropdown-content {
+            border: 0;
+        }
+        .m-dropdown-item {
+            min-width: 0;
+        }
     }
 }
 
