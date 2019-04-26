@@ -61,6 +61,29 @@ $menu-lg-padding: 115px;
             @include alpheios-h3();
         }
     }
+
+    .main-dropdown-login {
+        border-bottom: 1px solid $alpheioscolorneutrallight;
+        padding: 15px 5px;
+
+        @include media-breakpoint-up(lg) {
+            display: none;
+        }
+
+        .logged-in-text {
+            margin: 0;
+            @include alpheios-body();
+            .logged-in-text-nickname {
+                font-weight: bold;
+            }
+        }
+        .logged-in-email {
+            margin: 0;
+            padding-top: 10px;
+            @include alpheios-large-label();
+            color: $alpheioscolorneutraldark;
+        }
+    }
     
     .main-dropdown-header {
         padding-top: 0;
@@ -86,6 +109,10 @@ $menu-lg-padding: 115px;
             padding-left: 15px;
             vertical-align: middle;
             margin: 0;
+            font-weight: bold;
+            @include media-breakpoint-up(lg) {
+                font-weight: normal;
+            }
         }
     }
 
@@ -97,6 +124,7 @@ $menu-lg-padding: 115px;
         @include alpheios-large-label();
         padding: 5px 5px 0 5px;
         margin: 0;
+        color: $alpheioscolorneutraldark;
     }
     .main-dropdown-item {
         padding: 15px 5px;
@@ -118,6 +146,9 @@ $menu-lg-padding: 115px;
         &:hover {
             background: transparent;
             text-decoration: none;
+        }
+        .main-dropdown-item-text-current {
+            color: $alpheioscolorneutraldark;
         }
     }
 }

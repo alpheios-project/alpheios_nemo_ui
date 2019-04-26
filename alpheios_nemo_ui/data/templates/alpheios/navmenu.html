@@ -8,9 +8,14 @@
         <a href="{{ url_for('.r_index') }}"><img class="logo" src="{{url_for('.secondary_assets', filetype='static', asset='alpheios-logo.svg')}} " alt="Alpheios Reading Center" /></a>
         <h1>Reading Center</h1>
     </div>
+
     <div class="main-dropdown-header">
       <a href="#" class="toolbar-button-icon" data-dismiss="modal" id="dropdownMenuButtonClose">{% include "alpheios::icons/X-Close-Icon.svg" %}</a>
       <h3 class="main-dropdown-title">Main Menu</h3>
+    </div>
+
+    <div class="main-dropdown-login  d-md-block d-lg-none">
+        {% include "alpheios::login.html" %}
     </div>
 
     <div class="main-dropdown-content">
@@ -21,6 +26,9 @@
             <a class="dropdown-item main-dropdown-item" href="{{url_for(crumb.link, **args)}}">
                 <span class="main-dropdown-item-icon" >{% include "alpheios::icons/Collections-Folder-Icon.svg" %}</span>
                 <span class="main-dropdown-item-text">{{crumb.title}}</span>
+                {% if crumb.current %}
+                   <span class="main-dropdown-item-text-current">({{ crumb.current }})</span>
+                {% endif %}
             </a>
         {% endif %}
       {% endfor %}
@@ -30,6 +38,16 @@
         <span class="main-dropdown-item-icon">{% include "alpheios::icons/External-Link-Icon.svg" %}</span>
         <span class="main-dropdown-item-text">Go to Alpheios.net</span>
       </a>
+    </div>
+    <div class="main-dropdown-content d-md-block d-lg-none">
+      {% if 'profile' in session and session.profile != None %}
+        <a class="dropdown-item main-dropdown-item" href="{{url_for('.r_logout')}}?next={{request.url}}">
+          <span class="main-dropdown-item-icon">{% include "alpheios::icons/Logout-Lock-Icon.svg" %}</span>
+          <span class="main-dropdown-item-text">Log Out</span>
+        </a>
+      {% endif %}
+    </div>
+    
     </div>
   </div>
 </div>

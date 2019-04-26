@@ -1,7 +1,9 @@
 {% if 'profile' in session and session.profile != None %}
-  <p class="dropdown-item">Logged in as {{ session.profile.nickname }}</p>
+  <p class="logged-in-text">Logged in as <span class="logged-in-text-nickname">{{ session.profile.nickname }}</span></p>
+  {% if session.profile.mail != NaN %}
+    <p class="logged-in-email">{{ session.profile.mail }}</p>
+  {% endif %}  
 {% else %}
-  <p class="dropdown-item">You are not logged in<br/>
-   <button class="btn btn-sm btn-vivid"><a href="{{url_for('.r_login')}}?next={{ request.url }}">Login</a></button>
- </p>
+  <p class="">You are not logged in.</p>
+  <p><a class="btn btn-default alpheios-button-primary" href="{{url_for('.r_login')}}?next={{ request.url }}">Log in</a></p>
 {% endif %}
