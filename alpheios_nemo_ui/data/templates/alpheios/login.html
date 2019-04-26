@@ -1,8 +1,5 @@
 {% if 'profile' in session and session.profile != None %}
   <p class="logged-in-text">Logged in as <span class="logged-in-text-nickname">{{ session.profile.nickname }}</span></p>
-  {% if session.profile.mail != NaN %}
-    <p class="logged-in-email">{{ session.profile.mail }}</p>
-  {% endif %}  
   <a class="navlogin-login-container-link" href="#" role="button" id="dropdownLoginMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <span class="toolbar-button-icon">{% include "alpheios::icons/Down-caret.svg" %}</span>
   </a>
