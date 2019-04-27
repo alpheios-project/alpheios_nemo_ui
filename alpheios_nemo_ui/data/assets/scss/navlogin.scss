@@ -31,7 +31,8 @@ $logo-width: 50px;
     .navlogin-login-container {
         position: relative;
 
-        .logged-in-email {
+        .logged-in-email,
+        .log-out-text {
             display: none;
         }
         .logged-in-text {
