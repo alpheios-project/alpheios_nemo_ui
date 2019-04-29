@@ -53,7 +53,18 @@
 {{ super() }}
   <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function(event) {
-      new Alpheios.Embedded({'clientId':'alpheios-reader', 'enabledSelector':'.entry-content'}).activate();
+      new Alpheios.Embedded({
+        'clientId':'alpheios-reader', 
+        'enabledSelector':'.entry-content',
+        popupInitialPos: {
+          left: '50px',
+          top: '230px'
+        },
+        toolbarInitialPos: {
+          top: '220px',
+          right: '15px'
+        }
+      }).activate();
     });
 
   </script>
