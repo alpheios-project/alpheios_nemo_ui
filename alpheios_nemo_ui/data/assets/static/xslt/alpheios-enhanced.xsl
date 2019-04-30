@@ -24,7 +24,12 @@
     <xsl:output method="html" indent="yes"/>
     <xsl:param name="doclang"/>
 
-    <xsl:template match="tei:milestone[@unit != 'card']">
+    <!-- we ignore some milestones 
+         cards are the old Perseus chunking system and not in sync with the cts structure
+         alternatesection appears to be used only in urn:cts:latinLit:phi0474.phi055 and 
+         it isn't clear if/how to display it - wasn't apparently used in the old Perseus 4 display
+    -->
+    <xsl:template match="tei:milestone[@unit != 'card' and @unit != 'alternatesection']">
         <xsl:variable name="idstring">
             <xsl:if test="@n">
                 <xsl:text>m</xsl:text>
