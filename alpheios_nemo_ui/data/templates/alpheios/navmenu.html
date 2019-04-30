@@ -2,19 +2,5 @@
   <button class="navbar-toggler btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <span class="navbar-toggler-menu-icon toolbar-button-icon">{% include "alpheios::icons/Menu-Icon.svg" %}</span>
   </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    {% include "alpheios::login.html" %}
-    {% for crumb in menu: -%}
-      {% if loop.index < 4 %}
-        {% set args = { 'objectId': crumb['args']['objectId'] } %}
-        {% if crumb.current %}
-          <a class="dropdown-item" href="{{url_for(crumb.link, **args)}}">{{crumb.title}}<span class="current"> ({{crumb.current}})</span></a>
-        {% else %}
-          <a class="dropdown-item" href="{{url_for(crumb.link, **args)}}">{{crumb.title}}</a>
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-    <a class="dropdown-item" href="https://alpheios.net">Go to Alpheios.net</a>
-    {% include "alpheios::logout.html" %}
-  </div>
 </div>
+

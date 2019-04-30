@@ -1,11 +1,14 @@
 {% extends "main::container.html" %}
 {% block article %}
+<div class="article-wrap">
   {% include "alpheios::navlogin.html" %}
   {% include "alpheios::navreferences.html" %}
+  {% include "alpheios::breadcrumbreferences.html" %}
+  {% include "alpheios::mainnavmenu.html" %}
 
   {% import "alpheios::macros.html" as macros %}
 
-  {% include "alpheios::breadcrumbreferences.html" %}
+  
   <div class="d-flex" id="reading-container">
     <article class="nav container">
         <section class="d-flex flex-wrap">
@@ -17,4 +20,5 @@
         </section>
     </article>
   </div>
+</div>
 {% endblock %}

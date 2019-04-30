@@ -44,13 +44,29 @@
     font-style: normal;
     color: $alpheioscolorvivid;
 
-    &:hover {
+    svg {
+        fill: $alpheioscolorvivid;
+    }
+
+    &:hover,
+    &.current {
         text-decoration: underline;
         color: $alpheioscolorvividhover;
+
+        svg {
+            fill: $alpheioscolorvividhover;
+        }
     }
 }
 
+@mixin alpheios-link-dark-vivid() {
+    @include alpheios-link-vivid();
+    color: $alpheioscolordark;
 
+    svg {
+        fill: $alpheioscolordark;
+    }
+}
 
 @mixin alpheios-icon($width, $height) {
     svg {
