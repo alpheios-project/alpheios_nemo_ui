@@ -20,6 +20,7 @@ def f_hierarchical_passages_full(reffs, citation):
     levels = [x for x in citation]
     for cit, name in reffs:
         ref = cit.split('-')[0]
+        name = "%{}|{}%".format(levels[-1].name,name)
         if (len(levels) > 1):
             levs = ['%{}|{}%'.format(levels[i].name, v) for i, v in enumerate(ref.split('.'))]
         else:
