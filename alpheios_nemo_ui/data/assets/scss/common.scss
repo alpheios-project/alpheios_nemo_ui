@@ -190,12 +190,7 @@ body, html {
     display: none;
   }
   
-  #reading-container {
-    min-height: 100%;
-    background-color: $alpheioscolorneutrallightest;
-    margin-left: 0;
-    margin-right: 0;
-  }
+
   
   #browse-container article, #reading-container article {
     width: 100%;
@@ -294,11 +289,6 @@ body, html {
   .alpheios-nemo-toolbar {
     display: none;
   }
-  
-  #fullsearch {
-    margin-top:15px;
-  }
-  
   
   .popover-content {
     display: none;

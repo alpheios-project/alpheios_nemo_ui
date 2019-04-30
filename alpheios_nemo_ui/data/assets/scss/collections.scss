@@ -40,7 +40,7 @@
         }
 
         .collection-browse-card-item-icon {
-            fill: $alpheioscolormuted;
+            @include alpheios-vivid();
         }
     }
 
