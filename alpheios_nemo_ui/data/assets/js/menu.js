@@ -35,6 +35,7 @@ $(document).ready(function($) {
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       prefetch: $("#fullsearch").attr("data-target")
     });
+    fixedNavbar();
 
     $("#fullsearch").autocomplete(
       {
