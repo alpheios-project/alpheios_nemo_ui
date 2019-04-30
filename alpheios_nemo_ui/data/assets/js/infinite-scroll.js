@@ -75,7 +75,6 @@ function initPassages() {
 
 $(document).ready(function() {
     if ($('#current-passage').length > 0) {
-        preloadNext();
         isInit = true;
         setTimeout(initPassages, 1000)
 
