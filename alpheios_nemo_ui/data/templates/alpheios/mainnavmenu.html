@@ -1,0 +1,42 @@
+  
+  <div id="maindropdown" class="dropdown-menu main-dropdown" aria-labelledby="dropdownMenuButton">
+        <div class="main-dropdown-logo">
+            <a href="{{ url_for('.r_index') }}"><img class="logo" src="{{url_for('.secondary_assets', filetype='static', asset='alpheios-logo.svg')}} " alt="Alpheios Reading Center" /></a>
+            <h1>Reading Center</h1>
+        </div>
+    
+        <div class="main-dropdown-header">
+          <a href="javascript:void(0)" class="toolbar-button-icon" data-dismiss="modal" id="dropdownMenuButtonClose">{% include "alpheios::icons/X-Close-Icon.svg" %}</a>
+          <h3 class="main-dropdown-title">Main Menu</h3>
+        </div>
+    
+        <div class="main-dropdown-login">
+            {% include "alpheios::login.html" %}
+        </div>
+    
+        <div class="m-dropdown-content">
+          <p class="main-dropdown-content-title">Collections</p>
+          {% for crumb in menu: -%}
+            {% if loop.index < 4 %}
+              {% set args = { 'objectId': crumb['args']['objectId'] } %}          
+                <a class="dropdown-item m-dropdown-item" href="{{url_for(crumb.link, **args)}}">
+                    <span class="m-dropdown-item-icon" >{% include "alpheios::icons/Collections-Folder-Icon.svg" %}</span>
+                    <span class="m-dropdown-item-text">{{crumb.title}}</span>
+                    {% if crumb.current %}
+                       <span class="m-dropdown-item-text-current">({{ crumb.current }})</span>
+                    {% endif %}
+                </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="m-dropdown-content">
+          <a class="dropdown-item m-dropdown-item" href="https://alpheios.net">
+            <span class="m-dropdown-item-icon">{% include "alpheios::icons/External-Link-Icon.svg" %}</span>
+            <span class="m-dropdown-item-text">Go to Alpheios.net</span>
+          </a>
+        </div>
+        <div class="main-dropdown-login">
+            {% include "alpheios::logout.html" %}
+        </div>
+        
+        </div>

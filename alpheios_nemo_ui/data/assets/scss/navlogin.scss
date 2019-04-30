@@ -2,8 +2,13 @@ $logo-width: 50px;
 
 .navlogin {
     display: none;
-    padding: 26px 120px 26px 0;
+    padding: 17px 120px 17px 0;
     background: $navbar-dark-color;
+    min-height: $navlogin-height;
+    
+    @include media-breakpoint-up(lg) {
+        display: flex;
+    }
 
     .navlogin-logo-container {
         
@@ -34,6 +39,9 @@ $logo-width: 50px;
         .logged-in-email,
         .log-out-text {
             display: none;
+        }
+        .log-in-button {
+            margin: 0;
         }
         .logged-in-text {
             display: inline-block;
@@ -70,8 +78,3 @@ $logo-width: 50px;
     }
 }
 
-@include media-breakpoint-up(lg) {
-    .navlogin {
-        display: flex;
-    }
-}

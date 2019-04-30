@@ -5,6 +5,6 @@
   </a>
 {% else %}
   <p class="log-out-text">You are not logged in.</p>
-  <p><a class="btn btn-default alpheios-button-primary" href="{{url_for('.r_login')}}?next={{ request.url }}">Log in</a></p>
+  <p class="log-in-button"><a class="btn btn-default alpheios-button-primary" href="{{url_for('.r_login')}}?next={{ request.url }}">Log in</a></p>
 {% endif %}
 
