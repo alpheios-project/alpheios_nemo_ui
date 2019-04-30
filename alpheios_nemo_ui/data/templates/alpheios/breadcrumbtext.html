@@ -16,8 +16,8 @@
        href="{{url_for('.r_passage', objectId=objectId, subreference=prev) if prev else '#' }}">
        <span class="toolbar-button-icon">{% include "alpheios::icons/Left-caret.svg" %}</span>
     </a>   
-    <div class="subreference-all">{{ subreference }}</div>
-    <a class="navbar-section-ref-link btn btn-xs next {{'no-visibility' if not next }}" data-prev="{{ next|default(NaN) }}" 
+    <div class="subreference-all" id="current-passage" data-objectid="{{ objectId }}" data-subreference="{{ subreference }}">{{ subreference }}</div>
+    <a class="navbar-section-ref-link btn btn-xs next {{'no-visibility' if not next }}" data-prev="{{ next|default(NaN) }}" id="next-passage"
         href="{{url_for('.r_passage', objectId=objectId, subreference=next) if next else '#'}}">
         <span class="toolbar-button-icon">{% include "alpheios::icons/Right-caret.svg" %}<span>
     </a>
