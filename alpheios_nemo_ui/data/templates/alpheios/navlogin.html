@@ -5,9 +5,11 @@
     </div>
     
     <div class="navlogin-login-container">
-            {% include "alpheios::login.html" %}
-        <div class="dropdown-menu navlogin-dropdown-menu" aria-labelledby="dropdownLoginMenu">
-            {% include "alpheios::logout.html" %}
-        </div>
+        {% include "alpheios::login.html" %}
+        {% if 'profile' in session and session.profile != None %}
+            <div class="dropdown-menu navlogin-dropdown-menu" aria-labelledby="dropdownLoginMenu">
+                {% include "alpheios::logout.html" %}
+            </div>
+        {% endif %}
     </div>
 </nav>

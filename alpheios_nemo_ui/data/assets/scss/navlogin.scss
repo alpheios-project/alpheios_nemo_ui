@@ -4,6 +4,11 @@ $logo-width: 50px;
     display: none;
     padding: 17px 120px 17px 0;
     background: $navbar-dark-color;
+    min-height: $navlogin-height;
+    
+    @include media-breakpoint-up(lg) {
+        display: flex;
+    }
 
     .navlogin-logo-container {
         
@@ -73,8 +78,3 @@ $logo-width: 50px;
     }
 }
 
-@include media-breakpoint-up(lg) {
-    .navlogin {
-        display: flex;
-    }
-}
