@@ -70,6 +70,9 @@ function initPassages() {
             }
         })
         
+    } else {
+        isInit = false;
+        preloadNext();
     }
 }
 
