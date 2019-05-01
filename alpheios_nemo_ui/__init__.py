@@ -65,7 +65,9 @@ class AlpheiosNemoUI(PluginPrototype):
     ]
 
     FILTERS = [
-        "f_hierarchical_passages_full"
+        "f_hierarchical_passages_full",
+        "f_i18n_citation_label",
+        "f_i18n_citation_item"
     ]
 
     CACHED = ["r_typeahead_json"]
@@ -78,6 +80,8 @@ class AlpheiosNemoUI(PluginPrototype):
         self.external_url_base = external_url_base
         self.clear_routes = True
         self.f_hierarchical_passages_full = filters.f_hierarchical_passages_full
+        self.f_i18n_citation_label = filters.f_i18n_citation_label
+        self.f_i18n_citation_item = filters.f_i18n_citation_item
         self._get_lang = _get_lang
 
     def r_index(self):

@@ -1,19 +1,25 @@
 {% macro single_ref(objectId, subreference, human_reff) -%}
     <div class="card-text reff">
-        <a href="{{url_for('.r_passage', objectId=objectId, subreference=subreference)}}">{{ human_reff }}</a>
+        <a href="{{url_for('.r_passage', objectId=objectId, subreference=subreference)}}">{{ human_reff|i18n_citation_item }}</a>
     </div>
 {%- endmacro %}
 
 {% macro reff_dict(objectId, reffs) -%}
-    {% for human_reff, dict_or_reff in reffs.items() %}
-        {% if dict_or_reff|is_str %}
-            {{ single_ref(objectId, dict_or_reff, human_reff) }}
-        {% else %}
-          <div class="card p-2 m-2">
-              <div class="card-header">{{human_reff|i18n_citation_type}}</div>
-                 {{ reff_dict(objectId, dict_or_reff) }}
-            </div>
+    {% set reffs = reffs.items() %}
+    {% for human_reff, dict_or_reff in reffs %}
+      {% if dict_or_reff|is_str %}
+        {% if loop.index == 1 %}
+          <div class="passages" data-type="{{human_reff|i18n_citation_label}}">
+        {% endif%}
+        {{ single_ref(objectId, dict_or_reff, human_reff) }}
+        {% if loop.index == reffs|length %}
+          </div>
         {% endif %}
+      {% else %}
+        <div class="card p-2 m-2" data-type="{{human_reff|i18n_citation_label}}" data-value="{{human_reff|i18n_citation_item}}">
+          {{ reff_dict(objectId, dict_or_reff) }}
+        </div>
+      {% endif %}
     {% endfor %}
 {%- endmacro %}
 
