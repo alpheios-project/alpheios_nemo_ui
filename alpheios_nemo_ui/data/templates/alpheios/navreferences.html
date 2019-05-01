@@ -2,9 +2,6 @@
   {% include "alpheios::navmenu.html" %}
   {% set args = { 'objectId': objectId } %}
   <div class="navbar-text main-navbar-text">Browse Passages</div>
-  <div class="ml-auto d-inline w-20">
-    <input id="fullsearch" class="form-control form-inline" type="text" placeholder="Find a text" data-noresult="No results" data-target="{{url_for('.r_typeahead_json')}}"/>
-  </div>
   <button class="btn btn-icon btn-icon-md">
     <a href="{{url_for('.r_first_passage',**args) }}">
       <svg width="30" height="27" viewBox="0 0 30 27" fill="none" xmlns="http://www.w3.org/2000/svg">
