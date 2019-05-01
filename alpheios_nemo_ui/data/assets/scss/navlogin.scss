@@ -46,17 +46,25 @@ $logo-width: 50px;
         .logged-in-text {
             display: inline-block;
             vertical-align: baseline;
-            color: $alpheioscolorvivid;
         }
         .navlogin-login-container-link {
+            @include alpheios-vivid();
             @include alpheios-button(12px, auto);
-            @include alpheios-neutral-vivid();
-            
+            font-weight: normal;
+
             display: inline-block;
 
-            .toolbar-button-icon svg {
+            .svg {
                 vertical-align: baseline;
             }
+
+            &:hover {
+                font-weight: normal;
+            }
+        }
+
+        .logged-in-text-nickname {
+            font-weight: bold;
         }
 
         .m-dropdown-item:hover {

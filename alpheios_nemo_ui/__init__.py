@@ -34,7 +34,7 @@ class AlpheiosNemoUI(PluginPrototype):
         resource_filename("alpheios_nemo_ui", "data/assets/js/autocomplete.min.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/menu.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/text.js"),
-        resource_filename("alpheios_nemo_ui", "data/assets/js/mobile.js"),
+        resource_filename("alpheios_nemo_ui", "data/assets/js/infinite-scroll.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/env.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/alpheios-embedded.js")
     ]
@@ -60,7 +60,8 @@ class AlpheiosNemoUI(PluginPrototype):
         ("/logout","r_logout",["GET"]),
         ("/return","r_logout_return",["GET"]),
         ("/userinfo","r_userinfo",["GET"]),
-        ("/usertoken","r_usertoken",["GET"])
+        ("/usertoken","r_usertoken",["GET"]),
+        ("/nextpassage/<objectId>/<subreference>", "r_next_passage",["GET"])
     ]
 
     FILTERS = [
@@ -425,6 +426,19 @@ class AlpheiosNemoUI(PluginPrototype):
     @requires_auth
     def r_usertoken(self):
         return jsonify(session['access_token'])
+
+    def r_next_passage(self, objectId, subreference):
+        text = self.nemo.get_passage(objectId=objectId, subreference=subreference)
+        prev, next = self.nemo.get_siblings(objectId, subreference, text)
+        url = url_for('.r_passage', objectId=objectId, subreference=next)
+
+        prevRef, nextRef = self.nemo.get_siblings(objectId, next, text)
+        nextRefUrl = url_for('.r_passage', objectId=objectId, subreference=nextRef)
+        return jsonify({
+            'next': next,
+            'url': url,
+            'nextRefUrl': nextRefUrl
+        })
 
     def make_parents(self, collection, lang=None):
         """ Build parents list for given collection
