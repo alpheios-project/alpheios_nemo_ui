@@ -1,6 +1,6 @@
 {% if 'profile' in session and session.profile != None %}
-  <p class="logged-in-text">Logged in as <span class="logged-in-text-nickname">{{ session.profile.nickname }}</span></p>
-  <a class="navlogin-login-container-link" href="#" role="button" id="dropdownLoginMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<a class="navlogin-login-container-link" href="#" role="button" id="dropdownLoginMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  
+    <p class="logged-in-text">Logged in as <span class="logged-in-text-nickname">{{ session.profile.nickname }}</span></p>
     <span class="toolbar-button-icon">{% include "alpheios::icons/Down-caret.svg" %}</span>
   </a>
 {% else %}

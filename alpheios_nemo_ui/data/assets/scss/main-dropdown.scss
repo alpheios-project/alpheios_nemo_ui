@@ -73,9 +73,17 @@ $menu-lg-padding: 115px;
         .logged-in-text {
             margin: 0;
             @include alpheios-body();
+            display: inline-block;
+            vertical-align: baseline;
+            color: $alpheioscolorvivid;
+
             .logged-in-text-nickname {
                 font-weight: bold;
             }
+        }
+
+        .toolbar-button-icon {
+            display: none;
         }
         .logged-in-email {
             margin: 0;

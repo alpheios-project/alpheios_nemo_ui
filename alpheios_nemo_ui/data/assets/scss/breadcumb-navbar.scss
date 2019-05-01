@@ -51,7 +51,7 @@
     @include media-breakpoint-up(sm) {
         .toolbar-button-icon {
             vertical-align: top;
-            top: 3px;
+            top: 0;
         }
         .toolbar-button-text {
             vertical-align: top;
