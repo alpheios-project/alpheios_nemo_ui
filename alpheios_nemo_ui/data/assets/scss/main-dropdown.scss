@@ -65,7 +65,7 @@ $menu-lg-padding: 115px;
     .main-dropdown-logo-bottom {
         display: block;
         padding-top: 15px;
-        
+
         @include media-breakpoint-up(lg) {
             display: none;
         }
@@ -76,7 +76,7 @@ $menu-lg-padding: 115px;
         }
 
         .logo {
-            width: 30px;
+            width: 25px;
             height: auto;
             margin-right: 5px;
             margin-left: 5px;
