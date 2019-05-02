@@ -37,6 +37,10 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
     @include media-breakpoint-up(lg) {
         padding-top: $desktopPaddingTop;
 
+        &.article-text {
+            padding-top: $desktopPaddingTop;
+        }
+
         .navlogin {
             top: 0;
         }

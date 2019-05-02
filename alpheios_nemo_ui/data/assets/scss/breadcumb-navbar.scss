@@ -41,8 +41,8 @@
 .nav-link-current-text {
     @include alpheios-vivid();
     @include alpheios-button(15px, 15px);
-
     padding-top: 5px; 
+    
     .toolbar-button-icon {
         top: -3px;
     }
@@ -51,6 +51,7 @@
     }
 
     @include media-breakpoint-up(sm) {
+        padding-top: 0; 
         .toolbar-button-icon {
             vertical-align: top;
             top: 0;
@@ -74,5 +75,9 @@
         @include alpheios-vivid();
         @include alpheios-button(15px, 15px);
         padding: 0 20px;
+    }
+
+    @include media-breakpoint-up(sm) {
+        width: auto;
     }
 }

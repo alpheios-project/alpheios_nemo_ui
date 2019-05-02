@@ -46,6 +46,7 @@ $logo-width: 50px;
         .logged-in-text {
             display: inline-block;
             vertical-align: baseline;
+            margin: 0;
         }
         .navlogin-login-container-link {
             @include alpheios-vivid();
