@@ -1,8 +1,11 @@
+$mobilePaddingTop: $mainnavbar-height + $breadcrumbs-height  + $breadcrumbs-height * 0.6;
+$desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
+
 .article-wrap {
     position: relative;
     height: 100%;
 
-    padding-top: $mainnavbar-height + $breadcrumbs-height;
+    padding-top: $mobilePaddingTop;
 
     .navlogin,
     .main-navbar,
@@ -28,7 +31,7 @@
         min-height: 100%;
     }
     @include media-breakpoint-up(lg) {
-        padding-top: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
+        padding-top: $desktopPaddingTop;
 
         .navlogin {
             top: 0;
@@ -52,7 +55,7 @@
 }
 
 .article-wrap.fixed-navbar {
-    padding-top: $mainnavbar-height + $breadcrumbs-height;
+    padding-top: $mobilePaddingTop;
     .navlogin {
         display: none;
     }

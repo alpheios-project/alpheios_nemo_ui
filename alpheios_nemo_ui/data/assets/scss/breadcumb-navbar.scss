@@ -41,6 +41,7 @@
     @include alpheios-vivid();
     @include alpheios-button(15px, 15px);
 
+    padding-top: 5px; 
     .toolbar-button-icon {
         top: -3px;
     }
@@ -62,7 +63,7 @@
 .navbar-section-ref {
     display: flex;
     text-align: center;
-    padding: 0.5rem 0;
+    padding: 5px 0;
     
     .subreference-all {
         @include alpheios-body();
