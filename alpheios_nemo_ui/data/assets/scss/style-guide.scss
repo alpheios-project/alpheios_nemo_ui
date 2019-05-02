@@ -91,6 +91,7 @@
     width: auto;
     text-decoration: none;
     position: relative;
+    font-weight: normal;
 
     &:hover, 
     &:active,
@@ -110,6 +111,7 @@
         display: inline;
         position: relative;
         @include alpheios-body();
+        margin-left: 5px;
     }    
 
     @include media-breakpoint-up(sm) {
