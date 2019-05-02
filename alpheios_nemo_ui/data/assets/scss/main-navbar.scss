@@ -2,7 +2,6 @@
     padding-top: 15px;
     padding-bottom: 15px;
     min-height: $mainnavbar-height;
-    justify-content: left;
 
     @include media-breakpoint-up(sm) {
         padding-top: 13px;
@@ -38,6 +37,17 @@
         @include media-breakpoint-up(sm) {
             @include alpheios-icon(20px, 20px);
         }
+    }
+}
+
+.main-navbar {
+    .navbar-left-part {
+        .main-navbar-button,
+        .main-navbar-text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
     }
 }
 
