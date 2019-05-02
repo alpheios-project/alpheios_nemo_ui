@@ -1,15 +1,16 @@
 .breadcumb-navbar {
     overflow: hidden;
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
     text-align: center;
     min-height: $breadcrumbs-height;
     padding-top: 0;
     padding-bottom: 0;
 
     @include media-breakpoint-up(sm) {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
+
         justify-content: space-between;
     }
     @include media-breakpoint-up(lg) {
@@ -64,6 +65,7 @@
     display: flex;
     text-align: center;
     padding: 5px 0;
+    width: 100%;
     
     .subreference-all {
         @include alpheios-body();

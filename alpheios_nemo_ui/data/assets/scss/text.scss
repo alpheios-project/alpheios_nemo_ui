@@ -1,4 +1,4 @@
-$mobilePaddingTop: $mainnavbar-height + $breadcrumbs-height  + $breadcrumbs-height * 0.6;
+$mobilePaddingTop: $mainnavbar-height + $breadcrumbs-height;
 $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
 
 .article-wrap {
@@ -6,6 +6,10 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
     height: 100%;
 
     padding-top: $mobilePaddingTop;
+
+    &.article-text {
+        padding-top: $mobilePaddingTop + $breadcrumbs-height * 0.6;
+    }
 
     .navlogin,
     .main-navbar,
