@@ -197,6 +197,9 @@
 }
 
 @mixin alpheios-modal-popup() {
+    left: 2.5%;
+    width: 95%;
+    
     .modal-dialog {
         margin: 0;
         top: 64px;
