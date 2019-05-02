@@ -1,6 +1,9 @@
 <nav id="mainnav" class="navbar navbar-dark bg-dark main-navbar">
     <div class="navbar-left-part">
       {% include "alpheios::navmenu.html" %}
-      <div class="navbar-text main-navbar-text">Collections</div>
+      <a href="{{ url_for('.r_index') }}" class="navbar-logo-text-link">
+          <img class="logo" src="{{url_for('.secondary_assets', filetype='static', asset='alpheios-logo.svg')}} " alt="Alpheios Reading Center" />
+          <h4 class="navbar-text main-navbar-text">Collections</h4>
+      </a>
     </div>
 </nav>

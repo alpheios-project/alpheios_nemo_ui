@@ -41,13 +41,36 @@
 }
 
 .main-navbar {
+    .main-navbar-text {
+        padding-left: 15px;
+    }
+
     .navbar-left-part {
         .main-navbar-button,
         .main-navbar-text {
             display: inline-block;
             vertical-align: middle;
         }
+
+        .navbar-toggler {
+            padding-right: 0;
+        }
         
+        .navbar-logo-text-link {
+            vertical-align: bottom;
+            position: relative;
+            top: 2px; 
+
+            img.logo {
+                display: inline-block;
+                width: 30px;
+                margin-left: 7px;
+            }
+
+            .main-navbar-text {
+                padding-left: 3px;
+            }
+        }
     }
 }
 
