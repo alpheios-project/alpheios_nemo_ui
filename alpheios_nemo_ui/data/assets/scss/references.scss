@@ -1,0 +1,48 @@
+.reference-browse-container {
+    @include collection-container();
+
+    .browse-header {
+        .browse-level-2 {
+            display: none;
+        }
+    }
+    
+    .reference-browse-cards {
+        
+        @include collection-list-style();
+
+        .reference-browse-cards {
+            display: none;
+        }
+
+        .collection-browse-cards {
+            @include collection-cards-style();
+
+            li {
+                /* padding: 10px 20px 5px 20px;*/ 
+                .left-part {
+                    .card-title {
+                        margin-bottom: 0;
+                    }
+                }
+                .right-part {
+                    .card-icon,
+                    .card-text {
+                        display: inline-block;
+                    }
+                    .card-icon {
+                        margin-bottom: 0;
+                    }
+                    .card-text {
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+.ref-book-item {
+    .passages {
+        display: none;
+    }
+}

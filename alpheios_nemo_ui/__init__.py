@@ -35,6 +35,7 @@ class AlpheiosNemoUI(PluginPrototype):
         resource_filename("alpheios_nemo_ui", "data/assets/js/menu.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/text.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/infinite-scroll.js"),
+        resource_filename("alpheios_nemo_ui", "data/assets/js/browse.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/env.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/alpheios-embedded.js")
     ]

@@ -42,15 +42,18 @@
 }
 
 .main-navbar {
-    .main-navbar-text {
-        padding-left: 15px;
-    }
 
     .navbar-left-part {
         .main-navbar-button,
         .main-navbar-text {
             display: inline-block;
             vertical-align: middle;
+        }
+
+        .main-navbar-text {
+            padding-left: 15px;
+            top: 2px;
+            position: relative;
         }
 
         .navbar-toggler {
@@ -60,25 +63,16 @@
         .navbar-logo-text-link {
             vertical-align: bottom;
             position: relative;
-            top: 2px; 
+        }
+    }
 
-            img.logo {
-                display: inline-block;
-                width: 30px;
-                margin-left: 7px;
+    img.logo {
+        display: inline-block;
+        width: 30px;
+        margin-left: 7px;
 
-                @include media-breakpoint-up(md) {
-                    display: none;
-                }
-            }
-
-            .main-navbar-text {
-                padding-left: 3px;
-
-                @include media-breakpoint-up(md) {
-                    padding-left: 15px;
-                }
-            }
+        @include media-breakpoint-up(md) {
+            display: none;
         }
     }
 }
