@@ -25,8 +25,8 @@ d = "./texts"
 tic = TextInventoryCollection()
 latin = PrototypeTextInventory("urn:perseus:latinLit", parent=tic)
 latin.set_label("Classical Latin", "eng")
-ara = PrototypeTextInventory("urn:alpheios:arabicLit", parent=tic)
-ara.set_label("Classical Arabic", "eng")
+#ara = PrototypeTextInventory("urn:alpheios:arabicLit", parent=tic)
+#ara.set_label("Classical Arabic", "eng")
 gc = PrototypeTextInventory("urn:perseus:greekLit", parent=tic)
 gc.set_label("Ancient Greek", "eng")
 
@@ -40,11 +40,11 @@ def dispatchLatinLit(collection, path=None, **kwargs):
         return True
     return False
 
-@dispatcher.inventory("urn:alpheios:arabicLit")
-def dispatchArabicLit(collection, path=None, **kwargs):
-    if collection.id.startswith("urn:cts:arabicLit:"):
-        return True
-    return False
+#@dispatcher.inventory("urn:alpheios:arabicLit")
+#def dispatchArabicLit(collection, path=None, **kwargs):
+#    if collection.id.startswith("urn:cts:arabicLit:"):
+#        return True
+#    return False
 
 @dispatcher.inventory("urn:perseus:greekLit")
 def dispatchGreekLit(collection, path=None, **kwargs):
@@ -53,7 +53,7 @@ def dispatchGreekLit(collection, path=None, **kwargs):
     return False
 
 unfiltered_collections = {
-    'arabicLit': 1,
+#    'arabicLit': 1,
 }
 
 allowed_textgroups = [
@@ -73,6 +73,11 @@ allowed_works = [
     'urn:cts:greekLit:tlg0032.tlg007', # xenophon cyropaedia
     'urn:cts:greekLit:tlg0032.tlg001', # xenophon hellenica
     'urn:cts:greekLit:tlg0032.tlg002', # xenophon memorabilia
+    'urn:cts:greekLit:tlg0059.tlg002', # plato apology
+    'urn:cts:greekLit:tlg0059.tlg001', # plato euthyphro
+    'urn:cts:greekLit:tlg0059.tlg011', # plato symposium
+    'urn:cts:greekLit:tlg0540.tlg002', # lysius funeral oration
+    'urn:cts:greekLit:tlg0561.tlg001', # longus daphnis and chloe
 ]
 
 allowed_editions = [
