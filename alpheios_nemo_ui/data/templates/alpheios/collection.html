@@ -7,7 +7,7 @@
   {% include "alpheios::breadcrumb.html" %}
   {% include "alpheios::mainnavmenu.html" %}
 
-  <div class="d-flex" id="reading-container">
+  <div class="d-flex {{ 'collection-small-cards' if collections.current and collections.current.class == 'XmlCtsTextgroupMetadata' }}" id="reading-container">
     <article id="browse-container" class="collection-browse-container">
         <header class="collection-browse-header">
             {% if collections.current %}
@@ -26,18 +26,26 @@
               <p><i>Select a language</i></p>
             {% endif %}
         </header>
-        <section class="card-columns">
+        <section class="collection-browse-section">
             <ul class="collection-browse-cards">
             {% if collections.types|length > 0 %}
               {% for type in collections.types %}
-                <li class="card">
+                <li class="shadow">
                   <h3>{{type}}</h3>
                   <ul>
                     {% for coll in collections.types[type] %}
-                      <li class="card"><span lang="{{collections.current.label_lang}}">{{ coll.work.label }}</span><br/>
-                          {% set ed = coll.editions[0] %}
+                    {% set ed = coll.editions[0] %}
+                      <li class="">
+                        <div class="left-part">
+                          <span lang="{{collections.current.label_lang}}" class="card-title">{{ coll.work.label }}</span>
                           <a class="card-link" href="{{url_for('.r_references', objectId=ed.id)}}">Browse</a>
-                          <a class="card-link" href="{{url_for('.r_first_passage', objectId=ed.id)}}">Read</a>
+                        </div>
+                        <div class="right-part">
+                          <a class="card-link" href="{{url_for('.r_first_passage', objectId=ed.id)}}">
+                            <span class="card-icon">{% include "alpheios::icons/Alpheios-Reader-Icon.svg" %}</span>
+                            <span class="card-text">Read</span>
+                          </a>
+                        </div>
                       </li>
                     {% endfor %}
                   </ul>
@@ -45,19 +53,34 @@
               {% endfor %}
             {% elif collections.expanded_members|length > 0 %}
               {% for coll in collections.expanded_members %}
-                  <li class="card"><span lang="{{collections.current.label_lang}}">{{ coll.work.label }}</span><br/>
-                      {% set ed = coll.editions[0] %}
+                  {% set ed = coll.editions[0] %}
+                  <li class="shadow">
+                    <div class="left-part">
+                      <span lang="{{collections.current.label_lang}}" class="card-title">{{ coll.work.label }}</span>
                       <a class="card-link" href="{{url_for('.r_references', objectId=ed.id)}}">Browse</a>
-                      <a class="card-link" href="{{url_for('.r_first_passage', objectId=ed.id)}}">Read</a>
+                    </div>
+                    <div class="right-part">
+                      <a class="card-link" href="{{url_for('.r_first_passage', objectId=ed.id)}}">
+                        <span class="card-icon">{% include "alpheios::icons/Alpheios-Reader-Icon.svg" %}</span>
+                        <span class="card-text">Read</span>
+                      </a>
+                    </div>
                   </li>
               {% endfor %}
             {% else %}
               {% for coll in collections.members %}
                   {% if coll.model == 'http://w3id.org/dts-ontology/resource' %}
-                  <li class="card">
-                      <span lang="{{coll.label_lang}}">{{ coll.label }}</span><br />
+                  <li class="shadow">
+                    <div class="left-part">
+                      <span lang="{{coll.label_lang}}" class="card-title">{{ coll.label }}</span>
                       <a class="card-link" href="{{url_for('.r_references', objectId=coll.id)}}">Browse</a>
-                      <a class="card-link" href="{{url_for('.r_first_passage', objectId=coll.id)}}">Read</a>
+                    </div>
+                    <div class="right-part">
+                      <a class="card-link" href="{{url_for('.r_first_passage', objectId=coll.id)}}">
+                        <span class="card-icon">{% include "alpheios::icons/Alpheios-Reader-Icon.svg" %}</span>
+                        <span class="card-text">Read</span>
+                      </a>
+                    </div>
                   </li>
                   {% else %}
                   <li class="collection-browse-card-item">
