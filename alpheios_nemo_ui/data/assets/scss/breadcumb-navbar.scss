@@ -1,15 +1,16 @@
 .breadcumb-navbar {
     overflow: hidden;
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
     text-align: center;
     min-height: $breadcrumbs-height;
     padding-top: 0;
     padding-bottom: 0;
 
     @include media-breakpoint-up(sm) {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
+
         justify-content: space-between;
     }
     @include media-breakpoint-up(lg) {
@@ -18,6 +19,7 @@
 }
 
 .alpheios-nemo-toolbar {
+    visibility: hidden;
     max-height: 48px;
     min-width: 254px;
 
@@ -40,7 +42,8 @@
 .nav-link-current-text {
     @include alpheios-vivid();
     @include alpheios-button(15px, 15px);
-
+    padding-top: 5px; 
+    
     .toolbar-button-icon {
         top: -3px;
     }
@@ -49,6 +52,7 @@
     }
 
     @include media-breakpoint-up(sm) {
+        padding-top: 0; 
         .toolbar-button-icon {
             vertical-align: top;
             top: 0;
@@ -62,7 +66,8 @@
 .navbar-section-ref {
     display: flex;
     text-align: center;
-    padding: 0.5rem 0;
+    padding: 5px 0;
+    width: 100%;
     
     .subreference-all {
         @include alpheios-body();
@@ -71,5 +76,9 @@
         @include alpheios-vivid();
         @include alpheios-button(15px, 15px);
         padding: 0 20px;
+    }
+
+    @include media-breakpoint-up(sm) {
+        width: auto;
     }
 }

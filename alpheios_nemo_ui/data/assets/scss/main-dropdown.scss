@@ -62,8 +62,33 @@ $menu-lg-padding: 115px;
         }
     }
 
+    .main-dropdown-logo-bottom {
+        display: block;
+        padding-top: 15px;
+
+        @include media-breakpoint-up(lg) {
+            display: none;
+        }
+
+        .logo, h4 {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .logo {
+            width: 25px;
+            height: auto;
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+
+        h4 {
+            @include alpheios-h4();
+            margin: 0;
+        }
+    }
+
     .main-dropdown-login {
-        border-bottom: 1px solid $alpheioscolorneutrallight;
         padding: 15px 5px;
 
         @include media-breakpoint-up(lg) {
@@ -75,7 +100,7 @@ $menu-lg-padding: 115px;
             @include alpheios-body();
             display: inline-block;
             vertical-align: baseline;
-            color: $alpheioscolorvivid;
+            color: $alpheioscolordark;
 
             .logged-in-text-nickname {
                 font-weight: bold;

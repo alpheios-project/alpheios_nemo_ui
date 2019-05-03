@@ -19,6 +19,7 @@ $help-icon-size: 24px;
   .help-popup-title {
     width: 100%;
     padding-left: $help-icon-size * 1.5;
+    font-weight: bold;
   }
 
   .help-popup-list-item {
@@ -26,6 +27,10 @@ $help-icon-size: 24px;
     display: flex;
     column-count: 2;
     align-items: center;
+
+    .help-popup-list-item-text {
+      line-height: 1.5;
+    }
 
     .help-popup-list-item-icon {
       @include alpheios-icon($help-icon-size, $help-icon-size);

@@ -1,11 +1,12 @@
 {% if 'profile' in session and session.profile != None %}
+<!--
 <div class="m-dropdown-content">
     <a class="dropdown-item m-dropdown-item" href="#">
       <span class="m-dropdown-item-icon">{% include "alpheios::icons/User-Icon.svg" %}</span>
       <span class="m-dropdown-item-text">My Account</span>
     </a>
 </div>
-
+-->
 <div class="m-dropdown-content">
   <a class="dropdown-item m-dropdown-item" href="{{url_for('.r_logout')}}?next={{request.url}}">
     <span class="m-dropdown-item-icon">{% include "alpheios::icons/Logout-Lock-Icon.svg" %}</span>
