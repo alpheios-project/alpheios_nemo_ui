@@ -2,7 +2,8 @@
     @include collection-container();
 
     .browse-header {
-        .browse-level-2 {
+        .browse-level-2,
+        .browse-level-3 {
             display: none;
         }
     }
@@ -12,7 +13,8 @@
         @include collection-list-style();
 
         .reference-browse-cards {
-            display: none;
+            display: none; 
+            margin: 0;
         }
 
         .collection-browse-cards {

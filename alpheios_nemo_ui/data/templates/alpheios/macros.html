@@ -12,82 +12,71 @@
     </li>
 {%- endmacro %}
 
-{% macro reff_dict(objectId, reffs, booktitle) -%}
-    {% set reffs = reffs.items() %}
-      <ul class="reference-browse-cards {{booktitle if booktitle}}">
-        {% for human_reff, dict_or_reff in reffs %}
-          {% if dict_or_reff|is_str %}
-            {% if loop.index == 1 %}
-              <ul class="collection-browse-cards">
-            {% endif%}
-            {{ single_ref(objectId, dict_or_reff, human_reff) }}
-            {% if loop.index == reffs|length %}
-              </ul>
-            {% endif %}
-          {% else %}
-            {% set booktitle = human_reff|i18n_citation_label + '-' +human_reff|i18n_citation_item %}
-            {% if human_reff|i18n_citation_label == 'Book' %}
-            <li class="browse-list-item">
-                <a class="list-item-link" href="#" data-book-title="{{booktitle}}">
-                  <span>{{human_reff|i18n_citation_label}} {{human_reff|i18n_citation_item}}</span>
-                  <span class="list-item-icon">{% include "alpheios::icons/Right-caret.svg" %}</span>
-                </a>
-            </li>
-            {% endif %}
-            {{ reff_dict(objectId, dict_or_reff, booktitle) }}
-          {% endif %}
-        {% endfor %}
-      </ul>
-{%- endmacro %}
 
-{% macro hierarchical_dispatcher(objectId, reffs, citation, booktitle) -%}
-    {{ reff_dict(objectId, (reffs|hierarchical_passages_full(citation)), None) }}
-{%- endmacro %}
-
-{% macro reff_dict_header(objectId, reffs, booktitle) -%}
+{% macro reff_dict_header(objectId, reffs, booktitle, bookLevel, prevBookTitle) -%}
   {% set reffitems = reffs.items() %}
-  {% set finalBookTitle = booktitle.split('-') %}
-
-  {% if finalBookTitle|length == 1 %}
-    {% for keyItem in reffs.keys() %}
-      {% if loop.index == 1 %}
-        {% if keyItem|i18n_citation_label == 'Book' %}
-          <div class="browse-level-1">
-            <h3 class="browse-header-title">Book ({{ booktitle }})</h3>
-            <p><i>Select a book</i></p>
-          </div>
-        {% endif %}
-        {% if keyItem|i18n_citation_label == 'Line' %}
-          <div class="browse-level-1">
-            <h3 class="browse-header-title">Passage ({{ booktitle }})</h3>
-            <p><i>Select a passage</i></p>
-          </div>
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-  {% endif %}
+  {% set finalBookTitle = booktitle|i18n_readable_book_title %}
+  
+  {% set browseLink = None %}
 
   {% for human_reff, dict_or_reff in reffitems %}
-    {% if dict_or_reff|is_str %}
-      {% if loop.index == 1 %}
-        {% if human_reff|i18n_citation_label == 'Line' %}
-          {% if finalBookTitle|length > 1 %}
-            <div class="browse-level-2 {{ booktitle }}">
-              <h3 class="browse-header-title">Passage (
-                  <a href="#">{{ finalBookTitle[0] + ' ' +  finalBookTitle[1]}}</a>
-              )</h3>
-              <p><i>Select a passage</i></p>
-            </div>
-            {% endif %}
-        {% endif%}
-      {% endif%}
-    {% else %}
-        {{ reff_dict_header(objectId, dict_or_reff, human_reff|i18n_citation_label + '-' + human_reff|i18n_citation_item) }}
+    {% if loop.index == 1 %}
+      {% set browseLink = booktitle|citation_link %}
+      {% set finalPrev = prevBookTitle if prevBookTitle else browseLink %}
+      <p>1 - {{ browseLink }}, 2 - {{ prevBookTitle }}, 3 - {{ finalPrev }}</p>
+      <div class="browse-level browse-level-{{ bookLevel }} {{prevBookTitle+'-' if prevBookTitle}}{{ browseLink if browseLink }}">
+        {% if human_reff|citation_name == 'passage' %}
+          <h3 class="browse-header-title">Passage (<a href="#" class="book-level-prev">{{ finalBookTitle }}</a>)</h3>
+          <p><i>Select a passage</i></p>
+        {% elif human_reff|citation_name == 'chapter' %}
+          <h3 class="browse-header-title">Chapter (<a href="#" class="book-level-prev">{{ finalBookTitle }}</a>)</h3>
+          <p><i>Select a chapter</i></p>
+        {% else %}
+          <h3 class="browse-header-title">{{ human_reff|i18n_citation_label }} (<a href="#" class="book-level-prev">{{ finalBookTitle }}</a>)</h3>
+          <p><i>Select a {{ human_reff|i18n_citation_label|lower }}</i></p>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if dict_or_reff|is_str == false %}
+        <p>---1 - {{ browseLink }}, 2 - {{ prevBookTitle }}, 3 - {{ finalPrev }}</p>
+        {{ reff_dict_header(objectId, dict_or_reff, human_reff, bookLevel + 1, finalPrev) }}
     {% endif %}
   {% endfor %}
   
 {%- endmacro %}
 
-{% macro hierarchical_header_dispatcher(objectId, reffs, citation, booktitle) -%}
-    {{ reff_dict_header(objectId, (reffs|hierarchical_passages_full(citation)), booktitle) }}
+{% macro hierarchical_header_dispatcher(objectId, reffs, citation, booktitle, bookLevel) -%}
+    {{ reff_dict_header(objectId, (reffs|hierarchical_passages_full(citation)), booktitle, bookLevel, None) }}
+{%- endmacro %}
+
+{% macro reff_dict(objectId, reffs, booktitle, prevBookTitle) -%}
+    {% set reffs = reffs.items() %}
+    <ul class="reference-browse-cards {{prevBookTitle+'-' if prevBookTitle}}{{booktitle if booktitle}}">
+      {% for human_reff, dict_or_reff in reffs %}
+        {% if dict_or_reff|is_str %}
+          {% if loop.index == 1 %}
+            <ul class="collection-browse-cards">
+          {% endif%}
+          {{ single_ref(objectId, dict_or_reff, human_reff) }}
+          {% if loop.index == reffs|length %}
+            </ul>
+          {% endif %}
+        {% else %}
+          {% if human_reff|citation_name != 'passage' %}
+            {% set booktitleLower = human_reff|citation_link  %}
+            <li class="browse-list-item">
+                <a class="list-item-link" href="#" data-book-title="{{booktitle+'-' if booktitle}}{{booktitleLower}}">
+                  <span>{{human_reff|i18n_citation_label}} {{human_reff|i18n_citation_item}}</span>
+                  <span class="list-item-icon">{% include "alpheios::icons/Right-caret.svg" %}</span>
+                </a>
+            </li>
+          {% endif %}
+          {{ reff_dict(objectId, dict_or_reff, booktitleLower, booktitle) }}
+        {% endif %}
+      {% endfor %}
+    </ul>
+{%- endmacro %}
+
+{% macro hierarchical_dispatcher(objectId, reffs, citation) -%}
+    {{ reff_dict(objectId, (reffs|hierarchical_passages_full(citation)), None, None) }}
 {%- endmacro %}

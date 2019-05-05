@@ -68,7 +68,10 @@ class AlpheiosNemoUI(PluginPrototype):
     FILTERS = [
         "f_hierarchical_passages_full",
         "f_i18n_citation_label",
-        "f_i18n_citation_item"
+        "f_i18n_citation_item",
+        "f_citation_name",
+        "f_i18n_readable_book_title",
+        "f_citation_link"
     ]
 
     CACHED = ["r_typeahead_json"]
@@ -83,6 +86,9 @@ class AlpheiosNemoUI(PluginPrototype):
         self.f_hierarchical_passages_full = filters.f_hierarchical_passages_full
         self.f_i18n_citation_label = filters.f_i18n_citation_label
         self.f_i18n_citation_item = filters.f_i18n_citation_item
+        self.f_citation_name = filters.f_citation_name
+        self.f_i18n_readable_book_title = filters.f_i18n_readable_book_title
+        self.f_citation_link = filters.f_citation_link
         self._get_lang = _get_lang
 
     def r_index(self):
