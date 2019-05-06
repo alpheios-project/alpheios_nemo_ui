@@ -7,11 +7,11 @@
   {% include "alpheios::breadcrumb.html" %}
   {% include "alpheios::mainnavmenu.html" %}
 
-  <div class="d-flex" id="reading-container">
+  <div class="d-flex {{ 'collection-small-cards' if collections.current and collections.current.class == 'XmlCtsTextgroupMetadata' }}" id="reading-container">
     <article id="browse-container" class="collection-browse-container">
-        <header class="collection-browse-header">
+        <header class="browse-header">
             {% if collections.current %}
-              <h3  class="collection-browse-header-title">
+              <h3  class="browse-header-title">
               <span lang="{{collections.current.label_lang}}">{{collections.current.label}}</span>
               </h3>
               {% if collections.current.class == 'XmlCtsTextgroupMetadata' %}
@@ -20,24 +20,30 @@
                 <p><i>Select an author</i></p>
               {% endif %}
             {% else %}
-              <h3  class="collection-browse-header-title">
-              Language
-              </h3>
+              <h3  class="browse-header-title">Language</h3>
               <p><i>Select a language</i></p>
             {% endif %}
         </header>
-        <section class="card-columns">
+        <section class="browse-section">
             <ul class="collection-browse-cards">
             {% if collections.types|length > 0 %}
               {% for type in collections.types %}
-                <li class="card">
+                <li class="shadow">
                   <h3>{{type}}</h3>
                   <ul>
                     {% for coll in collections.types[type] %}
-                      <li class="card"><span lang="{{collections.current.label_lang}}">{{ coll.work.label }}</span><br/>
-                          {% set ed = coll.editions[0] %}
+                    {% set ed = coll.editions[0] %}
+                      <li class="">
+                        <div class="left-part">
+                          <span lang="{{collections.current.label_lang}}" class="card-title">{{ coll.work.label }}</span>
                           <a class="card-link" href="{{url_for('.r_references', objectId=ed.id)}}">Browse</a>
-                          <a class="card-link" href="{{url_for('.r_first_passage', objectId=ed.id)}}">Read</a>
+                        </div>
+                        <div class="right-part">
+                          <a class="card-link" href="{{url_for('.r_first_passage', objectId=ed.id)}}">
+                            <span class="card-icon">{% include "alpheios::icons/Alpheios-Reader-Icon.svg" %}</span>
+                            <span class="card-text">Read</span>
+                          </a>
+                        </div>
                       </li>
                     {% endfor %}
                   </ul>
@@ -45,25 +51,40 @@
               {% endfor %}
             {% elif collections.expanded_members|length > 0 %}
               {% for coll in collections.expanded_members %}
-                  <li class="card"><span lang="{{collections.current.label_lang}}">{{ coll.work.label }}</span><br/>
-                      {% set ed = coll.editions[0] %}
+                  {% set ed = coll.editions[0] %}
+                  <li class="shadow">
+                    <div class="left-part">
+                      <span lang="{{collections.current.label_lang}}" class="card-title">{{ coll.work.label }}</span>
                       <a class="card-link" href="{{url_for('.r_references', objectId=ed.id)}}">Browse</a>
-                      <a class="card-link" href="{{url_for('.r_first_passage', objectId=ed.id)}}">Read</a>
+                    </div>
+                    <div class="right-part">
+                      <a class="card-link" href="{{url_for('.r_first_passage', objectId=ed.id)}}">
+                        <span class="card-icon">{% include "alpheios::icons/Alpheios-Reader-Icon.svg" %}</span>
+                        <span class="card-text">Read</span>
+                      </a>
+                    </div>
                   </li>
               {% endfor %}
             {% else %}
               {% for coll in collections.members %}
                   {% if coll.model == 'http://w3id.org/dts-ontology/resource' %}
-                  <li class="card">
-                      <span lang="{{coll.label_lang}}">{{ coll.label }}</span><br />
+                  <li class="shadow">
+                    <div class="left-part">
+                      <span lang="{{coll.label_lang}}" class="card-title">{{ coll.label }}</span>
                       <a class="card-link" href="{{url_for('.r_references', objectId=coll.id)}}">Browse</a>
-                      <a class="card-link" href="{{url_for('.r_first_passage', objectId=coll.id)}}">Read</a>
+                    </div>
+                    <div class="right-part">
+                      <a class="card-link" href="{{url_for('.r_first_passage', objectId=coll.id)}}">
+                        <span class="card-icon">{% include "alpheios::icons/Alpheios-Reader-Icon.svg" %}</span>
+                        <span class="card-text">Read</span>
+                      </a>
+                    </div>
                   </li>
                   {% else %}
-                  <li class="collection-browse-card-item">
-                      <a class="card-link collection-browse-card-item-link" href="{{url_for('.r_collection', objectId=coll.id)}}">
+                  <li class="browse-list-item">
+                      <a class="list-item-link" href="{{url_for('.r_collection', objectId=coll.id)}}">
                         <span>{{ coll.label }} ({{coll.size}})</span>
-                        <span class="collection-browse-card-item-icon">{% include "alpheios::icons/Right-caret.svg" %}</span>
+                        <span class="list-item-icon">{% include "alpheios::icons/Right-caret.svg" %}</span>
                       </a>
                   </li>
                   {% endif %}
@@ -71,7 +92,7 @@
             {% endif %}
             </ul>
         </section>
-        <section class="collection-browse-copyright">
+        <section class="browse-copyright">
           <button class="btn btn-large btn-outline-muted copyright-button" data-toggle="modal" data-target="#copyrightPopup">© Copyright Info</button>
         </section>
     </article>
