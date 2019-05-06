@@ -8,11 +8,19 @@ implemented as a plugin to https://github.com/Capitains/flask-capitains-nemo
 Prerequisites: Docker and Docker-Compose
 
 ### Without Authentication Support
+#### For Linux
 ```
 git clone https://github.com/alpheios-project/alpheios_nemo_ui
 cd alpheios_nemo_ui
 ./get_texts.sh
 ./docker-compose up
+```
+#### For Windows 10 (with WSL)
+```
+git clone https://github.com/alpheios-project/alpheios_nemo_ui
+cd alpheios_nemo_ui
+get_texts.bat
+docker-compose up -d
 ```
 
 Alpheios Reader flask application will be accessible at http://localhost:5000
@@ -22,12 +30,21 @@ Alpheios Reader flask application will be accessible at http://localhost:5000
 Prerequisites: alpheios-protected-config repo must be a sibling to the alpheios_nemo_ui clone
 add dev.alpheios.net mapping for localhost to your /etc/hosts file
 
+#### For Linux
 ```
 git clone https://github.com/alpheios-project/alpheios_nemo_ui
 cd alpheios_nemo_ui
 ./get_texts.sh
 ./setup_env.sh
 ./docker-compose up
+```
+#### For Windows 10 (with WSL)
+```
+git clone https://github.com/alpheios-project/alpheios_nemo_ui
+cd alpheios_nemo_ui
+get_texts.bat
+setup_env.bat
+docker-compose up -d
 ```
 
 Alpheios Reader flask application will be accessible at http://dev.alpheios.net:5000
