@@ -13,14 +13,16 @@
     <article class="reference-browse-container">
       <header class="browse-header">
           {% if cache_active %}
-              {% cache cache_time, cache_key %}{{ macros.hierarchical_header_dispatcher(objectId, reffs, citation, breadcrumbs[-3]["label"], 1) }} {% endcache %}
+              {% set block_key1 = cache_key + '-1' %}
+              {% cache cache_time, block_key1 %}{{ macros.hierarchical_header_dispatcher(objectId, reffs, citation, breadcrumbs[-3]["label"], 1) }} {% endcache %}
           {% else %}
               {{ macros.hierarchical_header_dispatcher(objectId, reffs, citation, breadcrumbs[-3]["label"], 1) }}
           {% endif %}
       </header>
       <section class="browse-section">
           {% if cache_active %}
-              {% cache cache_time, cache_key %}{{ macros.hierarchical_dispatcher(objectId, reffs, citation) }} {% endcache %}
+              {% set block_key2 = cache_key + '-2' %}
+              {% cache cache_time, block_key2 %}{{ macros.hierarchical_dispatcher(objectId, reffs, citation) }} {% endcache %}
           {% else %}
               {{ macros.hierarchical_dispatcher(objectId, reffs, citation) }}
           {% endif %}
