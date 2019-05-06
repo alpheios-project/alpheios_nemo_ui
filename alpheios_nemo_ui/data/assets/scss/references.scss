@@ -2,6 +2,18 @@
     @include collection-container();
 
     .browse-header {
+        .browse-level-1 {
+            .book-level-prev {
+                cursor: default;
+                @include alpheios-h3();
+                font-weight: bold;
+                color: $alpheioscolordark;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+
         .browse-level-2,
         .browse-level-3 {
             display: none;

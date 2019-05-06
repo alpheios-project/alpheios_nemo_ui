@@ -12,28 +12,31 @@ function showPrevLevel ($browseLevel) {
     var levelNumber = jQuery.grep(browseClasses, function( a ) {
         return a.indexOf('browse-level') === 0 && a!=='browse-level';
     })[0].split('-')[2];
+    levelNumber = parseInt(levelNumber);
+
+    if (levelNumber === 1) {
+        return;
+    }
 
     $('.browse-header > div').hide();
+    var addClass = '';
 
-    if ($browseLevel.hasClass('browse-level-2')) {
-        $('.browse-header .browse-level-' + (levelNumber - 1)).show();
-        $('.reference-browse-cards '.repeat(levelNumber)).hide();
-        $('.reference-browse-cards '.repeat(levelNumber-1) + ' > .browse-list-item').show();
-    }
-    if ($browseLevel.hasClass('browse-level-3')) {
+    if (levelNumber > 2) {
         var levelClass = jQuery.grep(browseClasses, function( a ) {
             return a.indexOf('browse-level') !== 0 ;
         })[0];
         
         var levelClassArr = levelClass.split('-');
-        var addClass = '';
+        
         if (levelClassArr.length > levelNumber) {
             addClass = '.' + levelClassArr[levelClassArr.length-levelNumber-1] + '-' + levelClassArr[levelClassArr.length-levelNumber];
-        } 
-        $('.browse-header .browse-level-' + (levelNumber-1) + addClass).show();
-        $('.reference-browse-cards '.repeat(levelNumber)).hide();
-        $('.reference-browse-cards '.repeat(levelNumber-1) + ' > .browse-list-item').show();
+        }
     }
+      
+    $('.browse-header .browse-level-' + (levelNumber-1) + addClass).show();
+    $('.reference-browse-cards '.repeat(levelNumber)).hide();
+    $('.reference-browse-cards '.repeat(levelNumber-1) + ' > .browse-list-item').show();
+
 }
 
 $(document).ready(function() {

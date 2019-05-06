@@ -13,18 +13,17 @@
 {%- endmacro %}
 
 
-{% macro reff_dict_header(objectId, reffs, booktitle, bookLevel, prevBookTitle) -%}
+{% macro reff_dict_header(objectId, reffs, booktitle, bookLevel, prevBrowseLink, prevBookTitle) -%}
   {% set reffitems = reffs.items() %}
-  {% set finalBookTitle = booktitle|i18n_readable_book_title %}
+  {% set finalBookTitle = (prevBookTitle+' ' if prevBookTitle else '') + booktitle|i18n_readable_book_title %}
   
-  {% set browseLink = None %}
-
   {% for human_reff, dict_or_reff in reffitems %}
+    {% set browseLink = booktitle|citation_link %}
+    {% set prevBookTitle = booktitle|i18n_readable_book_title if bookLevel > 1 else None %}
     {% if loop.index == 1 %}
       {% set browseLink = booktitle|citation_link %}
-      {% set finalPrev = prevBookTitle if prevBookTitle else browseLink %}
-      <p>1 - {{ browseLink }}, 2 - {{ prevBookTitle }}, 3 - {{ finalPrev }}</p>
-      <div class="browse-level browse-level-{{ bookLevel }} {{prevBookTitle+'-' if prevBookTitle}}{{ browseLink if browseLink }}">
+
+      <div class="browse-level browse-level-{{ bookLevel }} {{ prevBrowseLink+'-' if prevBrowseLink }}{{ browseLink if browseLink }}">
         {% if human_reff|citation_name == 'passage' %}
           <h3 class="browse-header-title">Passage (<a href="#" class="book-level-prev">{{ finalBookTitle }}</a>)</h3>
           <p><i>Select a passage</i></p>
@@ -37,16 +36,17 @@
         {% endif %}
       </div>
     {% endif %}
+    
+
     {% if dict_or_reff|is_str == false %}
-        <p>---1 - {{ browseLink }}, 2 - {{ prevBookTitle }}, 3 - {{ finalPrev }}</p>
-        {{ reff_dict_header(objectId, dict_or_reff, human_reff, bookLevel + 1, finalPrev) }}
+        {{ reff_dict_header(objectId, dict_or_reff, human_reff, bookLevel + 1, browseLink, prevBookTitle) }}
     {% endif %}
   {% endfor %}
   
 {%- endmacro %}
 
 {% macro hierarchical_header_dispatcher(objectId, reffs, citation, booktitle, bookLevel) -%}
-    {{ reff_dict_header(objectId, (reffs|hierarchical_passages_full(citation)), booktitle, bookLevel, None) }}
+    {{ reff_dict_header(objectId, (reffs|hierarchical_passages_full(citation)), booktitle, bookLevel, None, None) }}
 {%- endmacro %}
 
 {% macro reff_dict(objectId, reffs, booktitle, prevBookTitle) -%}
