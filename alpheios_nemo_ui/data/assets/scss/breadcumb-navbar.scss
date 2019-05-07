@@ -13,6 +13,13 @@
         padding-left: 15px;
     }
 
+    .breadcrumb-item a {
+        @include alpheios-neutral-vivid();
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
     @include media-breakpoint-up(sm) {
         justify-content: space-between;
     }
