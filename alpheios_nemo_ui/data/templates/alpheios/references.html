@@ -1,6 +1,6 @@
 {% extends "main::container.html" %}
 {% block article %}
-<div class="article-wrap">
+<div class="article-wrap" id="reference-article">
   {% include "alpheios::navlogin.html" %}
   {% include "alpheios::navreferences.html" %}
   {% include "alpheios::breadcrumbreferences.html" %}
@@ -10,14 +10,23 @@
 
   
   <div class="d-flex" id="reading-container">
-    <article class="nav container">
-        <section class="d-flex flex-wrap">
-            {% if cache_active %}
-                {% cache cache_time, cache_key %}{{ macros.hierarchical_dispatcher(objectId, reffs, citation) }} {% endcache %}
-            {% else %}
-                {{ macros.hierarchical_dispatcher(objectId, reffs, citation) }}
-            {% endif %}
-        </section>
+    <article class="reference-browse-container">
+      <header class="browse-header">
+          {% if cache_active %}
+              {% set block_key1 = cache_key + '-1' %}
+              {% cache cache_time, block_key1 %}{{ macros.hierarchical_header_dispatcher(objectId, reffs, citation, breadcrumbs[-3]["label"], 1) }} {% endcache %}
+          {% else %}
+              {{ macros.hierarchical_header_dispatcher(objectId, reffs, citation, breadcrumbs[-3]["label"], 1) }}
+          {% endif %}
+      </header>
+      <section class="browse-section">
+          {% if cache_active %}
+              {% set block_key2 = cache_key + '-2' %}
+              {% cache cache_time, block_key2 %}{{ macros.hierarchical_dispatcher(objectId, reffs, citation) }} {% endcache %}
+          {% else %}
+              {{ macros.hierarchical_dispatcher(objectId, reffs, citation) }}
+          {% endif %}
+      </section>
     </article>
   </div>
 </div>
