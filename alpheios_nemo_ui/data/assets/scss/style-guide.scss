@@ -329,8 +329,10 @@
     @include media-breakpoint-up(md) {
         margin-left: 15px;
         margin-right: 15px;
-        width: 50%;
-        max-width: 600px;
+        li {
+            width: 50%;
+            max-width: 600px;
+        }
     }
 
     @include media-breakpoint-up(lg) {
