@@ -19,8 +19,15 @@
     .collection-letters {
         h3 {
             color: $alpheioscolorneutraldark;
-            padding-left: 10px;
+            margin-left: 30px;
             margin-bottom: 10px;
+
+            @include media-breakpoint-up(md) {
+                margin-left: 20px;
+            }
+            @include media-breakpoint-up(lg) {
+                margin-left: 0;
+            }
         }
 
         .collection-browse-cards {
