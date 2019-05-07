@@ -25,12 +25,12 @@
             {% endif %}
         </header>
         <section class="browse-section">
-            <ul class="collection-browse-cards">
+            <ul class="{{ 'collection-browse-cards' if collections.types|length == 0 else 'collection-genres' }}">
             {% if collections.types|length > 0 %}
               {% for type in collections.types %}
-                <li class="shadow">
+                <li class="">
                   <h3>{{type}}</h3>
-                  <ul>
+                  <ul class="collection-browse-cards">
                     {% for coll in collections.types[type] %}
                     {% set ed = coll.editions[0] %}
                       <li class="">
