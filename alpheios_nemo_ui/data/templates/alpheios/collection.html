@@ -50,7 +50,11 @@
                   {% else %}
                   <li class="browse-list-item">
                       <a class="list-item-link" href="{{url_for('.r_collection', objectId=coll.id)}}">
-                        <span>{{ coll.label }} ({{coll.size}})</span>
+                        {% if (collections.current and collections.current.class and collections.current.class != 'XmlCtsTextgroupMetadata') %}
+                          <span>{{ coll.label }}</span>
+                        {% else %}
+                          <span>{{ coll.label }} ({{coll.size}})</span>
+                        {% endif %}
                         <span class="list-item-icon">{% include "alpheios::icons/Right-caret.svg" %}</span>
                       </a>
                   </li>
