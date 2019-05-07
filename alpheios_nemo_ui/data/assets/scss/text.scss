@@ -9,11 +9,13 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
 
     &.article-text {
         padding-top: $mobilePaddingTop + $breadcrumbs-height * 0.6;
+        background-color: $alpheioscolorneutrallightest;
     }
+
 
     .navlogin,
     .main-navbar,
-    .breadcumb-navbar {
+    .breadcrumb-navbar {
         position: absolute;
         width: 100%;
         left: 0;
@@ -23,7 +25,7 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
         top: 0;
     }
 
-    .breadcumb-navbar {
+    .breadcrumb-navbar {
         top: $mainnavbar-height;
     }
 
@@ -34,6 +36,14 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
         background-color: $alpheioscolorneutrallightest;
         min-height: 100%;
     }
+
+    @include media-breakpoint-up(sm) {
+        &.article-text {
+            padding-top: $mobilePaddingTop;
+            background-color: transparent;
+        }
+    }
+
     @include media-breakpoint-up(lg) {
         padding-top: $desktopPaddingTop;
 
@@ -49,7 +59,7 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
             top: $navlogin-height;
         }
     
-        .breadcumb-navbar {
+        .breadcrumb-navbar {
             top: $mainnavbar-height + $navlogin-height;
         }
     }
@@ -69,7 +79,7 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
     }
     .navlogin,
     .main-navbar,
-    .breadcumb-navbar {
+    .breadcrumb-navbar {
         position: fixed;
         z-index: 500;
     }
@@ -77,7 +87,7 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
         top: 0;
     }
 
-    .breadcumb-navbar {
+    .breadcrumb-navbar {
         top: $mainnavbar-height;
     }
 

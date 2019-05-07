@@ -58,7 +58,7 @@ $menu-lg-padding: 115px;
             vertical-align: middle;
             padding-left: $logo-width * 0.3;
             margin: 0;
-            @include alpheios-h3();
+            @include alpheios-h1-mobile();
         }
     }
 
@@ -137,7 +137,7 @@ $menu-lg-padding: 115px;
         }
 
         .main-dropdown-title {
-             @include alpheios-h4();
+            @include alpheios-h3();
             display: inline-block;
             padding-left: 15px;
             vertical-align: middle;
@@ -165,7 +165,8 @@ $menu-lg-padding: 115px;
     min-width: 250px;
 
     @include alpheios_body();
-    @include alpheios-link-dark-vivid();
+    @include alpheios-link();
+    @include alpheios-dark-vivid();
 
     &:hover {
         font-weight: normal;

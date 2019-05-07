@@ -1,4 +1,4 @@
-.breadcumb-navbar {
+.breadcrumb-navbar {
     overflow: hidden;
     display: flex;
     flex-wrap: wrap;
@@ -11,6 +11,15 @@
 
     .breadcrumb {
         padding-left: 15px;
+    }
+
+    .breadcrumb-item a {
+        @include alpheios-link();
+        @include alpheios-neutral-bright();
+        &:hover,
+        &.current {
+            text-decoration: none;
+        }
     }
 
     @include media-breakpoint-up(sm) {
@@ -57,6 +66,7 @@
     }
     .toolbar-button-text {
         @include alpheios-h4();
+        margin-bottom: 0;
     }
 
     @include media-breakpoint-up(sm) {

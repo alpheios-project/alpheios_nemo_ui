@@ -3,6 +3,54 @@
 
     .collection-browse-cards {
         @include collection-list-style();
+
+        .list-item-link {
+            @include alpheios-link();
+            @include alpheios-neutral-dark();
+        }
+    }
+
+    .collection-letters,
+    .collection-genres {
+        list-style: none;
+        margin: 0 0 20px 0;
+        padding: 0;
+
+        h3 {
+            @include alpheios-h3-mobile();
+        }
+    }
+
+    .collection-letters {
+        @include media-breakpoint-up(md) {
+            width: 50%;
+            max-width: 600px;
+
+            li {
+                width: 100%;
+                max-width: none;
+            }
+        }
+
+        h3 {
+            @include alpheios-h3();
+            color: $alpheioscolorneutraldark;
+            margin-left: 30px;
+            margin-bottom: 10px;
+
+            @include media-breakpoint-up(md) {
+                margin-left: 20px;
+            }
+            @include media-breakpoint-up(lg) {
+                margin-left: 0;
+            }
+        }
+
+        .collection-browse-cards {
+            margin-top: 0;
+            border-top: 1px solid $alpheioscolorneutraldark;
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+        }
     }
 }
 

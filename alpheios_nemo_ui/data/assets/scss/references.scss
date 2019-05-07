@@ -2,11 +2,14 @@
     @include collection-container();
 
     .browse-header {
+        .book-level-prev {
+            @include alpheios-h3();
+            @include alpheios-vivid();
+        }
+
         .browse-level-1 {
             .book-level-prev {
                 cursor: default;
-                @include alpheios-h3();
-                font-weight: bold;
                 color: $alpheioscolordark;
                 &:hover {
                     text-decoration: none;
@@ -23,6 +26,10 @@
     .reference-browse-cards {
         
         @include collection-list-style();
+        .list-item-link {
+            @include alpheios-link();
+            @include alpheios-neutral-dark();
+        }
 
         .reference-browse-cards {
             display: none; 
@@ -31,6 +38,15 @@
 
         .collection-browse-cards {
             @include collection-cards-style();
+
+            li.small-card {
+                @include media-breakpoint-up(sm) {
+                    max-width: 200px;
+                }
+                @include media-breakpoint-up(md) {
+                    width: 200px;
+                }
+            }
 
             li {
                 /* padding: 10px 20px 5px 20px;*/ 

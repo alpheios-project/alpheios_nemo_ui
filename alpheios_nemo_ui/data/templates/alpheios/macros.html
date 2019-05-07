@@ -12,6 +12,14 @@
     </li>
 {%- endmacro %}
 
+{% macro single_ref_short(objectId, subreference, human_reff) -%}
+    <li class="shadow small-card">
+      <a class="card-link" href="{{url_for('.r_passage', objectId=objectId, subreference=subreference)}}">
+        <span class="card-title">{{ human_reff|i18n_citation_item }}</span>
+      </a>
+    </li>
+{%- endmacro %}
+
 
 {% macro reff_dict_header(objectId, reffs, booktitle, bookLevel, prevBrowseLink, prevBookTitle) -%}
   {% set reffitems = reffs.items() %}

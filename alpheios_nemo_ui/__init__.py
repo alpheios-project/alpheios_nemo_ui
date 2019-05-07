@@ -150,6 +150,7 @@ class AlpheiosNemoUI(PluginPrototype):
         members = self.nemo.make_members(collection, lang=lang)
         expanded_members = list()
         types = {}
+        letters = {}
         DCT = Namespace("http://purl.org/dc/terms/")
         if isinstance(collection, XmlCtsTextgroupMetadata):
             for m in members:
@@ -165,6 +166,12 @@ class AlpheiosNemoUI(PluginPrototype):
                     types[workType].append(e)
                 else:
                     expanded_members.append(e)
+        else:
+            for m in members:
+                letter = m['label'][0]
+                if letter not in letters:
+                    letters[letter] = []
+                letters[letter].append(m)
 
         return {
             "template": "alpheios::collection.html",
@@ -180,6 +187,7 @@ class AlpheiosNemoUI(PluginPrototype):
                 "members": self.nemo.make_members(collection, lang=lang),
                 "parents": self.make_parents(collection, lang=lang),
                 "types": types,
+                "letters": letters,
                 "expanded_members": expanded_members
             },
         }

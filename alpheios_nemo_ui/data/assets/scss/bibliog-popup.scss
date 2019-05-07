@@ -20,7 +20,8 @@
         }
         
         .bibliog-popup-footer-link {
-            @include alpheios-link-vivid();
+            @include alpheios-link();
+            @include alpheios-vivid();
             font-weight: bold;
             margin: 0;
         }   
