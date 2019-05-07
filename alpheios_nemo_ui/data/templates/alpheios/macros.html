@@ -1,4 +1,4 @@
-{% macro single_ref(objectId, subreference, human_reff) -%}
+{% macro single_ref_fullcard(objectId, subreference, human_reff) -%}
     <li class="shadow">
       <div class="left-part">
         <span class="card-title">{{ human_reff|i18n_citation_item }}</span>
@@ -9,6 +9,14 @@
           <span class="card-text">Read</span>
         </a>
       </div>
+    </li>
+{%- endmacro %}
+
+{% macro single_ref(objectId, subreference, human_reff) -%}
+    <li class="shadow small-card">
+      <a class="card-link" href="{{url_for('.r_passage', objectId=objectId, subreference=subreference)}}">
+        <span class="card-title">{{ human_reff|i18n_citation_item }}</span>
+      </a>
     </li>
 {%- endmacro %}
 

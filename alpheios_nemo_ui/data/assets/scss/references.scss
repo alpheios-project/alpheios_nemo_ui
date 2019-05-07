@@ -32,6 +32,15 @@
         .collection-browse-cards {
             @include collection-cards-style();
 
+            li.small-card {
+                @include media-breakpoint-up(sm) {
+                    max-width: 200px;
+                }
+                @include media-breakpoint-up(md) {
+                    width: 200px;
+                }
+            }
+
             li {
                 /* padding: 10px 20px 5px 20px;*/ 
                 .left-part {
