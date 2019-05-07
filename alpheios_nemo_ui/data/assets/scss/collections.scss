@@ -3,6 +3,15 @@
 
     .collection-browse-cards {
         @include collection-list-style();
+
+        .list-item-link {
+            @include alpheios-link();
+            @include alpheios-neutral-dark();
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
     }
 
     .collection-letters,
@@ -28,6 +37,7 @@
         }
 
         h3 {
+            @include alpheios-h3();
             color: $alpheioscolorneutraldark;
             margin-left: 30px;
             margin-bottom: 10px;

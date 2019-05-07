@@ -14,8 +14,10 @@
     }
 
     .breadcrumb-item a {
-        @include alpheios-neutral-vivid();
-        &:hover {
+        @include alpheios-link();
+        @include alpheios-neutral-bright();
+        &:hover,
+        &.current {
             text-decoration: none;
         }
     }
@@ -64,6 +66,7 @@
     }
     .toolbar-button-text {
         @include alpheios-h4();
+        margin-bottom: 0;
     }
 
     @include media-breakpoint-up(sm) {

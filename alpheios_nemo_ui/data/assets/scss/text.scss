@@ -9,7 +9,9 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
 
     &.article-text {
         padding-top: $mobilePaddingTop + $breadcrumbs-height * 0.6;
+        background-color: $alpheioscolorneutrallightest;
     }
+
 
     .navlogin,
     .main-navbar,
@@ -34,6 +36,14 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
         background-color: $alpheioscolorneutrallightest;
         min-height: 100%;
     }
+
+    @include media-breakpoint-up(sm) {
+        &.article-text {
+            padding-top: $mobilePaddingTop;
+            background-color: transparent;
+        }
+    }
+
     @include media-breakpoint-up(lg) {
         padding-top: $desktopPaddingTop;
 

@@ -22,7 +22,7 @@
           {% endif %}
           <li class="breadcrumb-item"><a href="{{url_for(link, **args)}}">{{crumb["title"]}}</a></li>
         {% else %}
-          <li class="breadcrumb-item active">{{crumb["title"]}}</li>
+          <li class="breadcrumb-item"><a href="#" class="current">{{crumb["title"]}}</a></li>
         {% endif %}
       {%- endfor %}
     </ol>

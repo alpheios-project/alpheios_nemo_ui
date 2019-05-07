@@ -1,73 +1,197 @@
-@mixin alpheios-h3-mobile() {
+@mixin alpheios-h1-mobile() {
     font-size: 22px;
-    font-weight: normal;
+    font-weight: 800;
     font-style: normal;
+    font-family: $font-family-serif;
 }
 
-@mixin alpheios-h3() {
-    font-size: 20px;
-    font-weight: normal;
-    font-style: normal;
-    
+@mixin alpheios-h1() {
+    @include alpheios-h1-mobile();
 
     @include media-breakpoint-up(md) {
-        @include alpheios-h3-mobile();
+        font-size: 36px;
+        font-weight: 800;
+        font-style: normal;
     }
 }
 
-@mixin alpheios-h4() {
+@mixin alpheios-h2-mobile() {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+    font-family: $font-family-sans-serif;
+}
+
+@mixin alpheios-h2() {
+    @include alpheios-h2-mobile();
+    
+    @include media-breakpoint-up(md) {
+        font-size: 36px;
+        font-weight: bold;
+        font-style: normal;        
+        font-family: $font-family-serif;
+    }
+}
+
+
+@mixin alpheios-h3-mobile() {
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-family: $font-family-sans-serif;
+}
+
+@mixin alpheios-h3() {
+    @include alpheios-h3-mobile();
+ 
+    @include media-breakpoint-up(md) {
+        font-size: 22px;
+        font-weight: bold;
+        font-style: normal;        
+    }
+}
+
+@mixin alpheios-h4-mobile() {
     font-size: 18px;
     font-weight: normal;
     font-style: normal;
+    font-family: $font-family-serif;
+}
+
+@mixin alpheios-h4() {
+    @include alpheios-h4-mobile();
+
+    @include media-breakpoint-up(md) {
+        font-size: 18px;
+        font-weight: normal;
+        font-style: normal;
+    }
+}
+
+@mixin alpheios-h5-mobile() {
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    font-family: $font-family-sans-serif;
+}
+
+@mixin alpheios-h5() {
+    @include alpheios-h5-mobile();
+
+    @include media-breakpoint-up(md) {
+        font-size: 16px;
+        font-weight: normal;
+        font-style: italic;
+    }
 }
 
 @mixin alpheios-body() {
     font-size: 16px;
     font-weight: normal;
     font-style: normal;
-}
-
-@mixin alpheios-h1-mobile() {
-    font-size: 22px;
-    font-weight: bold;
-    font-style: normal;
+    font-family: $font-family-sans-serif;
 }
 
 @mixin alpheios-large-label() {
     font-size: 14px;
     font-weight: normal;
     font-style: normal;
+    font-family: $font-family-sans-serif;
 }
 
 @mixin alpheios-small-label() {
     font-size: 14px;
     font-weight: normal;
     font-style: normal;
+    font-family: $font-family-sans-serif;
 }
 
-@mixin alpheios-link-vivid() {
+@mixin alpheios-button() {
     font-size: 16px;
-    font-weight: normal;
+    font-weight: bold;
     font-style: normal;
-    color: $alpheioscolorvivid;
+    font-family: $font-family-sans-serif;
+}
 
+@mixin alpheios-vivid() {
+    color: $alpheioscolorvivid;
     svg {
         fill: $alpheioscolorvivid;
+        stroke: $alpheioscolorvivid;
     }
-
-    &:hover,
-    &.current {
-        text-decoration: underline;
+    &:hover {
         color: $alpheioscolorvividhover;
-
         svg {
             fill: $alpheioscolorvividhover;
+            stroke: $alpheioscolorvividhover;
+        }
+    }
+    &.current {
+        color: $alpheisocolorvividpressed;
+
+        svg {
+            fill: $alpheisocolorvividpressed;
         }
     }
 }
 
-@mixin alpheios-link-dark-vivid() {
-    @include alpheios-link-vivid();
+@mixin alpheios-bright() {
+    color: $alpheioscolorbright;
+    svg {
+        fill: $alpheioscolorbright;
+        stroke: $alpheioscolorbright;
+    }
+    &:hover {
+        color: $alpheioscolorbrighthover;
+        svg {
+            fill: $alpheioscolorbrighthover;
+            stroke: $alpheioscolorbrighthover;
+        }
+    }
+    &.current {
+        color: $alpheisocolorbrightpressed;
+
+        svg {
+            fill: $alpheisocolorbrightpressed;
+        }
+    }
+}
+
+@mixin alpheios-neutral-bright() {
+    @include alpheios-bright();
+    color: $alpheioscolorneutrallightest;
+    svg {
+        fill: $alpheioscolorneutrallightest;
+        stroke: $alpheioscolorneutrallightest;
+    }
+    &.current {
+        color: $alpheioscolorbright;
+
+        svg {
+            fill: $alpheioscolorbright;
+        }
+    }
+}
+
+@mixin alpheios-link() {
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    &.current {
+        text-decoration: underline;
+    }
+    
+}
+
+
+
+@mixin alpheios-dark-vivid() {
+    @include alpheios-vivid();
     color: $alpheioscolordark;
 
     svg {
@@ -142,66 +266,24 @@
     }
 }
 
-@mixin alpheios-vivid() {
-    color: $alpheioscolorvivid;
-    svg {
-        fill: $alpheioscolorvivid;
-        stroke: $alpheioscolorvivid;
-    }
-    &:hover {
-        color: $alpheioscolorvividhover;
-        svg {
-            fill: $alpheioscolorvividhover;
-            stroke: $alpheioscolorvividhover;
-        }
-    }
-}
+
 
 @mixin alpheios-neutral-vivid() {
+    @include alpheios-vivid();
     color: $alpheioscolorneutrallightest;
     svg {
         fill: $alpheioscolorvivid;
         stroke: $alpheioscolorvivid;
     }
-    &:hover {
-        color: $alpheioscolorbright;
-        svg {
-            fill: $alpheioscolorvividhover;
-            stroke: $alpheioscolorvividhover;
-        }
-    }
 }
 
-@mixin alpheios-neutral-bright() {
-    color: $alpheioscolorneutrallightest;
-    svg {
-        fill: $alpheioscolorneutrallightest;
-        stroke: $alpheioscolorneutrallightest;
-    }
-    &:hover {
-        color: $alpheioscolorbright;
-        svg {
-            fill: $alpheioscolorbright;
-            stroke: $alpheioscolorbright;
-        }
-    }
-}
+
 
 @mixin alpheios-neutral-dark() {
     color: $alpheioscolordark;
-    border: 1px solid $alpheioscolordark;
-    background: $alpheioscolorneutrallightest;
     svg {
         fill: $alpheioscolordark;
         stroke: $alpheioscolordark;
-    }
-    &:hover {
-        color: $alpheioscolorneutrallightest;
-        background: $alpheioscolordark;
-        svg {
-            fill: $alpheioscolorneutrallightest;
-            stroke: $alpheioscolorneutrallightest;
-        }
     }
 }
 
@@ -240,16 +322,17 @@
     .modal-title {
         margin: 0;
         padding: 0;
-        @include alpheios-h1-mobile();
-
-        @include media-breakpoint-up(sm) {
-            @include alpheios-h3();
-        }
+        @include alpheios-h3();
     }
 
     .modal-body {
         padding: 0;
         @include alpheios-body();
+
+        a {
+            @include alpheios-link();
+            @include alpheios-vivid();
+        }
     }
 
     .modal-footer {
@@ -271,12 +354,14 @@
     }
 
     .browse-header-title {
-        font-weight: bold;
+        @include alpheios-h3();
     }
 
     .copyright-button {
         @include alpheios-neutral-dark();
         border-radius: 0.5rem;
+        border: 1px solid $alpheioscolordark;
+        background: $alpheioscolorneutrallightest;
     }
 
     @include media-breakpoint-up(md) {
@@ -364,6 +449,14 @@
         span, a  {
             display: block;
         }
+        a {
+            @include alpheios-link();
+            @include alpheios-vivid();
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
 
         .card-link {
             font-weight: bold;
@@ -372,9 +465,6 @@
         .right-part {
             text-align: center;
             @include alpheios-icon(30px, auto);
-            a {
-                @include alpheios-vivid();
-            }
             .card-icon {
                 margin-bottom: 5px;
             }
