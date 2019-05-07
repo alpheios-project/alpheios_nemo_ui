@@ -7,10 +7,6 @@
         .list-item-link {
             @include alpheios-link();
             @include alpheios-neutral-dark();
-
-            &:hover {
-                text-decoration: none;
-            }
         }
     }
 
