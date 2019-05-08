@@ -316,10 +316,15 @@ class AlpheiosNemoUI(PluginPrototype):
         passage = self.nemo.transform(text, text.export(Mimetypes.PYTHON.ETREE), objectId)
         prev, next = self.nemo.get_siblings(objectId, subreference, text)
         newLevel = self.new_level(subreference,prev)
+
+        nextUrl = None
+        if next: 
+            nextUrl = url_for('.r_passage', objectId=objectId, subreference=next)
         data = {
             "objectId": objectId,
             "subreference": subreference,
             "new_level": newLevel,
+            "nextUrl": nextUrl,
             "collections": {
                 "current": {
                     "label": collection.get_label(lang),
@@ -457,10 +462,14 @@ class AlpheiosNemoUI(PluginPrototype):
         url = url_for('.r_passage', objectId=objectId, subreference=next)
 
         prevRef, nextRef = self.nemo.get_siblings(objectId, next, text)
-        nextRefUrl = url_for('.r_passage', objectId=objectId, subreference=nextRef)
+        nextRefUrl = ""
+        if nextRef: 
+            nextRefUrl = url_for('.r_passage', objectId=objectId, subreference=nextRef)
+
         return jsonify({
             'next': next,
             'url': url,
+            'nextRef': nextRef,
             'nextRefUrl': nextRefUrl
         })
 
