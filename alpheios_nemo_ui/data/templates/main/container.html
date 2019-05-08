@@ -52,7 +52,23 @@
   {% block footer %}
     {% include "main::footer.html" %}
   {% endblock %}
-  <div id="alpheios-main" data-trigger="dblclick" data-selector=".entry-content"></div>
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+      new Alpheios.Embedded({
+        'clientId':'alpheios-reader',
+        'enabledSelector':'.entry-content',
+        popupInitialPos: {
+          left: '50px',
+          top: '230px'
+        },
+        toolbarInitialPos: {
+          top: '220px',
+          right: '15px'
+        }
+      }).activate();
+    });
+
+  </script>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

@@ -19,7 +19,7 @@
 {% macro show_passage(text, subreference, source, footer) %}
 <article class="hentry entry white">
     {{ source }}
-   
+
     <section id="reading-container" class="reading-container">
       <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
@@ -49,30 +49,13 @@
     {% include "alpheios::navreader.html" %}
     {% include "alpheios::breadcrumbtext.html" %}
     {% include "alpheios::mainnavmenu.html" %}
-    
+
     {{ show_passage(text_passage, subreference, source=source_passage(), footer=default_footer()) }}
   </div>
 {% endblock %}
 
 {% block additionalscript %}
 {{ super() }}
-  <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function(event) {
-      new Alpheios.Embedded({
-        'clientId':'alpheios-reader', 
-        'enabledSelector':'.entry-content',
-        popupInitialPos: {
-          left: '50px',
-          top: '230px'
-        },
-        toolbarInitialPos: {
-          top: '220px',
-          right: '15px'
-        }
-      }).activate();
-    });
-
-  </script>
 <script type="text/javascript">
   $("a.urn").each(function() {
 		var urn = $(this).attr("href").split(":"),

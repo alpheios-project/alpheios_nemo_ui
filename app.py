@@ -60,11 +60,11 @@ allowed_textgroups = [
     'phi0893', # Horace
     'phi0474', # Cicero
     'tlg0011', # Sophocles
+    'phi0448', # Caesar
 ]
 
 allowed_works = [
     'urn:cts:latinLit:phi0690.phi003', # vergil aen id
-    'urn:cts:latinLit:phi0448.phi001', # caesar gallic war
     'urn:cts:latinLit:phi0472.phi001', # catullus carmina
     'urn:cts:latinLit:phi0620.phi001', # propertius elegies
     'urn:cts:greekLit:tlg0020.tlg001', # hesiod theogeny
