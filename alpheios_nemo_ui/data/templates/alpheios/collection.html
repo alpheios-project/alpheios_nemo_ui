@@ -15,13 +15,13 @@
               <span lang="{{collections.current.label_lang}}">{{collections.current.label}}</span>
               </h3>
               {% if collections.current.class == 'XmlCtsTextgroupMetadata' %}
-                <p><i>Select a work</i></p>
+                <p class="browse-header-desc">Select a work</p>
               {% else %}
-                <p><i>Select an author</i></p>
+                <p class="browse-header-desc">Select an author</p>
               {% endif %}
             {% else %}
               <h3  class="browse-header-title">Language</h3>
-              <p><i>Select a language</i></p>
+              <p class="browse-header-desc">Select a language</p>
             {% endif %}
         </header>
         <section class="browse-section">
@@ -86,7 +86,7 @@
             </ul>
         </section>
         <section class="browse-copyright">
-          <button class="btn btn-large btn-outline-muted copyright-button" data-toggle="modal" data-target="#copyrightPopup">© Copyright Info</button>
+          <button class="btn btn-large btn-outline-muted copyright-button" id="copyright-button">© Copyright Info</button>
         </section>
     </article>
   </div>

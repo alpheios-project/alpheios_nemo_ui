@@ -2,7 +2,9 @@
     padding-top: 15px;
     padding-bottom: 15px;
     min-height: $mainnavbar-height;
-    padding-left: 30px;
+    padding-left: 20px;
+    background-color: $alpheioscolormuted;
+    color: $alpheioscolorneutrallightest;
 
     @include media-breakpoint-up(sm) {
         padding-top: 13px;
@@ -16,6 +18,7 @@
 }    
 .navbar-toggler {
     padding: 0 15px 0 0;
+
     @include alpheios-button(30px, 20px);
     @include alpheios-neutral();
 }

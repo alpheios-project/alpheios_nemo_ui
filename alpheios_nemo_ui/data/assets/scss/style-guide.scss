@@ -36,7 +36,7 @@
 
 @mixin alpheios-h3-mobile() {
     font-size: 20px;
-    font-weight: normal;
+    font-weight: bold;
     font-style: normal;
     font-family: $font-family-sans-serif;
 }
@@ -195,6 +195,7 @@
     color: $alpheioscolordark;
 
     svg {
+        stroke: $alpheioscolordark;
         fill: $alpheioscolordark;
     }
 }
@@ -230,6 +231,10 @@
         text-decoration: none;
         font-weight: bold;
     }
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
 
     .toolbar-button-icon {
         display: inline;
@@ -252,6 +257,15 @@
     }
 }
 
+@mixin alpheios-simple-button() {
+    border-radius: 7px;
+    border: 1px solid;
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}
+
 @mixin alpheios-neutral() {
     color: $alpheioscolorneutrallightest;
     svg {
@@ -265,24 +279,49 @@
     }
 }
 
-
-
 @mixin alpheios-neutral-vivid() {
     @include alpheios-vivid();
     color: $alpheioscolorneutrallightest;
+    border-color: transparent;
     svg {
         fill: $alpheioscolorvivid;
         stroke: $alpheioscolorvivid;
     }
+    &:hover {
+        color: $alpheioscolorneutrallightest;
+        background: $alpheioscolorvividhover;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-color: transparent;
+    }
 }
-
-
 
 @mixin alpheios-neutral-dark() {
     color: $alpheioscolordark;
     svg {
         fill: $alpheioscolordark;
         stroke: $alpheioscolordark;
+    }
+}
+
+
+@mixin alpheios-muted() {
+    color: $alpheioscolormuted;
+    background-color: transparent;
+    border-color: $alpheioscolormuted;
+    box-shadow: none;
+
+    &:hover {
+        background-color: $alpheioscolormuted;
+        color: $alpheioscolorneutrallightest;
+        border-color: transparent;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    &.active {
+        outline: none;
+        background-color: $alpheioscolormuted;
+        color: $alpheioscolorneutrallightest;
+        border-color: transparent;
+        box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
     }
 }
 
@@ -303,9 +342,12 @@
     .modal-content {
         padding: 20px;
         border-radius: 0;
+        border: 0;
 
         @include media-breakpoint-up(sm) {
             padding: 40px;
+            border: 1px solid $alpheioscolordark;
+            border-radius: 10px;
         }
     }
 
@@ -343,24 +385,41 @@
 
 @mixin collection-container() {
     min-height: 100%;
-    padding: 2rem 0;
+    padding: 20px 0;
 
     .browse-header,
     .browse-copyright {
-        margin-top: 20px;
-        margin-left: 30px;
-        margin-right: 30px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    
+    .browse-header {
+        margin-top: 0;
+    }
+
+    .browse-copyright {
+        margin-top: 50px;
+        @include media-breakpoint-up(md) {
+            margin-top: 15px;
+        } 
     }
 
     .browse-header-title {
-        @include alpheios-h3();
+        @include alpheios-h2();
+
+        @include media-breakpoint-up(md) {
+            @include alpheios-h3();
+        }
+    }
+    .browse-header-desc {
+        margin-bottom: 15px;
+        @include alpheios-body();
+        font-style: italic;
     }
 
     .copyright-button {
-        @include alpheios-neutral-dark();
-        border-radius: 0.5rem;
-        border: 1px solid $alpheioscolordark;
-        background: $alpheioscolorneutrallightest;
+        @include alpheios-simple-button();
+        @include alpheios-muted();
     }
 
     @include media-breakpoint-up(md) {
@@ -387,7 +446,7 @@
     
     list-style: none;
     padding: 0;
-    margin: 1rem 0 2rem;
+    margin: 15px 0;
     
     .browse-list-item {
         background: $navbar-dark-color;
@@ -403,7 +462,7 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem 2rem;
+            padding: 21px 20px;
 
             .list-item-icon {
                 @include alpheios-vivid();
@@ -435,10 +494,10 @@
 
     li {
         display: flex;
-        padding: 20px;
+        padding: 13px 20px;
         border-radius: 10px;
         width: 100%;
-        margin: 20px 0;
+        margin: 5px 0;
 
         justify-content: space-between;
         align-content: center;
@@ -472,26 +531,29 @@
         .left-part {
             .card-title {
                 margin-bottom: 15px;
+                line-height: 45px;
             }
         }
     }
 
     @include media-breakpoint-up(sm) {
         margin: 0;
+        padding: 22px 20px;
 
         li {
-            max-width: 500px;
-            margin: 20px;
+            max-width: 225px;
+            margin: 15px 5px;
         }
     }
     @include media-breakpoint-up(md) {
         li {
             max-width: 	none;
-            width: 350px;
+            width: 225px;
+            padding: 9px 20px;
         }
     }
 
     @include media-breakpoint-up(lg) {
-        margin: 0 0 0 -20px;
+        margin: -15px 0 0 -20px;
     }
 }

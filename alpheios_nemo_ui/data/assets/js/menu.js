@@ -85,4 +85,24 @@ $(document).ready(function($) {
     $(window).bind('scroll', function() {
       fixedNavbar();
     });
+
+    $( "body" ).on( "click", "#copyright-button", function() {
+      $('#copyrightPopup').modal();
+      $('.modal-backdrop').addClass('popup');
+      $(this).addClass('active');
+    });
+    $('#copyrightPopup').on('hidden.bs.modal', function (e) {
+      $("#copyright-button").removeClass('active');
+      $('.modal-backdrop').removeClass('popup');
+    });
+
+    $( "body" ).on( "click", "#bibliog-button", function() {
+      $('#bibliogPopup').modal();
+      $('.modal-backdrop').addClass('popup');
+      $(this).addClass('active');
+    });
+    $('#bibliogPopup').on('hidden.bs.modal', function (e) {
+      $("#bibliog-button").removeClass('active');
+      $('.modal-backdrop').removeClass('popup');
+    })
 });
