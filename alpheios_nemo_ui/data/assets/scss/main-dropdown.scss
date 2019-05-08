@@ -117,7 +117,13 @@ $menu-lg-padding: 115px;
             color: $alpheioscolorneutraldark;
         }
     }
-    
+
+    .main-dropdown-logout {
+        @include media-breakpoint-up(lg) {
+            display: none;
+        }
+    }
+
     .main-dropdown-header {
         padding-top: 0;
         padding-bottom: 15px;  
