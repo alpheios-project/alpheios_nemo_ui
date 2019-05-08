@@ -172,6 +172,10 @@ class AlpheiosNemoUI(PluginPrototype):
                 if letter not in letters:
                     letters[letter] = []
                 letters[letter].append(m)
+            
+            lettersSorted = {}
+            for key in sorted(letters.keys()) :
+                lettersSorted[key] = letters[key]
 
         return {
             "template": "alpheios::collection.html",
@@ -187,7 +191,7 @@ class AlpheiosNemoUI(PluginPrototype):
                 "members": self.nemo.make_members(collection, lang=lang),
                 "parents": self.make_parents(collection, lang=lang),
                 "types": types,
-                "letters": letters,
+                "letters": lettersSorted,
                 "expanded_members": expanded_members
             },
         }
