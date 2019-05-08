@@ -194,12 +194,16 @@ body, html {
     padding-bottom: 1em;
   }
 
-  .pb {
+  .pb, .milestone.page {
     display: none; /** for now hide the page break milestones **/
     font-weight: thin;
     font-size: 0.5em;
     font-style: italic;
     color:$alpheioscolorneutraldark;
+  }
+
+  .milestone.speech {
+    display: none; /** hide speech milestones - seen in Plato's Apology **/
   }
 
   .ex,
@@ -275,6 +279,18 @@ body, html {
     font-size: $h4-mobile-font-size;
   }
 
+  /** Stephanus sections in Plato **/
+  .milestone.section.Stephanus {
+    font-size: $font-size-base;
+    display: inline;
+  }
+  .milestone.section.Stephanus::before {
+    content: " [";
+  }
+  .milestone.section.Stephanus::after {
+    content: "] ";
+  }
+
   .speaker {
     font-weight: bold;
     font-style: italic;
@@ -282,6 +298,10 @@ body, html {
     text-align: center;
     display: block;
     padding-top: 1.2em;
+  }
+
+  cite {
+    text-align: right;
   }
 
 
@@ -334,6 +354,12 @@ body, html {
 
     .l-cite, .section, .newlevel, milestone.tale {
       font-size: $h3-font-size;
+    }
+
+    /** Stephanus sections in Plato **/
+    .milestone.section.Stephanus {
+      font-size: $font-size-base;
+      display: inline;
     }
 
     .alpheios-nemo-toolbar {
