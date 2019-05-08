@@ -2,14 +2,18 @@
 
 function fixedNavbar() {
   let scrollTopCheck = 0
-  if ($('.navlogin:visible').length > 0) {
-    scrollTopCheck = $('.navlogin:first').height();
+  if ($('.main-navbar').length > 0) {
+    scrollTopCheck = $('.main-navbar:first').height();
   }
-
+  
+  if ($('.navlogin:visible').length > 0) {
+    scrollTopCheck = scrollTopCheck + $('.navlogin:first').height();
+  }
+  
   if ($(window).scrollTop() > scrollTopCheck) {
-      $('.article-wrap').addClass('fixed-navbar');
+    $('.article-wrap').addClass('fixed-navbar');
   } else {
-     $('.article-wrap').removeClass('fixed-navbar');
+    $('.article-wrap').removeClass('fixed-navbar');
   }
 }
 

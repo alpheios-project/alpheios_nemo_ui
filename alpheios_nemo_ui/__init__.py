@@ -150,7 +150,8 @@ class AlpheiosNemoUI(PluginPrototype):
         members = self.nemo.make_members(collection, lang=lang)
         expanded_members = list()
         types = {}
-        letters = {}
+        
+        lettersSorted = {}
         DCT = Namespace("http://purl.org/dc/terms/")
         if isinstance(collection, XmlCtsTextgroupMetadata):
             for m in members:
@@ -167,13 +168,13 @@ class AlpheiosNemoUI(PluginPrototype):
                 else:
                     expanded_members.append(e)
         else:
+            letters = {}
             for m in members:
                 letter = m['label'][0]
                 if letter not in letters:
                     letters[letter] = []
                 letters[letter].append(m)
-            
-            lettersSorted = {}
+        
             for key in sorted(letters.keys()) :
                 lettersSorted[key] = letters[key]
 
