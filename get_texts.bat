@@ -1,8 +1,8 @@
 :: A version of get_texts.sh for Windows 10 build is 17063 or later (where it has cURL installed)
 :: Use wsl version of cURL for earlier Windows 10 builds
 mkdir texts
-curl -L https://github.com/PerseusDL/canonical-latinLit/archive/master.zip > ./texts/canonical-latinLit.zip
-curl -L https://github.com/PerseusDL/canonical-greekLit/archive/master.zip > ./texts/canonical-greekLit.zip
+curl -L https://github.com/alpheios-project/canonical-latinLit/archive/master.zip > ./texts/canonical-latinLit.zip
+curl -L https://github.com/alpheios-project/canonical-greekLit/archive/master.zip > ./texts/canonical-greekLit.zip
 curl -L https://github.com/alpheios-project/cts-texts-latinLit/archive/master.zip > ./texts/alpheios-latinLit.zip
 curl -L https://github.com/alpheios-project/cts-texts-greekLit/archive/master.zip > ./texts/alpheios-greekLit.zip
 curl -L https://github.com/alpheios-project/cts-texts-arabicLit/archive/master.zip > ./texts/alpheios-arabicLit.zip
