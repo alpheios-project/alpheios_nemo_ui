@@ -6,11 +6,15 @@
 
     text-align: center;
     min-height: $breadcrumbs-height;
-    padding-top: 0;
-    padding-bottom: 0;
+    padding: 0 20px;
+
+    background-color: $alpheioscolordark;
+    color: $alpheioscolorneutrallightest; 
 
     .breadcrumb {
-        padding-left: 15px;
+        padding-left: 0;
+        margin-bottom:0;
+        background-color: $alpheioscolordark;
     }
 
     .breadcrumb-item a {
@@ -89,6 +93,7 @@
     
     .subreference-all {
         @include alpheios-body();
+        color: $alpheioscolordark;
     }
     .navbar-section-ref-link {
         @include alpheios-vivid();

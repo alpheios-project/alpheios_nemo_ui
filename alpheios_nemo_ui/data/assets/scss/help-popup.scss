@@ -55,7 +55,7 @@ $help-icon-size: 24px;
     text-align: center;
 
     .help-popup-footer-button {
-        @include alpheios-button(0,0);
+        @include alpheios-simple-button();
         @include alpheios-neutral-vivid();
         min-width: 190px;
     }

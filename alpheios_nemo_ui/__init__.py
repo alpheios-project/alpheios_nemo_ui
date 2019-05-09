@@ -61,8 +61,7 @@ class AlpheiosNemoUI(PluginPrototype):
         ("/logout","r_logout",["GET"]),
         ("/return","r_logout_return",["GET"]),
         ("/userinfo","r_userinfo",["GET"]),
-        ("/usertoken","r_usertoken",["GET"]),
-        ("/nextpassage/<objectId>/<subreference>", "r_next_passage",["GET"])
+        ("/usertoken","r_usertoken",["GET"])
     ]
 
     FILTERS = [
@@ -150,7 +149,8 @@ class AlpheiosNemoUI(PluginPrototype):
         members = self.nemo.make_members(collection, lang=lang)
         expanded_members = list()
         types = {}
-        letters = {}
+        
+        lettersSorted = {}
         DCT = Namespace("http://purl.org/dc/terms/")
         if isinstance(collection, XmlCtsTextgroupMetadata):
             for m in members:
@@ -167,11 +167,15 @@ class AlpheiosNemoUI(PluginPrototype):
                 else:
                     expanded_members.append(e)
         else:
+            letters = {}
             for m in members:
                 letter = m['label'][0]
                 if letter not in letters:
                     letters[letter] = []
                 letters[letter].append(m)
+        
+            for key in sorted(letters.keys()) :
+                lettersSorted[key] = letters[key]
 
         return {
             "template": "alpheios::collection.html",
@@ -187,7 +191,7 @@ class AlpheiosNemoUI(PluginPrototype):
                 "members": self.nemo.make_members(collection, lang=lang),
                 "parents": self.make_parents(collection, lang=lang),
                 "types": types,
-                "letters": letters,
+                "letters": lettersSorted,
                 "expanded_members": expanded_members
             },
         }
@@ -311,10 +315,15 @@ class AlpheiosNemoUI(PluginPrototype):
         passage = self.nemo.transform(text, text.export(Mimetypes.PYTHON.ETREE), objectId)
         prev, next = self.nemo.get_siblings(objectId, subreference, text)
         newLevel = self.new_level(subreference,prev)
+
+        nextUrl = None
+        if next: 
+            nextUrl = url_for('.r_passage', objectId=objectId, subreference=next)
         data = {
             "objectId": objectId,
             "subreference": subreference,
             "new_level": newLevel,
+            "nextUrl": nextUrl,
             "collections": {
                 "current": {
                     "label": collection.get_label(lang),
@@ -445,19 +454,6 @@ class AlpheiosNemoUI(PluginPrototype):
     @requires_auth
     def r_usertoken(self):
         return jsonify(session['access_token'])
-
-    def r_next_passage(self, objectId, subreference):
-        text = self.nemo.get_passage(objectId=objectId, subreference=subreference)
-        prev, next = self.nemo.get_siblings(objectId, subreference, text)
-        url = url_for('.r_passage', objectId=objectId, subreference=next)
-
-        prevRef, nextRef = self.nemo.get_siblings(objectId, next, text)
-        nextRefUrl = url_for('.r_passage', objectId=objectId, subreference=nextRef)
-        return jsonify({
-            'next': next,
-            'url': url,
-            'nextRefUrl': nextRefUrl
-        })
 
     def make_parents(self, collection, lang=None):
         """ Build parents list for given collection

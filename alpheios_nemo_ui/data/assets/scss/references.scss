@@ -26,6 +26,8 @@
     .reference-browse-cards {
         
         @include collection-list-style();
+        margin-top: 0;
+
         .list-item-link {
             @include alpheios-link();
             @include alpheios-neutral-dark();
@@ -49,22 +51,43 @@
             }
 
             li {
-                /* padding: 10px 20px 5px 20px;*/ 
                 .left-part {
                     .card-title {
                         margin-bottom: 0;
                     }
                 }
                 .right-part {
+                    max-width: 50px;
                     .card-icon,
                     .card-text {
                         display: inline-block;
+                        margin-left: 0;
                     }
                     .card-icon {
                         margin-bottom: 0;
                     }
-                    .card-text {
+                }
+            }
+
+            @include media-breakpoint-up(sm) {
+                li {
+                    .right-part {
+                        max-width: none;
+                    }
+                    .right-part .card-text {
                         margin-left: 10px;
+                    }
+
+                    .left-part {
+                        .card-title {
+                            line-height: 1;
+                        }
+                    }
+            
+                    .right-part {
+                        .card-text {
+                            max-width: none;
+                        }
                     }
                 }
             }

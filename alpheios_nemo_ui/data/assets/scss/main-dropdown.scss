@@ -89,7 +89,9 @@ $menu-lg-padding: 115px;
     }
 
     .main-dropdown-login {
-        padding: 15px 5px;
+        padding: 20px 5px;
+        border-bottom: 1px solid $alpheioscolorneutrallight;
+        margin-bottom: 15px;
 
         @include media-breakpoint-up(lg) {
             display: none;
@@ -116,8 +118,18 @@ $menu-lg-padding: 115px;
             @include alpheios-large-label();
             color: $alpheioscolorneutraldark;
         }
+
+        .log-in-button {
+            margin: 0;
+        }
     }
-    
+
+    .main-dropdown-logout {
+        @include media-breakpoint-up(lg) {
+            display: none;
+        }
+    }
+
     .main-dropdown-header {
         padding-top: 0;
         padding-bottom: 15px;  
@@ -172,9 +184,9 @@ $menu-lg-padding: 115px;
         font-weight: normal;
     }
     .m-dropdown-item-icon {
-        @include alpheios-icon(15px, 15px);
+        @include alpheios-icon(20px, 20px);
         svg {
-            vertical-align: baseline;
+            vertical-align: middle;
         }
     }
 
@@ -192,7 +204,8 @@ $menu-lg-padding: 115px;
 
 .modal-backdrop.fade.show {
     display: block;
-    opacity: .5;
+    background-color: $alpheioscolordark;
+    opacity: 0.7;
 }
 
 .modal-backdrop.fade {
@@ -201,4 +214,13 @@ $menu-lg-padding: 115px;
 }
 .fade:not(.show) {
     opacity: 0;
+}
+
+.modal-backdrop.fade.show.popup {
+    background-color: $alpheioscolorneutrallightest;
+    opacity: 1;
+    @include media-breakpoint-up(md) {
+        background-color: $alpheioscolordark;
+        opacity: 0.7;
+    }
 }

@@ -91,49 +91,6 @@ body, html {
     text-decoration: underline;
   }
 
-  .navbar-dark .navbar-toggler-icon {
-    background-image: url(../static/Menu-Icon.svg);
-    background-color: $alpheioscolormuted;
-  }
-  .navbar {
-    font-family: $font-family-sans-serif;
-  }
-
-
-  #mainnav {
-    background-color: $alpheioscolormuted !important;
-    color: $alpheioscolorneutrallightest !important;
-  }
-
-  #breadcrumb {
-    text-transform: none;
-    font-size: $font-size-base;
-    background-color: $alpheioscolordark !important;
-    font-weight: bold;
-    margin: 0 auto;
-    color: $alpheioscolorneutrallightest;
-  }
-
-  #breadcrumb ol.breadcrumb {
-    margin-bottom:0;
-  }
-
-  .breadcrumb {
-    background-color: $alpheioscolordark;
-  }
-
-  .breadcrumb-item a {
-    color: $alpheioscolorneutrallightest;
-  }
-
-  .breadcrumb .active {
-    color: $alpheioscolorlight;
-  }
-
-  .breadcrumb-item+.breadcrumb-item::before {
-    color: $alpheioscolorneutrallightest;
-  }
-
   #textnav {
     font-size: $font-size-base;
     background-color: $alpheioscolordark !important;
@@ -273,10 +230,6 @@ body, html {
 
   .alpheios-text-source {
     font-size: small;
-  }
-
-  .l-cite, .section {
-    font-size: $h4-mobile-font-size;
   }
 
   /** Stephanus sections in Plato **/

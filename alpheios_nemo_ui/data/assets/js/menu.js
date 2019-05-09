@@ -2,14 +2,18 @@
 
 function fixedNavbar() {
   let scrollTopCheck = 0
-  if ($('.navlogin:visible').length > 0) {
-    scrollTopCheck = $('.navlogin:first').height();
+  if ($('.main-navbar').length > 0) {
+    scrollTopCheck = $('.main-navbar:first').height();
   }
-
+  
+  if ($('.navlogin:visible').length > 0) {
+    scrollTopCheck = scrollTopCheck + $('.navlogin:first').height();
+  }
+  
   if ($(window).scrollTop() > scrollTopCheck) {
-      $('.article-wrap').addClass('fixed-navbar');
+    $('.article-wrap').addClass('fixed-navbar');
   } else {
-     $('.article-wrap').removeClass('fixed-navbar');
+    $('.article-wrap').removeClass('fixed-navbar');
   }
 }
 
@@ -81,4 +85,24 @@ $(document).ready(function($) {
     $(window).bind('scroll', function() {
       fixedNavbar();
     });
+
+    $( "body" ).on( "click", "#copyright-button", function() {
+      $('#copyrightPopup').modal();
+      $('.modal-backdrop').addClass('popup');
+      $(this).addClass('active');
+    });
+    $('#copyrightPopup').on('hidden.bs.modal', function (e) {
+      $("#copyright-button").removeClass('active');
+      $('.modal-backdrop').removeClass('popup');
+    });
+
+    $( "body" ).on( "click", "#bibliog-button", function() {
+      $('#bibliogPopup').modal();
+      $('.modal-backdrop').addClass('popup');
+      $(this).addClass('active');
+    });
+    $('#bibliogPopup').on('hidden.bs.modal', function (e) {
+      $("#bibliog-button").removeClass('active');
+      $('.modal-backdrop').removeClass('popup');
+    })
 });

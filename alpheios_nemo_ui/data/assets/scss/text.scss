@@ -91,7 +91,8 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
         top: $mainnavbar-height;
     }
 
-    .main-dropdown .main-dropdown-login {
+    .main-dropdown .main-dropdown-login,
+    .main-dropdown .main-dropdown-logout {
         display: block;
     }
 }
