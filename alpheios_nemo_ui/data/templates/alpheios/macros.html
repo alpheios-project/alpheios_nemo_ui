@@ -23,7 +23,7 @@
 
 {% macro reff_dict_header(objectId, reffs, booktitle, bookLevel, prevBrowseLink) -%}
   {% set reffitems = reffs.items() %}
-  {% set finalBookTitle = booktitle|i18n_readable_book_title if bookLevel == 1 else 'Back' %}
+  {% set finalBookTitle = booktitle|i18n_readable_book_title if bookLevel == 1 else 'back' %}
   
   {% for human_reff, dict_or_reff in reffitems %}
     {% set browseLink = booktitle|citation_link %}
