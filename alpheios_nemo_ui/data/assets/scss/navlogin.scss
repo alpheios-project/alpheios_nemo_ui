@@ -28,7 +28,7 @@ $logo-width: 50px;
         h1 {
             display: inline-block;
             vertical-align: middle;
-            padding-left: $logo-width / 2;
+            padding-left: $logo-width / 3.3;
             margin: 0;
             @include alpheios-h1-mobile();
         }

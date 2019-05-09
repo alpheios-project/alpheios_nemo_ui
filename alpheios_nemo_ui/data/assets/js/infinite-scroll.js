@@ -5,6 +5,13 @@ var uploadOneMore = false;
 var uploadOnemoreCheck  = null;
 
 function preloadNext() {
+    if ($('#next-passage').prop('href') === 'javascript:void(0)') {
+        nextPassage = {}
+        return
+    }
+    if (!nextPassage.nextUrl) {
+        nextPassage.nextUrl = $('#next-passage').prop('href')
+    }
     if ($('#current-passage').length > 0) {
         var deferred = $.Deferred();
 
@@ -13,29 +20,30 @@ function preloadNext() {
             nextPassage.start = currentSubrefData.subreference.split('-')[0]
         }
         isloading = true
-        $.getJSON( `/nextpassage/${currentSubrefData.objectid}/${currentSubrefData.subreference}`)
-          .done(function( urlData ) {
-            deferred.notify(urlData)
 
-            $.getJSON(`${urlData.url}/json`)
+        $.getJSON(`${nextPassage.nextUrl}/json`)
             .done(function(data) {
-                let nextArr = urlData.next.split('-');
+                var finalRef = nextPassage.start
+                var subRef = data.subreference.split('-')
+                if (subRef) {
+                    finalRef = finalRef + '-' + subRef[subRef.length-1]
+                }
                 Object.assign(nextPassage, {
                     data: data,
-                    next: urlData.next,
-                    subreference: currentSubrefData.subreference,
-                    finalRef: nextPassage.start + '-' + nextArr[nextArr.length-1],
-                    nextRefUrl: urlData.nextRefUrl
+                    next: data.next,
+                    subreference: data.subreference,
+                    finalRef: finalRef,
+                    nextUrl: data.nextUrl
                 })
                 
-                console.log('Retrieved next data', urlData.url)
+                console.log('Retrieved next data', data.subreference)
                 isloading = false
                 deferred.resolve(nextPassage);
             })
             .fail(function(error) {
               console.log( "error" , error);
             });
-          })
+
         return deferred.promise();
     }
 }
@@ -45,12 +53,18 @@ function uploadNext() {
         if (nextPassage.data.new_level) {
             $('#article-entry').append(`<div class="newlevel">${nextPassage.data.new_level}</div>`)
         }
+
         $('#article-entry').append(nextPassage.data.text_passage);
-        $('#current-passage').data('subreference', nextPassage.next);           
+        $('#current-passage').data('subreference', nextPassage.next);     
         $('#current-passage').text(nextPassage.finalRef);
 
-        $('#next-passage').data('prev', nextPassage.data.next);
-        $('#next-passage').prop('href', nextPassage.data.next);
+        if (nextPassage.data.next) {
+            $('#next-passage').prop('data-next', nextPassage.data.next);
+            $('#next-passage').prop('href', nextPassage.data.nextUrl);
+        } else {
+            $('#next-passage').prop('data-next', nextPassage.data.next);
+            $('#next-passage').prop('href', 'javascript:void(0)');
+        }
         if (!isInit) {
             preloadNext();
         }

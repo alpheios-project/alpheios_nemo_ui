@@ -34,13 +34,13 @@
       <div class="browse-level browse-level-{{ bookLevel }} {{ prevBrowseLink+'-' if prevBrowseLink }}{{ browseLink if browseLink }}">
         {% if human_reff|citation_name == 'passage' %}
           <h3 class="browse-header-title">Passage (<a href="#" class="book-level-prev">{{ finalBookTitle }}</a>)</h3>
-          <p><i>Select a passage</i></p>
+          <p class="browse-header-desc">Select a passage</p>
         {% elif human_reff|citation_name == 'chapter' %}
           <h3 class="browse-header-title">Chapter (<a href="#" class="book-level-prev">{{ finalBookTitle }}</a>)</h3>
-          <p><i>Select a chapter</i></p>
+          <p class="browse-header-desc">Select a chapter</p>
         {% else %}
           <h3 class="browse-header-title">{{ human_reff|i18n_citation_label }} (<a href="#" class="book-level-prev">{{ finalBookTitle }}</a>)</h3>
-          <p><i>Select a {{ human_reff|i18n_citation_label|lower }}</i></p>
+          <p class="browse-header-desc">Select a {{ human_reff|i18n_citation_label|lower }}</p>
         {% endif %}
       </div>
     {% endif %}
