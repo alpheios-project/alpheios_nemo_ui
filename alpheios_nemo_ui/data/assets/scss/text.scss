@@ -96,3 +96,15 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
         display: block;
     }
 }
+
+.l-cite, .section, .speaker {
+    @include alpheios-h4-mobile();
+
+    @include media-breakpoint-up(md) {
+        @include alpheios-h3();
+    }
+}
+
+.l {
+    @include alpheios-body();
+}

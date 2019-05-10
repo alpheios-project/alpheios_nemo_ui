@@ -27,12 +27,3 @@
     background-color: $alpheioscolorvivid;
     text-decoration: none;
 }
-
-
-.l-cite, .section {
-    @include alpheios-h3();
-}
-
-.l {
-    @include alpheios-body();
-}
