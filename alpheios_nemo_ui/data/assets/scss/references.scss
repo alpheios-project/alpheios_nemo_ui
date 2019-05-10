@@ -5,15 +5,26 @@
         .book-level-prev {
             @include alpheios-h3();
             @include alpheios-vivid();
+            .link-icon {
+                @include alpheios-icon(16px, 16px);
+                svg {
+                    vertical-align: baseline;
+                }
+                @include media-breakpoint-up(md) {
+                    @include alpheios-icon(20px, 20px);
+                }
+            }
+            &:hover {
+                text-decoration: none;
+            }
         }
 
         .browse-level-1 {
             .book-level-prev {
                 cursor: default;
                 color: $alpheioscolordark;
-                &:hover {
-                    text-decoration: none;
-                }
+                
+                
             }
         }
 
