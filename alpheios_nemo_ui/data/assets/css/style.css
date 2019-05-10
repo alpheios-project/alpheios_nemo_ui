@@ -1213,12 +1213,14 @@ select.alpheios-setting__control,
   margin-top: calc(var(--alpheios-base-ui-size) * 1);
 }
 .alpheios-notification-area__close-btn {
-  width: calc(var(--alpheios-base-ui-size) * 1.25);
-  height: calc(var(--alpheios-base-ui-size) * 1.25);
   padding: 0 calc(var(--alpheios-base-ui-size) * 0.625) 0 calc(var(--alpheios-base-ui-size) * 1.25);
   cursor: pointer;
   fill: var(--alpheios-color-dark);
   stroke: var(--alpheios-color-dark);
+}
+.alpheios-notification-area__close-btn svg {
+  width: calc(var(--alpheios-base-ui-size) * 1.25);
+  height: calc(var(--alpheios-base-ui-size) * 1.25);
 }
 .alpheios-notification-area__close-btn:hover, .alpheios-notification-area__close-btn:focus {
   fill: var(--alpheios-color-dark-hover);
@@ -1578,13 +1580,15 @@ h3.alpheios-popup__toolbar-selection {
   font-weight: 700;
   color: var(--alpheios-color-neutral-dark);
 }
-a.alpheios-popup__providers-link {
+a.alpheios-popup__providers-link,
+a:not([href]):not([tabindex]).alpheios-popup__providers-link {
   display: inline-block;
   margin-bottom: calc(var(--alpheios-base-text-size) * 0.375);
   font-weight: 700;
   color: var(--alpheios-color-vivid);
 }
-a.alpheios-popup__providers-link:hover {
+a.alpheios-popup__providers-link:hover,
+a:not([href]):not([tabindex]).alpheios-popup__providers-link:hover {
   color: var(--alpheios-color-vivid-hover);
 }
 .alpheios-popup__definitions--placeholder {
