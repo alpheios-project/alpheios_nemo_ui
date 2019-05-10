@@ -36,7 +36,7 @@
                 <xsl:value-of select="@n"/>
             </xsl:if>
         </xsl:variable>
-        <div class="milestone {@unit}" id="{$idstring}" data-alpheios-ignore="all">
+        <div class="milestone {@unit} {@resp}" id="{$idstring}" data-alpheios-ignore="all">
             <xsl:value-of select="@n"/>
         </div>
     </xsl:template>
@@ -415,13 +415,21 @@
         <xsl:choose>
             <xsl:when test="tei:author"/>
             <xsl:when test="tei:title"/>
+            
             <xsl:otherwise>
+                <xsl:variable name="addclass">
+                    
+                </xsl:variable>    
                 <xsl:element name="cite">
                     <xsl:if test="@n">
                         <xsl:attribute name="data-ref">
                             <xsl:value-of select="@n"/>
                         </xsl:attribute>
                     </xsl:if>
+                    <xsl:if test="ancestor::tei:cit and preceding-sibling::tei:quote[@rend='blockquote']">
+                        <xsl:attribute name="class">blockquote-footer</xsl:attribute>
+                    </xsl:if>
+                    <xsl:attribute name="data-alpheios-ignore">all</xsl:attribute>
                     <xsl:value-of select="."/>
                 </xsl:element>
             </xsl:otherwise>
@@ -467,9 +475,19 @@
     </xsl:template>
 
     <xsl:template match="tei:label">
-        <span class="label">
-            <xsl:apply-templates/>
-        </span>
+        <xsl:choose>
+            <xsl:when test="parent::tei:said">
+                <!-- we used label type='abbr' in Plato to differentiate abbreviated speaker name labels which we don't want to render -->
+                <xsl:if test="not(@type) or @type != 'abbr'">
+                    <span class="speaker"><xsl:apply-templates/></span>
+                </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+                <span class="label">
+                    <xsl:apply-templates/>
+                </span>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="tei:speaker">
