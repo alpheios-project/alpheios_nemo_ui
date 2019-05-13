@@ -16,27 +16,28 @@ function preloadNext() {
         var deferred = $.Deferred();
 
         let currentSubrefData = $('#current-passage').data();
+
         if (!nextPassage.start) {
-            nextPassage.start = currentSubrefData.subreference.split('-')[0]
+            nextPassage.start = currentSubrefData.subreference.toString().split('-')[0]
         }
         isloading = true
 
         $.getJSON(`${nextPassage.nextUrl}/json`)
             .done(function(data) {
                 var finalRef = nextPassage.start
-                var subRef = data.subreference.split('-')
+                var subRef = data.subreference.toString().split('-')
                 if (subRef) {
                     finalRef = finalRef + '-' + subRef[subRef.length-1]
                 }
                 Object.assign(nextPassage, {
                     data: data,
                     next: data.next,
-                    subreference: data.subreference,
+                    subreference: data.subreference.toString(),
                     finalRef: finalRef,
                     nextUrl: data.nextUrl
                 })
                 
-                console.log('Retrieved next data', data.subreference)
+                console.log('Retrieved next data', data.subreference.toString())
                 isloading = false
                 deferred.resolve(nextPassage);
             })
@@ -64,6 +65,7 @@ function uploadNext() {
         } else {
             $('#next-passage').prop('data-next', nextPassage.data.next);
             $('#next-passage').prop('href', 'javascript:void(0)');
+            $('#next-passage').addClass('no-visibility');
         }
         if (!isInit) {
             preloadNext();
