@@ -81,9 +81,11 @@
             {% endif %}
             </ul>
         </section>
-        <section class="browse-copyright">
-          <button class="btn btn-large btn-outline-muted copyright-button" id="copyright-button">© Copyright Info</button>
-        </section>
+        {% if not collections.current %}
+          <section class="browse-copyright">
+            <button class="btn btn-large btn-outline-muted copyright-button" id="copyright-button">© Copyright Info</button>
+          </section>
+        {% endif %}
     </article>
   </div>
 </div>
