@@ -6,6 +6,8 @@ from flask import jsonify, url_for, redirect, Markup, session, request
 from flask_nemo.chunker import level_grouper
 from copy import deepcopy as copy
 import re
+import collections
+
 from MyCapytain.common.constants import RDF_NAMESPACES, Mimetypes
 from MyCapytain.resources.prototypes.metadata import ResourceCollection
 from MyCapytain.resources.prototypes.cts.inventory import CtsWorkMetadata, CtsEditionMetadata
@@ -150,7 +152,7 @@ class AlpheiosNemoUI(PluginPrototype):
         expanded_members = list()
         types = {}
         
-        lettersSorted = {}
+        lettersSorted = collections.OrderedDict()
         DCT = Namespace("http://purl.org/dc/terms/")
         if isinstance(collection, XmlCtsTextgroupMetadata):
             for m in members:
