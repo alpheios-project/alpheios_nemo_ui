@@ -27,3 +27,18 @@
     background-color: $alpheioscolorvivid;
     text-decoration: none;
 }
+
+.navbar-btn--reading-tools {
+    display: none;
+
+    [data-ap-layout-type="compact"] & {
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    & svg {
+        width: 22px;
+        height: auto;
+    }
+}

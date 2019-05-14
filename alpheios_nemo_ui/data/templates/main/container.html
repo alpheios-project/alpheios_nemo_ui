@@ -54,7 +54,7 @@
   {% endblock %}
   <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function(event) {
-      new Alpheios.Embedded({
+      const embedded = new Alpheios.Embedded({
         'clientId':'alpheios-reader',
         'enabledSelector':'.entry-content',
         popupInitialPos: {
@@ -64,8 +64,25 @@
         toolbarInitialPos: {
           top: '220px',
           right: '15px'
-        }
-      }).activate();
+        },
+        layoutType: 'readingTools'
+      })
+      embedded.activate()
+        .then(function () {
+          if (embedded.platform.isMobile) {
+            let toolsEl = document.querySelector('#alph-tools-ctrl')
+            if (toolsEl) {
+              toolsEl.addEventListener('click', function () {
+                embedded.openActionPanel({
+                  toolbarModule: 'actionPanel'
+                })
+              }, { passive: true })
+            }
+          }
+        })
+        .catch(function(e) {
+          console.error(`Alpheios cannot be activated`, e)
+        });
     });
 
   </script>

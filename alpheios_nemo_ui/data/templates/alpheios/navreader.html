@@ -10,10 +10,14 @@
         <span class="toolbar-button-text">Help</span>
       </button>
 
-        <a href="{{url_for('.r_references',**args) }}" class="btn main-navbar-btn">
-          <span class="toolbar-button-icon">{% include "alpheios::icons/Browse-Passages-Icon.svg" %}</span>
-          <span class="toolbar-button-text">Browse</span>
-        </a>
+      <a href="{{url_for('.r_references',**args) }}" class="btn main-navbar-btn">
+        <span class="toolbar-button-icon">{% include "alpheios::icons/Browse-Passages-Icon.svg" %}</span>
+        <span class="toolbar-button-text">Browse</span>
+      </a>
+
+      <a id="alph-tools-ctrl" class="btn main-navbar-btn navbar-btn--reading-tools">
+        {% include "alpheios::icons/Reading-tools.svg" %}
+      </a>
     </div>
 
 </nav>

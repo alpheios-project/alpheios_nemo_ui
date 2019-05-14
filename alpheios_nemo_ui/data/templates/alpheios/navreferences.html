@@ -7,9 +7,13 @@
 
   <div class="navbar-right-part">
     {% set args = { 'objectId': objectId } %}
-      <a href="{{url_for('.r_first_passage',**args) }}" class="btn main-navbar-btn">
-        <span class="toolbar-button-icon">{% include "alpheios::icons/Reader-icon.svg" %}</span>
-        <span class="toolbar-button-text">Back to Reader</span>
-      </a>
+    <a href="{{url_for('.r_first_passage',**args) }}" class="btn main-navbar-btn">
+      <span class="toolbar-button-icon">{% include "alpheios::icons/Reader-icon.svg" %}</span>
+      <span class="toolbar-button-text">Back to Reader</span>
+    </a>
+
+    <a id="alph-tools-ctrl" class="btn main-navbar-btn navbar-btn--reading-tools">
+      {% include "alpheios::icons/Reading-tools.svg" %}
+    </a>
   </div>
 </nav>
