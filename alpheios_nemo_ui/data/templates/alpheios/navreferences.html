@@ -6,6 +6,10 @@
   </div>
 
   <div class="navbar-right-part">
+    <button class="btn main-navbar-btn" data-toggle="modal" data-target="#helpPopup">
+      <span class="toolbar-button-icon">{% include "alpheios::icons/Help-icon2.svg" %}</span>
+      <span class="toolbar-button-text">Help</span>
+    </button>
     {% set args = { 'objectId': objectId } %}
       <a href="{{url_for('.r_first_passage',**args) }}" class="btn main-navbar-btn">
         <span class="toolbar-button-icon">{% include "alpheios::icons/Reader-icon.svg" %}</span>
