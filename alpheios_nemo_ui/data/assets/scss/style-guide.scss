@@ -541,14 +541,14 @@
         padding: 22px 20px;
 
         li {
-            max-width: 225px;
+            max-width: 250px;
             margin: 15px 5px;
         }
     }
     @include media-breakpoint-up(md) {
         li {
             max-width: 	none;
-            width: 225px;
+            width: 250px;
             padding: 9px 20px;
         }
     }
