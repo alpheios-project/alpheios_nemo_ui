@@ -4,9 +4,13 @@
       <h3 class="navbar-text main-navbar-text">Collections</h3>
       <img class="main-navbar-logo" src="{{url_for('.secondary_assets', filetype='static', asset='Alpheios-Logo-White.png')}} " alt="Alpheios Reading Center" />
     </div>
-  <div class="navbar-right-part">
-    <a id="alph-tools-ctrl" class="btn main-navbar-btn navbar-btn--reading-tools">
-      {% include "alpheios::icons/Reading-tools.svg" %}
-    </a>
-  </div>
+    <div class="navbar-right-part">
+      <button class="btn main-navbar-btn" data-toggle="modal" data-target="#helpPopup">
+        <span class="toolbar-button-icon">{% include "alpheios::icons/Help-icon2.svg" %}</span>
+        <span class="toolbar-button-text">Help</span>
+      </button>
+      <a id="alph-tools-ctrl" class="btn main-navbar-btn navbar-btn--reading-tools">
+        {% include "alpheios::icons/Reading-tools.svg" %}
+      </a>
+    </div>
 </nav>
