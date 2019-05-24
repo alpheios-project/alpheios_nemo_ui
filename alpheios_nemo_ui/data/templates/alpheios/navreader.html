@@ -5,6 +5,11 @@
     <h3 class="navbar-text main-navbar-text">Reader</h3>
     <img class="main-navbar-logo" src="{{url_for('.secondary_assets', filetype='static', asset='Alpheios-Logo-White.png')}} " alt="Alpheios Reading Center" />
     <div class="ml-auto d-inline w-20">
+      <a target="_blank" href="https://alpheios.net/pages/v3/faq">
+        <button class="btn main-navbar-btn">
+          <span class="toolbar-button-text">FAQ/Known Issues</span>
+        </button>
+      </a>
       <button class="btn main-navbar-btn" data-toggle="modal" data-target="#helpPopup">
         <span class="toolbar-button-icon">{% include "alpheios::icons/Help-icon2.svg" %}</span>
         <span class="toolbar-button-text">Help</span>

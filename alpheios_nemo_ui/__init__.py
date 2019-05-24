@@ -151,7 +151,7 @@ class AlpheiosNemoUI(PluginPrototype):
         members = self.nemo.make_members(collection, lang=lang)
         expanded_members = list()
         types = {}
-        
+
         lettersSorted = collections.OrderedDict()
         DCT = Namespace("http://purl.org/dc/terms/")
         if isinstance(collection, XmlCtsTextgroupMetadata):
@@ -175,7 +175,7 @@ class AlpheiosNemoUI(PluginPrototype):
                 if letter not in letters:
                     letters[letter] = []
                 letters[letter].append(m)
-        
+
             for key in sorted(letters.keys()) :
                 lettersSorted[key] = letters[key]
 
@@ -257,6 +257,13 @@ class AlpheiosNemoUI(PluginPrototype):
         :return: Template, collections metadata and Markup object representing the text
         :rtype: {str: Any}
         """
+        # keep track of the number of text views in a session to determine whether
+        # or not to force a survey popup
+        if 'textViews' in session:
+            session['textViews'] = session['textViews'] + 1
+        else:
+            session['textViews'] = 1
+        print(str(session),file=sys.stdout)
         collection = self.nemo.get_collection(objectId)
         lang = self._get_lang(objectId,lang)
         if isinstance(collection, CtsWorkMetadata):
@@ -319,7 +326,7 @@ class AlpheiosNemoUI(PluginPrototype):
         newLevel = self.new_level(subreference,prev)
 
         nextUrl = None
-        if next: 
+        if next:
             nextUrl = url_for('.r_passage', objectId=objectId, subreference=next)
         data = {
             "objectId": objectId,
@@ -424,6 +431,8 @@ class AlpheiosNemoUI(PluginPrototype):
             return redirect(url_for('.r_index'))
 
     def r_login(self):
+        # Clear session stored data
+        session.clear()
         session['loginReturn'] = request.args.get('next','')
         return self.auth0.authorize_redirect(redirect_uri=self.external_url_base + "/authorize",audience='alpheios.net:apis')
 

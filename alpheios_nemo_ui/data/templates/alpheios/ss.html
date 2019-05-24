@@ -1,8 +1,11 @@
-<script>
-  window.sparrowConfig = {
-    forceTrigger: true
-  }
-</script>
+{% if session['textViews'] == 1 %}
+  <script>
+    window.sparrowConfig = {
+      forceTrigger: true
+    }
+  </script>
+{% endif %}
 <script>
 (function(){var e="ss-widget",t="script",a=document,r=window;var s,n,c;r.SS_WIDGET_TOKEN="tt-59fa42";r.SS_ACCOUNT="alpheios.surveysparrow.com";r.SS_SURVEY_NAME="Alpheios-Mobile-Texts-Beta";if(!a.getElementById(e)){var S=function(){S.update(arguments)};S.args=[];S.update=function(e){S.args.push(e)};r.SparrowLauncher=S;s=a.getElementsByTagName(t);c=s[s.length-1];n=a.createElement(t);n.type="text/javascript";n.async=!0;n.id=e;n.src=["https://","alpheios.surveysparrow.com/widget/",r.SS_WIDGET_TOKEN].join("");c.parentNode.insertBefore(n,c)}})();
 </script>
+<div id="textViews">{{ session.textViews }}
