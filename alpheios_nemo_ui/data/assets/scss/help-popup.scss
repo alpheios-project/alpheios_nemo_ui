@@ -59,6 +59,9 @@ $help-icon-size: 24px;
         @include alpheios-neutral-vivid();
         min-width: 190px;
     }
+    .knownissues-button {
+        @include alpheios-simple-button();
+        @include alpheios-muted();
+    }
   }
 }
-  
