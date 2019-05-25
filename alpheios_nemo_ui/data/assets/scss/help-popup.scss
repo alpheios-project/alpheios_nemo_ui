@@ -59,6 +59,10 @@ $help-icon-size: 24px;
         @include alpheios-neutral-vivid();
         min-width: 190px;
     }
+  }
+
+  .help-popup-list-knownissues-item {
+    justify-content: flex-end;
     .knownissues-button {
         @include alpheios-simple-button();
         @include alpheios-muted();
