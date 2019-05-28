@@ -1,28 +1,33 @@
-<nav id="mainnav" class="navbar navbar-dark main-navbar">
+<nav id="mainnav" class="navbar navbar-dark main-navbar main-navbar-reader">
 
     {% include "alpheios::navmenu.html" %}
     {% set args = { 'objectId': objectId } %}
-    <h3 class="navbar-text main-navbar-text">Reader</h3>
-    <img class="main-navbar-logo" src="{{url_for('.secondary_assets', filetype='static', asset='Alpheios-Logo-White.png')}} " alt="Alpheios Reading Center" />
-    <div class="ml-auto d-inline w-20">
-      <a target="_blank" href="https://alpheios.net/pages/v3/faq">
-        <button class="btn main-navbar-btn">
-          <span class="toolbar-button-text">FAQ/Known Issues</span>
+    <div class="navbar-full-data">
+      <h3 class="navbar-text main-navbar-text">Reader</h3>
+      <img class="main-navbar-logo" src="{{url_for('.secondary_assets', filetype='static', asset='Alpheios-Logo-White.png')}} " alt="Alpheios Reading Center" />
+      <div class="ml-auto d-inline w-20">
+        <a target="_blank" href="https://alpheios.net/pages/v3/faq">
+          <button class="btn main-navbar-btn">
+            <span class="toolbar-button-text">FAQ/Known Issues</span>
+          </button>
+        </a>
+        <button class="btn main-navbar-btn" data-toggle="modal" data-target="#helpPopup">
+          <span class="toolbar-button-icon">{% include "alpheios::icons/Help-icon2.svg" %}</span>
+          <span class="toolbar-button-text">Help</span>
         </button>
-      </a>
-      <button class="btn main-navbar-btn" data-toggle="modal" data-target="#helpPopup">
-        <span class="toolbar-button-icon">{% include "alpheios::icons/Help-icon2.svg" %}</span>
-        <span class="toolbar-button-text">Help</span>
-      </button>
 
-      <a href="{{url_for('.r_references',**args) }}" class="btn main-navbar-btn">
-        <span class="toolbar-button-icon">{% include "alpheios::icons/Browse-Passages-Icon.svg" %}</span>
-        <span class="toolbar-button-text">Browse</span>
-      </a>
+        <a href="{{url_for('.r_references',**args) }}" class="btn main-navbar-btn">
+          <span class="toolbar-button-icon">{% include "alpheios::icons/Browse-Passages-Icon.svg" %}</span>
+          <span class="toolbar-button-text">Browse</span>
+        </a>
 
-      <a id="alph-tools-ctrl" class="btn main-navbar-btn navbar-btn--reading-tools">
-        {% include "alpheios::icons/Reading-tools.svg" %}
-      </a>
+        <a id="alph-tools-ctrl" class="btn main-navbar-btn navbar-btn--reading-tools">
+          {% include "alpheios::icons/Reading-tools.svg" %}
+        </a>
+      </div>
+    </div>
+    <div class="navbar-close-panel">
+      <h3 class="navbar-text main-navbar-text">Close Panel For Full Screen</h3>
     </div>
 
 </nav>
