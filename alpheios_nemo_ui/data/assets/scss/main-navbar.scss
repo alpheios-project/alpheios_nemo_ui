@@ -28,6 +28,7 @@
     color: $alpheioscolorneutrallightest;
     padding: 0;
     margin: 0;
+    vertical-align: middle;
 }
 
 .main-navbar-logo {
@@ -106,5 +107,19 @@
         @include media-breakpoint-up(md) {
             display: none;
         }
+    }
+}
+
+.alpheios-layout-landscape.alpheios-layout-landscape-open-panel .main-navbar-reader {
+    .navbar-full-data {
+        display: none;
+    }
+    .navbar-close-panel {
+        display: block;
+    }
+}
+.main-navbar-reader {
+    .navbar-close-panel {
+        display: none;
     }
 }
