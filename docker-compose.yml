@@ -13,6 +13,6 @@ services:
     container_name: alpheios_nemo_ui_container
     ports: 
       - 5000:5000
-    volumes: 
+    volumes:
       - ./texts:/code/texts
       - ./alpheios_nemo_ui:/code/alpheios_nemo_ui

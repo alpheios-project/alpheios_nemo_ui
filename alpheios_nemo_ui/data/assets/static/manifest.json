@@ -1,0 +1,43 @@
+{
+  "name": "Alpheios Reader progressive webapp",
+  "short_name": "Alpheios Reader PWA",
+  "description": "An Alpheios Reader progressive web application",
+  "theme_color": "#0E2233",
+  "background_color": "#BCE5F0",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "images/icons/pwa/icon_36x36.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icons/pwa/icon_72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icons/pwa/icon_96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icons/pwa/icon_144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icons/pwa/icon_192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/icons/pwa/icon_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
