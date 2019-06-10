@@ -1,49 +1,14 @@
 /* global self, workbox, Response, URL */
 console.log('Service worker has been registered')
-let swScriptURL
-let clientsURL = []
-let injectionStyles = ''
-let injectionScripts = ''
-let backToTocBtn = ''
-let tocURL = ''
-const viewportMeta = `<meta name="viewport" content="width=device-width, initial-scale=1">`
 
 self.importScripts('/workbox/workbox-sw.js');
 
 self.addEventListener('install', event => {
   console.log(`Service worker install event`)
-  // Get a URL object for the service worker script's location.
-  swScriptURL = new URL(self.location)
-
-  // Get URL objects for each client's location.
-  self.clients.matchAll({includeUncontrolled: true}).then(clients => {
-    for (const client of clients) {
-      console.log(`Clients are`)
-      console.log(clients)
-      const clientUrl = new URL(client.url)
-      clientsURL.push(clientUrl)
-      if (/.+index.*\.html$/.test(clientUrl.pathname)) {
-        // This is most likely a TOC page
-        tocURL = clientUrl.pathname
-      }
-    }
-  })
 })
 
 self.addEventListener('activate', event => {
   console.log(`Service worker activate event`)
-  console.log(`Service worker script URL is`, swScriptURL)
-  console.log(clientsURL)
-  // Parse precache manifest to determine what needs to be injected
-  for (const resource of self.__precacheManifest) {
-    if (/\.css$/.test(resource.url)) {
-      injectionStyles += `<link href="/${resource.url}" rel="stylesheet">\n`
-    }
-    if (/\.js$/.test(resource.url)) {
-      injectionScripts += `<script type="text/javascript" src="/${resource.url}"></script>\n`
-    }
-    backToTocBtn = `<a class="alpheios-pwa-content-toc-back-btn" data-alph-exclude-all-cpe="true" href="${tocURL}">Back to TOC</a>`
-  }
 })
 
 // This code runs whenever a Service Worker script is loaded, and Workbox library is loaded too
@@ -53,29 +18,6 @@ if (workbox) {
 
   self.addEventListener('fetch', evt => {
     console.log(`Service worker fetch evt: ${evt.request.url}`, evt)
-    if (evt.request.url.match(/.+dynamic.+/)) {
-      console.log(`This is a content page request`)
-      let response = self.fetch(evt.request).then(function (response) {
-        console.log(`Response received: `, response)
-        return response.text()
-      }).then(function (data) {
-        if (!(/meta name="viewport"/.test(data))) {
-          // Set initial viewport size and scaling if not set by the page to prevent Alpheios elements to have wrong size
-          data = data.replace(`<head>`, `<head>` + viewportMeta)
-        }
-        data = data.replace(`</head>`, injectionStyles + `</head>`)
-        data = data.replace(`<body>`, `<body>` + backToTocBtn)
-        data = data.replace(`</body>`, injectionScripts + `</body>`)
-
-        return new Response(data, {
-          headers: {'Content-Type': 'text/html'}
-        })
-      }).catch(function (err) {
-        console.log(`Fetch failed for ${evt.request.url}:`, err)
-      })
-
-      evt.respondWith(response)
-    }
   })
 
   // Will it cause an error if overwrite current cache files as with Cache.addAll()?
@@ -88,7 +30,7 @@ if (workbox) {
     // Cache image files
     /.*\.(?:png|jpg|jpeg|svg|gif)/,
     // Use the cache if it's available
-    workbox.strategies.staleWhileRevalidate({
+    new workbox.strategies.StaleWhileRevalidate({
       // Use a custom cache name
       cacheName: 'image-cache',
       plugins: [
@@ -105,7 +47,7 @@ if (workbox) {
   // External resources
   workbox.routing.registerRoute(
     /(?:https?:\/\/).*/,
-    workbox.strategies.staleWhileRevalidate({
+    new workbox.strategies.StaleWhileRevalidate({
       cacheName: 'external-resources-cache'
     })
   )

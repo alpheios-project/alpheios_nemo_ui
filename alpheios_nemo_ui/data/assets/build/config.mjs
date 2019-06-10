@@ -8,22 +8,26 @@ import path from 'path'
 const projectRoot = process.cwd()
 
 const sharedManifestConf = {
-  fingerprints: true,
-  inject: true,
+  name: 'My Progressive Web App',
+  short_name: 'MyPWA',
+  description: 'My awesome Progressive Web App!',
+  background_color: '#ffffff',
+  fingerprints: false,
+  inject: false,
   ios: {
     'apple-mobile-web-app-title': 'Alpheios Reader',
     'apple-mobile-web-app-status-bar-style': '#73CDDE'
   },
   icons: [
     {
-      src: path.resolve('images/icon-1024.png'),
+      src: path.resolve('images/alpheios_32.png'),
       sizes: [36, 48, 72, 96, 144, 192, 512],
-      destination: path.join('icons', 'pwa')
+      destination: path.join('alpheios_nemo-ui/data/assets/images/icons', 'pwa')
     },
     {
-      src: path.resolve('images/icon-ios-1024.png'),
+      src: path.resolve('images/alpheios_32.png'),
       sizes: [120, 152, 167, 180, 1024],
-      destination: path.join('icons', 'ios'),
+      destination: path.join('alpheios_nemo-ui/data/assets/images/icons', 'ios'),
       ios: true
     }
   ]
@@ -33,6 +37,9 @@ const webpack = {
   common: {
     entry: './dummy.js',
     externals: { },
+    plugins: [
+      new WebpackPwaManifest(sharedManifestConf)
+    ]
   },
 
   production: {
