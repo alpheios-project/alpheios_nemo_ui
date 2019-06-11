@@ -26,29 +26,124 @@ if (workbox) {
     self.__precacheManifest
   )
 
+
+  // Texts
   workbox.routing.registerRoute(
-    // Cache image files
-    /.*\.(?:png|jpg|jpeg|svg|gif)/,
-    // Use the cache if it's available
-    new workbox.strategies.StaleWhileRevalidate({
-      // Use a custom cache name
-      cacheName: 'image-cache',
+    /.*\/text\/.*/,
+    new workbox.strategies.CacheFirst({
+      cacheName: 'alpheios-text-resources',
       plugins: [
+        new workbox.cacheableResponse.Plugin({
+          statuses: [200],
+        }),
         new workbox.expiration.Plugin({
-          // Cache only 20 images
-          maxEntries: 20,
-          // Cache for a maximum of a week
-          maxAgeSeconds: 7 * 24 * 60 * 60
+          maxAgeSeconds: 60 * 60 * 24 * 365, // One year
+          maxEntries: 30,
         })
       ]
     })
   )
 
-  // External resources
+  // Collections
+  workbox.routing.registerRoute(
+    /.*\/collections\/.*/,
+    new workbox.strategies.CacheFirst({
+      cacheName: 'alpheios-collection-resources',
+      plugins: [
+        new workbox.cacheableResponse.Plugin({
+          statuses: [200],
+        }),
+        new workbox.expiration.Plugin({
+          maxAgeSeconds: 60 * 60 * 24 * 365, // One year
+          maxEntries: 30,
+        })
+      ]
+    })
+  )
+
+  // Grammar resources
+  workbox.routing.registerRoute(
+    /(?:https?:\/\/grammars\.alpheios\.net)\/.*/,
+    new workbox.strategies.CacheFirst({
+      cacheName: 'alpheios-grammar-resources',
+      plugins: [
+        new workbox.cacheableResponse.Plugin({
+          statuses: [200],
+        }),
+        new workbox.expiration.Plugin({
+          maxAgeSeconds: 60 * 60 * 24 * 365, // One year
+          maxEntries: 30,
+        })
+      ]
+    })
+  )
+
+  // JavaScript files
+  workbox.routing.registerRoute(
+    /.*\.(?:js[^on]).*/,
+    // Use the cache if it's available
+    new workbox.strategies.StaleWhileRevalidate({
+      // Use a custom cache name
+      cacheName: 'alpheios-js'
+    })
+  )
+
+  // CSS files
+  workbox.routing.registerRoute(
+    /.*\.(?:css).*/,
+    // Use the cache if it's available
+    new workbox.strategies.StaleWhileRevalidate({
+      // Use a custom cache name
+      cacheName: 'alpheios-css'
+    })
+  )
+
+  // Image files
+  workbox.routing.registerRoute(
+    /.*\.(?:png|jpg|jpeg|svg|gif).*/,
+    // Use the cache if it's available
+    new workbox.strategies.StaleWhileRevalidate({
+      // Use a custom cache name
+      cacheName: 'alpheios-images',
+      plugins: [
+        new workbox.expiration.Plugin({
+          maxEntries: 60,
+          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+        })
+      ]
+    })
+  )
+
+  // Cache the Google Fonts stylesheets with a stale-while-revalidate strategy.
+  workbox.routing.registerRoute(
+    /^https:\/\/fonts\.googleapis\.com/,
+    new workbox.strategies.StaleWhileRevalidate({
+      cacheName: 'google-fonts-stylesheets',
+    })
+  )
+
+// Cache the underlying font files with a cache-first strategy for 1 year.
+  workbox.routing.registerRoute(
+    /^https:\/\/fonts\.gstatic\.com/,
+    new workbox.strategies.CacheFirst({
+      cacheName: 'google-fonts-webfonts',
+      plugins: [
+        new workbox.cacheableResponse.Plugin({
+          statuses: [0, 200],
+        }),
+        new workbox.expiration.Plugin({
+          maxAgeSeconds: 60 * 60 * 24 * 365, // One year
+          maxEntries: 30,
+        })
+      ]
+    })
+  )
+
+  // All other resources
   workbox.routing.registerRoute(
     /(?:https?:\/\/).*/,
     new workbox.strategies.StaleWhileRevalidate({
-      cacheName: 'external-resources-cache'
+      cacheName: 'alpheios-other-resources'
     })
   )
 
