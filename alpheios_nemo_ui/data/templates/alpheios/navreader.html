@@ -1,11 +1,12 @@
 <nav id="mainnav" class="navbar navbar-dark main-navbar main-navbar-reader">
 
-    {% include "alpheios::navmenu.html" %}
-    {% set args = { 'objectId': objectId } %}
-    <div class="navbar-full-data">
-      <h3 class="navbar-text main-navbar-text">Reader</h3>
-      <img class="main-navbar-logo" src="{{url_for('.secondary_assets', filetype='static', asset='Alpheios-Logo-White.png')}} " alt="Alpheios Reading Center" />
-      <div class="ml-auto d-inline w-20">
+      <div class="navbar-left-part">
+        {% include "alpheios::navmenu.html" %}
+        {% set args = { 'objectId': objectId } %}
+        <h3 class="navbar-text main-navbar-text">Reader</h3>
+        <img class="main-navbar-logo" src="{{url_for('.secondary_assets', filetype='static', asset='Alpheios-Logo-White.png')}} " alt="Alpheios Reading Center" />
+      </div>
+      <div class="navbar-right-part">
         <a target="_blank" href="https://alpheios.net/pages/v3/faq">
           <button class="btn main-navbar-btn">
             <span class="toolbar-button-text">FAQ/Known Issues</span>
@@ -25,7 +26,7 @@
           {% include "alpheios::icons/Reading-tools.svg" %}
         </a>
       </div>
-    </div>
+
     <div class="navbar-close-panel">
       <h3 class="navbar-text main-navbar-text">Close Panel For Full Screen</h3>
     </div>
