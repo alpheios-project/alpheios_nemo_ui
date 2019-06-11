@@ -370,10 +370,10 @@ class AlpheiosNemoUI(PluginPrototype):
         abort(404)
 
     def r_manifest(self):
-        return send_from_directory('alpheios_nemo_ui/data/assets/static', 'manifest.json')
+        return send_from_directory('alpheios_nemo_ui/data/assets/', 'manifest.json')
 
     def r_sw(self):
-        response = make_response(send_from_directory('alpheios_nemo_ui/data/assets/static', 'sw.js'))
+        response = make_response(send_from_directory('alpheios_nemo_ui/data/assets/js', 'sw.js'))
         response.headers['Cache-Control'] = 'no-cache'
         return response
 
