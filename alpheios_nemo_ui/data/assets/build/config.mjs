@@ -1,29 +1,33 @@
-import VueLoaderPlugin from '../node_modules/vue-loader/lib/plugin.js'
-import InjectManifest from '../node_modules/workbox-webpack-plugin/build/inject-manifest.js'
 import WebpackPwaManifest from 'webpack-pwa-manifest'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import Package from '../package.json'
-
 import path from 'path'
 const projectRoot = process.cwd()
 
 const sharedManifestConf = {
-  fingerprints: true,
-  inject: true,
+  name: 'Alpheios Reader progressive webapp',
+  short_name: 'Alpheios Reader PWA',
+  description: 'An Alpheios Reader progressive web application',
+  theme_color: "#0E2233",
+  background_color: "#BCE5F0",
+  display: "standalone",
+  orientation: "portrait",
+  scope: "/",
+  start_url: "/",
+  fingerprints: false,
+  inject: false,
   ios: {
     'apple-mobile-web-app-title': 'Alpheios Reader',
     'apple-mobile-web-app-status-bar-style': '#73CDDE'
   },
   icons: [
     {
-      src: path.resolve('images/icon-1024.png'),
+      src: path.resolve('images/logo.png'),
       sizes: [36, 48, 72, 96, 144, 192, 512],
-      destination: path.join('icons', 'pwa')
+      destination: path.join('images/icons', 'pwa')
     },
     {
-      src: path.resolve('images/icon-ios-1024.png'),
+      src: path.resolve('images/logo.png'),
       sizes: [120, 152, 167, 180, 1024],
-      destination: path.join('icons', 'ios'),
+      destination: path.join('images/icons', 'ios'),
       ios: true
     }
   ]
@@ -32,7 +36,13 @@ const sharedManifestConf = {
 const webpack = {
   common: {
     entry: './dummy.js',
+    output: {
+      path: projectRoot
+    },
     externals: { },
+    plugins: [
+      new WebpackPwaManifest(sharedManifestConf)
+    ]
   },
 
   production: {
