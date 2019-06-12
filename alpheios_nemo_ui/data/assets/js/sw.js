@@ -80,7 +80,7 @@ if (workbox) {
 
   // JavaScript files
   workbox.routing.registerRoute(
-    /.*\.(?:js[^on]).*/,
+    /.+\.js$/,
     // Use the cache if it's available
     new workbox.strategies.StaleWhileRevalidate({
       // Use a custom cache name
@@ -90,7 +90,7 @@ if (workbox) {
 
   // CSS files
   workbox.routing.registerRoute(
-    /.*\.(?:css).*/,
+    /.+\.css$/,
     // Use the cache if it's available
     new workbox.strategies.StaleWhileRevalidate({
       // Use a custom cache name
@@ -100,7 +100,7 @@ if (workbox) {
 
   // Image files
   workbox.routing.registerRoute(
-    /.*\.(?:png|jpg|jpeg|svg|gif).*/,
+    /.+\.(?:png|jpg|jpeg|svg|gif)$/,
     // Use the cache if it's available
     new workbox.strategies.StaleWhileRevalidate({
       // Use a custom cache name
