@@ -1,6 +1,7 @@
 .cc-banner {
     background: $alpheioscolordark;
     color: $alpheioscolorlight;
+    opacity: 0.95;
 
     .cc-link {
         @include alpheios-bright-link();
