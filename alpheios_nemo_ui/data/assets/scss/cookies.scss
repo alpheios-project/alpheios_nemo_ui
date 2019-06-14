@@ -1,0 +1,29 @@
+.cc-banner {
+    background: $alpheioscolordark;
+    color: $alpheioscolorlight;
+    
+    &.cc-window {
+        opacity: 0.95;
+    }
+
+    @include alpheios-h4();
+
+    .cc-link {
+        @include alpheios-bright-link();
+        font-weight: bold;
+        text-decoration: none;
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .cc-btn.cc-dismiss {
+        @include alpheios-h4();
+        @include alpheios-simple-button();
+        @include alpheios-neutral-vivid();
+        background: $alpheioscolorvivid;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
