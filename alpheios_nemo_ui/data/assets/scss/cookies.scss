@@ -1,0 +1,12 @@
+.cc-banner {
+    background: $alpheioscolordark;
+    color: $alpheioscolorlight;
+
+    .cc-link {
+        @include alpheios-bright-link();
+    }
+
+    .cc-btn.cc-dismiss {
+        @include alpheios-bright-outline();
+    }
+}
