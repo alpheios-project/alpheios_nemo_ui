@@ -95,6 +95,9 @@ $menu-lg-padding: 115px;
 
         @include media-breakpoint-up(lg) {
             display: none;
+            .article-text & {
+                display: block;
+            }
         }
 
         .logged-in-text {
@@ -127,6 +130,10 @@ $menu-lg-padding: 115px;
     .main-dropdown-logout {
         @include media-breakpoint-up(lg) {
             display: none;
+
+            .article-text & {
+                display: block;
+            }
         }
     }
 
