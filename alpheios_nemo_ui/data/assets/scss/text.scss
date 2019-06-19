@@ -47,10 +47,6 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
     @include media-breakpoint-up(lg) {
         padding-top: $desktopPaddingTop;
 
-        &.article-text {
-            padding-top: $desktopPaddingTop;
-        }
-
         .navlogin {
             top: 0;
         }
@@ -61,6 +57,16 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
     
         .breadcrumb-navbar {
             top: $mainnavbar-height + $navlogin-height;
+        }
+
+        &.article-text {
+            padding-top: $desktopPaddingTop - $navlogin-height;
+            .main-navbar {
+                top: 0;
+            }
+            .breadcrumb-navbar {
+                top: $mainnavbar-height;
+            }
         }
     }
 

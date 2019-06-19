@@ -1,4 +1,4 @@
-.cc-banner {
+.cc-banner, .cc-floating {
     background: $alpheioscolordark;
     color: $alpheioscolorlight;
     
@@ -14,6 +14,10 @@
         text-decoration: none;
         &:focus {
             outline: none;
+        }
+
+        &:visited {
+            @include alpheios-bright-link();
         }
     }
 
