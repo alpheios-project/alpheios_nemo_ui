@@ -27,6 +27,16 @@ if (workbox) {
   )
 
 
+  // Network only requests
+  workbox.routing.registerRoute(
+    /.*\/(userinfo|usertoken|login|logout|return|authorize).*/,
+    new workbox.strategies.NetworkOnly()
+  )
+  workbox.routing.registerRoute(
+    /https:\/\/alpheios.auth0.com.*/,
+    new workbox.strategies.NetworkOnly()
+  )
+
   // Texts
   workbox.routing.registerRoute(
     /.*\/text\/.*/,
@@ -58,6 +68,48 @@ if (workbox) {
           maxEntries: 30,
         })
       ]
+    })
+  )
+
+  // Assets dir content
+  workbox.routing.registerRoute(
+    /.*\/assets\/.*/,
+    new workbox.strategies.CacheFirst({
+      cacheName: 'alpheios-asset-resources',
+      plugins: [
+        new workbox.cacheableResponse.Plugin({
+          statuses: [200],
+        }),
+        new workbox.expiration.Plugin({
+          maxAgeSeconds: 60 * 60 * 24 * 365, // One year
+          maxEntries: 30,
+        })
+      ]
+    })
+  )
+
+  // Images-dir-content
+  workbox.routing.registerRoute(
+    /.*\/images\/.*/,
+    new workbox.strategies.CacheFirst({
+      cacheName: 'alpheios-image-resources',
+      plugins: [
+        new workbox.cacheableResponse.Plugin({
+          statuses: [200],
+        }),
+        new workbox.expiration.Plugin({
+          maxAgeSeconds: 60 * 60 * 24 * 365, // One year
+          maxEntries: 30,
+        })
+      ]
+    })
+  )
+
+  // Wordlist data
+  workbox.routing.registerRoute(
+    /https:\/\/userapis.alpheios.net.*/,
+    new workbox.strategies.NetworkFirst({
+      cacheName: 'alpheios-user-data'
     })
   )
 
