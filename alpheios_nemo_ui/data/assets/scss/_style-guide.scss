@@ -252,7 +252,6 @@
         display: inline;
         position: relative;
         @include alpheios-body();
-        margin-left: 5px;
     }    
 
     @include media-breakpoint-up(sm) {

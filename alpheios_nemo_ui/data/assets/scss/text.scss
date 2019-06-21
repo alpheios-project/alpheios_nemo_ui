@@ -105,8 +105,10 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
 
 .l-cite, .section, .speaker {
     @include alpheios-h3-mobile();
+    font-weight: normal;
     @include media-breakpoint-up(md) {
         @include alpheios-h3-mobile();
+        font-weight: normal;
     }
 }
 .l {
