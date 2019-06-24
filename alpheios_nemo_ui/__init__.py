@@ -63,10 +63,7 @@ class AlpheiosNemoUI(PluginPrototype):
         ("/logout","r_logout",["GET"]),
         ("/return","r_logout_return",["GET"]),
         ("/userinfo","r_userinfo",["GET"]),
-        ("/usertoken","r_usertoken",["GET"]),
-        ("/manifest.json", "r_manifest", ["GET"]),
-        ("/sw.js","r_sw",["GET"]),
-        ("/workbox/workbox-sw.js", "r_workbox", ["GET"])
+        ("/usertoken","r_usertoken",["GET"])
     ]
 
     FILTERS = [
@@ -368,17 +365,6 @@ class AlpheiosNemoUI(PluginPrototype):
                 filename=asset
             )
         abort(404)
-
-    def r_manifest(self):
-        return send_from_directory('alpheios_nemo_ui/data/assets/', 'manifest.json')
-
-    def r_sw(self):
-        response = make_response(send_from_directory('alpheios_nemo_ui/data/assets/js', 'sw.js'))
-        response.headers['Cache-Control'] = 'no-cache'
-        return response
-
-    def r_workbox(self):
-        return send_from_directory('alpheios_nemo_ui/data/assets/node_modules/workbox-sw/build', 'workbox-sw.js')
 
     def render(self, **kwargs):
         kwargs["gtrack"] = self.GTrackCode
