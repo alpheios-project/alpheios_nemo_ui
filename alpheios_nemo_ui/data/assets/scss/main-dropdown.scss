@@ -93,13 +93,6 @@ $menu-lg-padding: 115px;
         border-bottom: 1px solid $alpheioscolorneutrallight;
         margin-bottom: 15px;
 
-        @include media-breakpoint-up(lg) {
-            display: none;
-            .article-text & {
-                display: block;
-            }
-        }
-
         .logged-in-text {
             margin: 0;
             @include alpheios-body();
@@ -124,16 +117,6 @@ $menu-lg-padding: 115px;
 
         .log-in-button {
             margin: 0;
-        }
-    }
-
-    .main-dropdown-logout {
-        @include media-breakpoint-up(lg) {
-            display: none;
-
-            .article-text & {
-                display: block;
-            }
         }
     }
 

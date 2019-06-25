@@ -64,15 +64,6 @@
     }
 
     
-    @include media-breakpoint-up(sm) {
-        .main-navbar-logo {
-            display: none;
-        }
-        .main-navbar-text {
-            display: inline-block;
-        }
-    }
-
     .navbar-left-part {
         .main-navbar-button {
             display: inline-block;
