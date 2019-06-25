@@ -5,25 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above three meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    
-    <!-- PWA tags -->
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#0E2233"/>
-
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
-    <link href="images/splashscreens/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="images/splashscreens/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="images/splashscreens/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-    <link href="images/splashscreens/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-    <link href="images/splashscreens/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="images/splashscreens/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-    <link href="images/splashscreens/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="images/splashscreens/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="images/splashscreens/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="images/splashscreens/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <!-- End of PWA tags -->
 
     <title>Alpheios Texts</title>
     {% for filename, directory in assets["css"].items() %}
@@ -31,7 +12,6 @@
       {% else %}<link rel="stylesheet" href="{{ filename }}">
       {% endif %}
     {% endfor %}
-    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -54,55 +34,6 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-      console.log(`Head script execution has been started`)
-      if ('serviceWorker' in navigator) { // Checks if Service Workers are supported by the browser
-
-        /*
-        Register service worker only after a page is fully loaded so that the service worker registration
-        would not slow down page showing.
-         */
-        window.addEventListener('load', () => {
-          // Delay registration until document is parsed and fully loaded
-
-          console.log("Navigator online state is " + navigator.onLine)
-          if (navigator.onLine === true) {
-            console.log(`Registering a service worker ...`)
-            navigator.serviceWorker.register('/sw.js', {scope: '/'})
-              .then(reg => console.log('Service worker has been registered!', reg))
-              .catch(err => console.log('Service worker failed to register', err));
-          } else {
-            console.log(`Skipping a service worker registration because we're offline`)
-          }
-        })
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-          // Prevent Chrome 67 and earlier from automatically showing the prompt
-          e.preventDefault()
-          e.prompt()
-          // Wait for the user to respond to the prompt
-          e.userChoice
-            .then((choiceResult) => {
-              if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the Alpheios Reader Tools prompt');
-              } else {
-                console.log('User dismissed the Alpheios Reader Tools prompt');
-              }
-            })
-        })
-      } else {
-        console.log('Service workers are not supported.');
-      }
-      document.addEventListener('DOMContentLoaded', () => {
-        console.log('DOM content loaded callback')
-      })
-      document.addEventListener('load', () => {
-        console.log('Document loaded callback')
-      })
-      window.addEventListener('load', () => {
-        console.log('Window loaded callback')
-      })
-    </script>
   </head>
   <body>
     {% block article %}
