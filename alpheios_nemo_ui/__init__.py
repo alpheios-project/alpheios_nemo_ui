@@ -39,7 +39,6 @@ class AlpheiosNemoUI(PluginPrototype):
         resource_filename("alpheios_nemo_ui", "data/assets/js/infinite-scroll.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/browse.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/env.js"),
-        resource_filename("alpheios_nemo_ui", "data/assets/js/alpheios-embedded.js")
     ]
     STATICS = [
         resource_filename("alpheios_nemo_ui", "data/assets/images/logo.png"),
@@ -63,7 +62,9 @@ class AlpheiosNemoUI(PluginPrototype):
         ("/logout","r_logout",["GET"]),
         ("/return","r_logout_return",["GET"]),
         ("/userinfo","r_userinfo",["GET"]),
-        ("/usertoken","r_usertoken",["GET"])
+        ("/usertoken","r_usertoken",["GET"]),
+        ("/alpheios/<objectId>", "r_alpheios",["GET"]),
+        ("/alpheios/lib/<objectId>", "r_alpheios_lib",["GET"])
     ]
 
     FILTERS = [
@@ -410,6 +411,17 @@ class AlpheiosNemoUI(PluginPrototype):
                 "uri": url_for(".r_first_passage", objectId=str(collection.id))
             })
         return jsonify(data)
+
+    def r_alpheios(self,objectId):
+        return send_from_directory('alpheios_nemo_ui/data/assets/node_modules/alpheios-embedded/dist', objectId)
+
+    def r_alpheios_lib(self,objectId):
+        components = re.compile("components")
+        interact = re.compile("interact")
+        if components.search(objectId):
+            return send_from_directory('alpheios_nemo_ui/data/assets/node_modules/alpheios-components/dist', objectId)
+        elif interact.search(objectId):
+            return send_from_directory('alpheios_nemo_ui/data/assets/node_modules/interactjs/dist', objectId)
 
     def r_authorize(self):
         # Handles response from token endpoint

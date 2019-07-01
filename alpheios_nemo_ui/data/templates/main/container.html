@@ -56,35 +56,43 @@
   {% endblock %}
   <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function(event) {
-      const embedded = new Alpheios.Embedded({
-        'clientId':'alpheios-reader',
-        'enabledSelector':'.entry-content',
-        popupInitialPos: {
-          left: '50px',
-          top: '230px'
-        },
-        toolbarInitialPos: {
-          top: '220px',
-          right: '15px'
-        },
-        layoutType: 'readingTools'
-      })
-      embedded.activate()
-        .then(function () {
-          if (embedded.platform.isMobile) {
-            let toolsEl = document.querySelector('#alph-tools-ctrl')
-            if (toolsEl) {
-              toolsEl.addEventListener('click', function () {
-                embedded.openActionPanel({
-                  toolbarModule: 'actionPanel'
-                })
-              }, { passive: true })
+      import ('/alpheios/alpheios-embedded.js').then(embedLib => {
+        console.info(`Embedded library has been imported successfully`)
+
+        window.AlpheiosEmbed.importDependencies({ mode: 'development' }).then(Embedded => {
+          const embedded = new Embedded(
+            {
+               clientId:'alpheios-reader',
+               enabledSelector:'.entry-content',
+               popupInitialPos: {
+                 left: '50px',
+                 top: '230px'
+               },
+              toolbarInitialPos: {
+                top: '220px',
+                right: '15px'
+              },
+              layoutType: 'readingTools'
+            })
+          embedded.activate().then(function () {
+            if (embedded.platform.isMobile) {
+              let toolsEl = document.querySelector('#alph-tools-ctrl')
+              if (toolsEl) {
+                toolsEl.addEventListener('click', function () {
+                  embedded.openActionPanel({
+                    toolbarModule: 'actionPanel'
+                  })
+                }, { passive: true })
+              }
             }
-          }
+          })
+        }).catch(e => {
+          console.error(`Import of an embedded library dependencies failed: ${e}`)
         })
-        .catch(function(e) {
-          console.error(`Alpheios cannot be activated`, e)
-        });
+
+      }).catch(e => {
+        console.error(`Import of an embedded library failed: ${e}`)
+      })
     });
 
   </script>
@@ -98,7 +106,7 @@
     ga('send', 'pageview');
 
   </script>
-  
+
   <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
   <script>
     window.addEventListener("load", function(){
