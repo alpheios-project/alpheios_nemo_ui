@@ -36,10 +36,6 @@ $menu-lg-padding: 115px;
         display: none;
         padding-top: 30px;
 
-        @include media-breakpoint-up(lg) {
-            // display: block;
-        }
-
         a {
             display: inline-block;
             vertical-align: middle;
