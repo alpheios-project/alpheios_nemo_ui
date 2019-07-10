@@ -1,7 +1,7 @@
 <nav id="mainnav" class="navbar navbar-dark main-navbar">
   <div class="navbar-left-part">
     {% include "alpheios::navmenu.html" %}
-    <h3 class="navbar-text main-navbar-text">Browse Passages</h3>
+    <h3 class="navbar-text main-navbar-text">Table of Contents</h3>
     <img class="main-navbar-logo" src="{{url_for('.secondary_assets', filetype='static', asset='Alpheios-Logo-White.png')}} " alt="Alpheios Reading Center" />
   </div>
 
@@ -11,11 +11,11 @@
         <span class="toolbar-button-text">FAQ/Known Issues</span>
       </button>
     </a>
-    
+
     {% set args = { 'objectId': objectId } %}
     <a href="{{url_for('.r_first_passage',**args) }}" class="btn main-navbar-btn">
       <span class="toolbar-button-icon">{% include "alpheios::icons/Reader-icon.svg" %}</span>
-      <span class="toolbar-button-text">Back to Reader</span>
+      <span class="toolbar-button-text">Back to Text</span>
     </a>
 
     <button class="btn main-navbar-btn" data-toggle="modal" data-target="#helpPopup">
