@@ -19,14 +19,14 @@
 --><!--
     Transforms an TEI XML to  XHTML (Alpheios Enhanced Text Display)
 -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:tei="http://www.tei-c.org/ns/1.0" version="1.0">
     <xsl:output method="html" indent="yes"/>
     <xsl:param name="doclang"/>
 
-    <!-- we ignore some milestones 
+    <!-- we ignore some milestones
          cards are the old Perseus chunking system and not in sync with the cts structure
-         alternatesection appears to be used only in urn:cts:latinLit:phi0474.phi055 and 
+         alternatesection appears to be used only in urn:cts:latinLit:phi0474.phi055 and
          it isn't clear if/how to display it - wasn't apparently used in the old Perseus 4 display
     -->
     <xsl:template match="tei:milestone[@unit != 'card' and @unit != 'alternatesection']">
@@ -66,7 +66,7 @@
             <div class="passage-end"></div>
         </div>
     </xsl:template>
-   
+
     <xsl:template match="tei:speaker">
         <div class="speaker">
             <xsl:apply-templates/>
@@ -100,7 +100,7 @@
             </div>
         </div>
     </xsl:template>
-    
+
     <xsl:template match="tei:seg">
         <xsl:variable name="rend" select="@rend"/>
         <div class="seg {$rend}">
@@ -114,7 +114,7 @@
             </div>
         </div>
     </xsl:template>
-    
+
     <xsl:template match="tei:w">
         <xsl:variable name="wordId">
             <xsl:call-template name="ref_to_id">
@@ -321,20 +321,20 @@
         <xsl:choose>
             <xsl:when test="@rend='blockquote'">
                 <blockquote class="blockquote">
-                    <xsl:apply-templates/>    
+                    <xsl:apply-templates/>
                 </blockquote>
             </xsl:when>
             <xsl:otherwise>
                 "<xsl:apply-templates/>"
             </xsl:otherwise>
         </xsl:choose>
-        
+
     </xsl:template>
-    
+
     <xsl:template match="tei:q">
         <xsl:text>"</xsl:text><xsl:apply-templates/><xsl:text>"</xsl:text>
     </xsl:template>
-    
+
 
     <xsl:template match="tei:figure">
         <div>Figure here!
@@ -367,7 +367,7 @@
     <xsl:template match="tei:foreign">
         <span lang="{@lang|@xml:lang}"><xsl:value-of select="."/></span>
     </xsl:template>
-    
+
     <xsl:template match="tei:foreign[1]">
         <xsl:choose>
             <xsl:when test="preceding-sibling::tei:ref[1][@cRef]">
@@ -415,11 +415,11 @@
         <xsl:choose>
             <xsl:when test="tei:author"/>
             <xsl:when test="tei:title"/>
-            
+
             <xsl:otherwise>
                 <xsl:variable name="addclass">
-                    
-                </xsl:variable>    
+
+                </xsl:variable>
                 <xsl:element name="cite">
                     <xsl:if test="@n">
                         <xsl:attribute name="data-ref">
@@ -687,7 +687,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <!--Creative Commons License--> This work is licensed under a <a rel="license"
-                        href="http://creativecommons.org/licenses/by-sa/3.0/us/">Creative Commons
+                        href="https://creativecommons.org/licenses/by-sa/3.0/us/">Creative Commons
                         Attribution-Share Alike 3.0 United States License</a>.
                     <!--/Creative Commons License-->
                 </xsl:otherwise>
@@ -849,7 +849,7 @@
             </span>
         </xsl:if>
     </xsl:template>
-    
+
     <xsl:template name="cite">
         <xsl:if test="@n">
          <xsl:variable name="citeshow">
@@ -857,7 +857,7 @@
          </xsl:variable>
          <div class="{concat(local-name(.),'-cite')} {$citeshow}">
              <xsl:value-of select="@n"/>
-         </div>    
+         </div>
         </xsl:if>
     </xsl:template>
 </xsl:stylesheet>
