@@ -40,7 +40,7 @@
 
 
     {% for filename, directory in assets["js"].items() %}
-      {% if 'alpheios-' in filename %}
+      {% if 'alpheios-' in filename %} <!-- {{ filename }} is dynamically imported -->
       {% elif directory %}<script src="{{url_for('.secondary_assets', filetype='js', asset=filename)}}"></script>
       {% else %}<script src="{{ filename }}"></script>
       {% endif %}
