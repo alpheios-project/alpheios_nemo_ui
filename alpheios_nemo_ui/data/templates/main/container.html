@@ -40,7 +40,8 @@
 
 
     {% for filename, directory in assets["js"].items() %}
-      {% if directory %}<script src="{{url_for('.secondary_assets', filetype='js', asset=filename)}}"></script>
+      {% if 'alpheios-' in filename %}
+      {% elif directory %}<script src="{{url_for('.secondary_assets', filetype='js', asset=filename)}}"></script>
       {% else %}<script src="{{ filename }}"></script>
       {% endif %}
     {% endfor %}
@@ -56,10 +57,12 @@
   {% endblock %}
   <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function(event) {
-      import ('/alpheios/alpheios-embedded.js').then(embedLib => {
+      import ('/assets/nemo.secondary/js/alpheios-embedded.min.js').then(embedLib => {
         console.info(`Embedded library has been imported successfully`)
 
-        window.AlpheiosEmbed.importDependencies({ mode: 'development' }).then(Embedded => {
+        window.AlpheiosEmbed.importDependencies(
+          { mode: 'custom',
+            libs: { components: '/assets/nemo.secondary/js/alpheios-components.min.js' } }).then(Embedded => {
           const embedded = new Embedded(
             {
                clientId:'alpheios-reader',

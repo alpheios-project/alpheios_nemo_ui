@@ -28,8 +28,8 @@ class AlpheiosNemoUI(PluginPrototype):
     }
     CSS = [
      resource_filename("alpheios_nemo_ui", "data/assets/css/alpheios.min.css"),
-     resource_filename("alpheios_nemo_ui", "data/assets/css/style.min.css"),
-     resource_filename("alpheios_nemo_ui", "data/assets/css/style-embedded.min.css")
+     resource_filename("alpheios_nemo_ui", "data/assets/node_modules/alpheios-components/dist/style/style-components.min.css"),
+
     ]
     JS = [
         resource_filename("alpheios_nemo_ui", "data/assets/js/bloodhound.min.js"),
@@ -39,6 +39,8 @@ class AlpheiosNemoUI(PluginPrototype):
         resource_filename("alpheios_nemo_ui", "data/assets/js/infinite-scroll.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/browse.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/env.js"),
+        resource_filename("alpheios_nemo_ui", "data/assets/node_modules/alpheios-embedded/dist/alpheios-embedded.min.js"),
+        resource_filename("alpheios_nemo_ui", "data/assets/node_modules/alpheios-components/dist/alpheios-components.min.js")
     ]
     STATICS = [
         resource_filename("alpheios_nemo_ui", "data/assets/images/logo.png"),
@@ -48,6 +50,7 @@ class AlpheiosNemoUI(PluginPrototype):
         resource_filename("alpheios_nemo_ui", "data/assets/images/Divider-Lg.svg"),
         resource_filename("alpheios_nemo_ui", "data/assets/images/Divider-Sm.svg")
     ]
+
     ROUTES = [
         ("/", "r_index", ["GET"]),
         ("/collections", "r_collections", ["GET"]),
@@ -62,9 +65,7 @@ class AlpheiosNemoUI(PluginPrototype):
         ("/logout","r_logout",["GET"]),
         ("/return","r_logout_return",["GET"]),
         ("/userinfo","r_userinfo",["GET"]),
-        ("/usertoken","r_usertoken",["GET"]),
-        ("/alpheios/<objectId>", "r_alpheios",["GET"]),
-        ("/alpheios/lib/<objectId>", "r_alpheios_lib",["GET"])
+        ("/usertoken","r_usertoken",["GET"])
     ]
 
     FILTERS = [
@@ -411,17 +412,6 @@ class AlpheiosNemoUI(PluginPrototype):
                 "uri": url_for(".r_first_passage", objectId=str(collection.id))
             })
         return jsonify(data)
-
-    def r_alpheios(self,objectId):
-        return send_from_directory('alpheios_nemo_ui/data/assets/node_modules/alpheios-embedded/dist', objectId)
-
-    def r_alpheios_lib(self,objectId):
-        components = re.compile("components")
-        interact = re.compile("interact")
-        if components.search(objectId):
-            return send_from_directory('alpheios_nemo_ui/data/assets/node_modules/alpheios-components/dist', objectId)
-        elif interact.search(objectId):
-            return send_from_directory('alpheios_nemo_ui/data/assets/node_modules/interactjs/dist', objectId)
 
     def r_authorize(self):
         # Handles response from token endpoint
