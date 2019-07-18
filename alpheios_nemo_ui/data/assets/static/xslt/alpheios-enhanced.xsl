@@ -451,7 +451,8 @@
     </xsl:template>
 
     <xsl:template match="tei:head">
-        <div class="head">
+        <xsl:variable name="rend" select="@rend"/>
+        <div class="head {$rend}">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
