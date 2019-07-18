@@ -61,12 +61,12 @@ allowed_textgroups = [
     'phi0474', # Cicero
     'tlg0011', # Sophocles
     'phi0448', # Caesar
+    'phi0959', # Ovid
 ]
 
 allowed_works = [
     'urn:cts:latinLit:phi0690.phi003', # vergil aen id
     'urn:cts:latinLit:phi0472.phi001', # catullus carmina
-    'urn:cts:latinLit:phi0620.phi001', # propertius elegies
     'urn:cts:greekLit:tlg0020.tlg001', # hesiod theogeny
     'urn:cts:greekLit:tlg0020.tlg003', # hesiod shield
     'urn:cts:greekLit:tlg0032.tlg006', # xenophon anabasis
@@ -82,6 +82,7 @@ allowed_works = [
 
 allowed_editions = [
     'urn:cts:latinLit:phi0959.phi006.alpheios-text-lat1',
+    'urn:cts:latinLit:phi0620.phi001.alpheios-text-lat1',
     'urn:cts:greekLit:tlg0085.tlg003.alpheios-text-grc1',
     'urn:cts:greekLit:tlg0085.tlg004.alpheios-text-grc1',
     'urn:cts:greekLit:tlg0085.tlg007.alpheios-text-grc1',
