@@ -7,10 +7,12 @@
  * itself. If the passage is found, we can go ahead and submit the form to load
  * the requested page
  */
-function tryPassage() {
+function tryPassage(e) {
+  e.preventDefault();
   const el = document.querySelector("#find_subreference")
   let ref = el.value
-  if (!ref || ref.match(/^\s+$/)) {
+  if (!ref || !ref.match(/^\d+(\.\d*)*$/)) {
+    console.warn('It is not a valid passage format! Try to use numbers and points.')
     return false
     // TODO we should maybe display a warning to the user here that they
     // haven't supplied valid input
@@ -18,6 +20,12 @@ function tryPassage() {
   // TODO we should show a loading progress widget somehow until the fetch
   // completes
   let findUrl = el.dataset.route.replace('REPLACE_REF',ref)
+  console.info('*****findUrl', findUrl);
+
+  let $iconContainer = $(el).parent();
+  console.info('*****************$(el)', $(el))
+  console.info('*****************$iconContainer', $iconContainer)
+  $iconContainer.addClass('loader-active');
   $.getJSON(findUrl)
     .done(function(data) {
       let form = document.querySelector("#jump_passage")
@@ -28,6 +36,9 @@ function tryPassage() {
     .fail(function(error) {
       console.warn(`Invalid passage ${ref}`)
       // TODO we need to notify the user somehow that it failed
+    })
+    .always(function() {
+      $iconContainer.removeClass('loader-active');
     });
   return false
 }

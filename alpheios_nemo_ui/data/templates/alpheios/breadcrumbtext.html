@@ -25,8 +25,13 @@
 
   <div class="navbar navbar-section-ref-jump">
     <form id="jump_passage" name="jump_passage" action="{{url_for('.r_passage',objectId=objectId,subreference='REPLACE_REF')}}">
-      <input class="form-control" type="text" id="find_subreference" placeholder="Jump to..." size="10"
-        name="subreference" data-route="{{url_for('.r_passage_json',objectId=objectId,subreference='REPLACE_REF')}}">
+      <div class="inputcontainer">
+        <input class="form-control" type="text" id="find_subreference" placeholder="Jump to..." size="10"
+          name="subreference" data-route="{{url_for('.r_passage_json',objectId=objectId,subreference='REPLACE_REF')}}">
+        <div class="icon-container">
+          <span class="loader"></span>
+        </div>
+      </div>
     </form>
   </div>
 
