@@ -443,7 +443,7 @@
                     <xsl:value-of select="string(@quantity)"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:text>⋯</xsl:text>
+                    <xsl:text>...</xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
 
