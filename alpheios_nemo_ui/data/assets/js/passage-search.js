@@ -20,11 +20,8 @@ function tryPassage(e) {
   // TODO we should show a loading progress widget somehow until the fetch
   // completes
   let findUrl = el.dataset.route.replace('REPLACE_REF',ref)
-  console.info('*****findUrl', findUrl);
 
   let $iconContainer = $(el).parent();
-  console.info('*****************$(el)', $(el))
-  console.info('*****************$iconContainer', $iconContainer)
   $iconContainer.addClass('loader-active');
   $.getJSON(findUrl)
     .done(function(data) {

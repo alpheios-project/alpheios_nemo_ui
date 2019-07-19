@@ -113,7 +113,8 @@
     width: 100%;
 
     form, label, input {
-      display: inline
+      display: inline;
+      width: 100%;
     }
 
     @include media-breakpoint-up(sm) {
