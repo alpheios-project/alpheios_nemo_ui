@@ -28,8 +28,8 @@ class AlpheiosNemoUI(PluginPrototype):
     }
     CSS = [
      resource_filename("alpheios_nemo_ui", "data/assets/css/alpheios.min.css"),
-     resource_filename("alpheios_nemo_ui", "data/assets/css/style.min.css"),
-     resource_filename("alpheios_nemo_ui", "data/assets/css/style-embedded.min.css")
+     resource_filename("alpheios_nemo_ui", "data/assets/node_modules/alpheios-components/dist/style/style-components.min.css"),
+
     ]
     JS = [
         resource_filename("alpheios_nemo_ui", "data/assets/js/bloodhound.min.js"),
@@ -40,7 +40,11 @@ class AlpheiosNemoUI(PluginPrototype):
         resource_filename("alpheios_nemo_ui", "data/assets/js/passage-search.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/browse.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/env.js"),
-        resource_filename("alpheios_nemo_ui", "data/assets/js/alpheios-embedded.js")
+        # we need to include these here so that we can refer to the them in the templates using the nemo.secondary
+        # abstract static url but they should be excluded from assets that get imported
+        # via script tags because they should use dynamic imports
+        resource_filename("alpheios_nemo_ui", "data/assets/node_modules/alpheios-embedded/dist/alpheios-embedded.min.js"),
+        resource_filename("alpheios_nemo_ui", "data/assets/node_modules/alpheios-components/dist/alpheios-components.min.js")
     ]
     STATICS = [
         resource_filename("alpheios_nemo_ui", "data/assets/images/logo.png"),
@@ -50,6 +54,7 @@ class AlpheiosNemoUI(PluginPrototype):
         resource_filename("alpheios_nemo_ui", "data/assets/images/Divider-Lg.svg"),
         resource_filename("alpheios_nemo_ui", "data/assets/images/Divider-Sm.svg")
     ]
+
     ROUTES = [
         ("/", "r_index", ["GET"]),
         ("/collections", "r_collections", ["GET"]),
