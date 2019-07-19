@@ -1,0 +1,17 @@
+
+.find-passage-popup {
+    @include alpheios-modal-popup();
+
+    .modal-title {
+        color: $alpheioscolorvivid;
+        text-transform: uppercase;
+    }
+    
+    .find-passage-popup-header {
+        .toolbar-button-icon {
+            @include alpheios-icon(30px, 30px);
+            @include alpheios-vivid();
+        }
+    }
+    
+}

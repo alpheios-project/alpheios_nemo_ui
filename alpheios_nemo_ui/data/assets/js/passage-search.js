@@ -13,12 +13,9 @@ function tryPassage(e) {
   let ref = el.value
   if (!ref || !ref.match(/^\d+(\.\d*)*$/)) {
     console.warn('It is not a valid passage format! Try to use numbers and points.')
+    showError(`It is not a valid passage format - ${ref}! Try to use numbers and points.`);
     return false
-    // TODO we should maybe display a warning to the user here that they
-    // haven't supplied valid input
   }
-  // TODO we should show a loading progress widget somehow until the fetch
-  // completes
   let findUrl = el.dataset.route.replace('REPLACE_REF',ref)
 
   let $iconContainer = $(el).parent();
@@ -32,12 +29,17 @@ function tryPassage(e) {
     })
     .fail(function(error) {
       console.warn(`Invalid passage ${ref}`)
-      // TODO we need to notify the user somehow that it failed
+      showError(`Invalid passage ${ref}`)
     })
     .always(function() {
       $iconContainer.removeClass('loader-active');
     });
   return false
+}
+
+function showError(message) {
+  $('#find-passage-popup-body-text').text(message)
+  $('#findPassagePopup').modal()
 }
 
 $(document).ready(function() {
