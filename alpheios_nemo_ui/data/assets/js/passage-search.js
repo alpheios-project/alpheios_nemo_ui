@@ -11,9 +11,9 @@ function tryPassage(e) {
   e.preventDefault();
   const el = document.querySelector("#find_subreference")
   let ref = el.value
-  if (!ref || !ref.match(/^\d+(\.\d*)*$/)) {
-    console.warn('It is not a valid passage format! Try to use numbers and points.')
-    showError(`It is not a valid passage format - ${ref}! Try to use numbers and points.`);
+  if (!ref || ref.trim().length === 0) {
+    console.warn('Please enter a valid passage reference.')
+    showError(`Please enter a valid passage reference.`);
     return false
   }
   let findUrl = el.dataset.route.replace('REPLACE_REF',ref)
@@ -28,8 +28,8 @@ function tryPassage(e) {
       form.submit()
     })
     .fail(function(error) {
-      console.warn(`Invalid passage ${ref}`)
-      showError(`Invalid passage ${ref}`)
+      console.warn(`${ref} is not a valid passage reference in this text. Browse the Table of Contents for valid references.`)
+      showError(`${ref} is not a valid passage reference in this text. Browse the Table of Contents for valid references.`)
     })
     .always(function() {
       $iconContainer.removeClass('loader-active');

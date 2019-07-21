@@ -522,6 +522,8 @@ def scheme_grouper(text, getreffs):
         level, groupby = 2, 1
     elif types == ["book", "line"]:
         level, groupby = 2, 30
+    elif types == ["book", "poem"]:
+        level, groupby = 2, 1
     elif types == ["book", "chapter"]:
         level, groupby = 2, 1
     elif types == ["book"]:
