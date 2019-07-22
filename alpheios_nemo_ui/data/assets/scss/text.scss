@@ -8,7 +8,7 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
     padding-top: $mobilePaddingTop;
 
     &.article-text {
-        padding-top: $mobilePaddingTop + $breadcrumbs-height * 0.6;
+        padding-top: $mobilePaddingTop + $breadcrumbs-height * 1.3;
         background-color: $alpheioscolorneutrallightest;
     }
 

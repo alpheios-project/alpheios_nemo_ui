@@ -37,6 +37,7 @@ class AlpheiosNemoUI(PluginPrototype):
         resource_filename("alpheios_nemo_ui", "data/assets/js/menu.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/text.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/infinite-scroll.js"),
+        resource_filename("alpheios_nemo_ui", "data/assets/js/passage-search.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/browse.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/env.js"),
         # we need to include these here so that we can refer to the them in the templates using the nemo.secondary

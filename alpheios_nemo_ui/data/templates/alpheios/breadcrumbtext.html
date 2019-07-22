@@ -13,20 +13,26 @@
 
   <div class="navbar navbar-section-ref">
     <a class="navbar-section-ref-link btn btn-xs prev {{'no-visibility' if not prev }}" data-prev="{{ prev|default(NaN) }}" id="prev-passage"
-       href="{{url_for('.r_passage', objectId=objectId, subreference=prev) if prev else '#' }}">
+       href="{{url_for('.r_passage', objectId=objectId, subreference=prev) if prev else 'javascript:void(0)' }}">
        <span class="toolbar-button-icon">{% include "alpheios::icons/Left-caret.svg" %}</span>
-    </a>   
+    </a>
     <div class="subreference-all" id="current-passage" data-objectid="{{ objectId }}" data-subreference="{{ subreference }}">{{ subreference }}</div>
     <a class="navbar-section-ref-link btn btn-xs next {{'no-visibility' if not next }}" data-next="{{ next|default(NaN) }}" id="next-passage"
-        href="{{url_for('.r_passage', objectId=objectId, subreference=next) if next else '#'}}">
+        href="{{url_for('.r_passage', objectId=objectId, subreference=next) if next else 'javascript:void(0)'}}">
         <span class="toolbar-button-icon">{% include "alpheios::icons/Right-caret.svg" %}<span>
     </a>
   </div>
 
-  <div class="navbar-nav bg-dark alpheios-nemo-toolbar h-100">
-    <a href="#" id='alpheios-toolbar-component' class="alpheios-nemo-toolbar-button">
-      <span class="toolbar-button-icon">{% include "alpheios::icons/Alpheios-Reader-Icon.svg" %}</span>
-      <span class="toolbar-button-text">Open Tools</span>
-    </a>
+  <div class="navbar navbar-section-ref-jump">
+    <form id="jump_passage" name="jump_passage" action="{{url_for('.r_passage',objectId=objectId,subreference='REPLACE_REF')}}">
+      <div class="inputcontainer">
+        <input class="form-control" type="text" id="find_subreference" placeholder="Find passage ..." size="10"
+          name="subreference" data-route="{{url_for('.r_passage_json',objectId=objectId,subreference='REPLACE_REF')}}">
+        <div class="icon-container">
+          <span class="loader"></span>
+        </div>
+      </div>
+    </form>
   </div>
+
 </nav>
