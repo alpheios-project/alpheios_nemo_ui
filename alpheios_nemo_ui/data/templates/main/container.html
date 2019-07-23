@@ -75,7 +75,12 @@
                 top: '220px',
                 right: '15px'
               },
-              layoutType: 'readingTools'
+              layoutType: 'readingTools',
+              {% if collections['current'] and collections['current']['id'] and 'greek' in collections['current']['id'] %}
+              textLangCode: 'grc'
+              {% else %}
+              textLangCode: 'lat'
+              {% endif %}
             })
           embedded.activate().then(function () {
             if (embedded.platform.isMobile) {
