@@ -50,6 +50,14 @@
             @include alpheios-icon(20px, 20px);
         }
     }
+
+    &.main-navbar-btn--faq {
+        display: none;
+
+        @include media-breakpoint-up(sm) {
+            display: inline-block;
+        }
+    }
 }
 
 .main-navbar {
