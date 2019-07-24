@@ -79,7 +79,7 @@
             })
           embedded.activate().then(function () {
             import ('/assets/nemo.secondary/js/alpheios-embed-support.js')
-              .then(m => m.embedPostActivation(m))
+              .then(m => m.embedPostActivation(embedded))
               .catch(e => console.error(`There is an error importing alpheios-embed-support.js:`, e))
           })
         }).catch(e => {
