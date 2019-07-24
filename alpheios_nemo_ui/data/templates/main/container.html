@@ -78,42 +78,9 @@
               layoutType: 'readingTools'
             })
           embedded.activate().then(function () {
-            if (embedded.platform.isMobile) {
-              let lookupPanelIsVisible = false
-              let toolsPanelIsVisible = false
-              let lookupEl = document.querySelector('#alph-lookup-ctrl')
-              if (lookupEl) {
-                lookupEl.addEventListener('click', function () {
-                  if (toolsPanelIsVisible) {
-                    embedded.closeActionPanel()
-                    toolsPanelIsVisible = false
-                  }
-                  if (!lookupPanelIsVisible) {
-                    embedded.openActionPanelLookup()
-                    lookupPanelIsVisible = true
-                  } else {
-                    embedded.closeActionPanel()
-                    lookupPanelIsVisible = false
-                  }
-                }, { passive: true })
-              }
-              let toolsEl = document.querySelector('#alph-tools-ctrl')
-              if (toolsEl) {
-                toolsEl.addEventListener('click', function () {
-                  if (lookupPanelIsVisible) {
-                    embedded.closeActionPanel()
-                    lookupPanelIsVisible = false
-                  }
-                  if (!toolsPanelIsVisible) {
-                    embedded.openActionPanelToolbar()
-                    toolsPanelIsVisible = true
-                  } else {
-                    embedded.closeActionPanel()
-                    toolsPanelIsVisible = false
-                  }
-                }, { passive: true })
-              }
-            }
+            import ('/assets/nemo.secondary/js/alpheios-embed-support.js')
+              .then(m => m.embedPostActivation(m))
+              .catch(e => console.error(`There is an error importing alpheios-embed-support.js:`, e))
           })
         }).catch(e => {
           console.error(`Import of an embedded library dependencies failed: ${e}`)

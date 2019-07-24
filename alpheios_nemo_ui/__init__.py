@@ -44,6 +44,7 @@ class AlpheiosNemoUI(PluginPrototype):
         # abstract static url but they should be excluded from assets that get imported
         # via script tags because they should use dynamic imports
         resource_filename("alpheios_nemo_ui", "data/assets/node_modules/alpheios-embedded/dist/alpheios-embedded.min.js"),
+        resource_filename("alpheios_nemo_ui", "data/assets/js/alpheios-embed-support.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/node_modules/alpheios-components/dist/alpheios-components.min.js")
     ]
     STATICS = [
