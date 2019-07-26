@@ -3,6 +3,13 @@ $help-icon-size: 24px;
 .help-popup {
   @include alpheios-modal-popup();
 
+  .help-popup-header {
+    .toolbar-button-icon {
+        @include alpheios-icon(30px, 30px);
+        @include alpheios-vivid();
+    }
+  }
+
   .help-popup-content {
     padding: 20px 30px;
     border-radius: 10px;
