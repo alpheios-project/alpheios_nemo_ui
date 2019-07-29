@@ -63,8 +63,9 @@
       var allowedBrowsers = ['Chrome', 'Firefox', 'Mobile Safari', 'Safari'];
 
       if (allowedBrowsers.indexOf(browserData.name) === -1) {
-        console.error('Your browser is not supported by Alpheios Extension. Please use Chrome, Firefox or Safari.')
-        window.alert('Your browser is not supported by Alpheios Extension. Please use Chrome, Firefox or Safari.')
+        var messageNew = 'Alpheios may not work with your browser. Please use Chrome, Firefox or Safari to access this site.';
+        console.error(messageNew);
+        window.alert(messageNew);
       } else {
         console.error(message)
       }
