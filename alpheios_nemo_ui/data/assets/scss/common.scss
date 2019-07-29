@@ -146,6 +146,9 @@ body, html {
   .milestone.chapter:after {
     content: ".";
   }
+  .milestone.meter {
+    display: none;
+  }
 
   .p {
     padding-bottom: 1em;
@@ -262,7 +265,7 @@ body, html {
     font-weight: bold;
     font-size: $h4-mobile-font-size;
   }
-  
+
   .head.newlevel {
     font-weight: normal;
   }
