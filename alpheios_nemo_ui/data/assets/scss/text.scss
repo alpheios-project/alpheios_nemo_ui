@@ -95,6 +95,6 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
         font-weight: normal;
     }
 }
-.l {
+.l, .p {
     @include alpheios-body-texts();
 }

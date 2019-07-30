@@ -74,7 +74,13 @@
     </xsl:template>
     <xsl:template match="tei:l">
         <xsl:variable name="rend" select="@rend"/>
-        <div class="l {$rend}">
+        <xsl:variable name="hascite">
+            <xsl:choose>
+                <xsl:when test="@n">hascite</xsl:when>
+                <xsl:otherwise></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <div class="l {$rend} {$hascite}">
             <xsl:if test="@xml:lang">
                 <xsl:attribute name="lang">
                     <xsl:value-of select="@xml:lang"/>
