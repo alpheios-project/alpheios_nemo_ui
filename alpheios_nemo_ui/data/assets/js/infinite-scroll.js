@@ -55,8 +55,8 @@ function uploadNext() {
             $('#article-entry').append(`<div class="newlevel">${nextPassage.data.new_level}</div>`)
         }
 
-        $("#article-entry [data-toggle=popover]").each(showNotes)
         $('#article-entry').append(nextPassage.data.text_passage);
+        $("#article-entry [data-toggle=popover]").each(showNotes)
         $('#current-passage').data('subreference', nextPassage.next);
         $('#current-passage').text(nextPassage.finalRef);
 
