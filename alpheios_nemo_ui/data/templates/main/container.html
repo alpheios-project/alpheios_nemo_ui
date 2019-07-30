@@ -72,7 +72,7 @@
     }
   </script>
   <script type="text/javascript">
-      const textLangCode = 'lat'
+      let textLangCode = 'lat'
       {% if collections['current'] and collections['current']['id'] and 'greek' in collections['current']['id'] %}
         textLangCode = 'grc'
       {% endif %}
@@ -102,9 +102,9 @@
         import (embedProps.alpheiosEmbedJSURL).then(embedLib => {
           console.info(`Embedded library has been imported successfully`)
 
-          window.AlpheiosEmbed.importDependencies({ 
+          window.AlpheiosEmbed.importDependencies({
             mode: 'custom',
-            libs: { components: embedProps.alpheiosComponentsJSURL } 
+            libs: { components: embedProps.alpheiosComponentsJSURL }
           }).then(Embedded => {
                 const embedded = new Embedded(embedProps.clientProps)
                 embedded.activate().then(function () {
