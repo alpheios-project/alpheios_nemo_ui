@@ -16,6 +16,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0/dist/ua-parser.min.js"></script>
 
     <meta name="alpheios-pedagogical-text" content="true"/>
     {% if 'greekLit' in objectId %}
@@ -56,46 +57,69 @@
     {% include "main::footer.html" %}
   {% endblock %}
   <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function(event) {
-      import ('/assets/nemo.secondary/js/alpheios-embedded.min.js').then(embedLib => {
-        console.info(`Embedded library has been imported successfully`)
+    window.onerror = function(message) {
+      var parser = new UAParser();
+      var browserData = parser.getBrowser();
+      var allowedBrowsers = ['Chrome', 'Firefox', 'Mobile Safari', 'Safari'];
 
-        window.AlpheiosEmbed.importDependencies(
-          { mode: 'custom',
-            libs: { components: '/assets/nemo.secondary/js/alpheios-components.min.js' } }).then(Embedded => {
-          const embedded = new Embedded(
-            {
-               clientId:'alpheios-reader',
-               authEnv: serverEnv,
-               enabledSelector:'.entry-content',
-               popupInitialPos: {
-                 left: '50px',
-                 top: '230px'
-               },
-              toolbarInitialPos: {
-                top: '220px',
-                right: '15px'
-              },
-              layoutType: 'readingTools',
-              {% if collections['current'] and collections['current']['id'] and 'greek' in collections['current']['id'] %}
-              textLangCode: 'grc'
-              {% else %}
-              textLangCode: 'lat'
-              {% endif %}
-            })
-          embedded.activate().then(function () {
-            import ('/assets/nemo.secondary/js/alpheios-embed-support.js')
-              .then(m => m.embedPostActivation(embedded))
-              .catch(e => console.error(`There is an error importing alpheios-embed-support.js:`, e))
+      if (allowedBrowsers.indexOf(browserData.name) === -1) {
+        var messageNew = 'Alpheios may not work with your browser. Please use Chrome, Firefox or Safari to access this site.';
+        console.error(messageNew);
+        window.alert(messageNew);
+      } else {
+        console.error(message)
+      }
+    }
+  </script>
+  <script type="text/javascript">
+      const textLangCode = 'lat'
+      {% if collections['current'] and collections['current']['id'] and 'greek' in collections['current']['id'] %}
+        textLangCode = 'grc'
+      {% endif %}
+
+      const embedProps = {
+        alpheiosEmbedJSURL: '/assets/nemo.secondary/js/alpheios-embedded.min.js',
+        alpheiosEmbedSupportJSURL: '/assets/nemo.secondary/js/alpheios-embed-support.js',
+        alpheiosComponentsJSURL: '/assets/nemo.secondary/js/alpheios-components.min.js',
+        clientProps: {
+                        clientId:'alpheios-reader',
+                        authEnv: serverEnv,
+                        enabledSelector:'.entry-content',
+                        popupInitialPos: {
+                          left: '50px',
+                          top: '230px'
+                        },
+                        toolbarInitialPos: {
+                          top: '220px',
+                          right: '15px'
+                        },
+                        layoutType: 'readingTools',
+                        textLangCode: textLangCode
+                      }
+      }
+
+      document.addEventListener("DOMContentLoaded", function(event) {
+        import (embedProps.alpheiosEmbedJSURL).then(embedLib => {
+          console.info(`Embedded library has been imported successfully`)
+
+          window.AlpheiosEmbed.importDependencies({ 
+            mode: 'custom',
+            libs: { components: embedProps.alpheiosComponentsJSURL } 
+          }).then(Embedded => {
+                const embedded = new Embedded(embedProps.clientProps)
+                embedded.activate().then(function () {
+                  import (embedProps.alpheiosEmbedSupportJSURL)
+                    .then(m => m.embedPostActivation(embedded))
+                    .catch(e => console.error(`There is an error importing alpheios-embed-support.js:`, e))
+                })
+          }).catch(e => {
+            console.error(`Import of an embedded library dependencies failed: ${e}`)
           })
-        }).catch(e => {
-          console.error(`Import of an embedded library dependencies failed: ${e}`)
-        })
 
-      }).catch(e => {
-        console.error(`Import of an embedded library failed: ${e}`)
-      })
-    });
+        }).catch(e => {
+          console.error(`Import of an embedded library failed: ${e}`)
+        })
+      });
 
   </script>
   <script>
