@@ -120,7 +120,7 @@ body, html {
     font-style: italic;
   }
 
-  .l {
+  .l.hascite { /** apply this style only when the line is the citation scheme */
     display: grid;
     grid-template-columns: minmax(max-content,30px) 1fr;
     column-gap: 1em;
