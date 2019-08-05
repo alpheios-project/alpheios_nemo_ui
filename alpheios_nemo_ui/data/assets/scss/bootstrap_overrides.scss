@@ -196,3 +196,11 @@ h5 {
   margin-top: 1em;
   margin-left: 2em;
 }
+
+@include media-breakpoint-down(md) {
+  .popover-on-mobile-bigger {
+    padding: 0 5px;
+    font-size: 20px;
+    top: -5px;
+  }
+}
