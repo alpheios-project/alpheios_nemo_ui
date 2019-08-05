@@ -57,19 +57,7 @@
     {% include "main::footer.html" %}
   {% endblock %}
   <script type="text/javascript">
-    window.onerror = function(message) {
-      var parser = new UAParser();
-      var browserData = parser.getBrowser();
-      var allowedBrowsers = ['Chrome', 'Firefox', 'Mobile Safari', 'Safari'];
-
-      if (allowedBrowsers.indexOf(browserData.name) === -1) {
-        var messageNew = 'Alpheios may not work with your browser. Please use Chrome, Firefox or Safari to access this site.';
-        console.error(messageNew);
-        window.alert(messageNew);
-      } else {
-        console.error(message)
-      }
-    }
+    window.onerror = errorHandler;
   </script>
   <script type="text/javascript">
       let textLangCode = 'lat'
@@ -140,13 +128,15 @@
   <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
   <script>
     window.addEventListener("load", function(){
-    window.cookieconsent.initialise({
-      content: {
-        link: 'Learn more',
-        href: 'https://alpheios.net/pages/privacy-policy',
-        target: '_blank',
-      }
-    })});
+      window.cookieconsent.initialise({
+        content: {
+          link: 'Learn more',
+          href: 'https://alpheios.net/pages/privacy-policy',
+          target: '_blank',
+        }
+      })
+    });
+    
   </script>
   </body>
 </html>
