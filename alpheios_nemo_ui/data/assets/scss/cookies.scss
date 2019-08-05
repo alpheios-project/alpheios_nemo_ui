@@ -31,3 +31,15 @@
         }
     }
 }
+
+#browser-supported-banner {
+    bottom: 50%;
+    
+    background: $alpheioscolorvivid;
+    color: $alpheioscolorneutrallightest;
+
+    .cc-btn.cc-dismiss {
+        @include alpheios-neutral-vivid();
+        background: $alpheioscolorneutraldark;
+    }
+}

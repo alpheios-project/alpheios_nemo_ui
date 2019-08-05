@@ -32,6 +32,8 @@ class AlpheiosNemoUI(PluginPrototype):
 
     ]
     JS = [
+        resource_filename("alpheios_nemo_ui", "data/assets/js/check-browser.js"),
+
         resource_filename("alpheios_nemo_ui", "data/assets/js/bloodhound.min.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/autocomplete.min.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/menu.js"),
@@ -40,6 +42,7 @@ class AlpheiosNemoUI(PluginPrototype):
         resource_filename("alpheios_nemo_ui", "data/assets/js/passage-search.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/browse.js"),
         resource_filename("alpheios_nemo_ui", "data/assets/js/env.js"),
+
         # we need to include these here so that we can refer to the them in the templates using the nemo.secondary
         # abstract static url but they should be excluded from assets that get imported
         # via script tags because they should use dynamic imports
