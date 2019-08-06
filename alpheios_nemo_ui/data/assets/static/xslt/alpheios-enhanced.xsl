@@ -139,6 +139,7 @@
             <xsl:with-param name="tbrefs" select="@ana"/>
             <xsl:with-param name="tbref" select="@ana"/>
         </xsl:call-template>
+        <xsl:if test="following-sibling::tei:w"><xsl:text> </xsl:text></xsl:if>
     </xsl:template>
 
     <!-- from scaife -->
