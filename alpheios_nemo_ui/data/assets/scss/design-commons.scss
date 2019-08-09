@@ -1,5 +1,5 @@
-.alpheios-button-tertiary, 
-.alpheios-button-secondary, 
+.alpheios-button-tertiary,
+.alpheios-button-secondary,
 .alpheios-button-primary {
     font-family: $font-family-base;
     font-size: $font-size-base;
@@ -28,6 +28,7 @@
     text-decoration: none;
 }
 
+.navbar-btn--help,
 .navbar-btn--lookup,
 .navbar-btn--reading-tools {
     display: none;
