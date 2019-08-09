@@ -17,6 +17,12 @@ let embedPostActivation = function (embedded) {
         embedded.openActionPanelToolbar()
       }, { passive: true })
     }
+  } else {
+    let helpControl = document.querySelector(".alpheios-toolbar__help-control")
+    if (helpControl) {
+      helpControl.setAttribute('data-toggle','modal')
+      helpControl.setAttribute('data-target',"#helpPopup")
+    }
   }
 }
 
