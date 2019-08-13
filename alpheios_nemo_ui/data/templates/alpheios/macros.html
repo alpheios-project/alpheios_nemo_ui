@@ -1,14 +1,9 @@
 {% macro single_ref(objectId, subreference, human_reff) -%}
-    <li class="shadow">
-      <div class="left-part">
-        <span class="card-title">{{ human_reff|i18n_citation_item }}</span>
-      </div>
-      <div class="right-part">
-        <a class="card-link" href="{{url_for('.r_passage', objectId=objectId, subreference=subreference)}}">
-          <span class="card-icon">{% include "alpheios::icons/Alpheios-Reader-Icon.svg" %}</span>
-          <span class="card-text">Read</span>
+    <li class="shadow  small-card">
+        <a class="list-item-link" href="{{url_for('.r_passage', objectId=objectId, subreference=subreference)}}">
+          <span>{{ human_reff|i18n_citation_item }}</span>
+          <span class="list-item-icon">{% include "alpheios::icons/Right-caret.svg" %}</span>
         </a>
-      </div>
     </li>
 {%- endmacro %}
 
