@@ -23,8 +23,6 @@
             .book-level-prev {
                 cursor: default;
                 color: $alpheioscolordark;
-                
-                
             }
         }
 
@@ -51,6 +49,7 @@
 
         .collection-browse-cards {
             @include collection-cards-style();
+            
 
             li.small-card {
                 @include media-breakpoint-up(sm) {
@@ -59,47 +58,13 @@
                 @include media-breakpoint-up(md) {
                     width: 200px;
                 }
-            }
 
-            li {
-                .left-part {
-                    .card-title {
-                        margin-bottom: 0;
-                    }
-                }
-                .right-part {
-                    max-width: 50px;
-                    .card-icon,
-                    .card-text {
-                        display: inline-block;
-                        margin-left: 0;
-                    }
-                    .card-icon {
-                        margin-bottom: 0;
-                    }
-                }
-            }
-
-            @include media-breakpoint-up(sm) {
-                li {
-                    .right-part {
-                        max-width: none;
-                    }
-                    .right-part .card-text {
-                        margin-left: 10px;
-                    }
-
-                    .left-part {
-                        .card-title {
-                            line-height: 1;
-                        }
-                    }
-            
-                    .right-part {
-                        .card-text {
-                            max-width: none;
-                        }
-                    }
+                .list-item-link {
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
                 }
             }
         }
