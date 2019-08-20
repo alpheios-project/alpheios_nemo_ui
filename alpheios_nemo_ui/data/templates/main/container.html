@@ -7,6 +7,7 @@
     <!-- The above three meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <title>Alpheios Texts</title>
+    <link rel="icon" type="image/png" href="{{url_for('.secondary_assets', filetype='static', asset='logo.png')}}">
     {% for filename, directory in assets["css"].items() %}
       {% if directory %}<link rel="stylesheet" href="{{url_for('.secondary_assets', filetype='css', asset=filename)}}">
       {% else %}<link rel="stylesheet" href="{{ filename }}">
