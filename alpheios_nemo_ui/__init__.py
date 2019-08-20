@@ -273,7 +273,6 @@ class AlpheiosNemoUI(PluginPrototype):
             session['textViews'] = session['textViews'] + 1
         else:
             session['textViews'] = 1
-        print(str(session),file=sys.stdout)
         collection = self.nemo.get_collection(objectId)
         lang = self._get_lang(objectId,lang)
         if isinstance(collection, CtsWorkMetadata):

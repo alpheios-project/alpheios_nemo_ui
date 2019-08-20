@@ -7,19 +7,10 @@
     </li>
 {%- endmacro %}
 
-{% macro single_ref_short(objectId, subreference, human_reff) -%}
-    <li class="shadow small-card">
-      <a class="card-link" href="{{url_for('.r_passage', objectId=objectId, subreference=subreference)}}">
-        <span class="card-title">{{ human_reff|i18n_citation_item }}</span>
-      </a>
-    </li>
-{%- endmacro %}
-
-
 {% macro reff_dict_header(objectId, reffs, booktitle, bookLevel, prevBrowseLink, prevBookTitle) -%}
   {% set reffitems = reffs.items() %}
   {% set finalBookTitle = (prevBookTitle+' ' if prevBookTitle else '') + booktitle|i18n_readable_book_title %}
-  
+
   {% for human_reff, dict_or_reff in reffitems %}
     {% set browseLink = booktitle|citation_link %}
     {% set prevBookTitle = booktitle|i18n_readable_book_title if bookLevel > 1 else None %}
@@ -48,13 +39,13 @@
         {% endif %}
       </div>
     {% endif %}
-    
+
 
     {% if dict_or_reff|is_str == false %}
         {{ reff_dict_header(objectId, dict_or_reff, human_reff, bookLevel + 1, browseLink, prevBookTitle) }}
     {% endif %}
   {% endfor %}
-  
+
 {%- endmacro %}
 
 {% macro hierarchical_header_dispatcher(objectId, reffs, citation, booktitle, bookLevel) -%}
@@ -67,7 +58,7 @@
       {% for human_reff, dict_or_reff in reffs %}
         {% if dict_or_reff|is_str %}
           {% if loop.index == 1 %}
-            <ul class="collection-browse-cards">
+            <ul class="collection-browse-cards single-refs">
           {% endif%}
           {{ single_ref(objectId, dict_or_reff, human_reff) }}
           {% if loop.index == reffs|length %}
