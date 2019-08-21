@@ -757,13 +757,32 @@
                         <xsl:value-of select="@ana"/>
                     </xsl:attribute>
                     <xsl:variable name="urn" select="ancestor::tei:body/@n"/>
+                    <xsl:variable name="book">
+                        <xsl:choose>
+                            <xsl:when test="ancestor::tei:div[@type='textpart'and @subtype='book']">
+                                <xsl:value-of select="ancestor::tei:div[@type='textpart'and @subtype='book']/@n"/>
+                            </xsl:when>
+                            <xsl:when test="ancestor::*[@type='Book']">
+                                <xsl:value-of select="ancestor::*[@type='Book']/@n"/>
+                            </xsl:when>
+                            <xsl:otherwise></xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
                     <xsl:variable name="docref">
                         <xsl:choose>
                             <xsl:when test="contains($urn, 'latinLit')">
                                 <xsl:value-of select="substring-after($urn, 'urn:cts:latinLit:')"/>
                             </xsl:when>
                             <xsl:when test="contains($urn, 'greekLit')">
-                                <xsl:value-of select="substring-after($urn, 'urn:cts:greekLit:')"/>
+                                <xsl:choose>
+                                    <!-- Homer Treebank is chunked by book -->
+                                    <xsl:when test="contains($urn, 'tlg0012.tlg001') or contains($urn,'tlg0012.tlg002')">
+                                        <xsl:value-of select="concat(substring-after($urn, 'urn:cts:greekLit:'),'.',$book)"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="substring-after($urn, 'urn:cts:greekLit:')"/>        
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xsl:when>
                         </xsl:choose>
                     </xsl:variable>
