@@ -6,7 +6,7 @@
 
         .list-item-link {
             @include alpheios-link();
-            @include alpheios-neutral-dark();
+            @include alpheios-dark();
         }
     }
 
@@ -34,7 +34,7 @@
 
         h3 {
             @include alpheios-h3();
-            color: $alpheioscolorneutraldark;
+            color: $alpheioscolordark;
             margin-left: 30px;
             margin-bottom: 10px;
 
@@ -48,7 +48,7 @@
 
         .collection-browse-cards {
             margin-top: 0;
-            border-top: 1px solid $alpheioscolorneutraldark;
+            border-top: 1px solid $alpheioscolordark;
             box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
         }
     }
