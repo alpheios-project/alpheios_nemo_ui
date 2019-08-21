@@ -10,12 +10,12 @@
         padding-top: 13px;
         padding-bottom: 13px;
     }
-    
+
     @include media-breakpoint-up(lg) {
         padding-left: 120px;
         padding-right: 100px;
     }
-}    
+}
 .navbar-toggler {
     padding: 0 15px 0 0;
 
@@ -44,7 +44,7 @@
     @include hidelabelXS();
     padding-right: 0;
     padding-left: 20px;
-    
+
     .toolbar-button-icon {
         @include media-breakpoint-up(sm) {
             @include alpheios-icon(20px, 20px);
@@ -60,6 +60,10 @@
     }
 }
 
+.btn.main-navbar-btn.disabled {
+  @include alpheios-neutral-dark();
+}
+
 .main-navbar {
 
     .main-navbar-logo {
@@ -71,7 +75,7 @@
         display: none;
     }
 
-    
+
     .navbar-left-part {
         .main-navbar-button {
             display: inline-block;
@@ -91,7 +95,7 @@
         .navbar-toggler {
             padding-right: 0;
         }
-        
+
         .navbar-logo-text-link {
             vertical-align: bottom;
             position: relative;

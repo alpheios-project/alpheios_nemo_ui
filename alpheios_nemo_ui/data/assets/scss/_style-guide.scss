@@ -24,11 +24,11 @@
 
 @mixin alpheios-h2() {
     @include alpheios-h2-mobile();
-    
+
     @include media-breakpoint-up(md) {
         font-size: 36px;
         font-weight: bold;
-        font-style: normal;        
+        font-style: normal;
         font-family: $font-family-serif;
     }
 }
@@ -43,11 +43,11 @@
 
 @mixin alpheios-h3() {
     @include alpheios-h3-mobile();
- 
+
     @include media-breakpoint-up(md) {
         font-size: 22px;
         font-weight: bold;
-        font-style: normal;        
+        font-style: normal;
     }
 }
 
@@ -191,7 +191,7 @@
     &.current {
         text-decoration: underline;
     }
-    
+
 }
 
 
@@ -209,7 +209,7 @@
 @mixin alpheios-icon($width, $height) {
     svg {
         width: $width;
-        height: $height;   
+        height: $height;
         display: inline-block;
     }
 }
@@ -231,7 +231,7 @@
     position: relative;
     font-weight: normal;
 
-    &:hover, 
+    &:hover,
     &:active {
         box-shadow: none;
         text-decoration: none;
@@ -252,7 +252,7 @@
         display: inline;
         position: relative;
         @include alpheios-body();
-    }    
+    }
 
     @include media-breakpoint-up(sm) {
         .toolbar-button-icon,
@@ -300,11 +300,19 @@
     }
 }
 
-@mixin alpheios-neutral-dark() {
+@mixin alpheios-dark() {
     color: $alpheioscolordark;
     svg {
         fill: $alpheioscolordark;
         stroke: $alpheioscolordark;
+    }
+}
+
+@mixin alpheios-neutral-dark() {
+    color: $alpheioscolorneutraldark;
+    svg {
+        fill: $alpheioscolorneutraldark;
+        stroke: $alpheioscolorneutraldark;
     }
 }
 
@@ -333,7 +341,7 @@
 @mixin alpheios-modal-popup() {
     left: 2.5%;
     width: 95%;
-    
+
     .modal-dialog {
         margin: 0;
         top: 64px;
@@ -384,7 +392,7 @@
     .modal-footer {
         border-top: 0;
         padding: 70px 0 0 0;
-        display: block; 
+        display: block;
     }
 }
 
@@ -397,7 +405,7 @@
         margin-left: 20px;
         margin-right: 20px;
     }
-    
+
     .browse-header {
         margin-top: 0;
     }
@@ -406,7 +414,7 @@
         margin-top: 50px;
         @include media-breakpoint-up(md) {
             margin-top: 15px;
-        } 
+        }
     }
 
     .browse-header-title {
@@ -448,11 +456,11 @@
 }
 
 @mixin collection-list-style() {
-    
+
     list-style: none;
     padding: 0;
     margin: 15px 0;
-    
+
     .browse-list-item {
         background: $alpheioscolorneutrallightest;
         width: 100%;
@@ -694,7 +702,7 @@
     .content-text-block-alert {
         @include alpheios-body();
         font-weight: bold;
-    
+
         background: $alpheioscolorbrighthover;
         color: $alpheioscolordark;
         border: 2px solid $alpheioscolorbright;

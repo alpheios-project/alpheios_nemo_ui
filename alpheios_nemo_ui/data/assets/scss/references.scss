@@ -31,25 +31,25 @@
             display: none;
         }
     }
-    
+
     .reference-browse-cards {
-        
+
         @include collection-list-style();
         margin-top: 0;
 
         .list-item-link {
             @include alpheios-link();
-            @include alpheios-neutral-dark();
+            @include alpheios-dark();
         }
 
         .reference-browse-cards {
-            display: none; 
+            display: none;
             margin: 0;
         }
 
         .collection-browse-cards {
             @include collection-cards-style();
-            
+
 
             li.small-card {
                 @include media-breakpoint-up(sm) {

@@ -13,6 +13,11 @@
           <span class="toolbar-button-icon">{% include "alpheios::icons/Browse-Passages-Icon.svg" %}</span>
           <span class="toolbar-button-text">Table of Contents</span>
         </a>
+        {% else %}
+        <span class="btn main-navbar-btn disabled">
+          <span class="toolbar-button-icon">{% include "alpheios::icons/Browse-Passages-Icon.svg" %}</span>
+          <span class="toolbar-button-text">Table of Contents</span>
+        </span>
         {% endif %}
 
         <button class="btn main-navbar-btn navbar-btn--help" data-toggle="modal" data-target="#helpPopup">
