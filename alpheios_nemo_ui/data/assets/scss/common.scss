@@ -279,6 +279,10 @@ body, html {
     height: 1rem;
   }
 
+  .alpheios-embed-lib-warning {
+    display:none !important; // hide the alpheios embedded library warning
+  }
+
   /**
    * Responsive styles
    */
