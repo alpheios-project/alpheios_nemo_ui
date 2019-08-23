@@ -67,6 +67,7 @@ class AlpheiosNemoUI(PluginPrototype):
         ("/text/<objectId>/passage/<subreference>", "r_passage", ["GET"]),
         ("/text/<objectId>/passage/<subreference>/json", "r_passage_json", ["GET"]),
         ("/text/<objectId>/passage", "r_first_passage", ["GET"]),
+        ("/text/<objectId>/lastpassage", "r_last_passage", ["GET"]),
         ("/typeahead/collections.json", "r_typeahead_json", ["GET"]),
         ("/authorize","r_authorize",["GET"]),
         ("/login","r_login",["GET"]),
@@ -253,6 +254,19 @@ class AlpheiosNemoUI(PluginPrototype):
         first, _ = reffs[0]
         return redirect(
             url_for(".r_passage", objectId=objectId, subreference=first)
+        )
+
+    def r_last_passage(self, objectId):
+        """ Provides a redirect to the last passage of given objectId
+
+        :param objectId: Collection identifier
+        :type objectId: str
+        :return: Redirection to the first passage of given text
+        """
+        collection, reffs = self.nemo.get_reffs(objectId=objectId, export_collection=True)
+        last, _ = reffs[-1]
+        return redirect(
+            url_for(".r_passage", objectId=objectId, subreference=last)
         )
 
     def r_passage(self, objectId, subreference, lang=None):
