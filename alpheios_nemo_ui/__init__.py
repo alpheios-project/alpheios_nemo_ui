@@ -261,7 +261,7 @@ class AlpheiosNemoUI(PluginPrototype):
 
         :param objectId: Collection identifier
         :type objectId: str
-        :return: Redirection to the first passage of given text
+        :return: Redirection to the last passage of given text
         """
         collection, reffs = self.nemo.get_reffs(objectId=objectId, export_collection=True)
         last, _ = reffs[-1]
