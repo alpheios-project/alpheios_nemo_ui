@@ -67,12 +67,25 @@
         {% else %}
           {% if human_reff|citation_name != 'passage' %}
             {% set booktitleLower = human_reff|citation_link  %}
-            <li class="browse-list-item">
-                <a class="list-item-link" href="#" data-book-title="{{booktitle+'-' if booktitle}}{{booktitleLower}}">
-                  <span>{{human_reff|i18n_citation_label}} {{human_reff|i18n_citation_item}}</span>
-                  <span class="list-item-icon">{% include "alpheios::icons/Right-caret.svg" %}</span>
-                </a>
-            </li>
+
+            {% if human_reff|citation_name != 'chapter' %}
+              <li class="browse-list-item browse-list-item-two-links">
+                  <a class="list-item-link list-item-link-direct" href="{{url_for('.r_passage', objectId=objectId, subreference=human_reff|i18n_citation_item)}}">
+                    <span>{{human_reff|i18n_citation_label}} {{human_reff|i18n_citation_item}}</span>
+                  </a>
+                  <a class="list-item-link" href="#" data-book-title="{{booktitle+'-' if booktitle}}{{booktitleLower}}">
+                    <span class="list-item-icon">{% include "alpheios::icons/Right-caret.svg" %}</span>
+                  </a>
+              </li>
+            {% else %}
+                <li class="browse-list-item">
+                  <a class="list-item-link" href="#" data-book-title="{{booktitle+'-' if booktitle}}{{booktitleLower}}">
+                    <span>{{human_reff|i18n_citation_label}} {{human_reff|i18n_citation_item}}</span>
+                    <span class="list-item-icon">{% include "alpheios::icons/Right-caret.svg" %}</span>
+                  </a>
+                </li>
+            {% endif %}
+
           {% endif %}
           {{ reff_dict(objectId, dict_or_reff, booktitleLower, booktitle) }}
         {% endif %}
