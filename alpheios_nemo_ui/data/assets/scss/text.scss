@@ -98,19 +98,3 @@ $desktopPaddingTop: $mainnavbar-height + $breadcrumbs-height + $navlogin-height;
 .l, .p {
     @include alpheios-body-texts();
 }
-
-#find_subreference {
-    &::-webkit-input-placeholder {
-        font-style: italic;
-     }
-    &:-moz-placeholder {
-        font-style: italic;  
-     }
-    &::-moz-placeholder {
-        font-style: italic;  
-     }
-    &:-ms-input-placeholder {  
-        font-style: italic; 
-     }
-}
-
