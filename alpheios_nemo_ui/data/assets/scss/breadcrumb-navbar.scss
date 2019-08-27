@@ -186,9 +186,10 @@
     label {
         display: none;
         color: #212529;
+        text-align: left;
         @include media-breakpoint-up(sm) {
             display: inline-block;
-            width: 28%;
+            width: 23%;
         }
     }
     input {
@@ -196,7 +197,7 @@
         width: 100%;
 
         @include media-breakpoint-up(sm) {
-            width: 70%;
+            width: 75%;
         }
 
         &::-webkit-input-placeholder {
