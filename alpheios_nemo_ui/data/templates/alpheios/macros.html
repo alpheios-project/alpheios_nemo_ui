@@ -52,9 +52,9 @@
     {{ reff_dict_header(objectId, (reffs|hierarchical_passages_full(citation)), booktitle, bookLevel, None, None) }}
 {%- endmacro %}
 
-{% macro reff_dict(objectId, reffs, booktitle, prevBookTitle) -%}
+{% macro reff_dict(objectId, reffs, booktitle, prevBook) -%}
     {% set reffs = reffs.items() %}
-    <ul class="reference-browse-cards {{prevBookTitle+'-' if prevBookTitle}}{{booktitle if booktitle}}">
+    <ul class="reference-browse-cards {{prevBook['title']+'-' if prevBook['title'] }}{{booktitle if booktitle}}">
       {% for human_reff, dict_or_reff in reffs %}
         {% if dict_or_reff|is_str %}
           {% if loop.index == 1 %}
@@ -65,16 +65,23 @@
             </ul>
           {% endif %}
         {% else %}
+          {% if prevBook %}
+            {%set subreference = prevBook['ref'] + '.' + human_reff|i18n_citation_item %}
+          {% else %}
+            {%set subreference = human_reff|i18n_citation_item %}
+          {% endif %}
           {% if human_reff|citation_name != 'passage' %}
             {% set booktitleLower = human_reff|citation_link  %}
-            <li class="browse-list-item">
-                <a class="list-item-link" href="#" data-book-title="{{booktitle+'-' if booktitle}}{{booktitleLower}}">
-                  <span>{{human_reff|i18n_citation_label}} {{human_reff|i18n_citation_item}}</span>
-                  <span class="list-item-icon">{% include "alpheios::icons/Right-caret.svg" %}</span>
-                </a>
+            <li class="browse-list-item browse-list-item-two-links">
+              <a class="list-item-link list-item-link-direct" href="{{url_for('.r_passage', objectId=objectId, subreference=subreference)}}">
+                <span>{{human_reff|i18n_citation_label}} {{human_reff|i18n_citation_item}}</span>
+              </a>
+              <a class="list-item-link" href="#" data-book-title="{{booktitle+'-' if booktitle}}{{booktitleLower}}">
+                <span class="list-item-icon">{% include "alpheios::icons/Right-caret.svg" %}</span>
+              </a>
             </li>
           {% endif %}
-          {{ reff_dict(objectId, dict_or_reff, booktitleLower, booktitle) }}
+          {{ reff_dict(objectId, dict_or_reff, booktitleLower, { 'title': booktitle, 'ref': subreference }) }}
         {% endif %}
       {% endfor %}
     </ul>

@@ -48,7 +48,7 @@ function showPrevLevel ($browseLevel) {
 
 $(document).ready(function() {
     if ( $('#reference-article').length > 0 ) {
-        $('.browse-list-item .list-item-link').click(function(event){
+        $('.browse-list-item .list-item-link').not('.list-item-link-direct').click(function(event){
             event.preventDefault();
             var currentBook = $(this).data('book-title');
             showOnlyBook(currentBook, $(this).parent());

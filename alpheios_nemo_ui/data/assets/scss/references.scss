@@ -70,6 +70,18 @@
         }
     }
 }
+
+.browse-list-item-two-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+
+    .list-item-link {
+        display: block;
+    }
+}
+
 .ref-book-item {
     .passages {
         display: none;
