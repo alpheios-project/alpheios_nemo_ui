@@ -126,6 +126,10 @@
     position: relative;
     min-width: 160px;
 
+    @include media-breakpoint-up(sm) {
+        min-width: 230px;
+    }
+
     .icon-container {
         display: none;
         position: absolute;
@@ -177,4 +181,39 @@
     }
   }
   
+
+  .navbar-section-ref-jump {
+    label {
+        display: inline-block;
+        width: 15%;
+        color: #212529;
+        text-align: left;
+        
+        @include media-breakpoint-up(sm) {
+            display: inline-block;
+            width: 23%;
+        }
+    }
+    input {
+        display: inline-block;
+        width: 83%;
+
+        @include media-breakpoint-up(sm) {
+            width: 75%;
+        }
+
+        &::-webkit-input-placeholder {
+            font-style: italic;
+        }
+        &:-moz-placeholder {
+            font-style: italic;  
+        }
+        &::-moz-placeholder {
+            font-style: italic;  
+        }
+        &:-ms-input-placeholder {  
+            font-style: italic; 
+        }
+    }
+}
   
