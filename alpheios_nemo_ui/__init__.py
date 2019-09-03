@@ -510,11 +510,19 @@ class AlpheiosNemoUI(PluginPrototype):
         ]
 
     def new_level(self,subreference,prev):
+        """ try to calculate whether this passage represents the start of a new
+            citation level
+
+            :param subreference: the subreference for the current passage (may be a range)
+            :param prev: the subreference for the previous passage (may be a range)
+            : return: the new level, if it is one, otherwise None
+        """
         curr_first = subreference.split('-')[0]
         curr_levels = curr_first.split('.')
         if prev and len(curr_levels)>1:
-            prev_first = prev.split('-')[0]
-            prev_levels = prev_first.split('.')
+            prev_parts = prev.split('-')
+            prev_last = prev_parts[-1]
+            prev_levels = prev_last.split('.')
             if len(prev_levels) == len(curr_levels) and curr_levels[-2] != prev_levels[-2]:
                 curr_levels.pop()
                 return '.'.join(curr_levels)
