@@ -27,7 +27,7 @@
     <form id="jump_passage" name="jump_passage" action="{{url_for('.r_passage',objectId=objectId,subreference='REPLACE_REF')}}">
       <div class="inputcontainer">
         <label for="subreference">Go to:</label>
-        <input class="form-control" type="text" id="find_subreference" placeholder="e.g. {{ subreference }}" size="10"
+        <input class="form-control" type="text" id="find_subreference" placeholder="e.g. {{ subreference.split('-')[0] }}" size="10"
           name="subreference" data-route="{{url_for('.r_passage_json',objectId=objectId,subreference='REPLACE_REF')}}">
         <div class="icon-container">
           <span class="loader"></span>
