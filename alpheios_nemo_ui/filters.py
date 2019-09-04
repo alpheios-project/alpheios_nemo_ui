@@ -96,3 +96,16 @@ def f_i18n_citation_item(string, lang="eng"):
     else:
         return string
 
+def f_citation_passage(string):
+    """ Take a string of form %citation_type|passage% and return unformatted passage
+
+    :param string: String of formation %citation_type|passage%
+    :return: the passage
+
+    """
+    s = string.strip("%").split("|")
+    if len(s) > 1:
+        return s[1]
+    else:
+        return string
+

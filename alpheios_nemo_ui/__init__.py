@@ -83,7 +83,8 @@ class AlpheiosNemoUI(PluginPrototype):
         "f_i18n_citation_item",
         "f_citation_name",
         "f_i18n_readable_book_title",
-        "f_citation_link"
+        "f_citation_link",
+        "f_citation_passage"
     ]
 
     CACHED = ["r_typeahead_json"]
@@ -101,6 +102,7 @@ class AlpheiosNemoUI(PluginPrototype):
         self.f_citation_name = filters.f_citation_name
         self.f_i18n_readable_book_title = filters.f_i18n_readable_book_title
         self.f_citation_link = filters.f_citation_link
+        self.f_citation_passage = filters.f_citation_passage
         self._get_lang = _get_lang
 
     def r_index(self):
@@ -544,7 +546,7 @@ def scheme_grouper(text, getreffs):
     if str(text.id) == "urn:cts:latinLit:stoa0040.stoa062.opp-lat1":
         level, groupby = 1, 2
     elif types == ["book", "poem", "line"]:
-        level, groupby = 3, 30 
+        level, groupby = 3, 30
     elif types == ["book", "line"]:
         level, groupby = 2, 30
     elif types == ["book", "poem"]:
