@@ -28,8 +28,8 @@ function tryPassage(e) {
       form.submit()
     })
     .fail(function(error) {
-      console.warn(`${ref} is not a valid passage reference in this text. Browse the Table of Contents for valid references.`)
-      showError(`${ref} is not a valid passage reference in this text. Browse the Table of Contents for valid references.`)
+      console.warn(`${ref} is not a valid passage reference in this text. Are you missing a citation level (such as poem or chapter)? Browse the Table of Contents for valid references.`)
+      showError(`${ref} is not a valid passage reference in this text. Are you missing a citation level (such as poem or chapter)? Browse the Table of Contents for valid references.`)
     })
     .always(function() {
       $iconContainer.removeClass('loader-active');
