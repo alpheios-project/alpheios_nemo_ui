@@ -14,9 +14,9 @@
     "bootstrap": "^4.1.3"
   },
   "devDependencies": {
-    "alpheios-components": "github:alpheios-project/components",
-    "alpheios-embedded": "github:alpheios-project/embed-lib",
-    "alpheios-node-build": "github:alpheios-project/node-build",
+    "alpheios-components": "github:alpheios-project/components#alpheios-release-3.0",
+    "alpheios-embedded": "github:alpheios-project/embed-lib#alpheios-release-3.0",
+    "alpheios-node-build": "github:alpheios-project/node-build#v0.6.2",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0"
   },
