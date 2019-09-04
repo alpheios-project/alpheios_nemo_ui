@@ -66,9 +66,9 @@
           {% endif %}
         {% else %}
           {% if prevBook %}
-            {%set subreference = prevBook['ref'] + '.' + human_reff|i18n_citation_item %}
+            {%set subreference = prevBook['ref'] + '.' + human_reff|citation_passage %}
           {% else %}
-            {%set subreference = human_reff|i18n_citation_item %}
+            {%set subreference = human_reff|citation_passage %}
           {% endif %}
           {% if human_reff|citation_name != 'passage' %}
             {% set booktitleLower = human_reff|citation_link  %}
