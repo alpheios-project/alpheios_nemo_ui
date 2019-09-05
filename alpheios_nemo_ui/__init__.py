@@ -27,9 +27,7 @@ class AlpheiosNemoUI(PluginPrototype):
         "alpheios": resource_filename("alpheios_nemo_ui", "data/templates/alpheios")
     }
     CSS = [
-     resource_filename("alpheios_nemo_ui", "data/assets/css/alpheios.min.css"),
-     resource_filename("alpheios_nemo_ui", "data/assets/node_modules/alpheios-components/dist/style/style-components.min.css"),
-
+     resource_filename("alpheios_nemo_ui", "data/assets/css/alpheios.min.css")
     ]
     JS = [
         resource_filename("alpheios_nemo_ui", "data/assets/js/check-browser.js"),
