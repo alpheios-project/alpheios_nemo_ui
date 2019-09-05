@@ -8,6 +8,7 @@
 
     <title>Alpheios Texts</title>
     <link rel="icon" type="image/png" href="{{url_for('.secondary_assets', filetype='static', asset='logo.png')}}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/alpheios-components@latest/dist/style/style-components.min.css" />
     {% for filename, directory in assets["css"].items() %}
       {% if directory %}<link rel="stylesheet" href="{{url_for('.secondary_assets', filetype='css', asset=filename)}}">
       {% else %}<link rel="stylesheet" href="{{ filename }}">
