@@ -67,7 +67,7 @@
       {% endif %}
 
       const embedProps = {
-        alpheiosEmbedJSURL: '/assets/nemo.secondary/js/alpheios-embedded.min.js',
+        alpheiosEmbedJSURL: 'https://cdn.jsdelivr.net/npm/alpheios-embedded@beta/dist/alpheios-embedded.min.js',
         alpheiosEmbedSupportJSURL: '/assets/nemo.secondary/js/alpheios-embed-support.js',
         alpheiosComponentsJSURL: '/assets/nemo.secondary/js/alpheios-components.min.js',
         clientProps: {
@@ -97,8 +97,7 @@
           console.info(`Embedded library has been imported successfully`)
 
           window.AlpheiosEmbed.importDependencies({
-            mode: 'custom',
-            libs: { components: embedProps.alpheiosComponentsJSURL }
+            mode: 'cdn'
           }).then(Embedded => {
                 const embedded = new Embedded(embedProps.clientProps)
                 embedded.activate().then(function () {
