@@ -9,6 +9,7 @@ import re
 import collections
 
 from MyCapytain.common.constants import RDF_NAMESPACES, Mimetypes
+from MyCapytain.common.reference import Reference
 from MyCapytain.resources.prototypes.metadata import ResourceCollection
 from MyCapytain.resources.prototypes.cts.inventory import CtsWorkMetadata, CtsEditionMetadata
 from MyCapytain.resources.collections.cts import XmlCtsTextgroupMetadata
@@ -296,7 +297,7 @@ class AlpheiosNemoUI(PluginPrototype):
             return redirect(url_for(".r_passage", objectId=str(editions[0].id), subreference=subreference))
         text = self.nemo.get_passage(objectId=objectId, subreference=subreference)
         passage = self.nemo.transform(text, text.export(Mimetypes.PYTHON.ETREE), objectId)
-        prev, next = self.nemo.get_siblings(objectId, subreference, text)
+        prev, next = self.get_siblings(objectId, subreference, text)
         newLevel = self.new_level(subreference,prev)
         return {
             "template": "main::text.html",
@@ -345,7 +346,7 @@ class AlpheiosNemoUI(PluginPrototype):
             return redirect(url_for(".r_passage_json", objectId=str(editions[0].id), subreference=subreference))
         text = self.nemo.get_passage(objectId=objectId, subreference=subreference)
         passage = self.nemo.transform(text, text.export(Mimetypes.PYTHON.ETREE), objectId)
-        prev, next = self.nemo.get_siblings(objectId, subreference, text)
+        prev, next = self.get_siblings(objectId, subreference, text)
         newLevel = self.new_level(subreference,prev)
 
         nextUrl = None
@@ -532,6 +533,130 @@ class AlpheiosNemoUI(PluginPrototype):
             curr_levels.pop()
             return '.'.join(curr_levels)
         else:
+            return None
+
+    def get_siblings(self, objectId, subreference, passage):
+        """ Get siblings of a browsed subreference
+
+        .. note:: Since 1.0.0c, there is no more prevnext dict. Nemo uses the list of original\
+        chunked references to retrieve next and previous, or simply relies on the resolver to get siblings\
+        when the subreference is not found in given original chunks.
+
+        :param objectId: Id of the object
+        :param subreference: Subreference of the object
+        :param passage: Current Passage
+        :return: Previous and next references
+        :rtype: (str, str)
+        """
+        reffs = [reff for reff, _ in self.nemo.get_reffs(objectId)]
+        if subreference in reffs:
+            index = reffs.index(subreference)
+            # Not the first item and not the last one
+            if 0 < index < len(reffs) - 1:
+                return reffs[index-1], reffs[index+1]
+            elif index == 0 and index < len(reffs) - 1:
+                return None, reffs[1]
+            elif index > 0 and index == len(reffs) - 1:
+                return reffs[index-1], None
+            else:
+                return None, None
+        else:
+            # if we can't find the exact subreference, we might have jumped
+            # to a user-entered subreference or range rather than navigated
+            # to a precalculated range chunk. Try to identify next and previous
+            # passages as portion of the range which immediately preceded or followed
+            # so that we don't have to resort to retrieving references one by one
+
+            # first find out the immediate next and previous siblings
+            # which could be ranges so we want just the end of the previous and the
+            # beginning of the next
+            if passage.prevId:
+                prevPassageRef = Reference(passage.prevId)
+                prevPassage = prevPassageRef.start
+                if prevPassageRef.end is not None:
+                    prevPassage = prevPassageRef.end
+            else:
+                prevPassage = None
+            if passage.nextId:
+                nextPassage = Reference(passage.nextId).start
+            else:
+                nextPassage = None
+
+            # turn our subreference string into a real Reference object and
+            # find its start and end (which will be the same if it was a single
+            # reference and not a range)
+            subreff = Reference(subreference)
+            substart = subreff.start
+            subend = subreff.end
+            if subend is None:
+                subend = substart
+
+            # now loop through the precaculated references and try to find one that
+            # the custom reference is part of
+            for index,reff in enumerate(reffs):
+                reff = Reference(reff)
+                refstart = reff.start
+                refend = reff.end
+                # these should all be ranges but if not just make the end the start
+                if refend is None:
+                    refend = reff.start
+                if refstart == substart:
+                    # custom reference starts the exact beginning of
+                    # a precalculated reference
+                    # so the previous precalculated reference is retained whole
+                    # and the next reference is the immediate next sibling to the
+                    #  end of the precalculated range
+                    nextRange = str(nextPassage) + '-' + str(refend)
+                    if index > 0:
+                        prevRange = reffs[index-1]
+                    else:
+                        prevRange = None
+                    return prevRange, nextRange
+                elif refend == subend:
+                    # custom reference ends at the exact end of the precalculated
+                    # reference so the previous reference is the beginning
+                    # of the precalculated reference to the previous sibling and
+                    # the next reference is retained whole
+                    prevRange = str(refstart) + "-" + str(prevPassage)
+                    if index < len(reffs) - 1:
+                        nextRange = reffs[index+1]
+                    else:
+                        nextRange = None
+                    return prevRange, nextRange
+                else:
+                    # check to see if the custom reference is somewhere in the middle
+                    highest_start = self.highest_reff(refstart, substart)
+                    highest_end = self.highest_reff(refend,subend)
+                    if highest_start == refstart and highest_end == subend:
+                        # custom reference is fully enclosed in the precalculated reference
+                        # previous reference is beginning of the precalculated reference
+                        # to the previous sibling and next reference is the next sibling to the
+                        # end of the precaculated reference
+                        return str(refstart) + "-" + str(prevPassage), str(nextPassage) + '-' + str(refend)
+        # if no matching range could be found, fall back to just the immeidate siblings as next and previous
+        return passage.siblingsId
+
+    def highest_reff(self, refA, refB):
+        try:
+            if (len(refA) != len(refB)):
+                # different length, return the highest reference
+                return Reference(refA + "-" + refB).highest
+            elif refA.parent == refB.parent:
+                # same length, same parent
+                # return the highest subreference
+                if float(refA.start.list[-1]) > float(refB.start.list[-1]):
+                    return refA
+                else :
+                    return refB
+            else:
+                # same length, different parent
+                # return the highest parent
+                if float(refA.parent.start.list[-1]) > float(refB.parent.start.list[-1]):
+                    return refA
+                else:
+                    return refB
+        except Exception as ex:
+            # if we have a reference with a string, we'll just quietly fail here
             return None
 
 def scheme_grouper(text, getreffs):
