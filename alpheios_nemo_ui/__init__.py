@@ -625,9 +625,9 @@ class AlpheiosNemoUI(PluginPrototype):
                     return prevRange, nextRange
                 else:
                     # check to see if the custom reference is somewhere in the middle
-                    highest_start = self.highest_reff(refstart, substart)
-                    highest_end = self.highest_reff(refend,subend)
-                    if highest_start == refstart and highest_end == subend:
+                    latest_start = self.latest_reff(refstart, substart)
+                    latest_end = self.latest_reff(refend,subend)
+                    if latest_start == substart and latest_end == refend:
                         # custom reference is fully enclosed in the precalculated reference
                         # previous reference is beginning of the precalculated reference
                         # to the previous sibling and next reference is the next sibling to the
@@ -636,21 +636,38 @@ class AlpheiosNemoUI(PluginPrototype):
         # if no matching range could be found, fall back to just the immeidate siblings as next and previous
         return passage.siblingsId
 
-    def highest_reff(self, refA, refB):
+    def latest_reff(self, refA, refB):
+        """ Calculate which reff is the later one in the text
+            2.1.4 is later than 2.1
+            2.2 is later than 2.1.4
+            2.1.610 is later than 2.1.61
+        """
         try:
-            if (len(refA) != len(refB)):
-                # different length, return the highest reference
-                return Reference(refA + "-" + refB).highest
+            lengthA = len(refA)
+            lengthB = len(refB)
+            if (lengthA != lengthB):
+            # one ref is longer than the other, need to check each part from the left
+                i = 0
+                while i < min(lengthA,lengthB) - 1:
+                    if float(refA.start.list[i]) > float(refB.start.list[i]):
+                        return refA
+                    elif float(refB.start.list[i]) > float(refA.start.list[i]):
+                        return refB
+                    i = i + 1
+
+                # if we get here then all were equal so we return the longest ref
+                if lengthA > lengthB:
+                    return refA
+                else:
+                    return refB
             elif refA.parent == refB.parent:
-                # same length, same parent
-                # return the highest subreference
+            # same length, same parent so we return the highest subreference
                 if float(refA.start.list[-1]) > float(refB.start.list[-1]):
                     return refA
                 else :
                     return refB
             else:
-                # same length, different parent
-                # return the highest parent
+            # same length, different parent return the highest parent
                 if float(refA.parent.start.list[-1]) > float(refB.parent.start.list[-1]):
                     return refA
                 else:
