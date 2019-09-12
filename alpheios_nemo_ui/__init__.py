@@ -458,7 +458,7 @@ class AlpheiosNemoUI(PluginPrototype):
         # Clear session stored data
         session.clear()
         session['loginReturn'] = request.args.get('next','')
-        return self.auth0.authorize_redirect(redirect_uri=self.external_url_base + "/authorize",audience='alpheios.net:apis')
+        return self.auth0.authorize_redirect(redirect_uri=self.external_url_base + "/authorize",audience='alpheios.net:apis',prompt='select_account')
 
     def r_logout(self):
         # Clear session stored data
