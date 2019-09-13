@@ -461,8 +461,6 @@ class AlpheiosNemoUI(PluginPrototype):
             a version of the Auth0 Universal Login page that only includes the SignUp tab
             and only allows username-password authentication (no social signin)
         """
-        session.clear()
-        session['loginReturn'] = request.args.get('next','')
         return self.auth0.authorize_redirect(redirect_uri=self.external_url_base + "/authorize",audience='alpheios.net:apis',prompt='select_account',mode='signUp',connection='Username-Password-Authentication')
 
     def r_login(self):
