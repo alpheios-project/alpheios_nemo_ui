@@ -70,6 +70,7 @@ class AlpheiosNemoUI(PluginPrototype):
         ("/typeahead/collections.json", "r_typeahead_json", ["GET"]),
         ("/authorize","r_authorize",["GET"]),
         ("/login","r_login",["GET"]),
+        ("/signup_safari","r_signup_safari",["GET"]),
         ("/logout","r_logout",["GET"]),
         ("/return","r_logout_return",["GET"]),
         ("/userinfo","r_userinfo",["GET"]),
@@ -453,6 +454,16 @@ class AlpheiosNemoUI(PluginPrototype):
             return redirect(session['loginReturn'])
         else:
             return redirect(url_for('.r_index'))
+
+    def r_signup_safari(self):
+        """ Initiate Account Creation for the Safari App Extension
+            This is a route to be used by the Safari App Extension. It creates
+            a version of the Auth0 Universal Login page that only includes the SignUp tab
+            and only allows username-password authentication (no social signin)
+        """
+        session.clear()
+        session['loginReturn'] = request.args.get('next','')
+        return self.auth0.authorize_redirect(redirect_uri=self.external_url_base + "/authorize",audience='alpheios.net:apis',prompt='select_account',mode='signUp',connection='Username-Password-Authentication')
 
     def r_login(self):
         # Clear session stored data
