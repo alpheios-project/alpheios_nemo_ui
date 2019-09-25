@@ -8,7 +8,7 @@
 
     <title>Alpheios Texts</title>
     <link rel="icon" type="image/png" href="{{url_for('.secondary_assets', filetype='static', asset='logo.png')}}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/alpheios-components@latest/dist/style/style-components.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/alpheios-components@dev/dist/style/style-components.min.css" />
     {% for filename, directory in assets["css"].items() %}
       {% if directory %}<link rel="stylesheet" href="{{url_for('.secondary_assets', filetype='css', asset=filename)}}">
       {% else %}<link rel="stylesheet" href="{{ filename }}">
@@ -70,7 +70,7 @@
       const embedProps = {
         alpheiosEmbedJSURL: 'https://cdn.jsdelivr.net/npm/alpheios-embedded@3.0.0-rc.2/dist/alpheios-embedded.min.js',
         alpheiosEmbedSupportJSURL: '/assets/nemo.secondary/js/alpheios-embed-support.js',
-        alpheiosComponentsJSURL: '/assets/nemo.secondary/js/alpheios-components.min.js',
+        alpheiosComponentsJSURL: 'https://cdn.jsdelivr.net/npm/alpheios-components@dev/dist/alpheios-components.min.js',
         clientProps: {
                         clientId:'alpheios-reader',
                         authEnv: serverEnv,
@@ -98,7 +98,8 @@
           console.info(`Embedded library has been imported successfully`)
 
           window.AlpheiosEmbed.importDependencies({
-            mode: 'cdn'
+            mode: 'custom',
+            libs: { components: embedProps.alpheiosComponentsJSURL }
           }).then(Embedded => {
                 const embedded = new Embedded(embedProps.clientProps)
                 embedded.activate().then(function () {
