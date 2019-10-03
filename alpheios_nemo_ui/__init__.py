@@ -449,7 +449,9 @@ class AlpheiosNemoUI(PluginPrototype):
         session['jwt_payload'] = userinfo
         session['profile'] = {
             'sub': userinfo['sub'],
+            'name': userinfo['name'],
             'nickname': userinfo['nickname'],
+            'expires_in': session['expires_in']
         }
         if 'loginReturn' in session and session['loginReturn'] is not None:
             return redirect(session['loginReturn'])
