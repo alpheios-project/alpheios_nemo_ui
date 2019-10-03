@@ -441,6 +441,7 @@ class AlpheiosNemoUI(PluginPrototype):
         tokens = self.auth0.authorize_access_token()
         # Store the access token in the flask session
         session['access_token'] = tokens['access_token']
+        session['expires_in'] = tokens['expires_in']
         resp = self.auth0.get('userinfo')
         userinfo = resp.json()
 
