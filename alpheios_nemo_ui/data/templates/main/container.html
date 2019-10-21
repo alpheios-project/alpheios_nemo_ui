@@ -8,7 +8,7 @@
 
     <title>Alpheios Texts</title>
     <link rel="icon" type="image/png" href="{{url_for('.secondary_assets', filetype='static', asset='logo.png')}}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/alpheios-components@dev/dist/style/style-components.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/alpheios-components@1.4.1/dist/style/style-components.min.css" />
     {% for filename, directory in assets["css"].items() %}
       {% if directory %}<link rel="stylesheet" href="{{url_for('.secondary_assets', filetype='css', asset=filename)}}">
       {% else %}<link rel="stylesheet" href="{{ filename }}">
@@ -68,9 +68,9 @@
       {% endif %}
 
       const embedProps = {
-        alpheiosEmbedJSURL: 'https://cdn.jsdelivr.net/npm/alpheios-embedded@dev/dist/alpheios-embedded.min.js',
+        alpheiosEmbedJSURL: 'https://cdn.jsdelivr.net/npm/alpheios-embedded@3.1.2/dist/alpheios-embedded.min.js',
         alpheiosEmbedSupportJSURL: '/assets/nemo.secondary/js/alpheios-embed-support.js',
-        alpheiosComponentsJSURL: 'https://cdn.jsdelivr.net/npm/alpheios-components@dev/dist/alpheios-components.min.js',
+        alpheiosComponentsJSURL: 'https://cdn.jsdelivr.net/npm/alpheios-components@1.4.1/dist/alpheios-components.min.js',
         clientProps: {
                         clientId:'alpheios-reader',
                         authEnv: serverEnv,
