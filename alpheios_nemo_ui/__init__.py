@@ -15,6 +15,7 @@ from MyCapytain.resources.prototypes.cts.inventory import CtsWorkMetadata, CtsEd
 from MyCapytain.resources.collections.cts import XmlCtsTextgroupMetadata
 from MyCapytain.errors import UnknownCollection
 import sys
+from datetime import datetime, timedelta
 import alpheios_nemo_ui.filters
 from rdflib import Namespace
 from six.moves.urllib.parse import urlencode
@@ -70,7 +71,6 @@ class AlpheiosNemoUI(PluginPrototype):
         ("/typeahead/collections.json", "r_typeahead_json", ["GET"]),
         ("/authorize","r_authorize",["GET"]),
         ("/login","r_login",["GET"]),
-        ("/signup_safari","r_signup_safari",["GET"]),
         ("/logout","r_logout",["GET"]),
         ("/return","r_logout_return",["GET"]),
         ("/userinfo","r_userinfo",["GET"]),
@@ -90,7 +90,7 @@ class AlpheiosNemoUI(PluginPrototype):
     CACHED = ["r_typeahead_json"]
     HAS_AUGMENT_RENDER = True
 
-    def __init__(self, GTrackCode=None, auth0=None, external_url_base='http://localhost:5000', *args, **kwargs):
+    def __init__(self, GTrackCode=None, auth0=None, external_url_base='http://localhost:5000', auth_max_age_override=None, *args, **kwargs):
         super(AlpheiosNemoUI, self).__init__(*args, **kwargs)
         self.GTrackCode = GTrackCode
         self.auth0 = auth0
@@ -104,6 +104,7 @@ class AlpheiosNemoUI(PluginPrototype):
         self.f_citation_link = filters.f_citation_link
         self.f_citation_passage = filters.f_citation_passage
         self._get_lang = _get_lang
+        self.auth_max_age_override = auth_max_age_override
 
     def r_index(self):
         """ Retrieve the top collections of the inventory
@@ -441,7 +442,12 @@ class AlpheiosNemoUI(PluginPrototype):
         tokens = self.auth0.authorize_access_token()
         # Store the access token in the flask session
         session['access_token'] = tokens['access_token']
-        session['expires_in'] = tokens['expires_in']
+        if (self.auth_max_age_override):
+            expires_in = int(self.auth_max_age_override)
+        else:
+            expires_in = int(tokens['expires_in'])
+        session['expires_in'] = expires_in
+        session['expires_at'] = datetime.utcnow() + timedelta(seconds=expires_in)
         resp = self.auth0.get('userinfo')
         userinfo = resp.json()
 
@@ -458,24 +464,11 @@ class AlpheiosNemoUI(PluginPrototype):
         else:
             return redirect(url_for('.r_index'))
 
-    def r_signup_safari(self):
-        """ Initiate Account Creation for the Safari App Extension
-            This is a route to be used by the Safari App Extension. It creates
-            a version of the Auth0 Universal Login page that only includes the SignUp tab
-            and only allows username-password authentication (no social signin)
-        """
-        # clearing the session because signup seems to invalidate any existing Auth0 session token
-        # even if we don't explicitly login after signup (which is how the universal form is setup for this,
-        # with loginAfterSignUp=true if mode === 'signUp'
-        session.clear()
-        session['loginReturn'] = request.args.get('next','')
-        return self.auth0.authorize_redirect(redirect_uri=self.external_url_base + "/authorize",audience='alpheios.net:apis',prompt='select_account',mode='signUp',connection='Username-Password-Authentication')
-
     def r_login(self):
         # Clear session stored data
         session.clear()
         session['loginReturn'] = request.args.get('next','')
-        return self.auth0.authorize_redirect(redirect_uri=self.external_url_base + "/authorize",audience='alpheios.net:apis',prompt='select_account')
+        return self.auth0.authorize_redirect(redirect_uri=self.external_url_base + "/authorize",audience=self.auth0.client_kwargs['audience'],prompt='select_account')
 
     def r_logout(self):
         # Clear session stored data
@@ -493,7 +486,7 @@ class AlpheiosNemoUI(PluginPrototype):
     def requires_auth(f):
         @wraps(f)
         def decorated(*args, **kwargs):
-            if 'profile' not in session:
+            if ('profile' not in session) or (session['expires_at'] <= datetime.utcnow()):
                 return "Unauthorized request", 401
             return f(*args, **kwargs)
 
