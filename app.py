@@ -114,6 +114,8 @@ app.secret_key = os.environ.get('ALPHEIOS_NEMO_APPKEY','appsecret')
 client_id = os.environ.get('ALPHEIOS_NEMO_AUTH0_CLIENTID','clientidhere')
 client_secret = os.environ.get('ALPHEIOS_NEMO_AUTH0_CLIENTSECRET','clientsecrethere')
 proxy_base = os.environ.get('ALPHEIOS_NEMO_PROXYBASE','http://dev.alpheios.net:5000')
+auth_max_age_override = os.environ.get('ALPHEIOS_NEMO_AUTH0_MAX_AGE_SECONDS')
+audience = os.environ.get('ALPHEIOS_NEMO_AUTH0_AUDIENCE')
 oauth = OAuth(app)
 
 auth0 = oauth.register(
@@ -124,7 +126,7 @@ auth0 = oauth.register(
     access_token_url='https://alpheios.auth0.com/oauth/token',
     authorize_url='https://alpheios.auth0.com/authorize',
     client_kwargs={
-        'audience': 'alpheios.net:apis',
+        'audience': audience,
         'scope': 'openid profile',
     },
 )
@@ -149,7 +151,7 @@ nemo = Nemo(
         "default": scheme_grouper
     },
     original_breadcrumb = False,
-    plugins=[AlpheiosNemoUI("",auth0,proxy_base),AlpheiosBreadcrumb()],
+    plugins=[AlpheiosNemoUI("",auth0,proxy_base,auth_max_age_override),AlpheiosBreadcrumb()],
     transform={
         "default": resource_filename("alpheios_nemo_ui","data/assets/static/xslt/alpheios-enhanced.xsl")
     },
