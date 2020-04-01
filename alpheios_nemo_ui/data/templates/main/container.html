@@ -37,7 +37,13 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body
+    {% if 'greekLit' in objectId or 'latinLit' in objectId  %}
+      data-alpheios_tb_app="perseids-treebank-template"
+      data-alpheios_tb_app_version="1"
+      data-alpheios_tb_app_url="https://alpheios-project.github.io/alpheios-trees/embed/DOC/SENTENCE?w=WORD"
+    {% endif %}
+  >
     {% block article %}
     {% endblock %}
 
