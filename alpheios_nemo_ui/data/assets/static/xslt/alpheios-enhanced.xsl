@@ -780,14 +780,17 @@
                                         <xsl:value-of select="concat(substring-after($urn, 'urn:cts:greekLit:'),'.',$book)"/>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:value-of select="substring-after($urn, 'urn:cts:greekLit:')"/>        
+                                        <xsl:value-of select="substring-after($urn, 'urn:cts:greekLit:')"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:when>
                         </xsl:choose>
                     </xsl:variable>
                     <xsl:attribute name="data-alpheios_tb_ref">
-                        <xsl:value-of select="concat($docref, '#', @ana)"/>
+                        <xsl:call-template name="tb_ref">
+                            <xsl:with-param name="ref" select="@ana"/>
+                            <xsl:with-param name="docref" select="$docref"/>
+                        </xsl:call-template>
                     </xsl:attribute>
                 </xsl:when>
             </xsl:choose>
@@ -838,6 +841,25 @@
                 </xsl:call-template>
             </xsl:if>
         </xsl:if>
+    </xsl:template>
+    
+    <xsl:template name="tb_ref">
+        <xsl:param name="ref"/>
+        <xsl:param name="docref"/>
+        <xsl:param name="delimiter" select="' '"/>
+        <xsl:choose>
+            <xsl:when test="$ref and contains($ref, $delimiter)" >
+                <xsl:value-of select="concat($docref,'#',substring-before($ref,$delimiter), ' ')"/>
+                <xsl:call-template name="tb_ref">
+                    <xsl:with-param name="ref" select="substring-after($ref,$delimiter)"></xsl:with-param>
+                    <xsl:with-param name="docref" select="$docref"/>
+                </xsl:call-template>
+            </xsl:when>    
+            <xsl:when test="$ref">
+                <xsl:value-of select="concat($docref,'#',$ref)"/>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
     </xsl:template>
 
     <!-- taken from perseus'  tei2p4.xsl -->
